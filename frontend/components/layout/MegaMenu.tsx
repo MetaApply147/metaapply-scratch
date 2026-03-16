@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Tabs, Tab } from "@mui/material";
 import { useState, useEffect } from "react";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 type MegaMenuTab = {
   id: number;
@@ -21,14 +22,16 @@ type MegaMenuProps = {
 
 export default function MegaMenu({ open, type, tabs }: MegaMenuProps) {
 
-   const [activeTab, setActiveTab] = useState<number | null>(null);
-   const filteredTabs = tabs?.filter((tab) => tab.menu?.Slug === type);
-   const selectedTab = filteredTabs?.find((tab) => tab.id === activeTab);
+   const [value, setValue] = useState(0);
+
+   const filteredTabs = tabs
+    ?.filter((tab) => tab.menu?.Slug === type)
+    ?.sort((a, b) => a.Order - b.Order) || [];
+
+  const selectedTab = filteredTabs[value];
 
   useEffect(() => {
-    if (filteredTabs?.length) {
-      setActiveTab(filteredTabs[0].id);
-    }
+    setValue(0);
   }, [type]);
 
   if (!open) return null;
@@ -38,6 +41,7 @@ export default function MegaMenu({ open, type, tabs }: MegaMenuProps) {
       sx={{
         position: "absolute",
         left: 0,
+        top: "100%",
         width: "100%",
         bgcolor: "white",
         boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
@@ -45,31 +49,53 @@ export default function MegaMenu({ open, type, tabs }: MegaMenuProps) {
         pt: 4,
         pb: 6,
         zIndex: 10,
-        top: "100%",
-        marginLeft: "16px",
-        marginRight: "16px",
+        mx: "16px",
       }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{p: 0}}>
         <Box sx={{ display: "flex", gap: 4 }}>
           {/* LEFT SIDE */}
-          <Box sx={{ width: "260px" }}>
-            {filteredTabs?.map((tab) => (
-              <Typography
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                variant="heading14"
-                sx={{
-                  py: 1.5,
-                  cursor: "pointer",
-                  color: activeTab === tab.id ? "primary.main" : "text.primary",
-                  fontWeight: activeTab === tab.id ? 600 : 400,
-                }}
-              >
-                {tab.Title}
-              </Typography>
+          <Tabs
+            orientation="vertical"
+            value={value}
+            onChange={(e, newValue) => setValue(newValue)}
+            sx={{
+              width: "240px",
+              minWidth: "240px",
+
+              "& .MuiTab-root": {
+                alignItems: "flex-start",
+                textAlign: "left",
+                textTransform: "none",
+                fontSize: "14px",
+                fontFamily: "var(--font-heading)",
+                color: "text.primary",
+                px: 3,
+                py: 2.41,
+                justifyContent: "flex-start",
+                width: "100%",
+              },
+
+              "& .MuiTab-root:hover": {
+                backgroundColor: "primary.main",
+                color: "background.default",
+              },
+
+              "& .MuiTab-root.Mui-selected": {
+                color: "background.default",
+                backgroundColor: "primary.main",
+              },
+
+              "& .MuiTabs-indicator": {
+                display: "none",
+                },
+            }}
+          >
+            {filteredTabs.map((tab) => (
+              <Tab key={tab.id} label={tab.Title} icon={<KeyboardArrowRightIcon />} iconPosition="end"/>
             ))}
-          </Box>
+            
+          </Tabs>
 
           {/* RIGHT SIDE */}
           <Box sx={{ flex: 1 }}>
