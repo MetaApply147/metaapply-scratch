@@ -15,11 +15,23 @@ type Menu = {
   Link?: string;
 }
 
-type HeaderProps = {
-  menus: Menu[];
+type MegaMenuTab = {
+  id: number;
+  Title: string;
+  Slug: string;
+  Order: number;
+  menu: {
+    Slug: string;
+    Title: string;
+  };
 };
 
-export default function Header({ menus }: HeaderProps) {
+type HeaderProps = {
+  menus: Menu[];
+  tabs: MegaMenuTab[];
+};
+
+export default function Header({ menus, tabs }: HeaderProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +85,7 @@ export default function Header({ menus }: HeaderProps) {
             </Box>
           </Box>
         </Toolbar>
-        <MegaMenu open={menus?.some(m => m.Slug === activeMenu && m.Type === "mega")} type={activeMenu}/>
+        <MegaMenu open={menus?.some(m => m.Slug === activeMenu && m.Type === "mega")} type={activeMenu} tabs={tabs}/>
       </Container>
     </AppBar>
   );

@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
 
-const API_URL = "http://localhost:1337/api";
+const API_URL = "https://strapi-backend.azurewebsites.net/api";
 
 export const getServices = async (url: string, params? : any) => {
     try {

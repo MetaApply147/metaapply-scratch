@@ -40,6 +40,9 @@ export default async function RootLayout({
   const menuResponse = await getServices("/menus?sort=Order:asc");
   const menus = menuResponse?.data?.data;
 
+  const tabsResponse  = await getServices("/mega-menu-tabs?populate=menu&sort=Order:asc");
+  const tabs = tabsResponse?.data?.data;
+
   return (
     <html lang="en">
       <body suppressHydrationWarning
@@ -47,7 +50,7 @@ export default async function RootLayout({
       >
         <ThemeRegistry>
           <ThemeProviderWrapper>
-            <Header menus={menus}/>
+            <Header menus={menus} tabs={tabs}/>
             {children} 
           </ThemeProviderWrapper>
         </ThemeRegistry>
