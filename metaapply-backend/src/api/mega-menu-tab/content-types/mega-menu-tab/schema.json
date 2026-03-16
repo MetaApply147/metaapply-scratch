@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mega_menu_tabs",
+  "info": {
+    "singularName": "mega-menu-tab",
+    "pluralName": "mega-menu-tabs",
+    "displayName": "Mega Menu Tab"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title"
+    },
+    "Order": {
+      "type": "integer"
+    },
+    "menu": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::menu.menu"
+    }
+  }
+}
