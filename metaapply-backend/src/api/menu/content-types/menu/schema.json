@@ -15,7 +15,8 @@
       "type": "string"
     },
     "Slug": {
-      "type": "uid"
+      "type": "uid",
+      "targetField": "Title"
     },
     "Type": {
       "type": "enumeration",

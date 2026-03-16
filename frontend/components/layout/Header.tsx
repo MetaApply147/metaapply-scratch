@@ -55,7 +55,7 @@ export default function Header({ menus }: HeaderProps) {
                   <Box key={menu.id} sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
                     onClick={() => setActiveMenu(isActive ? null : menu.Slug)}
                   >
-                    <Link href={`/&{menu.slug}`} style={{ textDecoration: "none" }}>
+                    <Link href={`/${menu.Slug}`} style={{ textDecoration: "none" }}>
                       <Typography variant="heading14" sx={{ fontWeight: 500, color: isActive ? "primary.main" : "text.primary", cursor: "pointer" }}>
                         {menu.Title}
                       </Typography>

@@ -481,7 +481,7 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     Order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    Slug: Schema.Attribute.UID;
+    Slug: Schema.Attribute.UID<'Title'>;
     Title: Schema.Attribute.String;
     Type: Schema.Attribute.Enumeration<['mega', 'link']>;
     updatedAt: Schema.Attribute.DateTime;
