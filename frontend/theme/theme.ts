@@ -10,7 +10,7 @@ const theme = createTheme({
       sm: 600,
       md: 900,
       lg: 1200,
-      xl: 1536,
+      xl: 1440,
     },
   },
 
@@ -44,35 +44,32 @@ const theme = createTheme({
 
     MuiContainer: {
       defaultProps: {
-        maxWidth: "xl", // default container size
+        maxWidth: false,
+        disableGutters: true,
       },
 
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           width: "100%",
-          marginLeft: "auto",
-          marginRight: "auto",
+          margin: "0 auto",
           paddingLeft: "16px",
           paddingRight: "16px",
-        },
 
-        maxWidthSm: {
-          maxWidth: "720px", // Tablet
-        },
-
-        maxWidthMd: {
-          maxWidth: "1140px", // Laptop
-        },
-
-        maxWidthLg: {
-          maxWidth: "1320px", // Desktop
-        },
-
-        maxWidthXl: {
-          maxWidth: "1440px", // Large screens
-        },
+          [theme.breakpoints.up("sm")]: {
+            maxWidth: 720,
+          },
+          [theme.breakpoints.up("md")]: {
+            maxWidth: 960,
+          },
+          [theme.breakpoints.up("lg")]: {
+            maxWidth: 1200,
+          },
+          [theme.breakpoints.up("xl")]: {
+            maxWidth: 1352,
+          },
+        }),
       },
-    },
+    }
   },
 });
 

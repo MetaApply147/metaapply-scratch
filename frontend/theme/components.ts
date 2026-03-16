@@ -4,17 +4,30 @@ const components = {
   MuiButton: {
     defaultProps: {
       disableElevation: true,
+      size: "medium" as const,
     },
+
     styleOverrides: {
       root: {
         borderRadius: 12,
-        padding: "12px 20px",
         textTransform: "none",
-        fontSize: 16,
-        fontWeight: 600,
-        lineHeight: "20px",
-        letterSpacing: "-0.16px",
         boxShadow: "none",
+        letterSpacing: "-0.16px",
+        fontFamily: "var(--font-heading)",
+      },
+
+      sizeMedium: {
+        padding: "12px 20px",
+        fontSize: 16,
+        fontWeight: 700,
+        lineHeight: "20px",
+      },
+
+      sizeSmall: {
+        padding: "7px 14.5px",
+        fontSize: 16,
+        fontWeight: 400,
+        lineHeight: "20px",
       },
 
       containedPrimary: {

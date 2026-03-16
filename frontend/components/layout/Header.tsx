@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AppBar, Toolbar, Typography, Button, Box, Container } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type Menu = {
@@ -22,7 +21,7 @@ export default function Header({ menus }: HeaderProps) {
   return (
     <AppBar position="sticky" elevation={0} sx={{backgroundColor: "white"}}>
       <Container maxWidth="xl">
-        <Toolbar sx={{ justifyContent: "space-between", py: 1 }}>
+        <Toolbar sx={{ justifyContent: "space-between", py: 4 }} disableGutters>
           <Box>
             <Link href="/">
               <Image src="/Header/mie-logo.svg" alt="MetaApply Logo" width={193} height={62}></Image>
@@ -45,8 +44,8 @@ export default function Header({ menus }: HeaderProps) {
               ))}
             </Box>
             <Box sx={{display: "flex", justifyContent: "space-between", gap: 2}}>
-              <Button variant="outlined" color="secondary">EN</Button>
-              <Button variant="outlined" color="primary">Sign In</Button>
+              <Button variant="outlined" color="secondary" size="small">EN</Button>
+              <Button variant="outlined" color="primary" size="small">Sign In</Button>
             </Box>
           </Box>
         </Toolbar>
