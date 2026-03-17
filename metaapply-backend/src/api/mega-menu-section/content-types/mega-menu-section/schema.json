@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mega_menu_sections",
+  "info": {
+    "singularName": "mega-menu-section",
+    "pluralName": "mega-menu-sections",
+    "displayName": "Mega Menu Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "courses",
+        "universities",
+        "services"
+      ]
+    },
+    "items": {
+      "type": "component",
+      "component": "menu.item",
+      "repeatable": true
+    }
+  }
+}
