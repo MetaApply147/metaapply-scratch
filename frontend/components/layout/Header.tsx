@@ -34,6 +34,7 @@ type MegaMenuTab = {
   Title: string;
   Slug: string;
   Order: number;
+  layout: "study" | "testprep" | "explore";
   menu: {
     Slug: string;
     Title: string;
