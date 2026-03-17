@@ -19,6 +19,7 @@ declare module "@mui/material/styles" {
     heading12: React.CSSProperties;
     heading13: React.CSSProperties;
     heading14: React.CSSProperties;
+    heading15: React.CSSProperties;
 
     body01: React.CSSProperties;
     body02: React.CSSProperties;
@@ -47,6 +48,7 @@ declare module "@mui/material/styles" {
     heading12?: React.CSSProperties;
     heading13?: React.CSSProperties;
     heading14?: React.CSSProperties;
+    heading15?: React.CSSProperties;
 
     body01?: React.CSSProperties;
     body02?: React.CSSProperties;
@@ -77,6 +79,7 @@ declare module "@mui/material/Typography" {
     heading12: true;
     heading13: true;
     heading14: true;
+    heading15: true;
 
     body01: true;
     body02: true;

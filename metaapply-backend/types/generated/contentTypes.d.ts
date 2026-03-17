@@ -454,7 +454,19 @@ export interface ApiMegaMenuSectionMegaMenuSection
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     Title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['courses', 'universities', 'services']>;
+    type: Schema.Attribute.Enumeration<
+      [
+        'courses',
+        'universities',
+        'services',
+        'examdetails',
+        'resources',
+        'IELTSpreparationtips',
+        'budgetcalculator',
+        'loancalculator',
+        'visasuccesscalculator',
+      ]
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

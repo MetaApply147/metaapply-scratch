@@ -19,7 +19,13 @@
       "enum": [
         "courses",
         "universities",
-        "services"
+        "services",
+        "examdetails",
+        "resources",
+        "IELTSpreparationtips",
+        "budgetcalculator",
+        "loancalculator",
+        "visasuccesscalculator"
       ]
     },
     "items": {

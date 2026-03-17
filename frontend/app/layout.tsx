@@ -40,7 +40,7 @@ export default async function RootLayout({
   const menuResponse = await getServices("/menus?sort=Order:asc");
   const menus = menuResponse?.data?.data;
 
-  const tabsResponse  = await getServices("/mega-menu-tabs?populate=menu&sort=Order:asc");
+  const tabsResponse  = await getServices("/mega-menu-tabs?populate[sections][populate][items]=*&populate=menu&sort=Order:asc");
   const tabs = tabsResponse?.data?.data;
 
   return (

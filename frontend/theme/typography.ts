@@ -99,6 +99,12 @@ const typography = {
     fontWeight: 700
   },
 
+  heading15: {
+    fontFamily: "var(--font-heading)",
+    fontSize: "14px",
+    fontWeight: 700
+  },
+
   /* BODY */
 
   body01: {
