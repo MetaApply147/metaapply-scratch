@@ -5,7 +5,11 @@ export interface MenuItem extends Struct.ComponentSchema {
   info: {
     displayName: 'Item';
   };
-  attributes: {};
+  attributes: {
+    label: Schema.Attribute.String;
+    order: Schema.Attribute.Integer;
+    url: Schema.Attribute.String;
+  };
 }
 
 declare module '@strapi/strapi' {
