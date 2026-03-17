@@ -2,7 +2,7 @@
 
 import { Box, Container, Typography, Tabs, Tab } from "@mui/material";
 import { useState, useEffect } from "react";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import ChevronRight from "@mui/icons-material/ChevronRight";
 
 type MegaMenuTab = {
   id: number;
@@ -46,8 +46,6 @@ export default function MegaMenu({ open, type, tabs }: MegaMenuProps) {
         bgcolor: "white",
         boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
         borderRadius: "0 0 20px 20px",
-        pt: 4,
-        pb: 6,
         zIndex: 10,
         mx: "16px",
       }}
@@ -64,16 +62,16 @@ export default function MegaMenu({ open, type, tabs }: MegaMenuProps) {
               minWidth: "240px",
 
               "& .MuiTab-root": {
-                alignItems: "flex-start",
-                textAlign: "left",
+                minHeight: 'unset',  
+                alignItems: "center",
                 textTransform: "none",
                 fontSize: "14px",
                 fontFamily: "var(--font-heading)",
                 color: "text.primary",
                 px: 3,
                 py: 2.41,
-                justifyContent: "flex-start",
-                width: "100%",
+                justifyContent: 'space-between',
+                flexDirection: 'row', 
               },
 
               "& .MuiTab-root:hover": {
@@ -92,7 +90,7 @@ export default function MegaMenu({ open, type, tabs }: MegaMenuProps) {
             }}
           >
             {filteredTabs.map((tab) => (
-              <Tab key={tab.id} label={tab.Title} icon={<KeyboardArrowRightIcon />} iconPosition="end"/>
+              <Tab key={tab.id} label={tab.Title} icon={<ChevronRight  />} iconPosition="end" sx={{display: "flex", alignItems: "flex-start", justifyContent: "space-between"}}/>
             ))}
             
           </Tabs>
