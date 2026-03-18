@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AppBar, Toolbar, Typography, Button, Box, Container } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MegaMenu from "./MegaMenu";
+import MegaMenu from "../MegaMenu/MegaMenu";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 
