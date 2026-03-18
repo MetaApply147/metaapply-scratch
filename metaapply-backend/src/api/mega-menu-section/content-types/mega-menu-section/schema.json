@@ -20,12 +20,10 @@
         "courses",
         "universities",
         "services",
-        "examdetails",
+        "exam_details",
         "resources",
-        "IELTSpreparationtips",
-        "budgetcalculator",
-        "loancalculator",
-        "visasuccesscalculator"
+        "tips",
+        "cards"
       ]
     },
     "items": {

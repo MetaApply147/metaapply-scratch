@@ -459,12 +459,10 @@ export interface ApiMegaMenuSectionMegaMenuSection
         'courses',
         'universities',
         'services',
-        'examdetails',
+        'exam_details',
         'resources',
-        'IELTSpreparationtips',
-        'budgetcalculator',
-        'loancalculator',
-        'visasuccesscalculator',
+        'tips',
+        'cards',
       ]
     >;
     updatedAt: Schema.Attribute.DateTime;
