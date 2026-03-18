@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { AppBar, Toolbar, Typography, Button, Box, Container } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MegaMenu from "@/components/MegaMenu/MegaMenu";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 
@@ -107,7 +106,7 @@ export default function Header({ menus, tabs }: HeaderProps) {
             </Box>
           </Box>
         </Toolbar>
-        <MegaMenu open={menus?.some(m => m.Slug === activeMenu && m.Type === "mega")} type={activeMenu} tabs={tabs}/>
+        {/* <MegaMenu open={menus?.some(m => m.Slug === activeMenu && m.Type === "mega")} type={activeMenu} tabs={tabs}/> */}
       </Container>
     </AppBar>
   );
