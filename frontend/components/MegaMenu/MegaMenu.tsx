@@ -47,7 +47,7 @@ export default function MegaMenu({ open, type, tabs }: any) {
         zIndex: 10,
       }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ p: 0 }}>
         <Box display="flex">
           <LeftTabs tabs={filteredTabs} value={value} setValue={setValue} />
           <Box flex={1} p={4}>
