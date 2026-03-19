@@ -1,24 +1,63 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
-import Link from "next/link";
+import { Box, Typography, Link as MuiLink } from "@mui/material";
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
+import { Section } from "@/types/megamenu";
 
-export default function SectionColumn({ section }: any) {
+/* ---------------- COMPONENT ---------------- */
+
+export default function SectionColumn({ section }: { section: Section }) {
+  const pathname = usePathname();
+
+  if (!section) return null;
+
   return (
     <Box>
-      <Typography variant="heading14" component="h6" mb={2} sx={{color: "text.primary"}}>
+      {/* TITLE */}
+      <Typography
+        variant="heading14"
+        component="h6"
+        mb={2}
+        sx={{ color: "text.primary" }}
+      >
         {section.title}
       </Typography>
 
-      {(section?.items || []).map((item: any) => (
-        <Box key={item.id} mb={1}>
-          <Link href={item.url || "#"} style={{ textDecoration: "none" }}>
-            <Typography variant="heading15" fontWeight={400} sx={{ color: "text.primary" }}>
-              {item.label}
-            </Typography>
-          </Link>
-        </Box>
-      ))}
+      {/* ITEMS */}
+      <Box display="flex" flexDirection="column" gap={1}>
+        {section.items?.map((item) => {
+          if (!item?.label) return null;
+
+          const href = item.url ?? "";
+
+          // ✅ ACTIVE CHECK
+          const isActive =
+            href && pathname.toLowerCase() === href.toLowerCase();
+
+          return (
+            <MuiLink
+              key={item.id}
+              component={NextLink}
+              href={href}
+              underline="none"
+              sx={{
+                color: isActive ? "primary.main" : "text.primary",
+                cursor: href ? "pointer" : "default",
+                transition: "0.2s",
+                fontWeight: isActive ? 500 : 400,
+                "&:hover": {
+                  color: "primary.main",
+                },
+              }}
+            >
+              <Typography variant="heading15">
+                {item.label}
+              </Typography>
+            </MuiLink>
+          );
+        })}
+      </Box>
     </Box>
   );
 }

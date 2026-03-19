@@ -6,33 +6,63 @@ import LeftTabs from "./shared/LeftTabs";
 import StudyMegaMenu from "./variants/StudyMegaMenu";
 import TestPrepMegaMenu from "./variants/TestPrepMegaMenu";
 import ExploreMegaMenu from "./variants/ExploreMegaMenu";
+import { Tab } from "@/types/megamenu";
 
-export default function MegaMenu({ open, type, tabs }: any) {
+/* ---------------- TYPES ---------------- */
+
+type MegaMenuProps = {
+  open: boolean;
+  type: "study-abroad" | "testprep" | "explore" | null;
+  tabs: (Tab & {
+    menu?: string;
+    order?: number;
+  })[];
+};
+
+/* ---------------- COMPONENT ---------------- */
+
+export default function MegaMenu({
+  open,
+  type,
+  tabs,
+}: MegaMenuProps) {
   const [value, setValue] = useState(0);
 
+  /* ---------------- FILTER TABS ---------------- */
+
   const filteredTabs = useMemo(() => {
-    if (!tabs || !type) return [];
+    if (!tabs?.length || !type) return [];
+
     return tabs
-      .filter((tab: any) => tab.menu === type)
-      .sort((a: any, b: any) => a.order - b.order);
+      .filter((tab) => tab.menu === type)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   }, [tabs, type]);
 
-  const selectedTab = filteredTabs?.[value] || null;
+  const selectedTab = filteredTabs[value] ?? null;
+
+  /* ---------------- RESET ON TYPE CHANGE ---------------- */
 
   useEffect(() => {
     setValue(0);
   }, [type]);
 
-  if (!open || !type || filteredTabs.length === 0) {
-    return null;
-    }
+  /* ---------------- EARLY RETURN ---------------- */
 
-  const renderVariant = () => {
-    if (type === "study-abroad") return <StudyMegaMenu tab={selectedTab} />;
-    if (type === "testprep") return <TestPrepMegaMenu tab={selectedTab} />;
-    if (type === "explore") return <ExploreMegaMenu tab={selectedTab} />;
+  if (!open || !type || !filteredTabs.length) {
     return null;
-  };
+  }
+
+  /* ---------------- VARIANT MAP (SCALABLE) ---------------- */
+
+  const variantMap = {
+    "study-abroad": StudyMegaMenu,
+    testprep: TestPrepMegaMenu,
+    explore: ExploreMegaMenu,
+  } as const;
+
+  const VariantComponent = variantMap[type];
+
+  /* ---------------- RENDER ---------------- */
 
   return (
     <Box
@@ -48,10 +78,23 @@ export default function MegaMenu({ open, type, tabs }: any) {
       }}
     >
       <Container maxWidth="xl" sx={{ p: 0 }}>
-        <Box display="flex">
-          <LeftTabs tabs={filteredTabs} value={value} setValue={setValue} />
-          <Box flex={1} p={4}>
-            {renderVariant()}
+        <Box
+          display="flex"
+          flexDirection={{
+            xs: "column",
+            md: "row",
+          }}
+        >
+          {/* LEFT TABS */}
+          <LeftTabs
+            tabs={filteredTabs}
+            value={value}
+            setValue={setValue}
+          />
+
+          {/* CONTENT */}
+          <Box flex={1} p={{ xs: 2, md: 4 }}>
+            {selectedTab && <VariantComponent tab={selectedTab} />}
           </Box>
         </Box>
       </Container>
