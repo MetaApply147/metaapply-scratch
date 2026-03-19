@@ -454,6 +454,33 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDestinationDestination extends Struct.CollectionTypeSchema {
+  collectionName: 'destinations';
+  info: {
+    displayName: 'Destination';
+    pluralName: 'destinations';
+    singularName: 'destination';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::destination.destination'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMegaMenuSectionMegaMenuSection
   extends Struct.CollectionTypeSchema {
   collectionName: 'mega_menu_sections';
@@ -1071,6 +1098,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::blog.blog': ApiBlogBlog;
+      'api::destination.destination': ApiDestinationDestination;
       'api::mega-menu-section.mega-menu-section': ApiMegaMenuSectionMegaMenuSection;
       'api::mega-menu-tab.mega-menu-tab': ApiMegaMenuTabMegaMenuTab;
       'api::menu.menu': ApiMenuMenu;
