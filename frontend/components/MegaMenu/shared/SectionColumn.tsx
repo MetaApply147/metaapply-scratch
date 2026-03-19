@@ -51,7 +51,7 @@ export default function SectionColumn({ section }: { section: Section }) {
                 },
               }}
             >
-              <Typography variant="heading15">
+              <Typography variant="heading15" fontWeight={400}>
                 {item.label}
               </Typography>
             </MuiLink>

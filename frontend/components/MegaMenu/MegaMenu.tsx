@@ -93,7 +93,7 @@ export default function MegaMenu({
           />
 
           {/* CONTENT */}
-          <Box flex={1} p={{ xs: 2, md: 4 }}>
+          <Box flex={1} sx={{p: "25px 32px"}}>
             {selectedTab && <VariantComponent tab={selectedTab} />}
           </Box>
         </Box>

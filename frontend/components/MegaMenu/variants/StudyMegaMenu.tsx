@@ -3,6 +3,10 @@
 import { Box, Typography, Divider } from "@mui/material";
 import SectionColumn from "../shared/SectionColumn";
 import { Tab } from "@/types/megamenu";
+import { ChevronRight } from "@mui/icons-material";
+import Link from "next/link";
+import EastIcon from '@mui/icons-material/East';
+import Image from "next/image";
 
 /* ---------------- COMPONENT ---------------- */
 
@@ -17,7 +21,7 @@ export default function StudyMegaMenu({ tab }: { tab: Tab }) {
       gridTemplateColumns={{
         xs: "1fr",
         md: "2fr 1fr",
-        lg: "minmax(0,1fr) minmax(280px, 340px)",
+        lg: "minmax(0,1fr) minmax(220px, 404px)",
       }}
       gap={{ xs: 2, md: 4 }}
     >
@@ -25,22 +29,25 @@ export default function StudyMegaMenu({ tab }: { tab: Tab }) {
       <Box minWidth={0}>
         {/* Heading */}
         <Box mb={2}>
-          <Typography
-            variant="body1"
-            sx={{
-              color: "primary.main",
-              fontWeight: 500,
-              cursor: "pointer",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            Explore Studying in {country} →
-          </Typography>
+          <Link href={`/study-in-${country.toLowerCase().replace(/\s+/g, "-")}`}>
+            <Typography
+              variant="heading15"
+              sx={{
+                color: "primary.main",
+                fontWeight: 500,
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 1,
+                mb: 1
+              }}
+            >
+              Explore Studying in {country} <ChevronRight fontSize="small" sx={{marginLeft: 3}} />
+            </Typography>
+          </Link>
         </Box>
 
-        <Divider sx={{ mb: 3 }} />
+        <Divider sx={{ mb: 2.5 }} />
 
         {/* Sections */}
         <Box
@@ -50,6 +57,7 @@ export default function StudyMegaMenu({ tab }: { tab: Tab }) {
             sm: "1fr 1fr",
           }}
           gap={3}
+          px= {2}
         >
           {tab?.sections?.length ? (
             tab.sections.map((section) => (
@@ -96,11 +104,13 @@ function TopCards() {
     <Box display="flex" gap={2} mb={3}>
       <SidebarCard
         title="MBBS Abroad"
-        gradient="linear-gradient(135deg,#B2F5EA,#81E6D9)"
+        gradient="linear-gradient(321.08deg, #ACFFE1 8.47%, #C8F2FF 72.68%)"
+        imageUrl="/Header/doctor_m.svg"
       />
       <SidebarCard
         title="Premium Counselling"
-        gradient="linear-gradient(135deg,#FBCFE8,#F9A8D4)"
+        gradient="linear-gradient(312.85deg, #CD8BFF 7.95%, #FFEEBB 69.45%)"
+        imageUrl="/Header/premium_counselling_girl.svg"
       />
     </Box>
   );
@@ -110,10 +120,10 @@ function TopCards() {
 
 function Services() {
   const services = [
-    "MetaFinance",
-    "MetaFly",
-    "MetaStay",
-    "MetaInsure",
+    { name: "MetaFinance", image: "/Header/metafinance_icon.svg" },
+    { name: "MetaFly", image: "/Header/metafly_icon.svg" },
+    { name: "MetaStay", image: "/Header/metastay_icon.svg" },
+    { name: "MetaInsure", image: "/Header/metainsure_icon.svg" },
   ];
 
   return (
@@ -124,7 +134,7 @@ function Services() {
 
       <Box display="grid" gridTemplateColumns="1fr 1fr" gap={2}>
         {services.map((service) => (
-          <SidebarItem key={service} label={service} />
+          <SidebarItem key={service.name} label={service.name} imageUrl={service.image}/>
         ))}
       </Box>
     </>
@@ -136,15 +146,21 @@ function Services() {
 function SidebarCard({
   title,
   gradient,
+  imageUrl
 }: {
   title: string;
   gradient: string;
+  imageUrl: string;
 }) {
   return (
     <Box
       sx={{
         flex: 1,
-        p: 2,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: "16px 12px 0 20px",
+        gap: 1,
         borderRadius: 3,
         background: gradient,
         cursor: "pointer",
@@ -152,19 +168,21 @@ function SidebarCard({
         "&:hover": {
           transform: "translateY(-2px)",
         },
+        color: "text.primary"
       }}
     >
-      <Typography fontWeight={600}>{title}</Typography>
-      <Typography variant="body2">Know More →</Typography>
+      <Typography fontWeight={600} variant="heading15" component="h6">{title}</Typography>
+      <Typography variant="body07">Know More <EastIcon sx={{fontSize: 12}}/></Typography>
+      <Image src={imageUrl} alt={title} width={130} height={131} />
     </Box>
   );
 }
 
-function SidebarItem({ label }: { label: string }) {
+function SidebarItem({ label, imageUrl, }: { label: string, imageUrl: string; }) {
   return (
     <Box
       sx={{
-        p: 2,
+        padding: "16px 12px 8px 20px",
         borderRadius: 2,
         boxShadow: 1,
         cursor: "pointer",
@@ -175,7 +193,8 @@ function SidebarItem({ label }: { label: string }) {
       }}
     >
       <Typography fontWeight={500}>{label}</Typography>
-      <Typography variant="body2">Know More →</Typography>
+      <Typography variant="body2">Know More <EastIcon sx={{fontSize: 12}}/></Typography>
+      <Image src={imageUrl} alt="Cards Images" width={124} height={137}/>
     </Box>
   );
 }
