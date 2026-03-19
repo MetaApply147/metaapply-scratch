@@ -32,7 +32,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: "strapi-backend"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D0A1936923C4DE780710C43C8A39720 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BACKEND }}
           package: ./metaapply-backend
 
 
