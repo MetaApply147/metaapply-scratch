@@ -26,10 +26,21 @@
       "relation": "oneToOne",
       "target": "api::menu.menu"
     },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "dynamic",
+        "link",
+        "static"
+      ]
+    },
+    "url": {
+      "type": "string"
+    },
     "sections": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::mega-menu-section.mega-menu-section"
+      "type": "component",
+      "component": "menu.section",
+      "repeatable": true
     }
   }
 }

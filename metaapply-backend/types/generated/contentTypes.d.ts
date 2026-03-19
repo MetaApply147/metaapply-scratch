@@ -481,47 +481,6 @@ export interface ApiDestinationDestination extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiMegaMenuSectionMegaMenuSection
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'mega_menu_sections';
-  info: {
-    displayName: 'Mega Menu Section';
-    pluralName: 'mega-menu-sections';
-    singularName: 'mega-menu-section';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    items: Schema.Attribute.Component<'menu.item', true>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::mega-menu-section.mega-menu-section'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    Title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<
-      [
-        'courses',
-        'universities',
-        'services',
-        'exam_details',
-        'resources',
-        'tips',
-        'cards',
-      ]
-    >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiMegaMenuTabMegaMenuTab extends Struct.CollectionTypeSchema {
   collectionName: 'mega_menu_tabs';
   info: {
@@ -545,15 +504,14 @@ export interface ApiMegaMenuTabMegaMenuTab extends Struct.CollectionTypeSchema {
     menu: Schema.Attribute.Relation<'oneToOne', 'api::menu.menu'>;
     Order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    sections: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::mega-menu-section.mega-menu-section'
-    >;
+    sections: Schema.Attribute.Component<'menu.section', true>;
     Slug: Schema.Attribute.UID<'Title'>;
     Title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['dynamic', 'link', 'static']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -1099,7 +1057,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::blog.blog': ApiBlogBlog;
       'api::destination.destination': ApiDestinationDestination;
-      'api::mega-menu-section.mega-menu-section': ApiMegaMenuSectionMegaMenuSection;
       'api::mega-menu-tab.mega-menu-tab': ApiMegaMenuTabMegaMenuTab;
       'api::menu.menu': ApiMenuMenu;
       'plugin::content-releases.release': PluginContentReleasesRelease;

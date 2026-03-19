@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Header from "@/components/layout/Header";
 import { getServices } from "@/services/httpServices";
+import { transformMegaMenu } from "@/components/MegaMenu/utils/helpers";
 import ThemeProviderWrapper from "@/theme/ThemeProviderWrapper";
 import ThemeRegistry from "@/theme/ThemeRegistry";
 
@@ -40,8 +41,8 @@ export default async function RootLayout({
   const menuResponse = await getServices("/menus?sort=Order:asc");
   const menus = menuResponse?.data?.data;
 
-  const tabsResponse  = await getServices("/mega-menu-tabs?populate[sections][populate][items]=*&populate=menu&sort=Order:asc");
-  const tabs = tabsResponse?.data?.data;
+  const tabsResponse = await getServices("/mega-menu-tabs?populate[sections][populate][items]=*&populate=menu&sort=Order:asc");
+  const tabs = transformMegaMenu(tabsResponse?.data?.data || []);
 
   return (
     <html lang="en">
