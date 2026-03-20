@@ -35,11 +35,11 @@ export default function LeftTabs({
         },
         borderRight: "1px solid",
         borderColor: palette.neutralBlue[100],
-        maxHeight: "calc(68vh - 150px)",
+        maxHeight: "calc(69vh - 150px)",
 
         "& .MuiTabs-scroller": {
           overflowY: "auto !important",
-          maxHeight: "calc(68vh - 150px)",
+          maxHeight: "calc(69vh - 150px)",
           scrollbarWidth: "thin",
         },
 

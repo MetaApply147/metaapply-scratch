@@ -23,6 +23,10 @@ export type Tab = {
   title: string;
   slug?: string; // useful for routing / API mapping
   sections?: Section[];
+  type?: "static" | "link" | "dynamic";
+  url?: string | null;
+  menu?: string;
+  order?: number;
 };
 
 /* ---------------- MEGA MENU ROOT ---------------- */
