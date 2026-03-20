@@ -61,6 +61,7 @@ export default function MegaMenu({
   } as const;
 
   const VariantComponent = variantMap[type];
+  // console.log(tabs.length);
 
   /* ---------------- RENDER ---------------- */
 
@@ -93,7 +94,7 @@ export default function MegaMenu({
           />
 
           {/* CONTENT */}
-          <Box flex={1} sx={{p: "25px 32px"}}>
+          <Box flex={1}>
             {selectedTab && <VariantComponent tab={selectedTab} />}
           </Box>
         </Box>

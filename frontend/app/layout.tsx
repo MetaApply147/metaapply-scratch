@@ -41,7 +41,7 @@ export default async function RootLayout({
   const menuResponse = await getServices("/menus?sort=Order:asc");
   const menus = menuResponse?.data?.data;
 
-  const tabsResponse = await getServices("/mega-menu-tabs?populate[sections][populate][items]=*&populate=menu&sort=Order:asc");
+  const tabsResponse = await getServices("/mega-menu-tabs?pagination[pageSize]=100&populate[sections][populate][items]=*&populate=menu&sort=Order:asc");
   const tabs = transformMegaMenu(tabsResponse?.data?.data || []);
 
   return (

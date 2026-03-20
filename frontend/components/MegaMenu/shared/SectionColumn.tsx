@@ -45,7 +45,6 @@ export default function SectionColumn({ section }: { section: Section }) {
                 color: isActive ? "primary.main" : "text.primary",
                 cursor: href ? "pointer" : "default",
                 transition: "0.2s",
-                fontWeight: isActive ? 500 : 400,
                 "&:hover": {
                   color: "primary.main",
                 },
