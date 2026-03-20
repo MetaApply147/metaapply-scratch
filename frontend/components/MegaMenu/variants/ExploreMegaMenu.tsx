@@ -10,13 +10,13 @@ import { useRouter } from "next/navigation";
 export default function ExploreMegaMenu({ tab }: { tab: Tab }) {
   const router = useRouter();
 
-  // ✅ Immediate redirect (no flicker)
+  // Immediate redirect (no flicker)
   if (tab?.type === "link" && tab?.url) {
     router.push(tab.url);
     return null;
   }
 
-  // ✅ Only render UI for static
+  // Only render UI for static
   if (tab?.type !== "static") return null;
 
   return <CalculatorCards />;
@@ -54,20 +54,20 @@ function CalculatorCards() {
       gap={4}
     >
       {cards.map((card) => (
-        <Link key={card.title} href={card.link} passHref>
+        <Link key={card.title} href={card.link} passHref style={{display: "inline-block", width: "fit-content",}}>
           <Box
-            component="a"
+            // component="a"
             sx={{
               cursor: "pointer",
               display: "block",
-              "&:hover": { opacity: 0.8 },
+              width: "auto"
             }}
           >
-            <Typography variant="heading14" fontWeight={600} mb={1} color="text.primary">
+            <Typography variant="heading14" fontWeight={600} color="text.primary">
               {card.title}
             </Typography>
 
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body06" component="p" color="text.primary" mt={2} sx={{maxWidth: "260px"}}>
               {card.desc}
             </Typography>
           </Box>

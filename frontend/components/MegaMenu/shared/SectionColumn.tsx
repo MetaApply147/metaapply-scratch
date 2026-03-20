@@ -48,6 +48,7 @@ export default function SectionColumn({ section }: { section: Section }) {
                 "&:hover": {
                   color: "primary.main",
                 },
+                width: "max-content"
               }}
             >
               <Typography variant="heading15" fontWeight={400}>
