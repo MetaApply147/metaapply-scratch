@@ -75,6 +75,7 @@ export default function MegaMenu({
         bgcolor: "#fff",
         boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
         borderRadius: "0 0 20px 20px",
+        overflow: "hidden",
         zIndex: 10,
       }}
     >
