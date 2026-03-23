@@ -7,7 +7,8 @@ import { getServices } from "@/services/httpServices";
 import { transformMegaMenu } from "@/components/MegaMenu/utils/helpers";
 import ThemeProviderWrapper from "@/theme/ThemeProviderWrapper";
 import ThemeRegistry from "@/theme/ThemeRegistry";
-
+import Footer from "@/components/layout/Footer";
+import { FooterData } from "@/types/footer";
 
 const headingFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -44,6 +45,9 @@ export default async function RootLayout({
   const tabsResponse = await getServices("/mega-menu-tabs?pagination[pageSize]=100&populate[sections][populate][items]=*&populate=menu&sort=Order:asc");
   const tabs = transformMegaMenu(tabsResponse?.data?.data || []);
 
+  const footerResponse = await getServices("/footers?populate[sections][populate]=links&populate[destinations][populate]=items");
+  const footer: FooterData | null = footerResponse?.data?.data?.[0] || null;
+
   return (
     <html lang="en">
       <body suppressHydrationWarning
@@ -53,6 +57,7 @@ export default async function RootLayout({
           <ThemeProviderWrapper>
             <Header menus={menus} tabs={tabs}/>
             {children} 
+            <Footer footer={footer} />
           </ThemeProviderWrapper>
         </ThemeRegistry>
       </body>
