@@ -76,40 +76,30 @@ export default function Footer({ footer }: FooterProps) {
             mb: { xs: 5, md: 0 },
           }}
         >
-            <Box
-                sx={{
-                    maxWidth: "420px",
-                    ml: "auto",
-                    px: { xs: 2, md: 6 },
-                    py: { xs: 5, md: 7 },
-                    }}
-                >
-                <Typography variant="h6" fontWeight={700}>
-                MetaApply
-            </Typography>
+          <Typography variant="h6" fontWeight={700}>
+            MetaApply
+          </Typography>
 
+          <Typography>
+            © {new Date().getFullYear()} All Rights Reserved
+          </Typography>
+
+          <Box mt={4}>
+            <Typography fontWeight={600}>Head Office</Typography>
+            <Typography fontWeight={600}>Dubai, UAE</Typography>
+         
+          </Box>
+
+          <Box mt={4}>
+            <Typography fontWeight={600}>Global Excellence Centre</Typography>
             <Typography>
-                © {new Date().getFullYear()} All Rights Reserved
+              Noida, India
             </Typography>
-
-            <Box mt={4}>
-                <Typography fontWeight={600}>Head Office</Typography>
-                <Typography fontWeight={600}>Dubai, UAE</Typography>
-            
-            </Box>
-
-            <Box mt={4}>
-                <Typography fontWeight={600}>Global Excellence Centre</Typography>
-                <Typography>
-                Noida, India
-                </Typography>
-            </Box>
-            </Box>
-          
+          </Box>
         </Box>
 
         {/* RIGHT */}
-        <Box sx={{ width: { xs: "100%", md: "70%" }, bgcolor: "#040437", pl: { md: 5 } }}>
+        <Box sx={{ width: { xs: "100%", md: "70%" }, bgcolor: "#0B0D2A", pl: { md: 5 } }}>
           
           {/* DESTINATIONS */}
           {footer.destinations && (
