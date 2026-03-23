@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_footer_destination_items",
+  "info": {
+    "displayName": "destination-item"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
