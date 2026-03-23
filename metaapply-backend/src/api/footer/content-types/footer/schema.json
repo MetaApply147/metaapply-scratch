@@ -20,6 +20,9 @@
       "type": "component",
       "component": "footer-destinations.destinations",
       "repeatable": false
+    },
+    "title": {
+      "type": "string"
     }
   }
 }
