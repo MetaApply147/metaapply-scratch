@@ -4,6 +4,13 @@
     "displayName": "footer-link"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
   "config": {}
 }

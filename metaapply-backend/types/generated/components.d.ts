@@ -27,7 +27,10 @@ export interface FooterFooterLink extends Struct.ComponentSchema {
   info: {
     displayName: 'footer-link';
   };
-  attributes: {};
+  attributes: {
+    name: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
 }
 
 export interface FooterFooterSection extends Struct.ComponentSchema {
