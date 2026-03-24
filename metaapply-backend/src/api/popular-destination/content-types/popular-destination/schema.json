@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "popular_destinations",
+  "info": {
+    "singularName": "popular-destination",
+    "pluralName": "popular-destinations",
+    "displayName": "Popular Destination"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "tagColor": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "popularCourses": {
+      "type": "string"
+    },
+    "studentCities": {
+      "type": "string"
+    },
+    "countryGuideLink": {
+      "type": "string"
+    },
+    "exploreMoreLink": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer"
+    }
+  }
+}

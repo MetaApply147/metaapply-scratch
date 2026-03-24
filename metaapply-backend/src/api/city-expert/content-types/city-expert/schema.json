@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "city_experts",
+  "info": {
+    "singularName": "city-expert",
+    "pluralName": "city-experts",
+    "displayName": "City Expert"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "city",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "features": {
+      "type": "component",
+      "component": "shared.feature",
+      "repeatable": true
+    },
+    "testimonial": {
+      "type": "component",
+      "component": "shared.testimonial",
+      "repeatable": false
+    },
+    "ctaText": {
+      "type": "string"
+    }
+  }
+}

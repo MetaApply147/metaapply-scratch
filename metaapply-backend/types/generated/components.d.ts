@@ -68,6 +68,37 @@ export interface MenuSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedFeature extends Struct.ComponentSchema {
+  collectionName: 'components_shared_features';
+  info: {
+    displayName: 'Feature';
+  };
+  attributes: {
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface SharedTestimonial extends Struct.ComponentSchema {
+  collectionName: 'components_shared_testimonials';
+  info: {
+    displayName: 'Testimonial';
+  };
+  attributes: {
+    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    designation: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    text: Schema.Attribute.Blocks;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -77,6 +108,8 @@ declare module '@strapi/strapi' {
       'footer.footer-section': FooterFooterSection;
       'menu.item': MenuItem;
       'menu.section': MenuSection;
+      'shared.feature': SharedFeature;
+      'shared.testimonial': SharedTestimonial;
     }
   }
 }
