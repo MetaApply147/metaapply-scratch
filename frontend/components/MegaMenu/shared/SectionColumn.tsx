@@ -31,7 +31,7 @@ export default function SectionColumn({ section }: { section: Section }) {
 
           const href = item.url ?? "";
 
-          // ✅ ACTIVE CHECK
+          // ACTIVE CHECK
           const isActive =
             href && pathname.toLowerCase() === href.toLowerCase();
 
