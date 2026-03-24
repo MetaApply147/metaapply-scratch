@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Typography, Container, Divider } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,32 +14,7 @@ import {
   YouTube,
 } from "@mui/icons-material";
 
-/* ---------------- TYPES ---------------- */
-
-type FooterLink = {
-  id: number;
-  name: string;
-  url: string;
-};
-
-type FooterSection = {
-  id: number;
-  title: string;
-  key?: string;
-  links: FooterLink[];
-};
-
-type FooterData = {
-  sections?: FooterSection[];
-  destinations?: {
-    title: string;
-    items: { id: number; name: string; url: string }[];
-  };
-};
-
-type FooterProps = {
-  footer: FooterData | null;
-};
+import { FooterData, FooterSection } from "@/types/footer";
 
 /* ---------------- CONSTANTS ---------------- */
 
@@ -75,17 +52,21 @@ const FooterLinkItem = ({ name, url }: { name: string; url: string }) => (
   </Link>
 );
 
-const FooterSectionColumn = ({ section }: { section: FooterSection }) => (
-  <Box>
-    <Typography fontWeight={600} mb={2} component="h6" variant="heading12">
-      {section.title}
-    </Typography>
+const FooterSectionColumn = ({ section }: { section?: FooterSection }) => {
+  if (!section) return null;
 
-    {section.links?.map((link) => (
-      <FooterLinkItem key={link.id} name={link.name} url={link.url} />
-    ))}
-  </Box>
-);
+  return (
+    <Box>
+      <Typography fontWeight={600} mb={2} component="h6" variant="heading12">
+        {section.title}
+      </Typography>
+
+      {section.links?.map((link) => (
+        <FooterLinkItem key={link.id} name={link.name} url={link.url} />
+      ))}
+    </Box>
+  );
+};
 
 const StaticTopLinks = () => (
   <Box>
@@ -97,36 +78,41 @@ const StaticTopLinks = () => (
 
 /* ---------------- HELPERS ---------------- */
 
-const getSection = (sections: FooterSection[] = [], title: string) =>
-  sections.find((s) => s.title === title);
+// ✅ PRODUCTION SAFE (key + fallback title)
+const getSection = (sections: FooterSection[] = [], key: string, title: string) =>
+  sections.find(
+    (s) =>
+      (s.key && s.key === key) ||
+      s.title.toLowerCase().replace(/\s/g, "") === title
+  );
 
 const createGroupedSections = (sections: FooterSection[] = []) => [
-  [getSection(sections, "TestPrep")],
-  [getSection(sections, "Company"), getSection(sections, "Services")],
-  [getSection(sections, "Partner With Us"), getSection(sections, "Others")],
-  [getSection(sections, "Study Abroad Centres"), getSection(sections, "Calculators")],
+  [getSection(sections, "testprep", "testprep")],
+  [getSection(sections, "company", "company"), getSection(sections, "services", "services")],
+  [getSection(sections, "partner", "partnerwithus"), getSection(sections, "others", "others")],
+  [getSection(sections, "centres", "studyabroadcentres"), getSection(sections, "calculators", "calculators")],
 ];
 
 /* ---------------- MAIN ---------------- */
 
-export default function Footer({ footer }: FooterProps) {
-  if (!footer) {
-    return (
-      <Box p={4} textAlign="center">
-        <Typography>Footer not available</Typography>
-      </Box>
-    );
-  }
+export default function Footer({ footer }: { footer: FooterData | null }) {
+  // ✅ SAFETY (no crashes)
+  const sections = footer?.sections || [];
+  const destinations = footer?.destinations;
 
-  const groupedSections = createGroupedSections(footer.sections);
-  const destinations = footer.destinations;
+  const groupedSections = createGroupedSections(sections);
+
+  // ✅ Debug (safe)
+  if (!footer) {
+    console.warn("Footer data missing");
+  }
 
   return (
     <Box component="footer" sx={{ color: "#fff", background: "#040437" }}>
       <Container maxWidth="xl" sx={{ position: "relative" }}>
         <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
 
-          {/* LEFT */}
+          {/* ================= LEFT (STATIC — UNCHANGED) ================= */}
           <Box
             sx={{
               width: { xs: "100%", md: "29%" },
@@ -151,11 +137,11 @@ export default function Footer({ footer }: FooterProps) {
             </Link>
 
             <Box sx={{ display: "flex", gap: 2.5, mt: 2.2, mb: 3 }}>
-              <Link href="#" aria-label="Instagram"><Instagram sx={{ fontSize: 20 }} /></Link>
-              <Link href="#" aria-label="LinkedIn"><LinkedIn sx={{ fontSize: 20 }} /></Link>
-              <Link href="#" aria-label="Facebook"><Facebook sx={{ fontSize: 20 }} /></Link>
-              <Link href="#" aria-label="Twitter"><X sx={{ fontSize: 20 }} /></Link>
-              <Link href="#" aria-label="Youtube"><YouTube sx={{ fontSize: 20 }} /></Link>
+              <Link href="#"><Instagram sx={{ fontSize: 20 }} /></Link>
+              <Link href="#"><LinkedIn sx={{ fontSize: 20 }} /></Link>
+              <Link href="#"><Facebook sx={{ fontSize: 20 }} /></Link>
+              <Link href="#"><X sx={{ fontSize: 20 }} /></Link>
+              <Link href="#"><YouTube sx={{ fontSize: 20 }} /></Link>
             </Box>
 
             <Divider sx={{ borderStyle: "dashed", borderColor: "background.default", borderBottomWidth: "2px", opacity: 0.7, my: 2.5 }} />
@@ -166,14 +152,14 @@ export default function Footer({ footer }: FooterProps) {
 
             <Box sx={{ display: "flex", gap: 5, mt: 5.75 }}>
               <Box>
-                <Typography fontWeight={600} variant="body06" mb={1.18} component="p">For Students</Typography>
+                <Typography fontWeight={600} variant="body06" mb={1} component="p">For Students</Typography>
                 <Typography fontWeight={700} variant="body06">
                   <PhoneIcon sx={{ fontSize: 15, mr: 1 }} />
                   <Link href="tel:+919560708184" style={linkStyle}>+91-9560708184</Link>
                 </Typography>
               </Box>
               <Box>
-                <Typography fontWeight={600} variant="body06" mb={1.18} component="p">For Partner Queries</Typography>
+                <Typography fontWeight={600} variant="body06" mb={1} component="p">For Partner Queries</Typography>
                 <Typography fontWeight={700} variant="body06">
                   <PhoneIcon sx={{ fontSize: 15, mr: 1 }} />
                   <Link href="tel:+918448876123" style={linkStyle}>+91-8448876123</Link>
@@ -181,21 +167,21 @@ export default function Footer({ footer }: FooterProps) {
               </Box>
             </Box>
 
-            <Box mt={4.25} mb={1.75}>
+            <Box mt={4.25} mb={3.5}>
               <Typography fontWeight={700} variant="body03" mb={1.75} component="p">Head Office</Typography>
               <Typography fontWeight={600} variant="body05">
                 MetaApply L.L.C-FZ, Business Center 1, <br />
                 M Floor, The Meydan Hotel Nad Al <br />
                 Sheba, Dubai, U.A.E.
               </Typography>
-              <Box sx={{ display: "flex", gap: 3, mt: 1.5 }}>
+              <Box sx={{ display: "flex", gap: 5, mt: 1.5 }}>
                 <Typography fontWeight={700} variant="body06">
                   <PhoneIcon sx={{ fontSize: 15, mr: 1 }} />
-                  <Link href="tel:+971562022750" style={linkStyle}>+971-56-202-2750</Link>
+                  <Link href="tel:+919560708184" style={linkStyle}>+91-9560708184</Link>
                 </Typography>
                 <Typography fontWeight={700} variant="body06">
-                  <EmailIcon sx={{ fontSize: 15, mr: 1 }} />
-                  <Link href="mailto:info@metaapply.io" style={linkStyle}>info@metaapply.io</Link>
+                  <PhoneIcon sx={{ fontSize: 15, mr: 1 }} />
+                  <Link href="tel:+918448876123" style={linkStyle}>+91-8448876123</Link>
                 </Typography>
               </Box>
             </Box>
@@ -207,8 +193,7 @@ export default function Footer({ footer }: FooterProps) {
               <Typography fontWeight={600} variant="body05">
                 MAPPLY EDUCATION PRIVATE LIMITED <br />
                 3rd Floor, Plot No.- A-67, Sector-64 <br />
-                Noida, Gautam Buddh Nagar,<br/>
-                Uttar Pradesh- 201301, India
+                Noida, Uttar Pradesh- 201301, India
               </Typography>
             </Box>
 
@@ -220,54 +205,54 @@ export default function Footer({ footer }: FooterProps) {
                 Rua Helena, 170 - Vila Olimpia <br />
                 Sao Paulo - SP - Brazil
               </Typography>
-              <Box sx={{ display: "flex", gap: 3, mt: 1.5 }}>
+              <Box sx={{ display: "flex", gap: 5, mt: 1.5 }}>
                 <Typography fontWeight={700} variant="body06">
                   <PhoneIcon sx={{ fontSize: 15, mr: 1 }} />
-                  <Link href="tel:+971562022750" style={linkStyle}>+971-56-202-2750</Link>
+                  <Link href="tel:+919560708184" style={linkStyle}>+91-9560708184</Link>
                 </Typography>
                 <Typography fontWeight={700} variant="body06">
-                  <EmailIcon sx={{ fontSize: 15, mr: 1 }} />
-                  <Link href="mailto:info@metaapply.io" style={linkStyle}>info@metaapply.io</Link>
+                  <PhoneIcon sx={{ fontSize: 15, mr: 1 }} />
+                  <Link href="tel:+918448876123" style={linkStyle}>+91-8448876123</Link>
                 </Typography>
               </Box>
             </Box>
           </Box>
 
-          {/* RIGHT */}
+          {/* ================= RIGHT (DYNAMIC SAFE) ================= */}
           <Box sx={{ width: { xs: "100%", md: "71%" }, py: 11.2, pl: 10.5 }}>
 
             {/* DESTINATIONS */}
-            {destinations && (
-            <Box mb={7.75}>
-                <Typography fontWeight={600} mb={2.5} component="p" variant="body03">
-                {destinations.title}
+            {(destinations?.items?.length ?? 0) > 0 && (
+              <Box mb={7.75}>
+                <Typography fontWeight={600} mb={2.2} variant="body03" component="p">
+                  {destinations?.title}
                 </Typography>
 
                 <Box sx={{ display: "flex", flexWrap: "wrap", gap: "2.5px 0px" }}>
-                {destinations.items.map((item, index) => (
+                  {destinations?.items?.map((item, index) => (
                     <Box key={item.id} sx={{ display: "flex", alignItems: "center" }}>
-                    <Link href={item.url || "#"}>
+                      <Link href={item.url || "#"}>
                         <Typography
-                        variant="body06"
-                        sx={{ color: palette.gray[200], fontWeight: 600 }}
+                          variant="body06"
+                          sx={{ color: palette.gray[200], fontWeight: 600 }}
                         >
-                        {item.name}
+                          {item.name}
                         </Typography>
-                    </Link>
+                      </Link>
 
-                    {index !== destinations.items.length - 1 && (
+                      {index !== (destinations?.items?.length ?? 0) - 1 && (
                         <Box
-                        sx={{
+                          sx={{
                             mx: "11px",
                             height: "16px",
                             borderRight: `1px solid ${palette.gray[500]}`,
-                        }}
+                          }}
                         />
-                    )}
+                      )}
                     </Box>
-                ))}
+                  ))}
                 </Box>
-            </Box>
+              </Box>
             )}
 
             {/* SECTIONS */}
@@ -286,8 +271,9 @@ export default function Footer({ footer }: FooterProps) {
               {groupedSections.map((column, colIndex) => (
                 <Box key={colIndex} sx={{ display: "flex", flexDirection: "column", gap: 2.25 }}>
                   {colIndex === 0 && <StaticTopLinks />}
-                  {column.filter(Boolean).map((section) => (
-                    <FooterSectionColumn key={section!.id} section={section!} />
+
+                  {column.map((section) => (
+                    <FooterSectionColumn key={section?.id} section={section} />
                   ))}
                 </Box>
               ))}
@@ -295,7 +281,6 @@ export default function Footer({ footer }: FooterProps) {
 
             <Divider sx={{ borderStyle: "dashed", borderColor: "#707070", borderBottomWidth: "2px", opacity: 0.5 }} />
 
-            {/* BOTTOM */}
             <Box pt={4} display="flex" flexWrap="wrap" justifyContent="center" gap={3}>
               <Link href="#"><Typography variant="body05">Privacy Policy</Typography></Link>
               <Link href="#"><Typography variant="body05">Terms & Conditions</Typography></Link>

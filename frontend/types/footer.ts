@@ -7,6 +7,7 @@ export type FooterLink = {
 export type FooterSection = {
   id: number;
   title: string;
+  key?: string;
   links: FooterLink[];
 };
 
@@ -17,9 +18,8 @@ export type DestinationItem = {
 };
 
 export type FooterData = {
-  title: string;
-  sections: FooterSection[];
-  destinations: {
+  sections?: FooterSection[];
+  destinations?: {
     title: string;
     items: DestinationItem[];
   };
