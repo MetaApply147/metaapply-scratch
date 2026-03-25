@@ -9,7 +9,7 @@ export default function SectionHeader({ title, highlight }: Props) {
   const parts = highlight ? title.split(highlight) : [title];
 
   return (
-    <Box mb={{ xs: 3, md: 5 }}>
+    <Box mb={{ xs: 3, md: 6.5 }}>
       <Typography variant="heading07">
         {parts[0]}
         {highlight && (

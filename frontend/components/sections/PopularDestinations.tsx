@@ -1,429 +1,198 @@
-// 'use client';
+'use client';
 
-// import {Box, Button, Card, CardActions, CardContent, CardMedia, Container, Typography, Skeleton, Alert,} from '@mui/material';
-// import Image from 'next/image';
-// import Link from 'next/link';
-// import { useEffect, useRef, useState, useCallback } from 'react';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Navigation } from 'swiper/modules';
-// import type { Swiper as SwiperType } from 'swiper';
-// import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import CheckIcon from '@mui/icons-material/Check';
-// import DownloadIcon from '@mui/icons-material/Download';
-// import { getServices } from '@/services/httpServices'; 
-// import 'swiper/css';
-// import 'swiper/css/navigation';
+import { Box, Container, Typography, Skeleton, Alert, Button } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { getServices } from '@/services/httpServices';
 
-// /* ================= CONSTANTS ================= */
-// const LOAD_TIMEOUT = 10000;
-// const MAX_RETRIES = 3;
-// const RETRY_DELAY = 1000;
+/* ================= TYPES ================= */
 
-// /* ================= TYPES ================= */
-// type StrapiImage = {
-//   url?: string;
-//   alternativeText?: string | null;
-// };
+type Destination = {
+  id: number;
+  title: string;
+  imageUrl: string;
+  tag?: string;
+  tagColor?: string;
+  popularCourses?: string;
+  studentCities?: string;
+  countryGuideLink?: string;
+  exploreMoreLink?: string;
+};
 
-// type DestinationItem = {
-//   id: number;
-//   title: string;
-//   tag: string;
-//   tagColor: string;
-//   popularCourses: string;
-//   studentCities: string;
-//   countryGuideLink: string;
-//   exploreMoreLink: string;
-//   order: number;
-//   imageUrl: string;
-//   imageAlt: string;
-// };
+/* ================= CONFIG ================= */
 
-// type ApiResponse<T> = {
-//   isSuccess: boolean;
-//   statusCode?: number;
-//   data?: T;
-//   message?: string | null;
-// };
+const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
-// /* ================= HELPER FUNCTIONS ================= */
+if (!BASE_URL) {
+  throw new Error('Missing API URL');
+}
 
-// /**
-//  * Sanitizes and validates URL
-//  */
-// const buildImageUrl = (imageUrl: string | undefined): string => {
-//   if (!imageUrl || typeof imageUrl !== 'string') return '';
+/* ================= HELPERS ================= */
 
-//   if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-//     return imageUrl;
-//   }
+const getImageUrl = (url?: string): string | null => {
+  if (!url) return null;
+  if (url.startsWith('http')) return url;
+  return `${BASE_URL}${url.startsWith('/') ? url : `/${url}`}`;
+};
 
-//   const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
-//   if (!baseUrl) {
-//     console.error('NEXT_PUBLIC_STRAPI_URL environment variable is not set');
-//     return '';
-//   }
+/* ================= COMPONENT ================= */
 
-//   return `${baseUrl}${imageUrl}`;
-// };
+export default function PopularDestinations() {
+  const [data, setData] = useState<Destination[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-// /**
-//  * Sanitizes alt text to prevent XSS
-//  */
-// const sanitizeAltText = (text: string | undefined | null): string => {
-//   if (!text) return 'destination image';
-//   return text
-//     .slice(0, 120)
-//     .replace(/[<>]/g, '')
-//     .toLowerCase()
-//     .trim();
-// };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
 
-// /**
-//  * Validates internal URL path
-//  */
-// const isValidUrl = (url: string): boolean => {
-//   if (!url) return false;
-//   return url.startsWith('/') || url === '#';
-// };
+        const res = await getServices('/popular-destinations', {
+          populate: 'image',
+          sort: ['order:asc'],
+        });
 
-// /**
-//  * Validates and transforms destination data
-//  */
-// const mapDestinationData = (item: unknown): DestinationItem | null => {
-//   if (!item || typeof item !== 'object') return null;
+        if (!res.isSuccess) {
+          const msg =
+            typeof res.message === 'string'
+              ? res.message
+              : res.message?.message || 'Failed to fetch';
+          throw new Error(msg);
+        }
 
-//   const dest = item as Record<string, unknown>;
+        const mapped = (res.data?.data || [])
+          .map((item: any) => {
+            const imageUrl = getImageUrl(item?.image?.url);
+            console.log("IMAGE:", item.imageUrl);
+            if (!imageUrl) return null;
 
-//   const id = typeof dest.id === 'number' ? dest.id : null;
-//   const title = typeof dest.title === 'string' ? dest.title.slice(0, 200) : 'Destination';
-//   const tag = typeof dest.tag === 'string' ? dest.tag.slice(0, 50) : '';
-//   const tagColor = typeof dest.tagColor === 'string' ? dest.tagColor : '#FF3185';
-//   const order = typeof dest.order === 'number' ? dest.order : 0;
+            return {
+              id: item.id,
+              title: item.title,
+              imageUrl,
+              tag: item.tag,
+              tagColor: item.tagColor,
+              popularCourses: item.popularCourses,
+              studentCities: item.studentCities,
+              countryGuideLink: item.countryGuideLink,
+              exploreMoreLink: item.exploreMoreLink,
+            };
+          })
+          .filter(Boolean) as Destination[];
 
-//   if (id === null) return null;
+        setData(mapped);
+      } catch (err: any) {
+        let message = 'Something went wrong';
+        if (typeof err === 'string') message = err;
+        else if (err?.message) message = err.message;
 
-//   const image = dest.image;
-//   const imageUrl = buildImageUrl(
-//     typeof image === 'object' && image && 'url' in image ? String(image.url) : undefined
-//   );
+        setError(message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-//   const imageAlt = sanitizeAltText(
-//     typeof image === 'object' && image && 'alternativeText' in image
-//       ? String(image.alternativeText)
-//       : title
-//   );
+    fetchData();
+  }, []);
 
-//   const popularCourses = typeof dest.popularCourses === 'string' ? dest.popularCourses.slice(0, 200) : '';
-//   const studentCities = typeof dest.studentCities === 'string' ? dest.studentCities.slice(0, 200) : '';
-//   const countryGuideLink = typeof dest.countryGuideLink === 'string' && isValidUrl(dest.countryGuideLink) ? dest.countryGuideLink : '#';
-//   const exploreMoreLink = typeof dest.exploreMoreLink === 'string' && isValidUrl(dest.exploreMoreLink) ? dest.exploreMoreLink : '#';
+  return (
+    <Box>
 
-//   return {
-//     id,
-//     title,
-//     tag,
-//     tagColor,
-//     order,
-//     imageUrl,
-//     imageAlt,
-//     popularCourses,
-//     studentCities,
-//     countryGuideLink,
-//     exploreMoreLink,
-//   };
-// };
+        {error && <Alert severity="error">{error}</Alert>}
 
-// export default function PopularDestinations() {
-//   const [destinations, setDestinations] = useState<DestinationItem[]>([]);
-//   const [loading, setLoading] = useState<boolean>(true);
-//   const [error, setError] = useState<string | null>(null);
-//   const swiperRef = useRef<SwiperType | null>(null);
+        {!error && (
+          <Grid container spacing={3}>
 
-//   /**
-//    * Fetches destinations with retry logic
-//    */
-//   const fetchDestinations = useCallback(async (retryCount = 0) => {
-//     try {
-//       setLoading(true);
-//       setError(null);
+            {/* LOADING */}
+            {loading &&
+              Array.from({ length: 3 }).map((_, i) => (
+                <Grid size={{ xs: 12, md: 4 }} key={i}>
+                  <Skeleton variant="rounded" height={300} />
+                </Grid>
+              ))}
 
-//       const res = (await Promise.race([
-//         getServices('/popular-destinations', {
-//           populate: '*',
-//           sort: ['order:asc'],
-//           pagination: { pageSize: 100 },
-//         }),
-//         new Promise((_, reject) =>
-//           setTimeout(() => reject(new Error('Request timeout')), LOAD_TIMEOUT)
-//         ),
-//       ])) as ApiResponse<{ data: unknown[] }>;
+            {/* CARDS */}
+            {!loading &&
+              data.map((item) => (
+                <Grid size={{ xs: 12, md: 4 }} key={item.id}>
+                  <Box
+                    sx={{
+                      borderRadius: 3,
+                      overflow: 'hidden',
+                      boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    {/* IMAGE */}
+                    <Box sx={{ position: 'relative' }}>
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title}
+                        width={400}
+                        height={220}
+                        sizes="(max-width: 768px) 100vw, 400px"
+                        style={{ width: '100%', height: 'auto' }}
+                      />
 
-//       if (!res.isSuccess) {
-//         throw new Error(res.message || 'Failed to fetch destinations');
-//       }
+                      {/* TAG */}
+                      {item.tag && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: 10,
+                            left: 10,
+                            px: 1.5,
+                            py: 0.5,
+                            borderRadius: 2,
+                            fontSize: 12,
+                            color: '#fff',
+                            background: item.tagColor || '#000',
+                          }}
+                        >
+                          {item.tag}
+                        </Box>
+                      )}
+                    </Box>
 
-//       if (!Array.isArray(res.data?.data)) {
-//         throw new Error('Invalid data format received from API');
-//       }
+                    {/* CONTENT */}
+                    <Box sx={{ p: 2 }}>
+                      <Typography fontWeight={600} mb={1}>
+                        {item.title}
+                      </Typography>
 
-//       const mapped = res.data.data
-//         .map(mapDestinationData)
-//         .filter((item): item is DestinationItem => item !== null)
-//         .sort((a, b) => a.order - b.order);
+                      <Typography variant="body2" mb={1}>
+                        {item.popularCourses}
+                      </Typography>
 
-//       if (mapped.length === 0 && res.data.data.length > 0) {
-//         console.warn('No valid destination data could be extracted');
-//       }
+                      <Typography variant="body2" mb={2}>
+                        {item.studentCities}
+                      </Typography>
 
-//       setDestinations(mapped);
-//     } catch (err) {
-//       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+                      {/* BUTTONS */}
+                      <Box sx={{ display: 'flex', gap: 1 }}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          href={item.countryGuideLink || '#'}
+                        >
+                          Country Guide
+                        </Button>
 
-//       if (retryCount < MAX_RETRIES) {
-//         console.warn(`Retry ${retryCount + 1}/${MAX_RETRIES} after ${RETRY_DELAY}ms`);
-//         setTimeout(() => fetchDestinations(retryCount + 1), RETRY_DELAY);
-//         return;
-//       }
-
-//       console.error('Failed to load destinations:', errorMessage);
-//       setError(errorMessage);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     fetchDestinations();
-//   }, [fetchDestinations]);
-
-//   return (
-//     <Box component="section" sx={{ py: { xs: 4, md: 6 }, backgroundColor: 'common.white' }}>
-//       <Container maxWidth="xl">
-        
-//         {/* HEADER */}
-//         <Box
-//           sx={{
-//             mb: { xs: 3, md: 4 },
-//             display: 'flex',
-//             justifyContent: 'space-between',
-//             alignItems: 'center',
-//             gap: 2,
-//           }}
-//         >
-//           <Typography variant="heading06">
-//             Popular{' '}
-//             <Box component="span" sx={{ color: 'primary.main' }}>
-//               Destinations
-//             </Box>
-//           </Typography>
-
-//           {/* NAV BUTTONS */}
-//           <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
-//             <Box
-//               component="button"
-//               onClick={() => swiperRef.current?.slidePrev()}
-//               sx={navBtn}
-//               aria-label="Previous destination"
-//             >
-//               <ArrowBackIosNewIcon sx={{ fontSize: 16 }} aria-hidden="true" />
-//             </Box>
-
-//             <Box
-//               component="button"
-//               onClick={() => swiperRef.current?.slideNext()}
-//               sx={navBtnActive}
-//               aria-label="Next destination"
-//             >
-//               <ArrowForwardIosIcon sx={{ fontSize: 16 }} aria-hidden="true" />
-//             </Box>
-//           </Box>
-//         </Box>
-
-//         {/* ERROR STATE */}
-//         {error && (
-//           <Alert severity="error" sx={{ mb: 3 }} role="alert">
-//             {error}
-//           </Alert>
-//         )}
-
-//         {/* LOADING STATE */}
-//         {loading && !error && (
-//           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 3 }}>
-//             {Array.from({ length: 3 }).map((_, i) => (
-//               <Skeleton key={`skeleton-${i}`} variant="rounded" height={320} />
-//             ))}
-//           </Box>
-//         )}
-
-//         {/* EMPTY STATE */}
-//         {!loading && !error && destinations.length === 0 && (
-//           <Box textAlign="center">
-//             <Typography>No destinations available at the moment.</Typography>
-//           </Box>
-//         )}
-
-//         {/* SWIPER */}
-//         {!loading && !error && destinations.length > 0 && (
-//           <Swiper
-//             modules={[Navigation]}
-//             spaceBetween={24}
-//             slidesPerView={1}
-//             onSwiper={(swiper) => (swiperRef.current = swiper)}
-//             breakpoints={{
-//               600: { slidesPerView: 2 },
-//               900: { slidesPerView: 3 },
-//             }}
-//           >
-//             {destinations.map((item) => (
-//               <SwiperSlide key={`destination-${item.id}`}>
-//                 <Box sx={{ pt: 0.5, pb: 2.5, px: 0.5 }}>
-//                   <Card sx={cardStyle}>
-                    
-//                     {/* IMAGE */}
-//                     <Box sx={{ position: 'relative' }}>
-//                       {item.imageUrl ? (
-//                         <Box sx={{ height: 210, position: 'relative', overflow: 'hidden' }}>
-//                           <Image
-//                             src={item.imageUrl}
-//                             alt={item.imageAlt}
-//                             fill
-//                             sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
-//                             priority={false}
-//                             loading="lazy"
-//                             quality={85}
-//                             style={{ objectFit: 'cover' }}
-//                             onError={(e) => {
-//                               e.currentTarget.style.display = 'none';
-//                               console.warn(`Failed to load image for destination: ${item.title}`);
-//                             }}
-//                           />
-//                         </Box>
-//                       ) : (
-//                         <CardMedia sx={{ height: 210, bgcolor: '#f0f0f0' }} />
-//                       )}
-
-//                       {item.tag && (
-//                         <Box sx={tagStyle(item.tagColor)} role="status" aria-label={`Tag: ${item.tag}`}>
-//                           <Typography variant="body06" color="white">
-//                             {item.tag}
-//                           </Typography>
-//                         </Box>
-//                       )}
-//                     </Box>
-
-//                     {/* CONTENT */}
-//                     <CardContent sx={{ flexGrow: 1 }}>
-//                       <Typography variant="heading12" sx={{ mb: 2 }}>
-//                         {item.title}
-//                       </Typography>
-
-//                       {item.popularCourses && (
-//                         <InfoRow text={`Popular Courses: ${item.popularCourses}`} />
-//                       )}
-//                       {item.studentCities && (
-//                         <InfoRow text={`Student Friendly Cities: ${item.studentCities}`} />
-//                       )}
-//                     </CardContent>
-
-//                     {/* BUTTONS */}
-//                     <CardActions sx={{ px: 2.5, pb: 2.5, gap: 1, flexWrap: 'wrap' }}>
-//                       <Button
-//                         component={Link}
-//                         href={item.countryGuideLink}
-//                         variant="contained"
-//                         startIcon={<DownloadIcon />}
-//                         sx={primaryBtn}
-//                         size="small"
-//                       >
-//                         Country Guide
-//                       </Button>
-
-//                       <Button
-//                         component={Link}
-//                         href={item.exploreMoreLink}
-//                         variant="outlined"
-//                         sx={secondaryBtn}
-//                         size="small"
-//                       >
-//                         Explore More
-//                       </Button>
-//                     </CardActions>
-//                   </Card>
-//                 </Box>
-//               </SwiperSlide>
-//             ))}
-//           </Swiper>
-//         )}
-//       </Container>
-//     </Box>
-//   );
-// }
-
-// /* ✅ SMALL REUSABLE COMPONENT */
-// const InfoRow = ({ text }: { text: string }) => (
-//   <Box sx={{ display: 'flex', gap: 1, mb: 1.5, alignItems: 'flex-start' }}>
-//     <CheckIcon sx={{ fontSize: 18, flexShrink: 0, mt: 0.3 }} aria-hidden="true" />
-//     <Typography variant="body06">{text}</Typography>
-//   </Box>
-// );
-
-// /* ✅ STYLES */
-// const cardStyle = {
-//   height: '100%',
-//   borderRadius: '20px',
-//   display: 'flex',
-//   flexDirection: 'column',
-//   border: '1px solid #e5e7eb',
-//   transition: 'all 0.3s ease-in-out',
-//   '&:hover': {
-//     boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-//     transform: 'translateY(-4px)',
-//   },
-// };
-
-// const navBtn = {
-//   width: 36,
-//   height: 36,
-//   border: '1px solid #D0D0D0',
-//   borderRadius: '50%',
-//   display: 'flex',
-//   alignItems: 'center',
-//   justifyContent: 'center',
-//   cursor: 'pointer',
-//   background: 'transparent',
-//   transition: 'all 0.2s ease',
-//   '&:hover': {
-//     borderColor: '#999',
-//   },
-//   '&:active': {
-//     transform: 'scale(0.95)',
-//   },
-// };
-
-// const navBtnActive = {
-//   ...navBtn,
-//   borderColor: 'primary.main',
-//   color: 'primary.main',
-// };
-
-// const tagStyle = (color?: string) => ({
-//   position: 'absolute',
-//   top: 10,
-//   left: 10,
-//   px: 1.2,
-//   py: 0.3,
-//   borderRadius: '8px',
-//   background: color || '#FF3185',
-// });
-
-// const primaryBtn = {
-//   background:
-//     'linear-gradient(270.04deg, #FF3185 33.28%, #FF7BB0 99.98%)',
-// };
-
-// const secondaryBtn = {
-//   borderColor: 'primary.main',
-//   color: 'primary.main',
-// };
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          href={item.exploreMoreLink || '#'}
+                        >
+                          Explore More
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Grid>
+              ))}
+          </Grid>
+        )}
+    </Box>
+  );
+}
