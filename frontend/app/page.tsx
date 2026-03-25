@@ -2,7 +2,7 @@ import Section from '@/components/common/Section';
 import SectionHeader from '@/components/common/SectionHeader';
 import CounterSection from "@/components/sections/CounterSection";
 import PartneredUniversities from '@/components/sections/PartneredUniversities';
-import PopularDestinations from '@/components/sections/PopularDestinations';
+// import PopularDestinations from '@/components/sections/PopularDestinations';
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
           title="Popular"
           highlight="Destinations"
         />
-        <PopularDestinations/>
+        {/* <PopularDestinations/> */}
       </Section>
     </>
     
