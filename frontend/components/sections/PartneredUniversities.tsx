@@ -152,6 +152,7 @@ export default function PartneredUniversities() {
       }
 
       setPartners(mapped);
+      console.log('Partners API response:', mapped);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
 
