@@ -7,7 +7,10 @@ const config: Core.Config.Middlewares = [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:3000'],
+      origin: [
+        "http://localhost:3000",
+        "https://next-frontend-hwa6c8h5cbhgfkh2.centralindia-01.azurewebsites.net"
+      ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       headers: '*',
     },
