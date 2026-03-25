@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
 
-const API_URL = "https://strapi-backend.azurewebsites.net/api";
+const API_URL = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api`;
 
 export const getServices = async (url: string, params? : any) => {
     try {
