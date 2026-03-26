@@ -1,8 +1,7 @@
 'use client';
 
-import { Box } from '@mui/material';
+import { Box, colors } from '@mui/material';
 import { useId } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -10,6 +9,7 @@ import 'swiper/css';
 // Icons
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import palette from '@/theme/palette';
 
 /* ================= TYPES ================= */
 
@@ -48,7 +48,9 @@ export default function CustomSlider<T>({
             display: 'flex',
             justifyContent: 'flex-end',
             gap: 1,
-            mb: 2,
+            position: "absolute",
+            top: 8,
+            right: 16,
           }}
         >
           <Box className={prevClass} sx={arrowStyle(false)}>
@@ -95,20 +97,32 @@ export default function CustomSlider<T>({
 /* ================= STYLES ================= */
 
 const arrowStyle = (active: boolean) => ({
-position: "absolute",
-top: 0,
-  width: 36,
-  height: 36,
+  width: 45,
+  height: 45,
   borderRadius: '50%',
-  border: `1px solid ${active ? '#ff4081' : '#ccc'}`,
-  color: active ? '#ff4081' : '#000',
+  border: `1px solid ${palette.pink[400]}`,
+  color: `${palette.pink[400]}`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   cursor: 'pointer',
   transition: 'all 0.2s ease',
   '&:hover': {
-    backgroundColor: active ? '#ff4081' : '#f5f5f5',
-    color: active ? '#fff' : '#000',
+    backgroundColor: `${palette.pink[400]}`,
+    color: `${palette.common.white}`,
+    border: "1px solid #ff4081"
+  },
+
+  // DISABLED STATE
+  '&.swiper-button-disabled': {
+    border: '1px solid #E0E0E0',
+    color: '#BDBDBD',
+    cursor: 'not-allowed',
+    backgroundColor: '#fff',
+
+    '&:hover': {
+      backgroundColor: '#fff',
+      color: '#BDBDBD',
+    },
   },
 });
