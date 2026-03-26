@@ -1,5 +1,6 @@
 'use client';
 import { Box, Container, BoxProps } from '@mui/material';
+import { relative } from 'path';
 
 type SectionProps = BoxProps & {
   children: React.ReactNode;
@@ -21,7 +22,7 @@ export default function Section({
 }: SectionProps) {
   return (
     <Box {...spacingMap[spacing]} {...props}>
-      {container ? <Container maxWidth="xl">{children}</Container> : children}
+      {container ? <Container maxWidth="xl" sx={{position: "relative"}}>{children}</Container> : children}
     </Box>
   );
 }

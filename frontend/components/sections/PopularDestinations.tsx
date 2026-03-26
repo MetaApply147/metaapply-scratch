@@ -1,10 +1,10 @@
 'use client';
 
-import { Box, Container, Typography, Skeleton, Alert, Button } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import { Box, Typography, Skeleton, Alert, Button } from '@mui/material';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getServices } from '@/services/httpServices';
+import CustomSlider from '@/components/common/CustomSlider';
 
 /* ================= TYPES ================= */
 
@@ -54,17 +54,16 @@ export default function PopularDestinations() {
         });
 
         if (!res.isSuccess) {
-          const msg =
+          throw new Error(
             typeof res.message === 'string'
               ? res.message
-              : res.message?.message || 'Failed to fetch';
-          throw new Error(msg);
+              : res.message?.message || 'Failed to fetch'
+          );
         }
 
         const mapped = (res.data?.data || [])
           .map((item: any) => {
             const imageUrl = getImageUrl(item?.image?.url);
-            console.log("IMAGE:", item.imageUrl);
             if (!imageUrl) return null;
 
             return {
@@ -83,11 +82,7 @@ export default function PopularDestinations() {
 
         setData(mapped);
       } catch (err: any) {
-        let message = 'Something went wrong';
-        if (typeof err === 'string') message = err;
-        else if (err?.message) message = err.message;
-
-        setError(message);
+        setError(err?.message || 'Something went wrong');
       } finally {
         setLoading(false);
       }
@@ -99,100 +94,90 @@ export default function PopularDestinations() {
   return (
     <Box>
 
-        {error && <Alert severity="error">{error}</Alert>}
+      {/* ERROR */}
+      {error && <Alert severity="error">{error}</Alert>}
 
-        {!error && (
-          <Grid container spacing={3}>
+      {/* LOADING */}
+      {loading && (
+        <Box sx={{ display: 'flex', gap: 2 }}>
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} variant="rounded" width="100%" height={300} />
+          ))}
+        </Box>
+      )}
 
-            {/* LOADING */}
-            {loading &&
-              Array.from({ length: 3 }).map((_, i) => (
-                <Grid size={{ xs: 12, md: 4 }} key={i}>
-                  <Skeleton variant="rounded" height={300} />
-                </Grid>
-              ))}
+      {/* SLIDER */}
+      {!loading && !error && (
+        <CustomSlider
+          data={data}
+          slidesPerView={3}
+          renderItem={(item) => (
+            <Box
+              sx={{
+                borderRadius: 3,
+                overflow: 'hidden',
+                boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
+                backgroundColor: '#fff',
+              }}
+            >
+              {/* IMAGE */}
+              <Box sx={{ position: 'relative' }}>
+                <Image
+                  src={item.imageUrl}
+                  alt={item.title}
+                  width={400}
+                  height={220}
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  style={{ width: '100%', height: 'auto' }}
+                />
 
-            {/* CARDS */}
-            {!loading &&
-              data.map((item) => (
-                <Grid size={{ xs: 12, md: 4 }} key={item.id}>
+                {item.tag && (
                   <Box
                     sx={{
-                      borderRadius: 3,
-                      overflow: 'hidden',
-                      boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
-                      backgroundColor: '#fff',
+                      position: 'absolute',
+                      top: 10,
+                      left: 10,
+                      px: 1.5,
+                      py: 0.5,
+                      borderRadius: 2,
+                      fontSize: 12,
+                      color: '#fff',
+                      background: item.tagColor || '#000',
                     }}
                   >
-                    {/* IMAGE */}
-                    <Box sx={{ position: 'relative' }}>
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.title}
-                        width={400}
-                        height={220}
-                        sizes="(max-width: 768px) 100vw, 400px"
-                        style={{ width: '100%', height: 'auto' }}
-                      />
-
-                      {/* TAG */}
-                      {item.tag && (
-                        <Box
-                          sx={{
-                            position: 'absolute',
-                            top: 10,
-                            left: 10,
-                            px: 1.5,
-                            py: 0.5,
-                            borderRadius: 2,
-                            fontSize: 12,
-                            color: '#fff',
-                            background: item.tagColor || '#000',
-                          }}
-                        >
-                          {item.tag}
-                        </Box>
-                      )}
-                    </Box>
-
-                    {/* CONTENT */}
-                    <Box sx={{ p: 2 }}>
-                      <Typography fontWeight={600} mb={1}>
-                        {item.title}
-                      </Typography>
-
-                      <Typography variant="body2" mb={1}>
-                        {item.popularCourses}
-                      </Typography>
-
-                      <Typography variant="body2" mb={2}>
-                        {item.studentCities}
-                      </Typography>
-
-                      {/* BUTTONS */}
-                      <Box sx={{ display: 'flex', gap: 1 }}>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          href={item.countryGuideLink || '#'}
-                        >
-                          Country Guide
-                        </Button>
-
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          href={item.exploreMoreLink || '#'}
-                        >
-                          Explore More
-                        </Button>
-                      </Box>
-                    </Box>
+                    {item.tag}
                   </Box>
-                </Grid>
-              ))}
-          </Grid>
-        )}
+                )}
+              </Box>
+
+              {/* CONTENT */}
+              <Box sx={{ p: 2 }}>
+                <Typography fontWeight={600} mb={1}>
+                  {item.title}
+                </Typography>
+
+                <Typography variant="body2" mb={1}>
+                  {item.popularCourses}
+                </Typography>
+
+                <Typography variant="body2" mb={2}>
+                  {item.studentCities}
+                </Typography>
+
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  <Button variant="contained" size="small">
+                    Country Guide
+                  </Button>
+
+                  <Button variant="outlined" size="small">
+                    Explore More
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
+          )}
+        />
+      )}
     </Box>
   );
 }
