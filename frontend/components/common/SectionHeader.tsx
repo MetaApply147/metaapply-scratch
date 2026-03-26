@@ -11,11 +11,14 @@ export default function SectionHeader({ title, highlight }: Props) {
   return (
     <Box mb={{ xs: 3, md: 6.5 }}>
       <Typography variant="heading07">
-        {parts[0]}
+        {parts[0]} 
         {highlight && (
-          <Box component="span" sx={{ color: 'primary.main' }}>
-            {highlight}
-          </Box>
+          <>
+            {" "}
+            <Box component="span" sx={{ color: 'primary.main' }}>
+              {highlight}
+            </Box>
+          </>
         )}
         {parts[1]}
       </Typography>

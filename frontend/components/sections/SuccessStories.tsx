@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { getServices } from "@/services/httpServices";
 import CustomSlider from "@/components/common/CustomSlider";
+import { Box, Typography } from "@mui/material";
+import Image from 'next/image';
+import { relative } from "path";
 
 type Props = {
   page: string;
@@ -39,7 +42,7 @@ export default function SuccessStories({ page, type, limit }: Props) {
     fetchData();
   }, [page, type, limit]);
 
-  // ✅ MOVE YOUR EXISTING UI HERE (NO CHANGE)
+  // MOVE YOUR EXISTING UI HERE (NO CHANGE)
   const renderItem = (item: any) => {
     const comp = item.content?.[0];
     if (!comp) return null;
@@ -51,78 +54,98 @@ export default function SuccessStories({ page, type, limit }: Props) {
         comp.thumbnail?.url;
 
       return (
-        <div className="rounded-xl overflow-hidden bg-white shadow-md">
-          <div className="relative">
-            <img
-              src={image}
-              alt={item.title}
-              className="w-full h-52 object-cover"
-            />
+        <Box sx={{borderRadius: 4, overflow: "hidden", boxShadow: 2}}>
+          <Box position="relative">
+            <Box position="relative" sx={{ width: "100%", height: 250 }}>
+              <Image
+                src={image}
+                alt={item.title}
+                fill
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "4 4 0 0",
+                }}
+              />
+            </Box>
 
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white rounded-full p-4 shadow-lg cursor-pointer">
+            <Box sx={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",}}>
+              <Box sx={{bgcolor: "#fff", borderRadius: "50%", p: 2, boxShadow: 3, cursor: "pointer", height: 20, width: 20, display: "flex", alignItems: "center", justifyContent: "center"}}>
                 ▶
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Box>
+          </Box>
 
-          <div className="p-4">
-            <p className="text-sm text-gray-600">
+          <Box p={3.5} sx={{borderRadius: 4}}>
+            <Typography variant="body05" component="p" color="#4B4B4B">
               {item.description}
-            </p>
+            </Typography>
 
-            <h4 className="text-pink-500 font-semibold mt-3">
+            <Typography variant="heading12" fontWeight={600} component="p" sx={{color: "primary.main"}} mt={2}>
               {item.title}
-            </h4>
+            </Typography>
 
-            <span className="text-xs text-gray-400">
+            <Typography variant="body05" sx={{color: "primary.main"}}>
               {item.role}
-            </span>
-          </div>
-        </div>
+            </Typography>
+          </Box>
+        </Box>
       );
     }
 
-    // 💬 TESTIMONIAL CARD
+    // TESTIMONIAL CARD
     if (comp.__component === "success-story.testimonial-story") {
       return (
-        <div
-          className="p-6 rounded-xl shadow-sm h-full"
-          style={{ backgroundColor: comp.backgroundColor }}
-        >
-          <div className="text-3xl mb-3 text-pink-500">“</div>
+        <Box className="testimonial-card" borderRadius={3} sx={{display: "flex"}}>
+          <Box>“</Box>
+          <Box p={4} pt={6} sx={{ background: comp.backgroundColor, display: "flex", flexDirection: "column", justifyContent: "space-between" }}> 
+            <Typography variant="body05" component="p" fontWeight={600}>
+              {item.description}
+            </Typography>
 
-          <p className="text-sm mb-6 leading-relaxed">
-            {item.description}
-          </p>
+            <Box mt={2}>
+              <Typography variant="heading12" fontWeight={600} component="p">
+                {item.title}
+              </Typography>
 
-          <h4 className="text-pink-600 font-semibold">
-            {item.title}
-          </h4>
-
-          <span className="text-xs text-gray-700">
-            {item.role}
-          </span>
-        </div>
+              <Typography variant="body05">
+                {item.role}
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
       );
     }
 
     return null;
   };
 
-  // ✅ ONLY CHANGE IS HERE
+  // ONLY CHANGE IS HERE
   return (
-    <CustomSlider
-      data={stories}
-      renderItem={renderItem}
-      slidesPerView={3}
-      spaceBetween={24}
-      showArrows={true}
-      breakpoints={{
-        0: { slidesPerView: 1 },
-        600: { slidesPerView: 2 },
-        900: { slidesPerView: 3 },
+    <Box
+      sx={{
+        '& .swiper-slide:nth-of-type(odd) .testimonial-card': {
+          background: 'linear-gradient(135deg, #FFE5F0, #FFCCE1)',
+          color: '#cc276a',
+        },
+        '& .swiper-slide:nth-of-type(even) .testimonial-card': {
+          background: 'linear-gradient(135deg, #E5E6FF, #C0C2FF)',
+          color: '#222466',
+        },
       }}
-    />
+    >
+      <CustomSlider
+        data={stories}
+        renderItem={renderItem}
+        slidesPerView={3}
+        spaceBetween={24}
+        showArrows={true}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          600: { slidesPerView: 2 },
+          900: { slidesPerView: 3 },
+        }} 
+      />
+    </Box>
+    
   );
 }

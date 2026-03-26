@@ -32,16 +32,16 @@ export default function Home() {
       {/* Success Story */}
       <Section spacing="lg">
         <SectionHeader
-          title="Popular"
-          highlight="Destinations"
+          title="Our"
+          highlight="Success Stories"
         />
         <SuccessStories page="home" type="video" />
       </Section>
 
       <Section spacing="lg">
         <SectionHeader
-          title="Popular"
-          highlight="Destinations"
+          title="Our"
+          highlight="Success Stories"
         />
         <SuccessStories page="metafly" type="testimonial"/>
       </Section>

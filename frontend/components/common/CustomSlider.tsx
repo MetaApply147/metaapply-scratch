@@ -85,8 +85,10 @@ export default function CustomSlider<T>({
         }
       >
         {data.map((item: any) => (
-          <SwiperSlide key={item.id}>
-            {renderItem(item)}
+          <SwiperSlide key={item.id} style={{ display: 'flex', height: 'auto' }}>
+            <Box sx={{ height: 'auto', display: 'flex' }}>
+              {renderItem(item)}
+            </Box>
           </SwiperSlide>
         ))}
       </Swiper>
