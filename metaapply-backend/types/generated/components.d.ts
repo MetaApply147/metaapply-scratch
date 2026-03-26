@@ -99,6 +99,27 @@ export interface SharedTestimonial extends Struct.ComponentSchema {
   };
 }
 
+export interface SuccessStoryTestimonialStory extends Struct.ComponentSchema {
+  collectionName: 'components_success_story_testimonial_stories';
+  info: {
+    displayName: 'testimonialStory';
+  };
+  attributes: {
+    backgroundColor: Schema.Attribute.String;
+  };
+}
+
+export interface SuccessStoryVideoStory extends Struct.ComponentSchema {
+  collectionName: 'components_success_story_video_stories';
+  info: {
+    displayName: 'videoStory';
+  };
+  attributes: {
+    thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    videoUrl: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -110,6 +131,8 @@ declare module '@strapi/strapi' {
       'menu.section': MenuSection;
       'shared.feature': SharedFeature;
       'shared.testimonial': SharedTestimonial;
+      'success-story.testimonial-story': SuccessStoryTestimonialStory;
+      'success-story.video-story': SuccessStoryVideoStory;
     }
   }
 }

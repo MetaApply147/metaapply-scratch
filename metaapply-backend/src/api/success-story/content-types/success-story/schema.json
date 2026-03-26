@@ -20,21 +20,33 @@
     "description": {
       "type": "text"
     },
-    "thumbnail": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "videoUrl": {
-      "type": "string"
-    },
     "order": {
       "type": "integer"
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "success-story.video-story",
+        "success-story.testimonial-story"
+      ]
+    },
+    "page": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "home",
+        "metafly",
+        "metafinance",
+        "metastay",
+        "metainsure"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "video",
+        "testimonial"
+      ]
     }
   }
 }

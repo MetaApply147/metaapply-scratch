@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_success_story_testimonial_stories",
+  "info": {
+    "displayName": "testimonialStory"
+  },
+  "options": {},
+  "attributes": {
+    "backgroundColor": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

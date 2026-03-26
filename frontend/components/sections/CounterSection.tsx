@@ -2,7 +2,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useEffect, useMemo, useState, useRef } from 'react';
-import Image from 'next/image';
 
 type CounterItem = {
   id: number;

@@ -721,6 +721,9 @@ export interface ApiSuccessStorySuccessStory
     draftAndPublish: true;
   };
   attributes: {
+    content: Schema.Attribute.DynamicZone<
+      ['success-story.video-story', 'success-story.testimonial-story']
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -732,14 +735,17 @@ export interface ApiSuccessStorySuccessStory
     > &
       Schema.Attribute.Private;
     order: Schema.Attribute.Integer;
+    page: Schema.Attribute.Enumeration<
+      ['home', 'metafly', 'metafinance', 'metastay', 'metainsure']
+    > &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     role: Schema.Attribute.String;
-    thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['video', 'testimonial']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    videoUrl: Schema.Attribute.String;
   };
 }
 

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_success_story_video_stories",
+  "info": {
+    "displayName": "videoStory"
+  },
+  "options": {},
+  "attributes": {
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "videoUrl": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}
