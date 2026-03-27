@@ -23,6 +23,9 @@
     },
     "countryname": {
       "type": "string"
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }

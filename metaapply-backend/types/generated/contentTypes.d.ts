@@ -736,6 +736,7 @@ export interface ApiServicesInnerPageDestinationServicesInnerPageDestination
       'api::services-inner-page-destination.services-inner-page-destination'
     > &
       Schema.Attribute.Private;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
