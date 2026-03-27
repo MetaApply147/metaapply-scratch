@@ -71,9 +71,17 @@ export default function CityExpertsSection() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await getServices("/city-experts", {
-        populate: "*",
+        populate: {
+            image: true,
+            features: true,
+            testimonial: {
+            populate: {
+                avatar: true,
+            },
+            },
+        },
         sort: ["order:asc"],
-      });
+        });
 
       if (!res.isSuccess) return;
 
@@ -89,6 +97,9 @@ export default function CityExpertsSection() {
   const activeData = data.find((c) => c.city === activeCity);
 
   if (!activeData) return null;
+
+  const avatarUrl = activeData.testimonial?.avatar?.url;
+
 
   return (
     <Section spacing="lg">
@@ -198,7 +209,7 @@ export default function CityExpertsSection() {
                 {/* USER */}
                 <Box display="flex" alignItems="center" gap={2}>
                 <Image
-                    src={getImageUrl(activeData.testimonial?.avatar?.url)}
+                    src={getImageUrl(avatarUrl) || "/default-avatar.png"}
                     alt={activeData.testimonial?.name}
                     width={40}
                     height={40}
