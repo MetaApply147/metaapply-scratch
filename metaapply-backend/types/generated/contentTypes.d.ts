@@ -469,7 +469,7 @@ export interface ApiCityExpertCityExpert extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    ctaText: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
     features: Schema.Attribute.Component<'shared.feature', true>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;

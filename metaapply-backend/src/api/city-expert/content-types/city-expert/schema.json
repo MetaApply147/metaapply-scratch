@@ -41,11 +41,11 @@
       "component": "shared.testimonial",
       "repeatable": false
     },
-    "ctaText": {
-      "type": "string"
-    },
     "order": {
       "type": "integer"
+    },
+    "ctaUrl": {
+      "type": "string"
     }
   }
 }
