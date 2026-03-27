@@ -43,6 +43,9 @@
     },
     "ctaText": {
       "type": "string"
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }

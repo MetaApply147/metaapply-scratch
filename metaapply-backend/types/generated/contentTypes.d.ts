@@ -479,6 +479,7 @@ export interface ApiCityExpertCityExpert extends Struct.CollectionTypeSchema {
       'api::city-expert.city-expert'
     > &
       Schema.Attribute.Private;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'city'> & Schema.Attribute.Required;
     testimonial: Schema.Attribute.Component<'shared.testimonial', false>;
