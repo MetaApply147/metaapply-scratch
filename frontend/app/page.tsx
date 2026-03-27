@@ -5,6 +5,7 @@ import PartneredUniversities from '@/components/sections/PartneredUniversities';
 import PopularDestinations from '@/components/sections/PopularDestinations';
 import SuccessStories from '@/components/sections/SuccessStories';
 import FAQSection from '@/components/sections/FAQSection';
+import ServicesSection from '@/components/sections/ServicesSection';
 
 export default function Home() {
   return (
@@ -39,13 +40,20 @@ export default function Home() {
         <PopularDestinations/>
       </Section>
 
+      {/* Our Services */}
+      <Section spacing="lg">
+        <SectionHeader
+          title="Our"
+          highlight="Services"
+        />
+        <ServicesSection/>
+      </Section>
+
       {/* FAQs */}
-      
-        
-        <FAQSection page="home" />
+      <FAQSection page="home" />
 
 
-        <FAQSection page="metafly" />
+       
       
       
       
