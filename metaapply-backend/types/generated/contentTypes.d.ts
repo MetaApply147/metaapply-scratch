@@ -713,6 +713,36 @@ export interface ApiPopularDestinationPopularDestination
   };
 }
 
+export interface ApiServicesInnerPageDestinationServicesInnerPageDestination
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'services_inner_page_destinations';
+  info: {
+    displayName: 'services inner page destination';
+    pluralName: 'services-inner-page-destinations';
+    singularName: 'services-inner-page-destination';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    countryname: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    flag: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::services-inner-page-destination.services-inner-page-destination'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSuccessStorySuccessStory
   extends Struct.CollectionTypeSchema {
   collectionName: 'success_stories';
@@ -1273,6 +1303,7 @@ declare module '@strapi/strapi' {
       'api::menu.menu': ApiMenuMenu;
       'api::partnered-university.partnered-university': ApiPartneredUniversityPartneredUniversity;
       'api::popular-destination.popular-destination': ApiPopularDestinationPopularDestination;
+      'api::services-inner-page-destination.services-inner-page-destination': ApiServicesInnerPageDestinationServicesInnerPageDestination;
       'api::success-story.success-story': ApiSuccessStorySuccessStory;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services_inner_page_destinations",
+  "info": {
+    "singularName": "services-inner-page-destination",
+    "pluralName": "services-inner-page-destinations",
+    "displayName": "services inner page destination"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "flag": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "countryname": {
+      "type": "string"
+    }
+  }
+}

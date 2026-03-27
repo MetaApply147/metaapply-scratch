@@ -7,6 +7,7 @@ import SuccessStories from '@/components/sections/SuccessStories';
 import FAQSection from '@/components/sections/FAQSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import CityExpertsSection from '@/components/sections/CityExpertsSection';
+import PlanYourJourney from '@/components/sections/home/PlanYourJourney';
 
 export default function Home() {
   return (
@@ -34,6 +35,8 @@ export default function Home() {
         /> */}
         <SuccessStories page="home" type="video" />
       {/* </Section> */}
+
+      <PlanYourJourney/>
 
       {/* Popular Destinations */}
       {/* <Section spacing="lg">
