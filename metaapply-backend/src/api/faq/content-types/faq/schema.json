@@ -27,6 +27,16 @@
     },
     "order": {
       "type": "integer"
+    },
+    "page": {
+      "type": "enumeration",
+      "enum": [
+        "home",
+        "metafly",
+        "metainsure",
+        "metastay",
+        "metafinance"
+      ]
     }
   }
 }

@@ -20,6 +20,15 @@ export default function Home() {
       <PartneredUniversities />
       {/* </Section> */}
 
+      {/* Success Story */}
+      <Section spacing="lg">
+        <SectionHeader
+          title="Our"
+          highlight="Success Stories"
+        />
+        <SuccessStories page="home" type="video" />
+      </Section>
+
       {/* Popular Destinations */}
       <Section spacing="lg">
         <SectionHeader
@@ -35,16 +44,10 @@ export default function Home() {
           title="Our"
           highlight="Success Stories"
         />
-        <SuccessStories page="home" type="video" />
+        
       </Section>
 
-      <Section spacing="lg">
-        <SectionHeader
-          title="Our"
-          highlight="Success Stories"
-        />
-        <SuccessStories page="metafly" type="testimonial"/>
-      </Section>
+      
       
     </>
     

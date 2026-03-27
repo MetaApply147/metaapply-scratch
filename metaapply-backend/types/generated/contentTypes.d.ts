@@ -537,6 +537,9 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'> &
       Schema.Attribute.Private;
     order: Schema.Attribute.Integer;
+    page: Schema.Attribute.Enumeration<
+      ['home', 'metafly', 'metainsure', 'metastay', 'metafinance']
+    >;
     publishedAt: Schema.Attribute.DateTime;
     question: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
