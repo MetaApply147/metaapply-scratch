@@ -3,6 +3,8 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import SectionHeader from '../common/SectionHeader';
+import Section from '../common/Section';
 
 /* ================= DATA ================= */
 
@@ -37,72 +39,77 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <Box>
-      {/* Cards */}
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))"
-        gap={3}
-      >
-        {services.map((service, index) => (
-          <Box
-            key={index}
-            sx={{
-              borderRadius: "16px",
-              overflow: "hidden",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                transform: "translateY(-6px)",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-              },
-            }}
-          >
-            {/* TOP IMAGE SECTION */}
+    <Section spacing="lg">
+        <SectionHeader
+            title="Our"
+            highlight="Services"
+        />
+        {/* Cards */}
+        <Box
+            display="grid"
+            gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))"
+            gap={3}
+        >
+            {services.map((service, index) => (
             <Box
-              sx={{
-                background: "#f5f5f5",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: 140,
-              }}
+                key={index}
+                sx={{
+                borderRadius: "16px",
+                overflow: "hidden",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                    transform: "translateY(-6px)",
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+                },
+                }}
             >
-              <Image
-                src={service.image}
-                alt={service.title}
-                width={80}
-                height={80}
-              />
-            </Box>
+                {/* TOP IMAGE SECTION */}
+                <Box
+                sx={{
+                    background: "#f5f5f5",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 140,
+                }}
+                >
+                <Image
+                    src={service.image}
+                    alt={service.title}
+                    width={80}
+                    height={80}
+                />
+                </Box>
 
-            {/* BOTTOM CONTENT */}
-            <Box
-              sx={{
-                p: 2,
-                color: "#fff",
-                background: service.gradient,
-                minHeight: 120,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <Box display="flex" justifyContent="space-between">
-                <Typography fontWeight={600}>
-                  {service.title}
+                {/* BOTTOM CONTENT */}
+                <Box
+                sx={{
+                    p: 2,
+                    color: "#fff",
+                    background: service.gradient,
+                    minHeight: 120,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                }}
+                >
+                <Box display="flex" justifyContent="space-between">
+                    <Typography fontWeight={600}>
+                    {service.title}
+                    </Typography>
+
+                    <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
+                </Box>
+
+                <Typography variant="body2" mt={1}>
+                    {service.desc}
                 </Typography>
-
-                <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
-              </Box>
-
-              <Typography variant="body2" mt={1}>
-                {service.desc}
-              </Typography>
+                </Box>
             </Box>
-          </Box>
-        ))}
-      </Box>
-    </Box>
+            ))}
+        </Box>
+    </Section>
+    
   );
 }

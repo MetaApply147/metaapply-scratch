@@ -5,7 +5,8 @@ import { getServices } from "@/services/httpServices";
 import CustomSlider from "@/components/common/CustomSlider";
 import { Box, Typography } from "@mui/material";
 import Image from 'next/image';
-import { relative } from "path";
+import Section from "../common/Section";
+import SectionHeader from "../common/SectionHeader";
 
 type Props = {
   page: string;
@@ -121,31 +122,36 @@ export default function SuccessStories({ page, type, limit }: Props) {
 
   // ONLY CHANGE IS HERE
   return (
-    <Box
-      sx={{
-        '& .swiper-slide:nth-of-type(odd) .testimonial-card': {
-          background: 'linear-gradient(135deg, #FFE5F0, #FFCCE1)',
-          color: '#cc276a',
-        },
-        '& .swiper-slide:nth-of-type(even) .testimonial-card': {
-          background: 'linear-gradient(135deg, #E5E6FF, #C0C2FF)',
-          color: '#222466',
-        },
-      }}
-    >
-      <CustomSlider
-        data={stories}
-        renderItem={renderItem}
-        slidesPerView={3}
-        spaceBetween={24}
-        showArrows={true}
-        breakpoints={{
-          0: { slidesPerView: 1 },
-          600: { slidesPerView: 2 },
-          900: { slidesPerView: 3 },
-        }} 
+    <Section spacing="lg">
+      <SectionHeader
+        title="Our"
+        highlight="Success Stories"
       />
-    </Box>
-    
+      <Box
+        sx={{
+          '& .swiper-slide:nth-of-type(odd) .testimonial-card': {
+            background: 'linear-gradient(135deg, #FFE5F0, #FFCCE1)',
+            color: '#cc276a',
+          },
+          '& .swiper-slide:nth-of-type(even) .testimonial-card': {
+            background: 'linear-gradient(135deg, #E5E6FF, #C0C2FF)',
+            color: '#222466',
+          },
+        }}
+      >
+        <CustomSlider
+          data={stories}
+          renderItem={renderItem}
+          slidesPerView={3}
+          spaceBetween={24}
+          showArrows={true}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            600: { slidesPerView: 2 },
+            900: { slidesPerView: 3 },
+          }} 
+        />
+      </Box>
+    </Section>
   );
 }

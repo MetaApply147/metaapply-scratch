@@ -6,6 +6,7 @@ import PopularDestinations from '@/components/sections/PopularDestinations';
 import SuccessStories from '@/components/sections/SuccessStories';
 import FAQSection from '@/components/sections/FAQSection';
 import ServicesSection from '@/components/sections/ServicesSection';
+import CityExpertsSection from '@/components/sections/CityExpertsSection';
 
 export default function Home() {
   return (
@@ -22,32 +23,35 @@ export default function Home() {
       <PartneredUniversities />
       {/* </Section> */}
 
+      {/* Meet Experts */}
+      <CityExpertsSection/>
+
       {/* Success Story */}
-      <Section spacing="lg">
+      {/* <Section spacing="lg">
         <SectionHeader
           title="Our"
           highlight="Success Stories"
-        />
+        /> */}
         <SuccessStories page="home" type="video" />
-      </Section>
+      {/* </Section> */}
 
       {/* Popular Destinations */}
-      <Section spacing="lg">
+      {/* <Section spacing="lg">
         <SectionHeader
           title="Popular"
           highlight="Destinations"
-        />
+        /> */}
         <PopularDestinations/>
-      </Section>
+      {/* </Section> */}
 
       {/* Our Services */}
-      <Section spacing="lg">
+      {/* <Section spacing="lg">
         <SectionHeader
           title="Our"
           highlight="Services"
-        />
+        /> */}
         <ServicesSection/>
-      </Section>
+      {/* </Section> */}
 
       {/* FAQs */}
       <FAQSection page="home" />
