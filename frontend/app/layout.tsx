@@ -56,7 +56,7 @@ export default async function RootLayout({
         <ThemeRegistry>
           <ThemeProviderWrapper>
             <Header menus={menus} tabs={tabs}/>
-            {children} 
+              <main>{children}</main>
             <Footer footer={footer} />
           </ThemeProviderWrapper>
         </ThemeRegistry>

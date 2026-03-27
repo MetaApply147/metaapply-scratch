@@ -4,6 +4,7 @@ import CounterSection from "@/components/sections/CounterSection";
 import PartneredUniversities from '@/components/sections/PartneredUniversities';
 import PopularDestinations from '@/components/sections/PopularDestinations';
 import SuccessStories from '@/components/sections/SuccessStories';
+import FAQSection from '@/components/sections/FAQSection';
 
 export default function Home() {
   return (
@@ -38,15 +39,15 @@ export default function Home() {
         <PopularDestinations/>
       </Section>
 
-      {/* Success Story */}
-      <Section spacing="lg">
-        <SectionHeader
-          title="Our"
-          highlight="Success Stories"
-        />
+      {/* FAQs */}
+      
         
-      </Section>
+        <FAQSection page="home" />
 
+
+        <FAQSection page="metafly" />
+      
+      
       
       
     </>
