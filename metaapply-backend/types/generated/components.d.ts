@@ -74,7 +74,7 @@ export interface SharedFeature extends Struct.ComponentSchema {
     displayName: 'Feature';
   };
   attributes: {
-    text: Schema.Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 
