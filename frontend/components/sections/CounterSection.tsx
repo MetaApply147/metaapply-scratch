@@ -164,6 +164,7 @@ export default function CounterSection() {
   return (
     <Box
       ref={containerRef}
+      component="section"
       sx={{
         py: { xs: 3, md: 2 },
         backgroundColor: 'common.white',

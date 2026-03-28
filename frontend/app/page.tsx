@@ -8,6 +8,7 @@ import FAQSection from '@/components/sections/FAQSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import CityExpertsSection from '@/components/sections/CityExpertsSection';
 import PlanYourJourney from '@/components/sections/home/PlanYourJourney';
+import HomeRecruitmentPartner from '@/components/sections/home/HomeRecruitmentPartner';
 
 export default function Home() {
   return (
@@ -16,45 +17,25 @@ export default function Home() {
       <CounterSection />
 
       {/* Partnered Universities */}
-      {/* <Section spacing="lg">
-        <SectionHeader
-          title="Our Exclusive Partnered Universities"
-          highlight="Partnered Universities"
-        /> */}
       <PartneredUniversities />
-      {/* </Section> */}
 
       {/* Meet Experts */}
       <CityExpertsSection/>
 
       {/* Success Story */}
-      {/* <Section spacing="lg">
-        <SectionHeader
-          title="Our"
-          highlight="Success Stories"
-        /> */}
-        <SuccessStories page="home" type="video" />
-      {/* </Section> */}
+      <SuccessStories page="home" type="video" />
 
+      {/* Plan Your Journey */}
       <PlanYourJourney/>
 
       {/* Popular Destinations */}
-      {/* <Section spacing="lg">
-        <SectionHeader
-          title="Popular"
-          highlight="Destinations"
-        /> */}
-        <PopularDestinations/>
-      {/* </Section> */}
+      <PopularDestinations/>
+
+      {/* Recruitment Partner */}
+      <HomeRecruitmentPartner/>
 
       {/* Our Services */}
-      {/* <Section spacing="lg">
-        <SectionHeader
-          title="Our"
-          highlight="Services"
-        /> */}
-        <ServicesSection/>
-      {/* </Section> */}
+      <ServicesSection/>
 
       {/* FAQs */}
       <FAQSection page="home" />

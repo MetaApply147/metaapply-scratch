@@ -2,6 +2,56 @@ import "@mui/material/Typography";
 import "@mui/material/styles";
 
 declare module "@mui/material/styles" {
+  interface Palette {
+    orange: {
+      main: string;
+    };
+    yellow: {
+      [key: number]: string;
+    };
+    neutralBlue: {
+      [key: number]: string;
+    };
+    violet: {
+      [key: number]: string;
+    };
+    navyBlue: {
+      [key: number]: string;
+    };
+    pink: {
+      [key: number]: string;
+    };
+    gray: {
+      [key: number]: string;
+    };
+    blueSelected: string;
+  }
+
+  interface PaletteOptions {
+    orange?: {
+      main: string;
+    };
+    yellow?: {
+      [key: number]: string;
+    };
+    neutralBlue?: {
+      [key: number]: string;
+    };
+    violet?: {
+      [key: number]: string;
+    };
+    navyBlue?: {
+      [key: number]: string;
+    };
+    pink?: {
+      [key: number]: string;
+    };
+    gray?: {
+      [key: number]: string;
+    };
+    blueSelected?: string;
+  }
+
   interface TypographyVariants {
     display00: React.CSSProperties;
     display01: React.CSSProperties;

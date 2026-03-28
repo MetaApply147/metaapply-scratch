@@ -2,6 +2,7 @@ const palette = {
 
   common: {
     white: "#FFFFFF",
+    black: "#000000"
   },
 
   text: {
