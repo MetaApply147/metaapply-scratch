@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { getServices } from "@/services/httpServices";
 import SectionHeader from "../common/SectionHeader";
 import Section from "../common/Section";
-import { FAQ_CATEGORY_MAP, FAQPageKey } from "@/constants/faqCategories";
+import { FAQ_CATEGORY_MAP } from "@/constants/faqCategories";
 
 /* ================= TYPES ================= */
 
@@ -26,7 +26,7 @@ type FAQ = {
 };
 
 type Props = {
-  page: FAQPageKey;
+  page: string;
 };
 
 /* ================= COMPONENT ================= */
@@ -71,7 +71,10 @@ export default function FAQSection({ page }: Props) {
           groupedData[key].sort((a, b) => a.order - b.order);
         });
 
-        const orderedCategories = (FAQ_CATEGORY_MAP[page] || []).filter(
+        const categoryOrder =
+          FAQ_CATEGORY_MAP[page as keyof typeof FAQ_CATEGORY_MAP];
+
+        const orderedCategories = (categoryOrder || []).filter(
           (cat) => groupedData[cat]
         );
 
