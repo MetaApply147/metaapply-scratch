@@ -127,6 +127,7 @@ function CounterCard({
         <Typography
           variant="heading07"
           component="h3"
+          fontWeight={700}
           sx={{
             lineHeight: '100%',
           }}
@@ -171,7 +172,12 @@ export default function CounterSection() {
       }}
     >
       <Container maxWidth="xl">
-        <Grid container>
+        <Grid container
+          sx={{
+            maxWidth: { xs: '100%', md: '80%' },
+            margin: '0 auto'
+          }}  
+        >
           {counterData.map((item, index) => (
             <Grid size={{ xs: 6, md: 3 }} key={item.id}>
               <CounterCard

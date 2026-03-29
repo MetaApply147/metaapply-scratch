@@ -67,11 +67,11 @@ export default function LeftTabs({
           justifyContent: "space-between",
           width: "100%",
           fontWeight: 400,
-          transition: "0.2s",
+          // transition: "0.2s",
         },
 
         "& .MuiTab-root:hover": {
-          backgroundColor: "primary.main",
+          backgroundColor: "pink.300",
           color: "background.default",
         },
 

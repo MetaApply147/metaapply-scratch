@@ -104,10 +104,11 @@ export default function PartneredUniversities() {
           sx={{
             display: 'inline-flex',
             alignItems: 'center',
-            px: 3,
+            pl: 3,
+            pr: 5,
             py: 1.5,
             borderRadius: '16px',
-            background: 'linear-gradient(90deg, #f4e4ad 0%, #efe7d4 100%)',
+            background: 'linear-gradient(94.85deg, #FEE9A4 0.85%, #FAFAFA 112.11%)',
             mb: 6,
           }}
         >

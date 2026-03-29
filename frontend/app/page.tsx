@@ -9,10 +9,25 @@ import ServicesSection from '@/components/sections/ServicesSection';
 import CityExpertsSection from '@/components/sections/CityExpertsSection';
 import PlanYourJourney from '@/components/sections/home/PlanYourJourney';
 import HomeRecruitmentPartner from '@/components/sections/home/HomeRecruitmentPartner';
+import BaseBanner from '@/components/banner/BaseBanner';
+import BannerContent from '@/components/banner/BannerContent';
 
 export default function Home() {
   return (
     <>
+      {/*  Hero Section */}
+      <BaseBanner
+        backgroundImage="/Home/home_banner.webp"
+        minHeight={796}
+        left={
+          <BannerContent
+            title="One Application,"
+            highlight="Multiple Universities"
+            description="Compare, shortlist, and apply to 450+ global universities-all in one go."
+          />
+        }
+      />
+
       {/* Counters */}
       <CounterSection />
 

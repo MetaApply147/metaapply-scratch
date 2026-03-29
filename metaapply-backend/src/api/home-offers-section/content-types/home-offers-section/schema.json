@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "home_offers_sections",
+  "info": {
+    "singularName": "home-offers-section",
+    "pluralName": "home-offers-sections",
+    "displayName": "Home Offers Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "link": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "order": {
+      "type": "integer"
+    }
+  }
+}

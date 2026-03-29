@@ -8,7 +8,7 @@ export default function PlanYourJourney() {
     <Box
       sx={{
         position: "relative",
-        background: "#0b0f5c",
+        backgroundColor: "navyBlue.600",
         borderRadius: "24px",
         overflow: "hidden",
         mx: "30px",
@@ -28,16 +28,16 @@ export default function PlanYourJourney() {
               flexDirection: "column",
               justifyContent: "center",
               color: "common.white",
-              py: { xs: 5, md: 14 },
+              py: { xs: 5, md: 15 },
               zIndex: 2,
             }}
           >
-            <Typography variant="heading06" component="h2" lineHeight={1.2} sx={{maxWidth: "90%"}}>
+            <Typography variant="heading06" component="h2" lineHeight={1.1} sx={{maxWidth: "90%"}}>
               Plan Your Complete{" "}
               <Box component="span" sx={{ color: "primary.main" }}>
-                Study Abroad
+                Study Abroad Journey
               </Box>{" "}
-              Journey With Us!
+               With Us!
             </Typography>
 
             <Typography

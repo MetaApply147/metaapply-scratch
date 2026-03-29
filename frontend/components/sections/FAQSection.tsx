@@ -165,12 +165,19 @@ export default function FAQSection({ page }: Props) {
                 transition: "all 0.3s ease",
                 }}
             >
-                <AccordionSummary sx={{px: 3, py: 1.3}}
+                <AccordionSummary sx={{
+                    px: 3, py: 1.3,
+                    fontWeight: 500,
+                    '&.Mui-expanded .MuiTypography-root': {
+                      fontWeight: 600,
+                    },
+
+                  }}
                   expandIcon={
                       <ExpandMoreIcon />
                   }
                   >
-                  <Typography fontWeight={500} variant="body03" component='p'>
+                  <Typography variant="body03" component='p'>
                       {faq.question}
                   </Typography>
                 </AccordionSummary>
