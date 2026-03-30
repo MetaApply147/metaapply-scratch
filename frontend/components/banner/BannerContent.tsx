@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
 type Props = {
-  logo: string;
   title: string;
   highlight?: string;
   description?: string;
