@@ -17,7 +17,6 @@ export default function BannerImage({ src }: { src: string }) {
         objectFit: 'contain',
       }}
       priority
-      unoptimized
     />
   );
 }

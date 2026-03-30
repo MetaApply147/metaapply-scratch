@@ -7,6 +7,7 @@ import { getServices } from '@/services/httpServices';
 import CustomSlider from '@/components/common/CustomSlider';
 import SectionHeader from '../common/SectionHeader';
 import Section from '../common/Section';
+import Link from 'next/link';
 
 /* ================= TYPES ================= */
 
@@ -63,14 +64,14 @@ export default function ServingDestinations() {
 
                 const mapped = (res.data?.data || [])
                     .map((item: any) => {
-                        // ✅ handle both Strapi formats
+                        //  handle both Strapi formats
                         const rawUrl =
                             item?.flag?.url ||
                             item?.flag?.data?.attributes?.url;
 
                         const flagUrl = getImageUrl(rawUrl);
 
-                        console.log('FINAL URL:', flagUrl); // ✅ debug
+                        console.log('FINAL URL:', flagUrl); //  debug
 
                         if (!flagUrl) return null;
 
@@ -115,51 +116,49 @@ export default function ServingDestinations() {
                     <CustomSlider
                         data={data}
                         spaceBetween={20}
-                        slidesPerView={6}
-                        breakpoints={{
-                            320: { slidesPerView: 2 },
-                            600: { slidesPerView: 3 },
-                            900: { slidesPerView: 4 },
-                            1200: { slidesPerView: 6 },
-                        }}
+                        slidesPerView={8}
                         renderItem={(item) => (
-                            <Box
-                                sx={{
-                                    backgroundColor: '#fff',
-                                    borderRadius: 3,
-                                    boxShadow: '0px 4px 20px rgba(0,0,0,0.08)',
-                                    textAlign: 'center',
-                                    py: 3,
-                                    px: 2,
-                                    transition: 'all 0.3s ease',
-                                    '&:hover': {
-                                        transform: 'translateY(-6px)',
-                                    },
-                                }}
-                            >
+                            <Link href="#">
                                 <Box
                                     sx={{
-                                        width: 60,
-                                        height: 60,
-                                        margin: '0 auto',
-                                        borderRadius: '50%',
-                                        overflow: 'hidden',
-                                        mb: 1.5,
+                                        backgroundColor: '#fff',
+                                        borderRadius: '20px',
+                                        boxShadow: '0 1px 11px 0 rgba(0, 0, 0, 0.15)',
+                                        border: '1px solid #c2c2c230',
+                                        textAlign: 'center',
+                                        py: 4,
+                                        px: 3,
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            transform: 'translateY(-6px)',
+                                        },
                                     }}
                                 >
-                                    <Image
-                                        src={item.flagUrl}
-                                        alt={item.name}
-                                        width={60}
-                                        height={60}
-                                        style={{ objectFit: 'cover' }}
-                                    />
-                                </Box>
+                                    <Box
+                                        sx={{
+                                            width: 60,
+                                            height: 60,
+                                            margin: '0 auto',
+                                            borderRadius: '50%',
+                                            overflow: 'hidden',
+                                            mb: 1.5,
+                                        }}
+                                    >
+                                        <Image
+                                            src={item.flagUrl}
+                                            alt={item.name}
+                                            width={60}
+                                            height={60}
+                                            style={{ objectFit: 'cover' }}
+                                        />
+                                    </Box>
 
-                                <Typography variant="body2" fontWeight={500}>
-                                    {item.name}
-                                </Typography>
-                            </Box>
+                                    <Typography variant="body05" fontWeight={600} component='p' sx={{color: 'text.secondary'}}>
+                                        {item.name}
+                                    </Typography>
+                                </Box>
+                            </Link>
+                            
                         )}
                     />
                 )}
