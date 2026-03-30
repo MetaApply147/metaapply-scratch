@@ -52,6 +52,10 @@ export default function ServingDestinations() {
                 const res = await getServices('/services-inner-page-destinations', {
                     populate: 'flag',
                     sort: ['order:asc'],
+                    pagination: {
+                        page: 1,
+                        pageSize: 50,
+                    },
                 });
 
                 if (!res.isSuccess) {
@@ -127,7 +131,7 @@ export default function ServingDestinations() {
                                         border: '1px solid #c2c2c230',
                                         textAlign: 'center',
                                         py: 4,
-                                        px: 3,
+                                        px: 1,
                                         transition: 'all 0.3s ease',
                                         '&:hover': {
                                             transform: 'translateY(-6px)',
