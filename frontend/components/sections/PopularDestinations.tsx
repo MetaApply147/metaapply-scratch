@@ -8,7 +8,6 @@ import CustomSlider from '@/components/common/CustomSlider';
 import SectionHeader from '../common/SectionHeader';
 import Section from '../common/Section';
 import CheckIcon from '@mui/icons-material/Check';
-import DownloadIcon from '@mui/icons-material/Download';
 
 /* ================= TYPES ================= */
 
@@ -161,30 +160,30 @@ export default function PopularDestinations() {
 
                 {/* CONTENT */}
                 <Box sx={{ px: 2, pt: 2, pb: 3.8 }}>
-                  <Typography  mb={1} variant='heading11' component='h5' color='navyBlue.500'>
+                  <Typography mb={1} variant='heading11' component='h5' color='navyBlue.500'>
                     {item.title}
                   </Typography>
 
-                  <Box sx={{display: 'flex', gap: 1.2}} mb={1.75}>
-                    <CheckIcon sx={{color: 'navyBlue.500', fontSize: 20}}/>
+                  <Box sx={{ display: 'flex', gap: 1.2 }} mb={1.75}>
+                    <CheckIcon sx={{ color: 'navyBlue.500', fontSize: 20 }} />
                     <Typography variant="body05" mb={0} color='text.secondary' component='p'>
-                      Popular Courses: <span style={{fontWeight: 600}}>{item.popularCourses}</span>
+                      Popular Courses: <span style={{ fontWeight: 600 }}>{item.popularCourses}</span>
                     </Typography>
                   </Box>
 
-                  <Box sx={{display: 'flex', gap: 1.2}}>
-                    <CheckIcon sx={{color: 'navyBlue.500', fontSize: 20}}/>
+                  <Box sx={{ display: 'flex', gap: 1.2 }}>
+                    <CheckIcon sx={{ color: 'navyBlue.500', fontSize: 20 }} />
                     <Typography variant="body05" mb={0} color='text.secondary' component='p'>
-                      Student Friendly Cities - <span style={{fontWeight: 600}}>{item.studentCities}</span>
+                      Student Friendly Cities - <span style={{ fontWeight: 600 }}>{item.studentCities}</span>
                     </Typography>
                   </Box>
 
                   <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }} mt={5}>
-                    <Button variant="contained" size="medium" sx={{fontWeight: 500, padding: '16px 30px'}}>
-                      <Image src='/Home/download_arrow.svg' height={16} width={16} alt='Download' style={{marginRight: "6px"}}/> Country Guide
+                    <Button variant="contained" size="medium" sx={{ fontWeight: 500, padding: '16px 30px' }}>
+                      <Image src='/Home/download_arrow.svg' height={16} width={16} alt='Download' style={{ marginRight: "6px" }} /> Country Guide
                     </Button>
 
-                    <Button variant="outlined" size="medium" sx={{fontWeight: 500, padding: '16px 30px'}}>
+                    <Button variant="outlined" size="medium" sx={{ fontWeight: 500, padding: '16px 30px' }}>
                       Explore More
                     </Button>
                   </Box>
@@ -195,6 +194,6 @@ export default function PopularDestinations() {
         )}
       </Box>
     </Section>
-    
+
   );
 }

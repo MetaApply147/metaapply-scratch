@@ -617,45 +617,6 @@ export interface ApiFooterFooter extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiHeroSectionHeroSection extends Struct.CollectionTypeSchema {
-  collectionName: 'hero_sections';
-  info: {
-    displayName: 'Hero Section';
-    pluralName: 'hero-sections';
-    singularName: 'hero-section';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    backgroundImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    ctaText: Schema.Attribute.String;
-    ctaUrl: Schema.Attribute.String;
-    description: Schema.Attribute.String;
-    highlight: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::hero-section.hero-section'
-    > &
-      Schema.Attribute.Private;
-    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    publishedAt: Schema.Attribute.DateTime;
-    rightImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiHomeOffersSectionHomeOffersSection
   extends Struct.CollectionTypeSchema {
   collectionName: 'home_offers_sections';
@@ -746,6 +707,33 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
     Slug: Schema.Attribute.UID<'Title'>;
     Title: Schema.Attribute.String;
     Type: Schema.Attribute.Enumeration<['mega', 'link']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPagePage extends Struct.CollectionTypeSchema {
+  collectionName: 'pages';
+  info: {
+    displayName: 'Page';
+    pluralName: 'pages';
+    singularName: 'page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hero: Schema.Attribute.Component<'shared.hero-banner', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1408,10 +1396,10 @@ declare module '@strapi/strapi' {
       'api::event.event': ApiEventEvent;
       'api::faq.faq': ApiFaqFaq;
       'api::footer.footer': ApiFooterFooter;
-      'api::hero-section.hero-section': ApiHeroSectionHeroSection;
       'api::home-offers-section.home-offers-section': ApiHomeOffersSectionHomeOffersSection;
       'api::mega-menu-tab.mega-menu-tab': ApiMegaMenuTabMegaMenuTab;
       'api::menu.menu': ApiMenuMenu;
+      'api::page.page': ApiPagePage;
       'api::partnered-university.partnered-university': ApiPartneredUniversityPartneredUniversity;
       'api::popular-destination.popular-destination': ApiPopularDestinationPopularDestination;
       'api::services-inner-page-destination.services-inner-page-destination': ApiServicesInnerPageDestinationServicesInnerPageDestination;
