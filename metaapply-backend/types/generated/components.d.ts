@@ -78,6 +78,31 @@ export interface SharedFeature extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHeroBanner extends Struct.ComponentSchema {
+  collectionName: 'components_shared_hero_banners';
+  info: {
+    displayName: 'hero-banner';
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    ctaTarget: Schema.Attribute.Enumeration<['_blank', '_self']>;
+    ctaText: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    highlight: Schema.Attribute.String;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    overlay: Schema.Attribute.Boolean;
+    rightImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    showLogo: Schema.Attribute.Boolean;
+    textColor: Schema.Attribute.Enumeration<['light', 'dark']>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedTestimonial extends Struct.ComponentSchema {
   collectionName: 'components_shared_testimonials';
   info: {
@@ -130,6 +155,7 @@ declare module '@strapi/strapi' {
       'menu.item': MenuItem;
       'menu.section': MenuSection;
       'shared.feature': SharedFeature;
+      'shared.hero-banner': SharedHeroBanner;
       'shared.testimonial': SharedTestimonial;
       'success-story.testimonial-story': SuccessStoryTestimonialStory;
       'success-story.video-story': SuccessStoryVideoStory;

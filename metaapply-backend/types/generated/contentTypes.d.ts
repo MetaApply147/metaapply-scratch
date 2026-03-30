@@ -713,6 +713,33 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPagePage extends Struct.CollectionTypeSchema {
+  collectionName: 'pages';
+  info: {
+    displayName: 'Page';
+    pluralName: 'pages';
+    singularName: 'page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hero: Schema.Attribute.Component<'shared.hero-banner', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPartneredUniversityPartneredUniversity
   extends Struct.CollectionTypeSchema {
   collectionName: 'partnered_universities';
@@ -1372,6 +1399,7 @@ declare module '@strapi/strapi' {
       'api::home-offers-section.home-offers-section': ApiHomeOffersSectionHomeOffersSection;
       'api::mega-menu-tab.mega-menu-tab': ApiMegaMenuTabMegaMenuTab;
       'api::menu.menu': ApiMenuMenu;
+      'api::page.page': ApiPagePage;
       'api::partnered-university.partnered-university': ApiPartneredUniversityPartneredUniversity;
       'api::popular-destination.popular-destination': ApiPopularDestinationPopularDestination;
       'api::services-inner-page-destination.services-inner-page-destination': ApiServicesInnerPageDestinationServicesInnerPageDestination;
