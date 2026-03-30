@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "strapi-backend.azurewebsites.net",
+        pathname: '/uploads/**',
       },
     ],
   },
