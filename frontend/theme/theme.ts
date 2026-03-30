@@ -35,6 +35,15 @@ const theme = createTheme({
     background: {
       default: palette.common.white,
     },
+
+    orange: palette.orange,
+    yellow: palette.yellow,
+    neutralBlue: palette.neutralBlue,
+    violet: palette.violet,
+    navyBlue: palette.navyBlue,
+    pink: palette.pink,
+    gray: palette.gray,
+    blueSelected: palette.blueSelected,
   },
 
   typography,

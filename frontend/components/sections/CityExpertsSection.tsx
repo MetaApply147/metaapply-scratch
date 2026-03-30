@@ -5,12 +5,14 @@ import {
   Box,
   Typography,
   Button,
+  Divider,
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { getServices } from "@/services/httpServices";
 import SectionHeader from '../common/SectionHeader';
 import Section from '../common/Section';
+import StarIcon from '@mui/icons-material/Star';
 
 /* ================= TYPES ================= */
 
@@ -53,13 +55,25 @@ const getImageUrl = (url?: string) => {
 };
 
 const parseRichText = (blocks: any) => {
-  if (!blocks || !Array.isArray(blocks)) return "";
+  if (!blocks || !Array.isArray(blocks)) return null;
 
-  return blocks
-    .map((block) =>
-      block.children?.map((child: any) => child.text).join("")
-    )
-    .join("\n");
+  return blocks.map((block: any, index: number) => {
+    if (block.type === "paragraph") {
+      const text = block.children
+        ?.map((child: any) => child.text)
+        .join("");
+
+      if (!text?.trim()) return <br key={index} />;
+
+      return (
+        <Typography key={index} variant="body05" component="p" mb={2}>
+          {text}
+        </Typography>
+      );
+    }
+
+    return null;
+  });
 };
 
 /* ================= COMPONENT ================= */
@@ -102,21 +116,24 @@ export default function CityExpertsSection() {
 
 
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{backgroundColor: 'yellow.50'}}>
         <SectionHeader
         title="Meet Our Experts"
         highlight="in Your City"
         />
         
         {/* ================= TABS ================= */}
-        <Box display="flex" gap={3} mb={4} flexWrap="wrap">
+        <Box display="flex" gap={5} mb={4} flexWrap="wrap">
             {data.map((item) => (
             <Typography
                 key={item.id}
                 onClick={() => setActiveCity(item.city)}
+                variant="heading12"
                 sx={{
                 cursor: "pointer",
                 fontWeight: 500,
+                px: 1.5,
+                pb: 0.5,
                 position: "relative",
                 color: activeCity === item.city ? "#ff4081" : "#000",
                 "&::after": {
@@ -139,113 +156,110 @@ export default function CityExpertsSection() {
         {/* ================= CONTENT ================= */}
         <Box
             display="grid"
-            gridTemplateColumns={{ xs: "1fr", md: "1fr 1fr" }}
-            gap={4}
+            gridTemplateColumns={{ xs: "1fr", md: "1.5fr 2fr" }}
+            gap={7}
         >
             {/* LEFT IMAGE */}
             <Box
             sx={{
-                borderRadius: "16px",
+                borderRadius: "0",
                 overflow: "hidden",
             }}
             >
             <Image
                 src={getImageUrl(activeData.image?.url)}
                 alt={activeData.city}
-                width={600}
-                height={500}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                width={540}
+                height={638}
+                style={{ width: "auto", height: "100%", objectFit: "cover", borderRadius: "0" }}
             />
             </Box>
 
             {/* RIGHT CONTENT */}
-            <Box>
+            <Box sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
             {/* FEATURES */}
-            <Box
-                sx={{
-                p: 2,
-                borderRadius: "16px",
-                background: "#f5f5f5",
-                mb: 3,
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 2,
-                }}
-            >
-                {activeData.features?.map((f, i) => (
-                <Box key={i} display="flex" gap={1} alignItems="center">
-                    <Box
-                    sx={{
-                        width: 10,
-                        height: 10,
-                        borderRadius: "50%",
-                        background: "green",
-                    }}
-                    />
-                    <Typography variant="body2">{f.title}</Typography>
-                </Box>
-                ))}
-            </Box>
-
-            {/* TESTIMONIAL */}
-            <Box
-                sx={{
-                p: 3,
-                borderRadius: "16px",
-                background: "#f5f5f5",
-                mb: 3,
-                }}
-            >
-                {/* RATING */}
-                <Box mb={1}>
-                {"⭐".repeat(activeData.testimonial?.rating || 0)}
-                </Box>
-
-                {/* TEXT */}
-                <Typography variant="body2" mb={2}>
-                {parseRichText(activeData.testimonial?.text)}
-                </Typography>
-
-                {/* USER */}
-                <Box display="flex" alignItems="center" gap={2}>
-                <Image
-                    src={getImageUrl(avatarUrl) || "/default-avatar.png"}
-                    alt={activeData.testimonial?.name}
-                    width={40}
-                    height={40}
-                    style={{ borderRadius: "50%" }}
-                />
-
                 <Box>
-                    <Typography fontWeight={600}>
-                    {activeData.testimonial?.name}
-                    </Typography>
-                    <Typography variant="body2">
-                    {activeData.testimonial?.designation}
-                    </Typography>
-                </Box>
-                </Box>
-            </Box>
+                    <Box
+                        sx={{
+                        py: 3.5,
+                        px: 5,
+                        borderRadius: 6,
+                        backgroundColor: "common.white",
+                        boxShadow: "0 8px 24px -8px #C0C0C040",
+                        color: "text.secondary",
+                        mb: 3,
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: 2,
+                        }}
+                    >
+                        {activeData.features?.map((f, i) => (
+                        <Box key={i} display="flex" gap={1} alignItems="center">
+                            <Image src="../green-circle-check.svg" height={20} width={20} alt="check"/>
+                            <Typography variant="body05">{f.title}</Typography>
+                        </Box>
+                        ))}
+                    </Box>
 
-            {/* CTA BUTTON */}
-            <Link href={activeData.ctaUrl?.toLowerCase() || "#"}>
-                <Button
-                sx={{
-                    borderRadius: "30px",
-                    px: 4,
-                    py: 1.5,
-                    textTransform: "none",
-                    fontWeight: 600,
-                    background: "linear-gradient(90deg, #ff4081, #ff1a75)",
-                    color: "#fff",
-                    "&:hover": {
-                    background: "linear-gradient(90deg, #ff1a75, #ff4081)",
-                    },
-                }}
-                >
-                {activeData.ctaText || "Book Your Visit Today"}
-                </Button>
-            </Link>
+                    {/* TESTIMONIAL */}
+                    <Box
+                        sx={{
+                        py: 3,
+                        px: 5,
+                        borderRadius: 6,
+                        backgroundColor: "common.white",
+                        boxShadow: "0 8px 24px -8px #C0C0C040",
+                        mb: 3,
+                        }}
+                    >   
+                        
+                        <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}} mb={4}>
+                            {/* Image Quotes */}
+                            <Image src="../Home/blueQuotes.svg" height={36} width={50} alt="quotes"/>
+
+                            {/* RATING */}
+                            <Box mb={1}>
+                            {[...Array(activeData.testimonial?.rating || 0)].map((_, i) => (
+                                <StarIcon key={i} sx={{color: "orange.main"}} />
+                            ))}
+                            </Box>
+                        </Box>
+
+                        {/* TEXT */}
+                        <Typography variant="body05" component="div" sx={{color: "text.secondary"}}>
+                        {parseRichText(activeData.testimonial?.text)}
+                        </Typography>
+
+                        <Divider sx={{borderColor: "#E9EFF5", mt: 2.5, mb: 2.5}}/>
+
+                        {/* USER */}
+                        <Box display="flex" alignItems="center" gap={2}>
+                            <Image
+                                src={getImageUrl(avatarUrl) || "/default-avatar.png"}
+                                alt={activeData.testimonial?.name}
+                                width={90}
+                                height={90}
+                                style={{ borderRadius: "50%" }}
+                            />
+
+                            <Box>
+                                <Typography variant="heading12">
+                                {activeData.testimonial?.name}
+                                </Typography>
+                                <Typography variant="body05" component="p" sx={{color: "text.secondary"}}>
+                                {activeData.testimonial?.designation}
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
+
+                {/* CTA BUTTON */}
+                <Link href={activeData.ctaUrl?.toLowerCase() || "#"}>
+                    <Button variant="contained" size="large">
+                    {activeData.ctaText || "Book Your Visit Today"}
+                    </Button>
+                </Link>
             </Box>
         </Box>
     </Section>

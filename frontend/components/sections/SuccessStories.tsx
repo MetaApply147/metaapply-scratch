@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 import Image from 'next/image';
 import Section from "../common/Section";
 import SectionHeader from "../common/SectionHeader";
+import Link from "next/link";
 
 type Props = {
   page: string;
@@ -55,7 +56,7 @@ export default function SuccessStories({ page, type, limit }: Props) {
         comp.thumbnail?.url;
 
       return (
-        <Box sx={{borderRadius: 4, overflow: "hidden", boxShadow: 2}}>
+        <Box sx={{borderRadius: 4}}>
           <Box position="relative">
             <Box position="relative" sx={{ width: "100%", height: 250 }}>
               <Image
@@ -64,24 +65,24 @@ export default function SuccessStories({ page, type, limit }: Props) {
                 fill
                 style={{
                   objectFit: "cover",
-                  borderRadius: "4 4 0 0",
+                  borderRadius: "16px 16px 0 0",
                 }}
               />
             </Box>
 
-            <Box sx={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",}}>
-              <Box sx={{bgcolor: "#fff", borderRadius: "50%", p: 2, boxShadow: 3, cursor: "pointer", height: 20, width: 20, display: "flex", alignItems: "center", justifyContent: "center"}}>
+            <Link href={item.content?.[0]?.videoUrl || "#"} target="_blank" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",}}>
+              <Box sx={{bgcolor: "common.white", borderRadius: "50%", p: 2, boxShadow: 3, cursor: "pointer", height: 20, width: 20, display: "flex", alignItems: "center", justifyContent: "center"}}>
                 ▶
               </Box>
-            </Box>
+            </Link>
           </Box>
 
-          <Box p={3.5} sx={{borderRadius: 4}}>
+          <Box p={3.5} sx={{borderRadius: 4, boxShadow: `0px 8.19px 18.43px 0px #A1A1A11A, 0px 137.23px 55.3px 0px #A1A1A103` }}>
             <Typography variant="body05" component="p" color="#4B4B4B">
               {item.description}
             </Typography>
 
-            <Typography variant="heading12" fontWeight={600} component="p" sx={{color: "primary.main"}} mt={2}>
+            <Typography variant="heading12" component="p" sx={{color: "primary.main"}} mt={2}>
               {item.title}
             </Typography>
 
@@ -104,7 +105,7 @@ export default function SuccessStories({ page, type, limit }: Props) {
             </Typography>
 
             <Box mt={2}>
-              <Typography variant="heading12" fontWeight={600} component="p">
+              <Typography variant="heading12" component="p">
                 {item.title}
               </Typography>
 
@@ -143,7 +144,7 @@ export default function SuccessStories({ page, type, limit }: Props) {
           data={stories}
           renderItem={renderItem}
           slidesPerView={3}
-          spaceBetween={24}
+          spaceBetween={0}
           showArrows={true}
           breakpoints={{
             0: { slidesPerView: 1 },

@@ -144,6 +144,7 @@ export default function Header({ menus, tabs }: HeaderProps) {
                             ? "primary.main"
                             : "text.primary",
                         }}
+                        variant="heading14"
                       >
                         {menu.Title}
                       </Typography>

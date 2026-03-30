@@ -1,76 +1,80 @@
 'use client';
 
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Container } from "@mui/material";
 import Image from "next/image";
-import SectionHeader from '../../common/SectionHeader';
 
 export default function PlanYourJourney() {
   return (
     <Box
       sx={{
-        display: "grid",
-        gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+        position: "relative",
+        backgroundColor: "navyBlue.600",
         borderRadius: "24px",
         overflow: "hidden",
-        background: "#0b0f5c",
-        margin: 4,
+        mx: "30px",
       }}
     >
-      {/* LEFT CONTENT */}
-      <Box
-        sx={{
-          p: { xs: 4, md: 6 },
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          color: "#fff",
-        }}
-      >
-        <SectionHeader title="Plan Your Complete" highlight="Study Abroad Journey" title2="with Us">
-
-        </SectionHeader>
-        {/* <Typography component="h4" fontWeight={600} mb={2}>
-          Plan Your Complete{" "}
-          <span style={{ color: "#ff4081" }}>
-            Study Abroad Journey
-          </span>{" "}
-          With Us!
-        </Typography> */}
-
-        <Typography
-          variant="body2"
-          sx={{ opacity: 0.8, mb: 3, maxWidth: 400 }}
-        >
-          Explore the right destinations, programmes, and opportunities aligned
-          with your future goals.
-        </Typography>
-
-        <Button
+      {/* LEFT CONTENT (INSIDE CONTAINER) */}
+      <Container maxWidth="xl">
+        <Box
           sx={{
-            width: "fit-content",
-            borderRadius: "30px",
-            px: 4,
-            py: 1.5,
-            textTransform: "none",
-            fontWeight: 600,
-            background: "linear-gradient(90deg, #ff4081, #ff1a75)",
-            color: "#fff",
-            "&:hover": {
-              background: "linear-gradient(90deg, #ff1a75, #ff4081)",
-            },
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
           }}
         >
-          Start Planning Today
-        </Button>
-      </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              color: "common.white",
+              py: { xs: 5, md: 15 },
+              zIndex: 2,
+            }}
+          >
+            <Typography variant="heading06" component="h2" lineHeight={1.1} sx={{maxWidth: "90%"}}>
+              Plan Your Complete{" "}
+              <Box component="span" sx={{ color: "primary.main" }}>
+                Study Abroad Journey
+              </Box>{" "}
+               With Us!
+            </Typography>
 
-      {/* RIGHT IMAGE */}
-      <Box sx={{ position: "relative", minHeight: 300 }}>
+            <Typography
+              variant="body05"
+              sx={{ maxWidth: "80%" }}
+              mt={2.5}
+              mb={5}
+            >
+              Explore the right destinations, programmes, and opportunities aligned
+              with your future goals.
+            </Typography>
+
+            <Button variant="contained" size="large" sx={{ width: "max-content" }}>
+              Start Planning Today
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+
+      {/* RIGHT IMAGE (FULL BLEED) */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: { xs: "100%", md: "50%" },
+          height: "100%",
+        }}
+      >
         <Image
-          src="/images/study-banner.jpg" 
+          src="/Home/student_with_degree.webp"
           alt="Study Abroad"
           fill
-          style={{ objectFit: "cover" }}
+          style={{
+            objectFit: "cover",
+            borderRadius: "0 24px 24px 0",
+          }}
         />
       </Box>
     </Box>

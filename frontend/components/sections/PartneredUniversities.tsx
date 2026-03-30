@@ -4,7 +4,6 @@ import { Box, Container, Typography, Skeleton, Alert } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { getServices } from '@/services/httpServices';
 
 /* ================= TYPES ================= */
@@ -97,7 +96,7 @@ export default function PartneredUniversities() {
   }, []);
 
   return (
-    <Box sx={{ py: { xs: 4, md: 5 }, backgroundColor: 'common.white' }}>
+    <Box sx={{ pt: { xs: 4, md: 5 }, pb: { xs: 4, md: 11.25 }, backgroundColor: 'common.white' }} component="section">
       <Container maxWidth="xl">
 
         {/* HEADER */}
@@ -105,10 +104,11 @@ export default function PartneredUniversities() {
           sx={{
             display: 'inline-flex',
             alignItems: 'center',
-            px: 3,
-            py: 2,
+            pl: 3,
+            pr: 5,
+            py: 1.5,
             borderRadius: '16px',
-            background: 'linear-gradient(90deg, #f4e4ad 0%, #efe7d4 100%)',
+            background: 'linear-gradient(94.85deg, #FEE9A4 0.85%, #FAFAFA 112.11%)',
             mb: 6,
           }}
         >
@@ -117,7 +117,6 @@ export default function PartneredUniversities() {
             <Box component="span" sx={{ color: 'primary.main' }}>
               Partnered Universities
             </Box>
-            <CheckBoxIcon sx={{ ml: 1, color: '#22c55e' }} />
           </Typography>
         </Box>
 

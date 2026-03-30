@@ -30,7 +30,7 @@ export default function CustomSlider<T>({
   data,
   renderItem,
   slidesPerView = 3,
-  spaceBetween = 20,
+  spaceBetween = 12,
   breakpoints,
   showArrows = true,
 }: CustomSliderProps<T>) {
@@ -40,7 +40,7 @@ export default function CustomSlider<T>({
   const nextClass = `next-${id}`;
 
   return (
-    <Box>
+    <Box sx={{ mx: "-10px", my: "-30px" }}>
       {/* ARROWS */}
       {showArrows && (
         <Box
@@ -86,7 +86,7 @@ export default function CustomSlider<T>({
       >
         {data.map((item: any) => (
           <SwiperSlide key={item.id} style={{ display: 'flex', height: 'auto' }}>
-            <Box sx={{ height: 'auto', display: 'flex' }}>
+            <Box sx={{ px: "10px", py: "30px", width: "100%" }}>
               {renderItem(item)}
             </Box>
           </SwiperSlide>

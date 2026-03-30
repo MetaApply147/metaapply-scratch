@@ -7,6 +7,8 @@ import { getServices } from '@/services/httpServices';
 import CustomSlider from '@/components/common/CustomSlider';
 import SectionHeader from '../common/SectionHeader';
 import Section from '../common/Section';
+import CheckIcon from '@mui/icons-material/Check';
+import DownloadIcon from '@mui/icons-material/Download';
 
 /* ================= TYPES ================= */
 
@@ -117,14 +119,14 @@ export default function PopularDestinations() {
         {!loading && !error && (
           <CustomSlider
             data={data}
+            spaceBetween={0}
             slidesPerView={3}
             renderItem={(item) => (
               <Box
                 sx={{
                   borderRadius: 3,
                   overflow: 'hidden',
-                  boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
-                  backgroundColor: '#fff',
+                  boxShadow: `0px 8.19px 18.43px 0px #A1A1A11A, 0px 137.23px 55.3px 0px #A1A1A103`,
                 }}
               >
                 {/* IMAGE */}
@@ -142,41 +144,47 @@ export default function PopularDestinations() {
                     <Box
                       sx={{
                         position: 'absolute',
-                        top: 10,
-                        left: 10,
-                        px: 1.5,
-                        py: 0.5,
+                        top: 15,
+                        left: 12,
+                        px: 1.8,
+                        py: 0.3,
                         borderRadius: 2,
-                        fontSize: 12,
-                        color: '#fff',
+                        color: 'common.white',
                         background: item.tagColor || '#000',
+                        border: `1px solid #fff`
                       }}
                     >
-                      {item.tag}
+                      <Typography variant='heading15' fontWeight={500}>{item.tag}</Typography>
                     </Box>
                   )}
                 </Box>
 
                 {/* CONTENT */}
-                <Box sx={{ p: 2 }}>
-                  <Typography fontWeight={600} mb={1}>
+                <Box sx={{ px: 2, pt: 2, pb: 3.8 }}>
+                  <Typography  mb={1} variant='heading11' component='h5' color='navyBlue.500'>
                     {item.title}
                   </Typography>
 
-                  <Typography variant="body2" mb={1}>
-                    {item.popularCourses}
-                  </Typography>
+                  <Box sx={{display: 'flex', gap: 1.2}} mb={1.75}>
+                    <CheckIcon sx={{color: 'navyBlue.500', fontSize: 20}}/>
+                    <Typography variant="body05" mb={0} color='text.secondary' component='p'>
+                      Popular Courses: <span style={{fontWeight: 600}}>{item.popularCourses}</span>
+                    </Typography>
+                  </Box>
 
-                  <Typography variant="body2" mb={2}>
-                    {item.studentCities}
-                  </Typography>
+                  <Box sx={{display: 'flex', gap: 1.2}}>
+                    <CheckIcon sx={{color: 'navyBlue.500', fontSize: 20}}/>
+                    <Typography variant="body05" mb={0} color='text.secondary' component='p'>
+                      Student Friendly Cities - <span style={{fontWeight: 600}}>{item.studentCities}</span>
+                    </Typography>
+                  </Box>
 
-                  <Box sx={{ display: 'flex', gap: 1 }}>
-                    <Button variant="contained" size="small">
-                      Country Guide
+                  <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }} mt={5}>
+                    <Button variant="contained" size="medium" sx={{fontWeight: 500, padding: '16px 30px'}}>
+                      <Image src='/Home/download_arrow.svg' height={16} width={16} alt='Download' style={{marginRight: "6px"}}/> Country Guide
                     </Button>
 
-                    <Button variant="outlined" size="small">
+                    <Button variant="outlined" size="medium" sx={{fontWeight: 500, padding: '16px 30px'}}>
                       Explore More
                     </Button>
                   </Box>

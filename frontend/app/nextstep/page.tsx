@@ -12,7 +12,13 @@ export default function MetaFlyPage() {
                 <SuccessStories page="nextstep" type="testimonial" />
             </Section>
 
+<<<<<<< HEAD
             <FAQSection page="nextstep" />
+=======
+            <FAQSection page="metafly" />
+
+            
+>>>>>>> a5f9a5c0dcf1232813dc2651a290d9d00befce8a
         </>
     );
 }

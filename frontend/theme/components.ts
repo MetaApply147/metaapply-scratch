@@ -30,12 +30,19 @@ const components = {
         lineHeight: "20px",
       },
 
+      sizeLarge: {
+        padding: "20px 32px",
+        fontSize: 20,
+        fontWeight: 500,
+        lineHeight: "100%",
+      },
+
       containedPrimary: {
-        backgroundColor: palette.pink[400],
+        background: `linear-gradient(270.04deg, ${palette.pink[400]} 33.28%, ${palette.pink[200]} 99.98%)`,
         color: palette.common.white,
 
         "&:hover": {
-          backgroundColor: palette.pink[500],
+          background: `linear-gradient(270.04deg, ${palette.pink[500]} 33.28%, ${palette.pink[300]} 99.98%)`,
           boxShadow: "none",
         },
       },

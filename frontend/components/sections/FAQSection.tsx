@@ -13,6 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { getServices } from "@/services/httpServices";
 import SectionHeader from "../common/SectionHeader";
 import Section from "../common/Section";
+import { FAQ_CATEGORY_MAP } from "@/constants/faqCategories";
 
 /* ================= TYPES ================= */
 
@@ -35,6 +36,7 @@ export default function FAQSection({ page }: Props) {
   const [grouped, setGrouped] = useState<Record<string, FAQ[]>>({});
   const [activeTab, setActiveTab] = useState("");
   const [expanded, setExpanded] = useState<number | false>(false);
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,15 +71,22 @@ export default function FAQSection({ page }: Props) {
           groupedData[key].sort((a, b) => a.order - b.order);
         });
 
+        const categoryOrder =
+          FAQ_CATEGORY_MAP[page as keyof typeof FAQ_CATEGORY_MAP];
+
+        const orderedCategories = (categoryOrder || []).filter(
+          (cat) => groupedData[cat]
+        );
+
         setGrouped(groupedData);
-        setActiveTab(Object.keys(groupedData)[0]);
+        setActiveTab(orderedCategories[0] || "");
+        setCategories(orderedCategories);
       }
     };
 
     fetchData();
   }, [page]);
 
-  const categories = Object.keys(grouped);
   const isTabView = categories.length > 0;
 
   const currentFaqs = isTabView ? grouped[activeTab] : data;
@@ -95,11 +104,6 @@ export default function FAQSection({ page }: Props) {
             title="Frequently Asked"
             highlight="Questions"
         />
-    
-        {/* <Typography variant="h4" fontWeight={600} mb={2}>
-            Frequently Asked{" "}
-            <span style={{ color: "#ff4081" }}>Questions</span>
-        </Typography> */}
 
         {/* ================= TABS ================= */}
         {isTabView && (
@@ -107,34 +111,41 @@ export default function FAQSection({ page }: Props) {
             display="flex"
             gap={1}
             sx={{
-                background: "#f3f3f3",
-                p: "6px",
-                borderRadius: "30px",
+                background: "#FFF0F6",
+                border: '1px solid #FFBDD8',
+                p: "12px",
+                borderRadius: "51px",
                 width: "fit-content",
             }}
             >
             {categories.map((cat) => (
                 <Button
-                key={cat}
-                onClick={() => {
-                    setActiveTab(cat);
-                    setExpanded(false); // close accordion on tab change
-                }}
-                sx={{
-                    borderRadius: "30px",
-                    px: 3,
-                    py: 1,
-                    textTransform: "none",
-                    fontWeight: 500,
-                    background:
-                    activeTab === cat
-                        ? "linear-gradient(90deg, #ff4081, #ff1a75)"
-                        : "transparent",
-                    color: activeTab === cat ? "#fff" : "#000",
-                    transition: "0.3s",
-                }}
+                  key={cat}
+                  onClick={() => {
+                      setActiveTab(cat);
+                      setExpanded(false); // close accordion on tab change
+                  }}
+                  disableRipple
+                  disableTouchRipple
+                  sx={{
+                      borderRadius: "30px",
+                      px: 4.5,
+                      py: 1.5,
+                      background:
+                      activeTab === cat
+                          ? 'linear-gradient(90deg, #BF0E2E 0%, #EE0081 100%)'
+                          : "#FFF0F6",
+                      color: activeTab === cat ? "common.white" : "text.primary",
+                      boxShadow: activeTab === cat ? '0px 4px 19px 0px #FF99CE' : 'none',
+                      // transition: "0.3s",
+                      "&:hover": {
+                          boxShadow: activeTab === cat ? '0px 4px 19px 0px #FF99CE' : 'none',
+                      },
+                      
+                  }}
                 >
-                {cat}
+                
+                <Typography variant="heading12" component='h6' fontWeight={500}>{cat}</Typography>
                 </Button>
             ))}
             </Box>
@@ -150,33 +161,32 @@ export default function FAQSection({ page }: Props) {
                 disableGutters
                 elevation={0}
                 sx={{
-                mb: 2,
-                borderRadius: "12px !important",
-                background: "linear-gradient(90deg, #f5e6ff, #e6ccff)",
+                mb: 2.5,
+                borderRadius: "16px !important",
+                background: "linear-gradient(90.19deg, rgba(255, 229, 240, 0.5) 9.4%, #F8E7FF 94.98%)",
                 "&:before": { display: "none" },
                 transition: "all 0.3s ease",
                 }}
             >
-                <AccordionSummary
-                expandIcon={
-                    <ExpandMoreIcon
-                    sx={{
-                        transform:
-                        expanded === faq.id
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                        transition: "0.3s",
-                    }}
-                    />
-                }
-                >
-                <Typography fontWeight={500}>
-                    {faq.question}
-                </Typography>
+                <AccordionSummary sx={{
+                    px: 3, py: 1.3,
+                    fontWeight: 500,
+                    '&.Mui-expanded .MuiTypography-root': {
+                      fontWeight: 600,
+                    },
+
+                  }}
+                  expandIcon={
+                      <ExpandMoreIcon />
+                  }
+                  >
+                  <Typography variant="body03" component='p'>
+                      {faq.question}
+                  </Typography>
                 </AccordionSummary>
 
-                <AccordionDetails>
-                <Typography color="text.secondary">
+                <AccordionDetails sx={{px: 3, pb: 3, pt: 0}}>
+                <Typography color="text.secondary" variant="body04" component='p'>
                     {faq.answer}
                 </Typography>
                 </AccordionDetails>

@@ -30,79 +30,79 @@ const typography = {
   heading03: {
     fontFamily: "var(--font-heading)",
     fontSize: "68px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading04: {
     fontFamily: "var(--font-heading)",
     fontSize: "60px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading05: {
     fontFamily: "var(--font-heading)",
     fontSize: "52px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading06: {
     fontFamily: "var(--font-heading)",
     fontSize: "48px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading07: {
     fontFamily: "var(--font-heading)",
     fontSize: "40px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading08: {
     fontFamily: "var(--font-heading)",
     fontSize: "36px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading09: {
     fontFamily: "var(--font-heading)",
     fontSize: "32px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading10: {
     fontFamily: "var(--font-heading)",
     fontSize: "28px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading11: {
     fontFamily: "var(--font-heading)",
     fontSize: "24px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading12: {
     fontFamily: "var(--font-heading)",
     fontSize: "20px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading13: {
     fontFamily: "var(--font-heading)",
     fontSize: "18px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading14: {
     fontFamily: "var(--font-heading)",
     fontSize: "16px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   heading15: {
     fontFamily: "var(--font-heading)",
     fontSize: "14px",
-    fontWeight: 700
+    fontWeight: 600
   },
 
   /* BODY */
