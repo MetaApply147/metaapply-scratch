@@ -1,16 +1,15 @@
-import Section from '@/components/common/Section';
-import SectionHeader from '@/components/common/SectionHeader';
+import HeroBanner from '@/components/banner/HeroBanner';
 import FAQSection from '@/components/sections/FAQSection';
-
 import SuccessStories from '@/components/sections/SuccessStories';
 
 export default function MetaFlyPage() {
     return (
         <>
+            <HeroBanner slug="metastay" size="medium"/>
+
             {/* Success Story */}
-            <Section spacing="lg">
-                <SuccessStories page="metastay" type="testimonial" />
-            </Section>
+            <SuccessStories page="metastay" type="testimonial" />
+            
 
             <FAQSection page="metastay" />
         </>

@@ -63,7 +63,7 @@ export default function BaseBanner({
         >
           <Box flex={1}>{left}</Box>
 
-          {right && <Box flex={1}>{right}</Box>}
+          {right && <Box sx={{textAlign: 'right'}}>{right}</Box>}
         </Box>
       </Container>
     </Box>
