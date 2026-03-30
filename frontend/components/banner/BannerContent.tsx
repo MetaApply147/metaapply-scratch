@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 
 type Props = {
+  logo: string;
   title: string;
   highlight?: string;
   description?: string;
@@ -27,7 +28,7 @@ export default function BannerContent({
       </Typography>
 
       {description && (
-        <Typography mt={3} color="text.secondary" variant='body03' component='p'>
+        <Typography mt={3} color="text.secondary" variant='heading12' component='p' fontWeight={400}>
           {description}
         </Typography>
       )}

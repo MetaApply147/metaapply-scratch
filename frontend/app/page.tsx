@@ -11,6 +11,7 @@ import PlanYourJourney from '@/components/sections/home/PlanYourJourney';
 import HomeRecruitmentPartner from '@/components/sections/home/HomeRecruitmentPartner';
 import BaseBanner from '@/components/banner/BaseBanner';
 import BannerContent from '@/components/banner/BannerContent';
+import EventsOffers from '@/components/sections/home/EventsOffers';
 
 export default function Home() {
   return (
@@ -51,6 +52,9 @@ export default function Home() {
 
       {/* Our Services */}
       <ServicesSection/>
+
+      {/* Event Offers */}
+      <EventsOffers/>
 
       {/* FAQs */}
       <FAQSection page="home" />

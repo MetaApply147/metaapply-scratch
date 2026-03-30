@@ -129,7 +129,7 @@ export default function ServicesSection() {
                             <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
                         </Box>
 
-                        <Typography variant="body05" component='p'>
+                        <Typography variant="body05" component='p' sx={{maxWidth: '85%'}}>
                             {service.desc}
                         </Typography>
                     </Box>

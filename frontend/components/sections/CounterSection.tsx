@@ -167,7 +167,7 @@ export default function CounterSection() {
       ref={containerRef}
       component="section"
       sx={{
-        py: { xs: 3, md: 2 },
+        py: { xs: 0, md: 0 },
         backgroundColor: 'common.white',
       }}
     >

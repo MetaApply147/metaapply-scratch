@@ -1,5 +1,4 @@
 import FAQSection from '@/components/sections/FAQSection';
-
 import SuccessStories from '@/components/sections/SuccessStories';
 
 export default function MetaFlyPage() {
