@@ -9,11 +9,7 @@ export default function MetaFlyPage() {
     <>
       {/* Success Story */}
       <Section spacing="lg">
-        <SectionHeader
-          title="Our"
-          highlight="Success Stories"
-        />
-        <SuccessStories page="metafly" type="testtestimonial" />
+        <SuccessStories page="metafly" type="testimonial" />
       </Section>
 
       <FAQSection page="metafly" />
