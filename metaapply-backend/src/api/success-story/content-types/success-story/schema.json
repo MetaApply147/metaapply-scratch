@@ -47,6 +47,12 @@
         "video",
         "testimonial"
       ]
+    },
+    "ctaText": {
+      "type": "string"
+    },
+    "ctaUrl": {
+      "type": "string"
     }
   }
 }

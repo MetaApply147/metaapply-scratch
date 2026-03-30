@@ -857,6 +857,8 @@ export interface ApiSuccessStorySuccessStory
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    ctaText: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
     description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
