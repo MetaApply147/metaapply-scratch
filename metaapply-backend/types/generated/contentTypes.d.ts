@@ -617,45 +617,6 @@ export interface ApiFooterFooter extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiHeroSectionHeroSection extends Struct.CollectionTypeSchema {
-  collectionName: 'hero_sections';
-  info: {
-    displayName: 'Hero Section';
-    pluralName: 'hero-sections';
-    singularName: 'hero-section';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    backgroundImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    ctaText: Schema.Attribute.String;
-    ctaUrl: Schema.Attribute.String;
-    description: Schema.Attribute.String;
-    highlight: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::hero-section.hero-section'
-    > &
-      Schema.Attribute.Private;
-    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    publishedAt: Schema.Attribute.DateTime;
-    rightImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiHomeOffersSectionHomeOffersSection
   extends Struct.CollectionTypeSchema {
   collectionName: 'home_offers_sections';
@@ -1408,7 +1369,6 @@ declare module '@strapi/strapi' {
       'api::event.event': ApiEventEvent;
       'api::faq.faq': ApiFaqFaq;
       'api::footer.footer': ApiFooterFooter;
-      'api::hero-section.hero-section': ApiHeroSectionHeroSection;
       'api::home-offers-section.home-offers-section': ApiHomeOffersSectionHomeOffersSection;
       'api::mega-menu-tab.mega-menu-tab': ApiMegaMenuTabMegaMenuTab;
       'api::menu.menu': ApiMenuMenu;

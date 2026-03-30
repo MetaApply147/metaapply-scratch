@@ -8,7 +8,6 @@ import CustomSlider from '@/components/common/CustomSlider';
 import SectionHeader from '../common/SectionHeader';
 import Section from '../common/Section';
 import CheckIcon from '@mui/icons-material/Check';
-import DownloadIcon from '@mui/icons-material/Download';
 
 /* ================= TYPES ================= */
 

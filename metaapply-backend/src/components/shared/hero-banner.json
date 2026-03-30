@@ -1,15 +1,9 @@
 {
-  "kind": "collectionType",
-  "collectionName": "hero_sections",
+  "collectionName": "components_shared_hero_banners",
   "info": {
-    "singularName": "hero-section",
-    "pluralName": "hero-sections",
-    "displayName": "Hero Section"
+    "displayName": "hero-banner"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "title": {
       "type": "string"
@@ -18,7 +12,7 @@
       "type": "string"
     },
     "description": {
-      "type": "string"
+      "type": "text"
     },
     "ctaText": {
       "type": "string"
@@ -55,6 +49,27 @@
         "videos",
         "audios"
       ]
+    },
+    "ctaTarget": {
+      "type": "enumeration",
+      "enum": [
+        "_blank",
+        "_self"
+      ]
+    },
+    "overlay": {
+      "type": "boolean"
+    },
+    "textColor": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ]
+    },
+    "showLogo": {
+      "type": "boolean"
     }
-  }
+  },
+  "config": {}
 }
