@@ -1,5 +1,3 @@
-import Section from '@/components/common/Section';
-import SectionHeader from '@/components/common/SectionHeader';
 import CounterSection from "@/components/sections/CounterSection";
 import PartneredUniversities from '@/components/sections/PartneredUniversities';
 import PopularDestinations from '@/components/sections/PopularDestinations';

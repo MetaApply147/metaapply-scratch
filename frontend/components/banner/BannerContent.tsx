@@ -42,7 +42,7 @@ export default function BannerContent({
   return (
     <Box>
       {showLogo && logo && (
-        <Box mb={0.5}>
+        <Box mb={1.5}>
           <Image
             src={logo}
             alt="logo"

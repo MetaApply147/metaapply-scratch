@@ -8,6 +8,14 @@ import Image from 'next/image';
 import Section from "../common/Section";
 import SectionHeader from "../common/SectionHeader";
 import Link from "next/link";
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import { Varela } from 'next/font/google';
+
+const varela = Varela({
+  subsets: ['latin'],
+  weight: '400',
+  variable: "--font-varela",
+});
 
 type Props = {
   page: string;
@@ -49,7 +57,7 @@ export default function SuccessStories({ page, type, limit }: Props) {
     const comp = item.content?.[0];
     if (!comp) return null;
 
-    // 🎥 VIDEO CARD
+    //  VIDEO CARD
     if (comp.__component === "success-story.video-story") {
       const image =
         process.env.NEXT_PUBLIC_STRAPI_URL +
@@ -97,15 +105,17 @@ export default function SuccessStories({ page, type, limit }: Props) {
     // TESTIMONIAL CARD
     if (comp.__component === "success-story.testimonial-story") {
       return (
-        <Box className="testimonial-card" borderRadius={3} sx={{display: "flex"}}>
-          <Box>“</Box>
-          <Box p={4} pt={6} sx={{ background: comp.backgroundColor, display: "flex", flexDirection: "column", justifyContent: "space-between" }}> 
-            <Typography variant="body05" component="p" fontWeight={600}>
-              {item.description}
-            </Typography>
+        <Box className="testimonial-card" borderRadius={3} sx={{display: "flex", flexDirection: 'column', height: '100%'}}>
+          <Box p={4} pt={6} sx={{ background: comp.backgroundColor, display: "flex", flexDirection: "column", justifyContent: "space-between", height: '100%' }}> 
+            <Box>
+              <Box className={varela.className} sx={{fontSize: '96px', lineHeight: '50px'}}>“</Box>
+              <Typography variant="body05" component="p" fontWeight={600}>
+                {item.description}
+              </Typography>
+            </Box>
 
-            <Box mt={2}>
-              <Typography variant="heading12" component="p">
+            <Box mt={3}>
+              <Typography variant="heading13" component="p" fontWeight={700}>
                 {item.title}
               </Typography>
 
