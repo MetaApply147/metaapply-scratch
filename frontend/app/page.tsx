@@ -13,7 +13,7 @@ import HeroBanner from '@/components/banner/HeroBanner';
 export default function Home() {
   return (
     <>
-
+    
       {/*  Hero Section */}
       <HeroBanner slug="home" minHeight={796} />
 
