@@ -4,6 +4,7 @@ import SuccessStories from '@/components/sections/SuccessStories';
 import HeroBanner from '@/components/banner/HeroBanner';
 import DynamicLeadForm from "@/components/forms/DynamicLeadForm";
 import { metaflyForm } from "@/config/forms/metafly.form";
+import MetaFlyProcess from '@/components/sections/Pages/metafly/MetaFlyProcess';
 
 export default function MetaFlyPage() {
   return (
@@ -14,6 +15,9 @@ export default function MetaFlyPage() {
       </section>
       {/* Hero Section */}
       <HeroBanner slug="metafly" size="medium" />
+
+      {/* Process section  */}
+      <MetaFlyProcess/>
 
       {/* Success Story */}
       <ServingDestinations />

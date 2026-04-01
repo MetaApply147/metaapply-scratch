@@ -8,14 +8,6 @@ import Image from 'next/image';
 import Section from "../common/Section";
 import SectionHeader from "../common/SectionHeader";
 import Link from "next/link";
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import { Varela } from 'next/font/google';
-
-const varela = Varela({
-  subsets: ['latin'],
-  weight: '400',
-  variable: "--font-varela",
-});
 
 type Props = {
   page: string;
@@ -108,18 +100,17 @@ export default function SuccessStories({ page, type, limit }: Props) {
         <Box className="testimonial-card" borderRadius={3} sx={{display: "flex", flexDirection: 'column', height: '100%'}}>
           <Box p={4} pt={6} sx={{ background: comp.backgroundColor, display: "flex", flexDirection: "column", justifyContent: "space-between", height: '100%' }}> 
             <Box>
-              <Box className={varela.className} sx={{fontSize: '96px', lineHeight: '50px'}}>“</Box>
-              <Typography variant="body05" component="p" fontWeight={600}>
+              <Typography variant="body05" component="p">
                 {item.description}
               </Typography>
             </Box>
 
             <Box mt={3}>
-              <Typography variant="heading13" component="p" fontWeight={700}>
+              <Typography variant="heading13" component="p" sx={{color: '#FF3185'}}>
                 {item.title}
               </Typography>
 
-              <Typography variant="body05">
+              <Typography variant="body05" sx={{color: '#FF3185'}}>
                 {item.role}
               </Typography>
             </Box>
@@ -141,12 +132,12 @@ export default function SuccessStories({ page, type, limit }: Props) {
       <Box
         sx={{
           '& .swiper-slide:nth-of-type(odd) .testimonial-card': {
-            background: 'linear-gradient(135deg, #FFE5F0, #FFCCE1)',
-            color: '#cc276a',
+            background: 'linear-gradient(149.75deg, #FFF3F8 8.52%, #FFFFFF 104.28%)',
+            color: '#202020',
           },
           '& .swiper-slide:nth-of-type(even) .testimonial-card': {
-            background: 'linear-gradient(135deg, #E5E6FF, #C0C2FF)',
-            color: '#222466',
+            background: 'linear-gradient(149.75deg, #FFF3F8 8.52%, #FFFFFF 104.28%)',
+            color: '#202020',
           },
         }}
       >

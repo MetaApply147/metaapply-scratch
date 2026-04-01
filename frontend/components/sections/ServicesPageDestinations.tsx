@@ -102,7 +102,7 @@ export default function ServingDestinations() {
         <Section spacing="lg">
             <SectionHeader
                 title="Destinations"
-                highlight="we are Serving"
+                highlight="We are serving"
             />
 
             <Box>
@@ -127,8 +127,8 @@ export default function ServingDestinations() {
                                     sx={{
                                         backgroundColor: '#fff',
                                         borderRadius: '20px',
-                                        boxShadow: '0 1px 11px 0 rgba(0, 0, 0, 0.15)',
-                                        border: '1px solid #c2c2c230',
+                                        boxShadow: '0px 8px 28px 0px #9A9A9A26',
+                                        border: '0.5px solid #C2C2C2',
                                         textAlign: 'center',
                                         py: 4,
                                         px: 1,
@@ -145,7 +145,7 @@ export default function ServingDestinations() {
                                             margin: '0 auto',
                                             borderRadius: '50%',
                                             overflow: 'hidden',
-                                            mb: 1.5,
+                                            mb: '20px',
                                         }}
                                     >
                                         <Image
@@ -157,7 +157,7 @@ export default function ServingDestinations() {
                                         />
                                     </Box>
 
-                                    <Typography variant="body05" fontWeight={600} component='p' sx={{color: 'text.secondary'}}>
+                                    <Typography variant="heading14" fontWeight={500} component='p'>
                                         {item.name}
                                     </Typography>
                                 </Box>
