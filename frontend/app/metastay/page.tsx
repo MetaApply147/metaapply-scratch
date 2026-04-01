@@ -1,6 +1,7 @@
 import HeroBanner from '@/components/banner/HeroBanner';
 import TwoColumnFormSection from '@/components/common/TwoColumnFormSection';
 import FAQSection from '@/components/sections/FAQSection';
+import ComfortConvenience from '@/components/sections/Pages/metastay/ComfortConvenience';
 import MetaStayLeftInfo from '@/components/sections/Pages/metastay/MetaStayLeftInfo';
 import MetaStayProcess from '@/components/sections/Pages/metastay/MetaStayProcess';
 import SuccessStories from '@/components/sections/SuccessStories';
@@ -12,14 +13,15 @@ export default function MetaStayPage() {
       {/* HERO */}
       <HeroBanner slug="metastay" size="medium" />
 
-      {/* TWO COLUMN SECTION */}
+      {/* PROCESS */}
+      <MetaStayProcess />
 
+      {/* TWO COLUMN SECTION */}
       <TwoColumnFormSection formSchema={metaflyForm}>
             <MetaStayLeftInfo />
       </TwoColumnFormSection>
 
-      {/* PROCESS */}
-      <MetaStayProcess />
+      {/* <ComfortConvenience/> */}
 
       {/* SUCCESS STORIES */}
       <SuccessStories page="metastay" type="testimonial" />

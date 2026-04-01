@@ -37,7 +37,7 @@ export default function ServicesProcessSlider({
         {/* Slider */}
         <CustomSlider
           data={data}
-          spaceBetween={-20}
+          spaceBetween={-40}
           slidesPerView={slidesPerView}
           renderItem={(item) => <ProcessCard item={item} />}
         />
@@ -52,9 +52,13 @@ const ProcessCard = ({ item }: { item: ProcessItem }) => {
   return (
     <Box
       sx={{
+        display:"flex",
+        flexDirection:"column",
+        justifyContent: "space-between",
+        alignItems: "center",
         textAlign: "center",
-        px: 8,
-        py: 2,
+        px: 6,
+        py: 3,
         minHeight: "130px",
         background: "linear-gradient(64.71deg, #FFFBEE 15.36%, #FFECF4 83.03%)",
         clipPath:
@@ -80,7 +84,7 @@ const ProcessCard = ({ item }: { item: ProcessItem }) => {
           }}
         />
       </Box>
-      <Box sx={{ pt: 2 }}>
+      <Box sx={{ pt: 0 }}>
         <Typography variant="body06" fontWeight={600}>
           {item.title}
         </Typography>
