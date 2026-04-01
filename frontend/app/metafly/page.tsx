@@ -9,6 +9,16 @@ import TwoColumnFormSection from '@/components/common/TwoColumnFormSection';
 import MetaFlyLeftInfo from '@/components/sections/Pages/metafly/MetaFlyLeftInfo';
 
 export default function MetaFlyPage() {
+  const schema = {
+    formId: "study_abroad_form",
+    submitLabel: "Apply Now",
+    fields: metaflyForm,
+
+    extraPayload: {
+      Program_Products: "Study Abroad", // ✅ change per page
+    },
+  };
+
   return (
     <>
       <section className="max-w-md mx-auto p-8 bg-white rounded-2xl shadow-lg">

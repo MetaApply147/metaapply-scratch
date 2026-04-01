@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import {
   TextField,
@@ -9,24 +10,33 @@ import {
   CircularProgress,
   Alert,
   Box,
+  Checkbox, 
+  FormControlLabel,
+  Typography
 } from "@mui/material";
 import { useCountries } from "@/hooks/useCountries";
 import { useStates } from "@/hooks/useStates";
+import NextLink from "next/link";
+import { Link as MuiLink } from "@mui/material";
 
 export interface FormField {
   name: string;
-  type: "text" | "email" | "phone" | "select" | "textarea" | "country" | "state";
+  type: "text" | "email" | "phone" | "select" | "textarea" | "country" | "state" | "checkbox";
   lsKey: string;
   placeholder?: string;
   required?: boolean;
   options?: { label: string; value: string }[];
   phonePrefix?: string;
+  defaultChecked?: boolean;
+  label?: string;
+  sendToLSQ?: boolean;
 }
 
 export interface FormSchema {
   formId: string;
   submitLabel?: string;
   fields: FormField[];
+  extraPayload?: Record<string, string>;
 }
 
 interface Props {
@@ -34,14 +44,56 @@ interface Props {
   onSuccess?: () => void;
 }
 
+type FieldWrapperProps = {
+  name: string;
+  children: ReactNode;
+  error?: string;
+};
+
+const FieldWrapper = ({ name, children, error }: FieldWrapperProps) => {
+  const hasError = !!error;
+
+  return (
+    <Box sx={{ position: "relative", pb: hasError ? "15px" : 0 }}>
+      {children}
+
+      {hasError && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: "78%",
+            left: 0,
+            fontSize: 12,
+            color: "error.main",
+            lineHeight: "16px",
+          }}
+        >
+          {error}
+        </Box>
+      )}
+    </Box>
+  );
+};
+
 export default function DynamicLeadForm({ schema, onSuccess }: Props) {
   const router = useRouter();
 
-  const [values, setValues]           = useState<Record<string, string>>({ phoneCode: "91" });
+  const [values, setValues] = useState<Record<string, string>>(() => {
+    const initial: Record<string, string> = { phoneCode: "91" };
+
+    schema.fields.forEach((field) => {
+      if (field.type === "checkbox") {
+        initial[field.name] = field.defaultChecked ? "true" : "false";
+      }
+    });
+
+    return initial;
+  });
   const [loading, setLoading]         = useState(false);
   const [error, setError]             = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted]     = useState(false);
+  const [pageUrl, setPageUrl] = useState("");
 
   const selectedCountryId = values["country"] ? Number(values["country"]) : null;
 
@@ -50,6 +102,10 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
 
   const selectedCountry = countries.find((c) => c.id === selectedCountryId);
   const selectedState   = states.find((s) => s.id === Number(values["state"]));
+
+  useEffect(() => {
+    setPageUrl(window.location.href);
+  }, []);
 
   // ── Handle Change ──────────────────────────────────────────────────────────
 
@@ -115,6 +171,13 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
         else if (!/^[a-zA-Z\s'-]+$/.test(value))
           errors[field.name] = "Name can only contain letters, spaces, hyphens and apostrophes";
       }
+
+      // Checkbox validaion
+      if (field.type === "checkbox") {
+        if (field.required && values[field.name] !== "true") {
+          errors[field.name] = "This field is required";
+        }
+      }
     });
 
     return errors;
@@ -138,16 +201,39 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
 
     const code = values["phoneCode"] ? `+${values["phoneCode"]}` : "+91";
 
-    const attributes = schema.fields.map((field) => {
-      let value = values[field.name] ?? "";
-      if (field.type === "country" && selectedCountry)
-        value = selectedCountry.country_name;
-      if (field.type === "state" && selectedState)
-        value = selectedState.state_name;
-      if (field.type === "phone")
-        value = `${code}-${values[field.name] ?? ""}`;
-      return { Attribute: field.lsKey, Value: value };
-    });
+    const attributes = [
+      // ✅ Dynamic form fields
+      ...schema.fields
+        .filter((field) => field.sendToLSQ !== false)
+        .map((field) => {
+          let value = values[field.name] ?? "";
+
+          if (field.type === "country" && selectedCountry)
+            value = selectedCountry.country_name;
+
+          if (field.type === "state" && selectedState)
+            value = selectedState.state_name;
+
+          if (field.type === "phone")
+            value = `${code}-${values[field.name] ?? ""}`;
+
+          return { Attribute: field.lsKey, Value: value };
+        }),
+
+      // ✅ Page URL (dynamic)
+      {
+        Attribute: "mx_Meta_Lead_Source_URL",
+        Value: pageUrl,
+      },
+
+      // ✅ Extra payload (dynamic per page)
+      ...(schema.extraPayload
+        ? Object.entries(schema.extraPayload).map(([key, value]) => ({
+            Attribute: key,
+            Value: value,
+          }))
+        : []),
+    ];
 
     try {
       const res = await fetch("/api/leads", {
@@ -174,15 +260,64 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
     }
   };
 
-  // ── Submitted fallback ─────────────────────────────────────────────────────
+  // ✅ Common props generator
+  const getCommonProps = (field: FormField) => {
+    const id = `field-${field.name}`;
 
-  if (submitted) {
-    return (
-      <Alert severity="success" sx={{ textAlign: "center" }}>
-        Thank you! We'll be in touch shortly.
-      </Alert>
-    );
-  }
+    return {
+      id,
+      name: field.name, // ✅ important for autofill
+      fullWidth: true,
+      required: field.required,
+      label: field.placeholder?.replace("*", "").trim(),
+      value: values[field.name] ?? "",
+      onChange: (e: any) => handleChange(field.name, e.target.value),
+      error: !!fieldErrors[field.name],
+      size: "small" as const,
+    };
+  };
+
+  // ✅ Reusable Select Field
+  const renderSelect = (
+    field: FormField,
+    options: { label: string; value: any }[],
+    disabled?: boolean,
+    placeholder?: string
+  ) => (
+    <FieldWrapper key={field.name} name={field.name} error={fieldErrors[field.name]}>
+      <TextField
+        {...getCommonProps(field)}
+        select
+        disabled={disabled}
+        slotProps={{
+          select: {
+            MenuProps: {
+              PaperProps: { sx: { maxHeight: 250, borderRadius: 2 } },
+            },
+          },
+        }}
+      >
+        <MenuItem value="" disabled>
+          {placeholder || field.placeholder}
+        </MenuItem>
+        {options.map((opt) => (
+          <MenuItem key={opt.value} value={opt.value}>
+            {opt.label}
+          </MenuItem>
+        ))}
+      </TextField>
+    </FieldWrapper>
+  );
+
+  const wrap = (field: FormField, child: ReactNode) => (
+    <FieldWrapper
+      key={field.name}
+      name={field.name}
+      error={fieldErrors[field.name]}
+    >
+      {child}
+    </FieldWrapper>
+  );
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
@@ -194,171 +329,133 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
       sx={{ display: "flex", flexDirection: "column", gap: 2 }}
     >
       {schema.fields.map((field) => {
+        if (field.type === "checkbox") return null;
 
-        // ── COUNTRY dropdown ──────────────────────────────────────────────
+        // COUNTRY
         if (field.type === "country") {
-          return (
-            <TextField
-              key={field.name}
-              select
-              fullWidth
-              required={field.required}
-              label={field.placeholder?.replace("*", "").trim()}
-              value={values[field.name] ?? ""}
-              onChange={(e) => handleChange(field.name, e.target.value)}
-              error={!!fieldErrors[field.name]}
-              helperText={fieldErrors[field.name]}
-              disabled={countriesLoading}
-              size="small"
-            >
-              <MenuItem value="" disabled>
-                {countriesLoading ? "Loading countries..." : field.placeholder}
-              </MenuItem>
-              {countries.map((c) => (
-                <MenuItem key={c.id} value={c.id}>
-                  {c.country_name}
-                </MenuItem>
-              ))}
-            </TextField>
+          return renderSelect(
+            field,
+            countries.map((c) => ({ label: c.country_name, value: c.id })),
+            countriesLoading,
+            countriesLoading ? "Loading countries..." : field.placeholder
           );
         }
 
-        // ── STATE dropdown ────────────────────────────────────────────────
+        // STATE
         if (field.type === "state") {
-          return (
-            <TextField
-              key={field.name}
-              select
-              fullWidth
-              required={field.required}
-              label={field.placeholder?.replace("*", "").trim()}
-              value={values[field.name] ?? ""}
-              onChange={(e) => handleChange(field.name, e.target.value)}
-              error={!!fieldErrors[field.name]}
-              helperText={fieldErrors[field.name]}
-              disabled={!selectedCountryId || statesLoading}
-              size="small"
-            >
-              <MenuItem value="" disabled>
-                {statesLoading
-                  ? "Loading states..."
-                  : !selectedCountryId
-                  ? "Select Country first"
-                  : field.placeholder}
-              </MenuItem>
-              {states.map((s) => (
-                <MenuItem key={s.id} value={s.id}>
-                  {s.state_name}
-                </MenuItem>
-              ))}
-            </TextField>
+          return renderSelect(
+            field,
+            states.map((s) => ({ label: s.state_name, value: s.id })),
+            !selectedCountryId || statesLoading,
+            statesLoading
+              ? "Loading states..."
+              : !selectedCountryId
+              ? "Select Country first"
+              : field.placeholder
           );
         }
 
-        // ── PHONE field ───────────────────────────────────────────────────
+        // PHONE
         if (field.type === "phone") {
-          return (
-            <Box key={field.name} sx={{ display: "flex", flexDirection: "column", gap: 0 }}>
-              <Box sx={{ display: "flex", gap: 1 }}>
-                {/* Country code dropdown — native select for compact +91 display */}
-                <TextField
-                  select
-                  value={values["phoneCode"] ?? "91"}
-                  onChange={(e) => handleChange("phoneCode", e.target.value)}
-                  size="small"
-                  sx={{ width: 100 }}
-                  SelectProps={{ native: true }}
-                >
-                  {countries.map((c) => (
-                    <option key={c.id} value={c.phone_code}>
-                      +{c.phone_code}
-                    </option>
-                  ))}
-                </TextField>
+          return wrap(
+            field,
+            <Box sx={{ display: "flex", gap: 1 }}>
+              <TextField
+                select
+                value={values["phoneCode"] ?? "91"}
+                onChange={(e) => handleChange("phoneCode", e.target.value)}
+                size="small"
+                sx={{ width: 100 }}
+                slotProps={{ select: { native: true } }}
+              >
+                {countries.map((c) => (
+                  <option key={c.id} value={c.phone_code}>
+                    +{c.phone_code}
+                  </option>
+                ))}
+              </TextField>
 
-                {/* Phone number — numeric only, 7–12 digits */}
-                <TextField
-                  fullWidth
-                  required={field.required}
-                  label={field.placeholder?.replace("*", "").trim()}
-                  value={values[field.name] ?? ""}
-                  onChange={(e) => {
-                    // Strip non-numeric — alphabets never appear in field
-                    const numericOnly = e.target.value.replace(/\D/g, "");
-                    if (numericOnly.length <= 12)
-                      handleChange(field.name, numericOnly);
-                  }}
-                  inputProps={{
-                    inputMode: "numeric",
-                    maxLength: 12,
-                  }}
-                  error={!!fieldErrors[field.name]}
-                  helperText={fieldErrors[field.name]}
-                  size="small"
-                />
-              </Box>
+              <TextField
+                {...getCommonProps(field)}
+                id={`field-${field.name}`}
+                name={field.name}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, "");
+                  if (val.length <= 12) handleChange(field.name, val);
+                }}
+                inputProps={{ inputMode: "numeric", maxLength: 12 }}
+              />
             </Box>
           );
         }
 
-        // ── STATIC SELECT ─────────────────────────────────────────────────
+        // SELECT
         if (field.type === "select") {
-          return (
-            <TextField
-              key={field.name}
-              select
-              fullWidth
-              required={field.required}
-              label={field.placeholder?.replace("*", "").trim()}
-              value={values[field.name] ?? ""}
-              onChange={(e) => handleChange(field.name, e.target.value)}
-              error={!!fieldErrors[field.name]}
-              helperText={fieldErrors[field.name]}
-              size="small"
-            >
-              <MenuItem value="" disabled>{field.placeholder}</MenuItem>
-              {field.options?.map((opt) => (
-                <MenuItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          );
+          return renderSelect(field, field.options || []);
         }
 
-        // ── TEXTAREA ──────────────────────────────────────────────────────
+        // TEXTAREA
         if (field.type === "textarea") {
-          return (
-            <TextField
-              key={field.name}
-              fullWidth
-              multiline
-              minRows={3}
-              required={field.required}
-              label={field.placeholder?.replace("*", "").trim()}
-              value={values[field.name] ?? ""}
-              onChange={(e) => handleChange(field.name, e.target.value)}
-              error={!!fieldErrors[field.name]}
-              helperText={fieldErrors[field.name]}
-              size="small"
-            />
+          return wrap(
+            field,
+            <TextField {...getCommonProps(field)} multiline minRows={3} />
           );
         }
 
-        // ── TEXT / EMAIL ──────────────────────────────────────────────────
+        // TEXT / EMAIL (default)
+        return wrap(
+          field,
+          <TextField {...getCommonProps(field)} type={field.type} />
+        );
+      })}
+
+      {schema.fields.map((field) => {
+        if (field.type !== "checkbox") return null;
+
         return (
-          <TextField
-            key={field.name}
-            fullWidth
-            type={field.type}
-            required={field.required}
-            label={field.placeholder?.replace("*", "").trim()}
-            value={values[field.name] ?? ""}
-            onChange={(e) => handleChange(field.name, e.target.value)}
-            error={!!fieldErrors[field.name]}
-            helperText={fieldErrors[field.name]}
-            size="small"
-          />
+          <Box key={field.name} sx={{ position: "relative" }}>
+            <FormControlLabel
+              sx={{ ml: 0 }}
+              control={
+                <Checkbox
+                  id={`field-${field.name}`}
+                  name={field.name}
+                  checked={values[field.name] === "true"}
+                  onChange={(e) =>
+                    handleChange(field.name, String(e.target.checked))
+                  }
+                  size="small"
+                  sx={{ height: 18, width: 18, p: 0, mr: 1 }}
+                />
+              }
+              label={
+                <Typography variant="body07">
+                  {field.name === "terms" ? (
+                    <>
+                      I have read and agreed to{" "}
+                      <MuiLink
+                        component={NextLink}
+                        href="/terms-and-conditions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ color: "primary.main", fontWeight: 600 }}
+                      >
+                        Terms and Conditions
+                      </MuiLink>
+                    </>
+                  ) : (
+                    field.label
+                  )}
+                </Typography>
+              }
+            />
+
+            {fieldErrors[field.name] && (
+              <Box sx={{ color: "error.main", fontSize: 12 }}>
+                {fieldErrors[field.name]}
+              </Box>
+            )}
+          </Box>
         );
       })}
 

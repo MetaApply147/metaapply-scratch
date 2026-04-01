@@ -11,11 +11,22 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
         }
 
+        const accessKey = process.env.LEADSQUARED_ACCESS_KEY;
+        const secretKey = process.env.LEADSQUARED_SECRET_KEY;
+
+        if (!accessKey || !secretKey) {
+            console.error("Missing LeadSquared env variables");
+            return NextResponse.json(
+                { error: "Server config error" },
+                { status: 500 }
+            );
+        }
+
         const url = new URL(
             "https://api-in21.leadsquared.com/v2/LeadManagement.svc/Lead.Capture"
         );
-        url.searchParams.set("accessKey", process.env.LEADSQUARED_ACCESS_KEY!);
-        url.searchParams.set("secretKey", process.env.LEADSQUARED_SECRET_KEY!);
+        url.searchParams.set("accessKey", accessKey);
+        url.searchParams.set("secretKey", secretKey);
 
         const res = await fetch(url.toString(), {
             method: "POST",
