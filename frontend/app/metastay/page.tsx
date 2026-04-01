@@ -12,14 +12,13 @@ export default function MetaStayPage() {
       {/* HERO */}
       <HeroBanner slug="metastay" size="medium" />
 
-      {/* TWO COLUMN SECTION */}
+      {/* PROCESS */}
+      <MetaStayProcess />
 
+      {/* TWO COLUMN SECTION */}
       <TwoColumnFormSection formSchema={metaflyForm}>
             <MetaStayLeftInfo />
       </TwoColumnFormSection>
-
-      {/* PROCESS */}
-      <MetaStayProcess />
 
       {/* SUCCESS STORIES */}
       <SuccessStories page="metastay" type="testimonial" />
