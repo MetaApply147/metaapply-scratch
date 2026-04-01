@@ -2,7 +2,7 @@ import HeroBanner from '@/components/banner/HeroBanner';
 import FAQSection from '@/components/sections/FAQSection';
 import SuccessStories from '@/components/sections/SuccessStories';
 
-export default function MetaFlyPage() {
+export default function MetaFinancePage() {
     return (
         <>
             <HeroBanner slug="metafinance" size="medium"/>

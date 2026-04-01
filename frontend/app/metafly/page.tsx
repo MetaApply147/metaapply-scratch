@@ -4,6 +4,9 @@ import SuccessStories from '@/components/sections/SuccessStories';
 import HeroBanner from '@/components/banner/HeroBanner';
 import DynamicLeadForm from "@/components/forms/DynamicLeadForm";
 import { metaflyForm } from "@/config/forms/metafly.form";
+import MetaFlyProcess from '@/components/sections/Pages/metafly/MetaFlyProcess';
+import TwoColumnFormSection from '@/components/common/TwoColumnFormSection';
+import MetaFlyLeftInfo from '@/components/sections/Pages/metafly/MetaFlyLeftInfo';
 
 export default function MetaFlyPage() {
   const schema = {
@@ -24,6 +27,14 @@ export default function MetaFlyPage() {
       </section>
       {/* Hero Section */}
       <HeroBanner slug="metafly" size="medium" />
+
+      {/* Process section  */}
+      <MetaFlyProcess/>
+
+      {/* MetaFly Left Info section  */}
+      <TwoColumnFormSection formSchema={metaflyForm}>
+        <MetaFlyLeftInfo />
+      </TwoColumnFormSection>
 
       {/* Success Story */}
       <ServingDestinations />

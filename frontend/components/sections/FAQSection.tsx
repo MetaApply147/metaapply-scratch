@@ -163,13 +163,15 @@ export default function FAQSection({ page }: Props) {
                 sx={{
                 mb: 2.5,
                 borderRadius: "16px !important",
-                background: "linear-gradient(90.19deg, rgba(255, 229, 240, 0.5) 9.4%, #F8E7FF 94.98%)",
+                boxShadow: expanded === faq.id ? '0px 2px 2px 0px #48505814' : '0',
+                background: expanded === faq.id ? "linear-gradient(90deg, #FFFDE7 0%, #FFE5F0 100%)"
+                  : "linear-gradient(90.19deg, rgba(255, 229, 240, 0.5) 9.4%, #F8E7FF 94.98%)",
                 "&:before": { display: "none" },
                 transition: "all 0.3s ease",
                 }}
             >
                 <AccordionSummary sx={{
-                    px: 3, py: 1.3,
+                    px: 3, py: 2.5,
                     fontWeight: 500,
                     '&.Mui-expanded .MuiTypography-root': {
                       fontWeight: 600,
