@@ -128,10 +128,10 @@ function TopCards() {
 
 function Services() {
   const services = [
-    { name: "MetaFinance", image: "/Header/metafinance_icon.svg", href: "/testurl" },
-    { name: "MetaFly", image: "/Header/metafly_icon.svg", href: "/testurl2" },
-    { name: "MetaStay", image: "/Header/metastay_icon.svg", href: "/testurl3" },
-    { name: "MetaInsure", image: "/Header/metainsure_icon.svg", href: "/testurl4" },
+    { name: "MetaFinance", image: "/Header/metafinance_icon.svg", href: "/metafinance" },
+    { name: "MetaFly", image: "/Header/metafly_icon.svg", href: "/metafly" },
+    { name: "MetaStay", image: "/Header/metastay_icon.svg", href: "/metastay" },
+    { name: "MetaInsure", image: "/Header/metainsure_icon.svg", href: "/metainsure" },
   ];
 
   return (

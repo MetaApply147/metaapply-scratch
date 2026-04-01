@@ -1,6 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  TextField,
+  MenuItem,
+  Button,
+  CircularProgress,
+  Alert,
+  Box,
+} from "@mui/material";
 import { useCountries } from "@/hooks/useCountries";
 import { useStates } from "@/hooks/useStates";
 
@@ -26,31 +35,108 @@ interface Props {
 }
 
 export default function DynamicLeadForm({ schema, onSuccess }: Props) {
-  const [values, setValues]       = useState<Record<string, string>>({});
-  const [loading, setLoading]     = useState(false);
-  const [error, setError]         = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
+
+  const [values, setValues]           = useState<Record<string, string>>({ phoneCode: "91" });
+  const [loading, setLoading]         = useState(false);
+  const [error, setError]             = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted]     = useState(false);
 
   const selectedCountryId = values["country"] ? Number(values["country"]) : null;
 
   const { countries, loading: countriesLoading } = useCountries();
   const { states,    loading: statesLoading    } = useStates(selectedCountryId);
 
+  const selectedCountry = countries.find((c) => c.id === selectedCountryId);
+  const selectedState   = states.find((s) => s.id === Number(values["state"]));
+
+  // ── Handle Change ──────────────────────────────────────────────────────────
+
   const handleChange = (name: string, value: string) => {
     setValues((prev) => {
       const updated = { ...prev, [name]: value };
-      if (name === "country") updated["state"] = "";
+      if (name === "country") {
+        updated["state"] = "";
+        const country = countries.find((c) => c.id === Number(value));
+        if (country) updated["phoneCode"] = String(country.phone_code);
+      }
+      return updated;
+    });
+
+    // Clear field error on change without causing infinite loop
+    setFieldErrors((prev) => {
+      if (!prev[name]) return prev;
+      const updated = { ...prev };
+      delete updated[name];
       return updated;
     });
   };
 
+  // ── Validation ─────────────────────────────────────────────────────────────
+
+  const validate = (): Record<string, string> => {
+    const errors: Record<string, string> = {};
+
+    schema.fields.forEach((field) => {
+      // ✅ Always coerce to string before trim — fixes "trim is not a function"
+      // because country/state store numeric IDs not strings
+      const value = String(values[field.name] ?? "").trim();
+      const label = field.placeholder?.replace("*", "").trim() ?? field.name;
+
+      // Required check
+      if (field.required && !value) {
+        errors[field.name] = `${label} is required`;
+        return;
+      }
+
+      if (!value) return;
+
+      // Email validation
+      if (field.type === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value))
+          errors[field.name] = "Enter a valid email address";
+      }
+
+      // Phone validation — digits only, 7–12 digits
+      if (field.type === "phone") {
+        const digits = value.replace(/\D/g, "");
+        if (digits.length < 7)
+          errors[field.name] = "Phone number must be at least 7 digits";
+        else if (digits.length > 12)
+          errors[field.name] = "Phone number must not exceed 12 digits";
+      }
+
+      // Name validation
+      if (field.type === "text" && field.name === "fullName") {
+        if (value.length < 2)
+          errors[field.name] = "Name must be at least 2 characters";
+        else if (!/^[a-zA-Z\s'-]+$/.test(value))
+          errors[field.name] = "Name can only contain letters, spaces, hyphens and apostrophes";
+      }
+    });
+
+    return errors;
+  };
+
+  // ── Submit ─────────────────────────────────────────────────────────────────
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
 
-    const selectedCountry = countries.find((c) => c.id === selectedCountryId);
-    const selectedState   = states.find((s) => s.id === Number(values["state"]));
+    // Run validations — show field errors and stop
+    const errors = validate();
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
+    setFieldErrors({});
+    setLoading(true);
+
+    const code = values["phoneCode"] ? `+${values["phoneCode"]}` : "+91";
 
     const attributes = schema.fields.map((field) => {
       let value = values[field.name] ?? "";
@@ -58,6 +144,8 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
         value = selectedCountry.country_name;
       if (field.type === "state" && selectedState)
         value = selectedState.state_name;
+      if (field.type === "phone")
+        value = `${code}-${values[field.name] ?? ""}`;
       return { Attribute: field.lsKey, Value: value };
     });
 
@@ -67,9 +155,18 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ attributes }),
       });
-      if (!res.ok) throw new Error();
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // ✅ Shows actual LSQ error e.g. "Lead with same email already exists"
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
       setSubmitted(true);
       onSuccess?.();
+      router.push("/thank-you");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -77,143 +174,223 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
     }
   };
 
+  // ── Submitted fallback ─────────────────────────────────────────────────────
+
   if (submitted) {
     return (
-      <p className="text-green-600 font-medium text-center">
+      <Alert severity="success" sx={{ textAlign: "center" }}>
         Thank you! We'll be in touch shortly.
-      </p>
+      </Alert>
     );
   }
 
+  // ── Render ─────────────────────────────────────────────────────────────────
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      noValidate
+      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+    >
       {schema.fields.map((field) => {
 
-        // COUNTRY dropdown
+        // ── COUNTRY dropdown ──────────────────────────────────────────────
         if (field.type === "country") {
           return (
-            <select
+            <TextField
               key={field.name}
+              select
+              fullWidth
               required={field.required}
+              label={field.placeholder?.replace("*", "").trim()}
               value={values[field.name] ?? ""}
               onChange={(e) => handleChange(field.name, e.target.value)}
-              className="border rounded px-4 py-3 w-full"
+              error={!!fieldErrors[field.name]}
+              helperText={fieldErrors[field.name]}
+              disabled={countriesLoading}
+              size="small"
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 {countriesLoading ? "Loading countries..." : field.placeholder}
-              </option>
+              </MenuItem>
               {countries.map((c) => (
-                <option key={c.id} value={c.id}>
+                <MenuItem key={c.id} value={c.id}>
                   {c.country_name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           );
         }
 
-        // STATE dropdown
+        // ── STATE dropdown ────────────────────────────────────────────────
         if (field.type === "state") {
           return (
-            <select
+            <TextField
               key={field.name}
+              select
+              fullWidth
               required={field.required}
+              label={field.placeholder?.replace("*", "").trim()}
               value={values[field.name] ?? ""}
-              disabled={!selectedCountryId}
               onChange={(e) => handleChange(field.name, e.target.value)}
-              className="border rounded px-4 py-3 w-full disabled:opacity-50 disabled:cursor-not-allowed"
+              error={!!fieldErrors[field.name]}
+              helperText={fieldErrors[field.name]}
+              disabled={!selectedCountryId || statesLoading}
+              size="small"
             >
-              <option value="" disabled>
+              <MenuItem value="" disabled>
                 {statesLoading
                   ? "Loading states..."
                   : !selectedCountryId
                   ? "Select Country first"
                   : field.placeholder}
-              </option>
+              </MenuItem>
               {states.map((s) => (
-                <option key={s.id} value={s.id}>
+                <MenuItem key={s.id} value={s.id}>
                   {s.state_name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           );
         }
 
-        // PHONE field
+        // ── PHONE field ───────────────────────────────────────────────────
         if (field.type === "phone") {
           return (
-            <div key={field.name} className="flex gap-2">
-              <span className="border rounded px-3 py-3 bg-gray-100 text-sm">
-                {field.phonePrefix ?? "+91"}
-              </span>
-              <input
-                type="tel"
-                required={field.required}
-                placeholder={field.placeholder}
-                value={values[field.name] ?? ""}
-                onChange={(e) => handleChange(field.name, e.target.value)}
-                className="border rounded px-4 py-3 flex-1"
-              />
-            </div>
+            <Box key={field.name} sx={{ display: "flex", flexDirection: "column", gap: 0 }}>
+              <Box sx={{ display: "flex", gap: 1 }}>
+                {/* Country code dropdown — native select for compact +91 display */}
+                <TextField
+                  select
+                  value={values["phoneCode"] ?? "91"}
+                  onChange={(e) => handleChange("phoneCode", e.target.value)}
+                  size="small"
+                  sx={{ width: 100 }}
+                  SelectProps={{ native: true }}
+                >
+                  {countries.map((c) => (
+                    <option key={c.id} value={c.phone_code}>
+                      +{c.phone_code}
+                    </option>
+                  ))}
+                </TextField>
+
+                {/* Phone number — numeric only, 7–12 digits */}
+                <TextField
+                  fullWidth
+                  required={field.required}
+                  label={field.placeholder?.replace("*", "").trim()}
+                  value={values[field.name] ?? ""}
+                  onChange={(e) => {
+                    // Strip non-numeric — alphabets never appear in field
+                    const numericOnly = e.target.value.replace(/\D/g, "");
+                    if (numericOnly.length <= 12)
+                      handleChange(field.name, numericOnly);
+                  }}
+                  inputProps={{
+                    inputMode: "numeric",
+                    maxLength: 12,
+                  }}
+                  error={!!fieldErrors[field.name]}
+                  helperText={fieldErrors[field.name]}
+                  size="small"
+                />
+              </Box>
+            </Box>
           );
         }
 
-        // STATIC SELECT
+        // ── STATIC SELECT ─────────────────────────────────────────────────
         if (field.type === "select") {
           return (
-            <select
+            <TextField
               key={field.name}
+              select
+              fullWidth
               required={field.required}
+              label={field.placeholder?.replace("*", "").trim()}
               value={values[field.name] ?? ""}
               onChange={(e) => handleChange(field.name, e.target.value)}
-              className="border rounded px-4 py-3 w-full"
+              error={!!fieldErrors[field.name]}
+              helperText={fieldErrors[field.name]}
+              size="small"
             >
-              <option value="" disabled>{field.placeholder}</option>
+              <MenuItem value="" disabled>{field.placeholder}</MenuItem>
               {field.options?.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                <MenuItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           );
         }
 
-        // TEXTAREA
+        // ── TEXTAREA ──────────────────────────────────────────────────────
         if (field.type === "textarea") {
           return (
-            <textarea
+            <TextField
               key={field.name}
+              fullWidth
+              multiline
+              minRows={3}
               required={field.required}
-              placeholder={field.placeholder}
+              label={field.placeholder?.replace("*", "").trim()}
               value={values[field.name] ?? ""}
               onChange={(e) => handleChange(field.name, e.target.value)}
-              className="border rounded px-4 py-3 w-full min-h-[100px]"
+              error={!!fieldErrors[field.name]}
+              helperText={fieldErrors[field.name]}
+              size="small"
             />
           );
         }
 
-        // TEXT / EMAIL / DATE
+        // ── TEXT / EMAIL ──────────────────────────────────────────────────
         return (
-          <input
+          <TextField
             key={field.name}
+            fullWidth
             type={field.type}
             required={field.required}
-            placeholder={field.placeholder}
+            label={field.placeholder?.replace("*", "").trim()}
             value={values[field.name] ?? ""}
             onChange={(e) => handleChange(field.name, e.target.value)}
-            className="border rounded px-4 py-3 w-full"
+            error={!!fieldErrors[field.name]}
+            helperText={fieldErrors[field.name]}
+            size="small"
           />
         );
       })}
 
+      {/* LSQ / server error shown above submit button */}
       {error && (
-        <p className="text-red-500 text-sm">{error}</p>
+        <Alert severity="error" sx={{ fontSize: "0.85rem" }}>
+          {error}
+        </Alert>
       )}
 
-      <button
+      <Button
         type="submit"
+        variant="contained"
         disabled={loading}
-        className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-full transition disabled:opacity-70"
+        fullWidth
+        sx={{
+          bgcolor: "rgb(236, 72, 153)",
+          borderRadius: "9999px",
+          py: 1.5,
+          fontWeight: 600,
+          fontSize: "1rem",
+          textTransform: "none",
+          "&:hover": { bgcolor: "rgb(219, 39, 119)" },
+          "&:disabled": { opacity: 0.7 },
+        }}
       >
-        {loading ? "Submitting..." : schema.submitLabel ?? "Submit"}
-      </button>
-    </form>
+        {loading ? (
+          <CircularProgress size={22} sx={{ color: "white" }} />
+        ) : (
+          schema.submitLabel ?? "Submit"
+        )}
+      </Button>
+    </Box>
   );
 }

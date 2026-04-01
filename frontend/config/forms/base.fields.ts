@@ -9,18 +9,10 @@ export const baseFields: FormField[] = [
         required: true,
     },
     {
-        name: "email",
-        type: "email",
-        lsKey: "EmailAddress",
-        placeholder: "Enter Email ID*",
-        required: true,
-    },
-    {
         name: "phone",
         type: "phone",
         lsKey: "Phone",
         placeholder: "Phone Number*",
-        phonePrefix: "+91",
         required: true,
     },
     {

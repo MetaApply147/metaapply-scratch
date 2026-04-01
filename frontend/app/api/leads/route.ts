@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    console.log("🔥 LEADS ROUTE HIT");
+
     try {
         const body = await req.json();
-        console.log("🔥 BODY:", JSON.stringify(body));
-        console.log("🔥 Keys:", process.env.LEADSQUARED_ACCESS_KEY, process.env.LEADSQUARED_SECRET_KEY);
+        console.log("BODY:", JSON.stringify(body));
         const { attributes } = body;
 
         if (!attributes || !Array.isArray(attributes)) {
@@ -21,12 +20,26 @@ export async function POST(req: NextRequest) {
         const res = await fetch(url.toString(), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(attributes),
+            body: JSON.stringify([
+                ...attributes,
+                { Attribute: "SearchBy", Value: "Phone" } 
+            ]),
         });
 
         if (!res.ok) {
-            const error = await res.text();
-            throw new Error(`LeadSquared error: ${error}`);
+            const errorText = await res.text();
+            console.error("LeadSquared raw error:", errorText);
+            
+            // Parse LSQ error message if JSON
+            let errorMessage = "Submission failed";
+            try {
+                const errorJson = JSON.parse(errorText);
+                errorMessage = errorJson.ExceptionMessage || errorJson.Message || errorMessage;
+            } catch {
+                errorMessage = errorText;
+            }
+            
+            return NextResponse.json({ error: errorMessage }, { status: 500 });
         }
 
         return NextResponse.json({ success: true });
