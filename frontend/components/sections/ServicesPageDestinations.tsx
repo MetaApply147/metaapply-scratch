@@ -75,8 +75,6 @@ export default function ServingDestinations() {
 
                         const flagUrl = getImageUrl(rawUrl);
 
-                        console.log('FINAL URL:', flagUrl); //  debug
-
                         if (!flagUrl) return null;
 
                         return {

@@ -7,18 +7,12 @@ export const metaflyForm: FormSchema = {
     fields: [
         ...baseFields,
         {
-            name: "flyingFrom",
-            type: "text",
-            lsKey: "mx_Flying_From",
-            placeholder: "Flying From*",
-            required: true,
-        },
-        {
-            name: "flyingTo",
-            type: "text",
-            lsKey: "mx_Flying_To",
-            placeholder: "Flying To*",
-            required: true,
-        },
+        name: "email",
+        type: "email",
+        lsKey: "EmailAddress",
+        placeholder: "Enter Email ID*",
+        required: true,
+    },
+       
     ],
 };
