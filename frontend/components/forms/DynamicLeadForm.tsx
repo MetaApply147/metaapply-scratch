@@ -296,6 +296,10 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
             },
           },
         }}
+        sx={{
+          border: '1px solid #D0D0D0',
+          borderRadius: '8px'
+        }}
       >
         <MenuItem value="" disabled>
           {placeholder || field.placeholder}
@@ -322,172 +326,176 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      noValidate
-      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-    >
-      {schema.fields.map((field) => {
-        if (field.type === "checkbox") return null;
+    <Box>
+      <Typography variant="heading11" component='h5' sx={{textAlign: 'center', mb: 3.5}}>Enquire Now</Typography>
+    
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        noValidate
+        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+      >
+        {schema.fields.map((field) => {
+          if (field.type === "checkbox") return null;
 
-        // COUNTRY
-        if (field.type === "country") {
-          return renderSelect(
-            field,
-            countries.map((c) => ({ label: c.country_name, value: c.id })),
-            countriesLoading,
-            countriesLoading ? "Loading countries..." : field.placeholder
-          );
-        }
+          // COUNTRY
+          if (field.type === "country") {
+            return renderSelect(
+              field,
+              countries.map((c) => ({ label: c.country_name, value: c.id })),
+              countriesLoading,
+              countriesLoading ? "Loading countries..." : field.placeholder
+            );
+          }
 
-        // STATE
-        if (field.type === "state") {
-          return renderSelect(
-            field,
-            states.map((s) => ({ label: s.state_name, value: s.id })),
-            !selectedCountryId || statesLoading,
-            statesLoading
-              ? "Loading states..."
-              : !selectedCountryId
-              ? "Select Country first"
-              : field.placeholder
-          );
-        }
+          // STATE
+          if (field.type === "state") {
+            return renderSelect(
+              field,
+              states.map((s) => ({ label: s.state_name, value: s.id })),
+              !selectedCountryId || statesLoading,
+              statesLoading
+                ? "Loading states..."
+                : !selectedCountryId
+                ? "Select Country first"
+                : field.placeholder
+            );
+          }
 
-        // PHONE
-        if (field.type === "phone") {
-          return wrap(
-            field,
-            <Box sx={{ display: "flex", gap: 1 }}>
-              <TextField
-                select
-                value={values["phoneCode"] ?? "91"}
-                onChange={(e) => handleChange("phoneCode", e.target.value)}
-                size="small"
-                sx={{ width: 100 }}
-                slotProps={{ select: { native: true } }}
-              >
-                {countries.map((c) => (
-                  <option key={c.id} value={c.phone_code}>
-                    +{c.phone_code}
-                  </option>
-                ))}
-              </TextField>
+          // PHONE
+          if (field.type === "phone") {
+            return wrap(
+              field,
+              <Box sx={{ display: "flex", gap: 1 }}>
+                <TextField
+                  select
+                  value={values["phoneCode"] ?? "91"}
+                  onChange={(e) => handleChange("phoneCode", e.target.value)}
+                  size="small"
+                  sx={{ width: 100 }}
+                  slotProps={{ select: { native: true } }}
+                >
+                  {countries.map((c) => (
+                    <option key={c.id} value={c.phone_code}>
+                      +{c.phone_code}
+                    </option>
+                  ))}
+                </TextField>
 
-              <TextField
-                {...getCommonProps(field)}
-                id={`field-${field.name}`}
-                name={field.name}
-                onChange={(e) => {
-                  const val = e.target.value.replace(/\D/g, "");
-                  if (val.length <= 12) handleChange(field.name, val);
-                }}
-                inputProps={{ inputMode: "numeric", maxLength: 12 }}
-              />
-            </Box>
-          );
-        }
-
-        // SELECT
-        if (field.type === "select") {
-          return renderSelect(field, field.options || []);
-        }
-
-        // TEXTAREA
-        if (field.type === "textarea") {
-          return wrap(
-            field,
-            <TextField {...getCommonProps(field)} multiline minRows={3} />
-          );
-        }
-
-        // TEXT / EMAIL (default)
-        return wrap(
-          field,
-          <TextField {...getCommonProps(field)} type={field.type} />
-        );
-      })}
-
-      {schema.fields.map((field) => {
-        if (field.type !== "checkbox") return null;
-
-        return (
-          <Box key={field.name} sx={{ position: "relative" }}>
-            <FormControlLabel
-              sx={{ ml: 0 }}
-              control={
-                <Checkbox
+                <TextField
+                  {...getCommonProps(field)}
                   id={`field-${field.name}`}
                   name={field.name}
-                  checked={values[field.name] === "true"}
-                  onChange={(e) =>
-                    handleChange(field.name, String(e.target.checked))
-                  }
-                  size="small"
-                  sx={{ height: 18, width: 18, p: 0, mr: 1 }}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, "");
+                    if (val.length <= 12) handleChange(field.name, val);
+                  }}
+                  inputProps={{ inputMode: "numeric", maxLength: 12 }}
                 />
-              }
-              label={
-                <Typography variant="body07">
-                  {field.name === "terms" ? (
-                    <>
-                      I have read and agreed to{" "}
-                      <MuiLink
-                        component={NextLink}
-                        href="/terms-and-conditions"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{ color: "primary.main", fontWeight: 600 }}
-                      >
-                        Terms and Conditions
-                      </MuiLink>
-                    </>
-                  ) : (
-                    field.label
-                  )}
-                </Typography>
-              }
-            />
-
-            {fieldErrors[field.name] && (
-              <Box sx={{ color: "error.main", fontSize: 12 }}>
-                {fieldErrors[field.name]}
               </Box>
-            )}
-          </Box>
-        );
-      })}
+            );
+          }
 
-      {/* LSQ / server error shown above submit button */}
-      {error && (
-        <Alert severity="error" sx={{ fontSize: "0.85rem" }}>
-          {error}
-        </Alert>
-      )}
+          // SELECT
+          if (field.type === "select") {
+            return renderSelect(field, field.options || []);
+          }
 
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={loading}
-        fullWidth
-        sx={{
-          bgcolor: "rgb(236, 72, 153)",
-          borderRadius: "9999px",
-          py: 1.5,
-          fontWeight: 600,
-          fontSize: "1rem",
-          textTransform: "none",
-          "&:hover": { bgcolor: "rgb(219, 39, 119)" },
-          "&:disabled": { opacity: 0.7 },
-        }}
-      >
-        {loading ? (
-          <CircularProgress size={22} sx={{ color: "white" }} />
-        ) : (
-          schema.submitLabel ?? "Submit"
+          // TEXTAREA
+          if (field.type === "textarea") {
+            return wrap(
+              field,
+              <TextField {...getCommonProps(field)} multiline minRows={3} />
+            );
+          }
+
+          // TEXT / EMAIL (default)
+          return wrap(
+            field,
+            <TextField {...getCommonProps(field)} type={field.type}/>
+          );
+        })}
+
+        {schema.fields.map((field) => {
+          if (field.type !== "checkbox") return null;
+
+          return (
+            <Box key={field.name} sx={{ position: "relative" }}>
+              <FormControlLabel
+                sx={{ ml: 0 }}
+                control={
+                  <Checkbox
+                    id={`field-${field.name}`}
+                    name={field.name}
+                    checked={values[field.name] === "true"}
+                    onChange={(e) =>
+                      handleChange(field.name, String(e.target.checked))
+                    }
+                    size="small"
+                    sx={{ height: 18, width: 18, p: 0, mr: 1 }}
+                  />
+                }
+                label={
+                  <Typography variant="body07">
+                    {field.name === "terms" ? (
+                      <>
+                        I have read and agreed to{" "}
+                        <MuiLink
+                          component={NextLink}
+                          href="/terms-and-conditions"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{ color: "primary.main", fontWeight: 600 }}
+                        >
+                          Terms and Conditions
+                        </MuiLink>
+                      </>
+                    ) : (
+                      field.label
+                    )}
+                  </Typography>
+                }
+              />
+
+              {fieldErrors[field.name] && (
+                <Box sx={{ color: "error.main", fontSize: 12 }}>
+                  {fieldErrors[field.name]}
+                </Box>
+              )}
+            </Box>
+          );
+        })}
+
+        {/* LSQ / server error shown above submit button */}
+        {error && (
+          <Alert severity="error" sx={{ fontSize: "0.85rem" }}>
+            {error}
+          </Alert>
         )}
-      </Button>
+
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={loading}
+          fullWidth
+          sx={{
+            bgcolor: "rgb(236, 72, 153)",
+            borderRadius: "9999px",
+            py: 1.5,
+            fontWeight: 600,
+            fontSize: "1rem",
+            textTransform: "none",
+            "&:hover": { bgcolor: "rgb(219, 39, 119)" },
+            "&:disabled": { opacity: 0.7 },
+          }}
+        >
+          {loading ? (
+            <CircularProgress size={22} sx={{ color: "white" }} />
+          ) : (
+            schema.submitLabel ?? "Submit"
+          )}
+        </Button>
+      </Box>
     </Box>
   );
 }
