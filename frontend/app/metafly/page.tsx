@@ -5,6 +5,8 @@ import HeroBanner from '@/components/banner/HeroBanner';
 import DynamicLeadForm from "@/components/forms/DynamicLeadForm";
 import { metaflyForm } from "@/config/forms/metafly.form";
 import MetaFlyProcess from '@/components/sections/Pages/metafly/MetaFlyProcess';
+import TwoColumnFormSection from '@/components/common/TwoColumnFormSection';
+import MetaFlyLeftInfo from '@/components/sections/Pages/metafly/MetaFlyLeftInfo';
 
 export default function MetaFlyPage() {
   return (
@@ -18,6 +20,11 @@ export default function MetaFlyPage() {
 
       {/* Process section  */}
       <MetaFlyProcess/>
+
+      {/* MetaFly Left Info section  */}
+      <TwoColumnFormSection formSchema={metaflyForm}>
+        <MetaFlyLeftInfo />
+      </TwoColumnFormSection>
 
       {/* Success Story */}
       <ServingDestinations />
