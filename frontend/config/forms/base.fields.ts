@@ -29,4 +29,25 @@ export const baseFields: FormField[] = [
         placeholder: "Select State*",
         required: true,
     },
+    // ✅ CHECKBOX 1
+    {
+        name: "consent",
+        type: "checkbox",
+        lsKey: "mx_consent",
+        required: true,
+        defaultChecked: true,
+        label:
+        "I authorise company & its representatives to contact me with updates and notifications via Email/SMS/WhatsApp/Call.",
+    },
+
+    // ✅ CHECKBOX 2 (WITH LINK)
+    {
+        name: "terms",
+        type: "checkbox",
+        lsKey: "mx_Terms",
+        required: true,
+        defaultChecked: true,
+        label: `I have read and agreed to Terms and Conditions`,
+        sendToLSQ: false,
+    },
 ];
