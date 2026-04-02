@@ -138,6 +138,22 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
     }
   }, [otp]);
 
+  // seterror remove when otp is verifies
+  useEffect(() => {
+  if (otpVerified) {
+    setFieldErrors((prev) => {
+      if (!prev["phone"]) return prev;
+
+      const updated = { ...prev };
+      delete updated["phone"];
+      return updated;
+    });
+
+    setError(null); // optional (clears top error also)
+  }
+}, [otpVerified]);
+  
+
   // ── Handle Change ──────────────────────────────────────────────────────────
 
   const handleChange = (name: string, value: string) => {
@@ -159,7 +175,20 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       return updated;
     });
 
-    if (name === "country" || name === "phone") {
+    if (name === "country") {
+      resetOtp();
+
+      //  clear phone + OTP related errors when country changes
+      setFieldErrors((prev) => {
+        const updated = { ...prev };
+        delete updated["phone"];
+        return updated;
+      });
+
+      setError(null); // optional: clears top-level error
+    }
+
+    if (name === "phone") {
       resetOtp();
     }
   };
@@ -199,7 +228,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
             errors[field.name] = "Enter valid 10-digit mobile number";
           } else if (digits.length > 10) {
             errors[field.name] = "Mobile number cannot exceed 10 digits";
-          } else if (!otpSent || !otpVerified) {
+          } else if (values["phoneCode"] === "91" && (!otpSent || !otpVerified)) {
             errors[field.name] = "Please verify your mobile number first";
           }
         } else {
@@ -752,7 +781,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
           {loading ? (
             <CircularProgress size={22} sx={{ color: "white" }} />
           ) : (
-            schema.submitLabel ?? "Submit"
+            "Submit"
           )}
         </Button>
       </Box>
