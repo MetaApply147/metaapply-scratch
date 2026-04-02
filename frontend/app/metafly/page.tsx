@@ -9,25 +9,24 @@ import MetaFlyLeftInfo from '@/components/sections/Pages/metafly/MetaFlyLeftInfo
 
 export default function MetaFlyPage() {
   const schema = {
-    formId: "metafly_form",
-    submitLabel: "Apply Now",
-    fields: metaflyForm,
+    ...metaflyForm,
 
     extraPayload: {
-      Program_Products: "Study Abroad",
+      mx_Program_Products: "Study Abroad",
+      mx_Marketing_Pages: "MetaFly page"
     },
   };
 
   return (
     <>
-      {/* Hero banner Section */}
+      {/* Hero Section */}
       <HeroBanner slug="metafly" size="medium" />
 
       {/* Process section  */}
       <MetaFlyProcess/>
 
       {/* MetaFly Content Form Section */}
-      <TwoColumnFormSection formSchema={metaflyForm} formWidth={'84%'}>
+      <TwoColumnFormSection formSchema={schema} formWidth={'84%'}>
         <MetaFlyLeftInfo />
       </TwoColumnFormSection>
 
