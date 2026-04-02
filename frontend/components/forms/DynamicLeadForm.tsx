@@ -398,7 +398,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       pb: 4,
       width: Setwidth,
     }}>
-      <Typography variant="heading11" component='h5' sx={{textAlign: 'center', mb: 3.5}}>Enquire Now</Typography>
+      <Typography variant="heading11" component='h5' sx={{textAlign: 'center', mb: 3.5}}>{schema.submitLabel ?? "Enquire Now"}</Typography>
     
       <Box
         component="form"
