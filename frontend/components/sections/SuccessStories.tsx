@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getServices } from "@/services/httpServices";
 import CustomSlider from "@/components/common/CustomSlider";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Image from 'next/image';
 import Section from "../common/Section";
 import SectionHeader from "../common/SectionHeader";
@@ -13,9 +13,15 @@ type Props = {
   page: string;
   type?: string;
   limit?: number;
+  bgColor?: string,
+
+  cta?: {
+    label: string;
+    link: string;
+  };
 };
 
-export default function SuccessStories({ page, type, limit }: Props) {
+export default function SuccessStories({ page, type, limit, bgColor, cta }: Props) {
   const [stories, setStories] = useState<any[]>([]);
 
   useEffect(() => {
@@ -98,7 +104,7 @@ export default function SuccessStories({ page, type, limit }: Props) {
     if (comp.__component === "success-story.testimonial-story") {
       return (
         <Box className="testimonial-card" borderRadius={3} sx={{display: "flex", flexDirection: 'column', height: '100%'}}>
-          <Box p={4} pt={6} sx={{ background: comp.backgroundColor, display: "flex", flexDirection: "column", justifyContent: "space-between", height: '100%' }}> 
+          <Box p={3} py={3.5} sx={{ background: comp.backgroundColor, display: "flex", flexDirection: "column", justifyContent: "space-between", height: '100%' }}> 
             <Box>
               <Typography variant="body05" component="p">
                 {item.description}
@@ -124,7 +130,7 @@ export default function SuccessStories({ page, type, limit }: Props) {
 
   // ONLY CHANGE IS HERE
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{backgroundColor: bgColor}}>
       <SectionHeader
         title="Our"
         highlight="Success Stories"
@@ -154,6 +160,20 @@ export default function SuccessStories({ page, type, limit }: Props) {
           }} 
         />
       </Box>
+
+      {/* optional CTA Button */}
+      {cta && (
+      <Box textAlign="center" mt={7}>
+        <Link href={cta.link}>
+          <Button
+            variant="contained"
+            size="large"
+          >
+            {cta.label}
+          </Button>
+        </Link>
+      </Box>
+    )}
     </Section>
   );
 }

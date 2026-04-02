@@ -1,5 +1,6 @@
 'use client';
 
+import SectionHeader from '@/components/common/SectionHeader';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
@@ -24,40 +25,51 @@ export default function MetaFlyLeftInfo() {
 
   return (
     <Box>
+      <Box mb={{ xs: 3, md: 2.5 }}>
+        <Typography variant="heading07" component="h2" sx={{lineHeight: "normal"}}>
+          Why Choose{" "}
+          <Box component="span" sx={{ color: 'primary.main' }}>
+            MetaFly
+          </Box>
+        </Typography>
+      </Box>
+
       <Typography
-        variant="heading07"
+        variant="body05"
+        component='p'
         sx={{
-          mb: 2,
-          fontWeight: 600,
-          display: 'inline',
+          color: 'text.secondary',   
         }}
       >
-        Why Choose{' '}
-        <Box component="span" sx={{ color: 'primary.main' }}>
-          MetaFly
-        </Box>
+        Studying abroad is a once-in-a-lifetime opportunity that requires making the right decisions at the right time. From selecting the course, university, and country, to clearing English language exams, securing finances, obtaining a visa, and arranging accommodation – the journey is full of critical steps.
       </Typography>
 
       <Typography
         variant="body05"
+        component='p'
         sx={{
-          color: 'text.secondary',        
-          lineHeight: 1.7,
-          mb: 5,
-          mt: 3,
-          display: 'block',
+          color: 'text.secondary',   
         }}
       >
-        Studying abroad is a once-in-a-lifetime opportunity that requires making the right decisions at the right time. From selecting the course, university, and country, to clearing English language exams, securing finances, obtaining a visa, and arranging accommodation – the journey is full of critical steps. 
-            Flying abroad is the final milestone in this journey, and at MetaFly, we make sure you get the best experience. We help you find the most affordable flight tickets tailored to your study schedule, budget, and preferences.
-            With exclusive student deals, flexible options, and round-the-clock support, MetaFly ensures your travel to your dream destination is smooth, cost-effective, and stress-free.
-        
+        Flying abroad is the final milestone in this journey, and at MetaFly, we make sure you get the best experience. We help you find the most affordable flight tickets tailored to your study schedule, budget, and preferences.
       </Typography>
 
+      <Typography
+        variant="body05"
+        component='p'
+        sx={{
+          color: 'text.secondary',   
+        }}
+      >
+        With exclusive student deals, flexible options, and round-the-clock support, MetaFly ensures your travel to your dream destination is smooth, cost-effective, and stress-free.
+      </Typography>
+
+      {/* Bottom Cards */}
       <Box
         sx={{
           display: 'flex',
           gap: 3,
+          mt: 5,
         }}
       >
         {cards.map((item) => (
@@ -67,7 +79,7 @@ export default function MetaFlyLeftInfo() {
               flex: 1,
               backgroundColor: 'common.white',
               borderRadius: '12px',
-              py: 3,
+              py: 2.1,
               px: 2,
               textAlign: 'center',
               boxShadow: '0px 8px 28px 0px #DDDDDD66',  
@@ -79,7 +91,11 @@ export default function MetaFlyLeftInfo() {
                 alt={item.title}
                 width={100}
                 height={78}
-                style={{ objectFit: 'contain' }}
+                style={{
+                  height: "68px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
               />
             </Box>
 

@@ -1,4 +1,4 @@
-import ServicesProcessSlider from '@/components/common/ServicesProcessSlider';
+import ServicesProcessSlider from '@/components/sections/ServicesProcessSlider';
 import { Box, Container } from '@mui/material';
 
 const metaFinanceData = [

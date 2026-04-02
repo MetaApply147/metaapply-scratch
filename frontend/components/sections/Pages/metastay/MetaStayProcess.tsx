@@ -1,4 +1,4 @@
-import ServicesProcessSlider from '@/components/common/ServicesProcessSlider';
+import ServicesProcessSlider from '@/components/sections/ServicesProcessSlider';
 
 const metaStayData = [
   { id: 1, title: 'Submit Travel Info', icon: '/Services-images/Submit-travel-info.svg' },

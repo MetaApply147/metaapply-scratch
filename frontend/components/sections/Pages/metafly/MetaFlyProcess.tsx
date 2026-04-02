@@ -1,4 +1,4 @@
-import ServicesProcessSlider from '@/components/common/ServicesProcessSlider';
+import ServicesProcessSlider from '@/components/sections/ServicesProcessSlider';
 import { Box, Container } from '@mui/material';
 
 const metaFlyData = [
@@ -12,19 +12,12 @@ const metaFlyData = [
 
 export default function MetaFlyProcess() {
   return (
-   
-<Box component="section">
-  <Container maxWidth="lg">
     <ServicesProcessSlider 
-      highlightText=" Easy Process "
-      title="MetaFly"
+      highlightText="MetaFly"
+      title="Easy Process"
       data={metaFlyData}
       slidesPerView={6}
     />
-  </Container>
-</Box>
-    
-    
   );
 }
 

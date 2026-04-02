@@ -33,11 +33,11 @@ export default function ServicesProcessSlider({
     <Section spacing="lg">
       <Box sx={{ position: "relative" }}>
         {/* Heading */}
-        <SectionHeader highlight={highlightText} title={title} />
+        <SectionHeader highlight={highlightText} title={title} highlightPosition="start" />
         {/* Slider */}
         <CustomSlider
           data={data}
-          spaceBetween={-40}
+          spaceBetween={-35}
           slidesPerView={slidesPerView}
           renderItem={(item) => <ProcessCard item={item} />}
         />
@@ -54,11 +54,12 @@ const ProcessCard = ({ item }: { item: ProcessItem }) => {
       sx={{
         display:"flex",
         flexDirection:"column",
-        justifyContent: "space-between",
         alignItems: "center",
-        textAlign: "center",
+        textAlign: 'center',
+        gap: 1.8,
         px: 6,
-        py: 3,
+        pt: 5,
+        pb: 1.5,
         minHeight: "130px",
         background: "linear-gradient(64.71deg, #FFFBEE 15.36%, #FFECF4 83.03%)",
         clipPath:
@@ -78,14 +79,14 @@ const ProcessCard = ({ item }: { item: ProcessItem }) => {
           width={100}
           height={68}
           style={{
-            height: "100%",
+            height: "68px",
             width: "auto",
             objectFit: "contain",
           }}
         />
       </Box>
-      <Box sx={{ pt: 0 }}>
-        <Typography variant="body06" fontWeight={600}>
+      <Box>
+        <Typography variant="body06" fontWeight={600} sx={{px: 2, lineHeight: '18px'}} component='p'>
           {item.title}
         </Typography>
       </Box>

@@ -4,7 +4,7 @@ import SuccessStories from '@/components/sections/SuccessStories';
 import HeroBanner from '@/components/banner/HeroBanner';
 import { metaflyForm } from "@/config/forms/metafly.form";
 import MetaFlyProcess from '@/components/sections/Pages/metafly/MetaFlyProcess';
-import TwoColumnFormSection from '@/components/common/TwoColumnFormSection';
+import TwoColumnFormSection from '@/components/sections/TwoColumnFormSection';
 import MetaFlyLeftInfo from '@/components/sections/Pages/metafly/MetaFlyLeftInfo';
 
 export default function MetaFlyPage() {
@@ -27,7 +27,7 @@ export default function MetaFlyPage() {
       <MetaFlyProcess/>
 
       {/* MetaFly Content Form Section */}
-      <TwoColumnFormSection formSchema={metaflyForm}>
+      <TwoColumnFormSection formSchema={metaflyForm} formWidth={'84%'}>
         <MetaFlyLeftInfo />
       </TwoColumnFormSection>
 
@@ -35,7 +35,11 @@ export default function MetaFlyPage() {
       <ServingDestinations />
 
       {/* Success Story */}
-      <SuccessStories page="metafly" type="testimonial" />
+      <SuccessStories page="metafly" type="testimonial" bgColor={'#F2F2F285'} 
+        cta={{
+          label: "Talk to Our Expert",
+          link: "/#",
+        }}/>
 
       {/* FAQs */}
       <FAQSection page="metafly" />

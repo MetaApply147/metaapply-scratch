@@ -35,14 +35,14 @@ export default function BannerContent({
       lineHeight: '88px',
     },
     medium: {
-      fontSize: '48px',
-      lineHeight: '64px',
+      fontSize: '52px',
+      lineHeight: '120%',
     },
   };
   return (
     <Box>
       {showLogo && logo && (
-        <Box mb={1.5}>
+        <Box mb={2.5}>
           <Image
             src={logo}
             alt="logo"
@@ -82,8 +82,8 @@ export default function BannerContent({
 
       {description && (
         <Typography
-          mt={1}
-          mb={5}
+          mt={2}
+          mb={7}
           color={textColor === 'light' ? 'common.white' : 'text.secondary'}
           variant="heading12"
           component="p"
@@ -98,10 +98,7 @@ export default function BannerContent({
           href={ctaUrl}
           target={ctaTarget}
           variant="contained"
-          size='medium'
-          sx={{
-            padding: '17px 38px',
-          }}
+          size='large'
         >
           {ctaText}
         </Button>

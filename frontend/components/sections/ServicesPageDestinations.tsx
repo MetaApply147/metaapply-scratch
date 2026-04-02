@@ -123,7 +123,7 @@ export default function ServingDestinations() {
                             <Link href="#">
                                 <Box
                                     sx={{
-                                        backgroundColor: '#fff',
+                                        backgroundColor: 'common.white',
                                         borderRadius: '20px',
                                         boxShadow: '0px 8px 28px 0px #9A9A9A26',
                                         border: '0.5px solid #C2C2C2',

@@ -1,5 +1,5 @@
 import HeroBanner from '@/components/banner/HeroBanner';
-import TwoColumnFormSection from '@/components/common/TwoColumnFormSection';
+import TwoColumnFormSection from '@/components/sections/TwoColumnFormSection';
 import FAQSection from '@/components/sections/FAQSection';
 import ComfortConvenience from '@/components/sections/Pages/metastay/ComfortConvenience';
 import MetaStayLeftInfo from '@/components/sections/Pages/metastay/MetaStayLeftInfo';

@@ -30,7 +30,7 @@ export default function BaseBanner({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        py: 9,
+        py: 9.5,
         minHeight,
         display: 'flex',
       }}

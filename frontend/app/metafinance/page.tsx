@@ -1,7 +1,7 @@
 import HeroBanner from '@/components/banner/HeroBanner';
 import FAQSection from '@/components/sections/FAQSection';
 import SuccessStories from '@/components/sections/SuccessStories';
-import TwoColumnFormSection from '@/components/common/TwoColumnFormSection';
+import TwoColumnFormSection from '@/components/sections/TwoColumnFormSection';
 import { metaflyForm } from "@/config/forms/metafly.form";
 import MetaFinanceLeftInfo from '@/components/sections/Pages/metafinance/MetaFinanceLeftInfo';
 import MetaFinanceProcess from '@/components/sections/Pages/metafinance/MetaFinanceProcess';

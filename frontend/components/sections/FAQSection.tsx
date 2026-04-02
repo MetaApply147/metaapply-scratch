@@ -171,7 +171,7 @@ export default function FAQSection({ page }: Props) {
                 }}
             >
                 <AccordionSummary sx={{
-                    px: 3, py: 2.5,
+                    px: 3, py: 1,
                     fontWeight: 500,
                     '&.Mui-expanded .MuiTypography-root': {
                       fontWeight: 600,

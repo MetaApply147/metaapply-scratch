@@ -42,6 +42,7 @@ export interface FormSchema {
 interface Props {
   schema: FormSchema;
   onSuccess?: () => void;
+  Setwidth?: number;
 }
 
 type FieldWrapperProps = {
@@ -54,14 +55,14 @@ const FieldWrapper = ({ name, children, error }: FieldWrapperProps) => {
   const hasError = !!error;
 
   return (
-    <Box sx={{ position: "relative", pb: hasError ? "15px" : 0 }}>
+    <Box sx={{ position: "relative", pb: hasError ? "20px" : 0 }}>
       {children}
 
       {hasError && (
         <Box
           sx={{
             position: "absolute",
-            top: "78%",
+            top: "72%",
             left: 0,
             fontSize: 12,
             color: "error.main",
@@ -75,7 +76,7 @@ const FieldWrapper = ({ name, children, error }: FieldWrapperProps) => {
   );
 };
 
-export default function DynamicLeadForm({ schema, onSuccess }: Props) {
+export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) {
   const router = useRouter();
 
   const [values, setValues] = useState<Record<string, string>>(() => {
@@ -274,21 +275,71 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
       onChange: (e: any) => handleChange(field.name, e.target.value),
       error: !!fieldErrors[field.name],
       size: "small" as const,
+
+      sx: {
+        "& .MuiOutlinedInput-root": {
+          borderRadius: "8px",
+          "& fieldset": {
+            borderColor: "#D0D0D0",
+          },
+          "&:hover fieldset": {
+            borderColor: "gray.500",
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "gray.500",
+            borderWidth: "1.5px",
+          },
+        },
+        "& .MuiInputBase-input": {
+          fontSize: "14px",
+          fontFamily: "var(--font-body)",
+          color: 'gray.800',
+          padding: '10px 16px',
+        },
+        "& .MuiInputLabel-root": {
+          fontSize: "14px",
+          fontFamily: "var(--font-body)",
+          color: 'gray.600',
+        },
+      },
     };
   };
 
   // ✅ Reusable Select Field
   const renderSelect = (
-    field: FormField,
-    options: { label: string; value: any }[],
-    disabled?: boolean,
-    placeholder?: string
-  ) => (
-    <FieldWrapper key={field.name} name={field.name} error={fieldErrors[field.name]}>
+  field: FormField,
+  options: { label: string; value: any }[],
+  disabled?: boolean,
+  placeholder?: string
+) => {
+  const commonProps = getCommonProps(field); // ✅ store once
+
+  return (
+    <FieldWrapper
+      key={field.name}
+      name={field.name}
+      error={fieldErrors[field.name]}
+    >
       <TextField
-        {...getCommonProps(field)}
+        {...commonProps}
         select
         disabled={disabled}
+        sx={{
+          ...commonProps.sx,
+
+          "& .MuiOutlinedInput-root": {
+            ...commonProps.sx?.["& .MuiOutlinedInput-root"], 
+            height: "40.13px",
+            display: "flex",
+            alignItems: "center",
+          },
+
+          "& .MuiSelect-select": {
+            display: "flex",
+            alignItems: "center",
+            padding: "10px 12px",
+          },
+        }}
         slotProps={{
           select: {
             MenuProps: {
@@ -296,14 +347,11 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
             },
           },
         }}
-        sx={{
-          border: '1px solid #D0D0D0',
-          borderRadius: '8px'
-        }}
       >
         <MenuItem value="" disabled>
           {placeholder || field.placeholder}
         </MenuItem>
+
         {options.map((opt) => (
           <MenuItem key={opt.value} value={opt.value}>
             {opt.label}
@@ -312,6 +360,7 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
       </TextField>
     </FieldWrapper>
   );
+};
 
   const wrap = (field: FormField, child: ReactNode) => (
     <FieldWrapper
@@ -326,7 +375,14 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <Box>
+    <Box width={Setwidth} sx={{
+      boxShadow: '0px 20px 38px 0px #9C9C9C80',
+      borderRadius: 4,
+      backgroundColor: 'common.white',
+      px: 4,
+      pt: 3,
+      pb: 4,
+    }}>
       <Typography variant="heading11" component='h5' sx={{textAlign: 'center', mb: 3.5}}>Enquire Now</Typography>
     
       <Box
@@ -366,13 +422,34 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
           if (field.type === "phone") {
             return wrap(
               field,
-              <Box sx={{ display: "flex", gap: 1 }}>
+              <Box sx={{ display: "flex", gap: 0 }}>
                 <TextField
                   select
                   value={values["phoneCode"] ?? "91"}
                   onChange={(e) => handleChange("phoneCode", e.target.value)}
                   size="small"
-                  sx={{ width: 100 }}
+                  sx={{ width: '100px',
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "8px 0 0 8px",
+                      "& fieldset": {
+                        borderColor: "#D0D0D0",
+                        borderRight: 'none',
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "gray.500",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "gray.500",
+                        borderWidth: "1.5px",
+                      },
+                    },
+                    '& .MuiInputBase-input': {
+                        fontSize: '14px',
+                        fontFamily: 'var(--font-body)',
+                        color: 'gray.800',
+                        p: '10px',
+                      },
+                   }}
                   slotProps={{ select: { native: true } }}
                 >
                   {countries.map((c) => (
@@ -390,6 +467,13 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
                     const val = e.target.value.replace(/\D/g, "");
                     if (val.length <= 12) handleChange(field.name, val);
                   }}
+                  sx={{
+                    ...getCommonProps(field).sx,  
+                    "& .MuiOutlinedInput-root": {
+                      ...getCommonProps(field).sx["& .MuiOutlinedInput-root"], 
+                      borderRadius: "0 8px 8px 0",
+                    },
+                   }}
                   inputProps={{ inputMode: "numeric", maxLength: 12 }}
                 />
               </Box>
@@ -432,11 +516,11 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
                       handleChange(field.name, String(e.target.checked))
                     }
                     size="small"
-                    sx={{ height: 18, width: 18, p: 0, mr: 1 }}
+                    sx={{ height: 18, width: 18, p: 0, mr: 1, mb: 'auto', color: '#C2C2C2'  }}
                   />
                 }
                 label={
-                  <Typography variant="body07">
+                  <Typography variant="body07" sx={{color: '#595959'}}>
                     {field.name === "terms" ? (
                       <>
                         I have read and agreed to{" "}
@@ -445,7 +529,7 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
                           href="/terms-and-conditions"
                           target="_blank"
                           rel="noopener noreferrer"
-                          sx={{ color: "primary.main", fontWeight: 600 }}
+                          sx={{ color: "primary.main", fontWeight: 600, textDecoration: 'none' }}
                         >
                           Terms and Conditions
                         </MuiLink>
@@ -478,16 +562,6 @@ export default function DynamicLeadForm({ schema, onSuccess }: Props) {
           variant="contained"
           disabled={loading}
           fullWidth
-          sx={{
-            bgcolor: "rgb(236, 72, 153)",
-            borderRadius: "9999px",
-            py: 1.5,
-            fontWeight: 600,
-            fontSize: "1rem",
-            textTransform: "none",
-            "&:hover": { bgcolor: "rgb(219, 39, 119)" },
-            "&:disabled": { opacity: 0.7 },
-          }}
         >
           {loading ? (
             <CircularProgress size={22} sx={{ color: "white" }} />

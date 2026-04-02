@@ -3,7 +3,7 @@ import { baseFields } from "./base.fields";
 
 export const metaflyForm: FormSchema = {
     formId: "metafly-enquiry",
-    submitLabel: "Enquire Now",
+    submitLabel: "Submit",
     fields: [
         ...baseFields,
         {

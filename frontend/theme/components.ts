@@ -21,7 +21,6 @@ const components = {
         fontSize: 16,
         fontWeight: 700,
         lineHeight: "20px",
-        borderRadius: 10,
       },
 
       sizeSmall: {
