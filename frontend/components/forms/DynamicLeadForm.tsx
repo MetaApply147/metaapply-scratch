@@ -19,6 +19,8 @@ import { useCountries } from "@/hooks/useCountries";
 import { useStates } from "@/hooks/useStates";
 import NextLink from "next/link";
 import { Link as MuiLink } from "@mui/material";
+import { useOtp } from "@/hooks/useOtp";
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 export interface FormField {
   name: string;
@@ -63,7 +65,7 @@ const FieldWrapper = ({ name, children, error }: FieldWrapperProps) => {
         <Box
           sx={{
             position: "absolute",
-            top: "72%",
+            bottom: "0",
             left: 0,
             fontSize: 12,
             color: "error.main",
@@ -97,8 +99,13 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
   const [fieldErrors, setFieldErrors]       = useState<Record<string, string>>({});
   const [submitted, setSubmitted]           = useState(false);
   const [pageUrl, setPageUrl]               = useState("");
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);  // 👈 added
-  const [recaptchaError, setRecaptchaError] = useState<string | null>(null);  // 👈 added
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);  //  added
+  const [recaptchaError, setRecaptchaError] = useState<string | null>(null);  //  added
+  const [timer, setTimer] = useState(0);
+
+  // OTP
+  const {otp, setOtp, otpSent, otpVerified, loading: otpLoading, error: otpError, sendOtp, verifyOtp, resendOtp, resetOtp, } = useOtp();
+  const isIndia = values["phoneCode"] === "91";
 
   const selectedCountryId = values["country"] ? Number(values["country"]) : null;
 
@@ -108,9 +115,28 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
   const selectedCountry = countries.find((c) => c.id === selectedCountryId);
   const selectedState   = states.find((s) => s.id === Number(values["state"]));
 
+  // FOr MetaLeadSource URL
   useEffect(() => {
     setPageUrl(window.location.href);
   }, []);
+
+  // for otp timer
+  useEffect(() => {
+    if (timer <= 0) return;
+
+    const interval = setInterval(() => {
+      setTimer((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timer]);
+
+  // Auto verify OTP
+  useEffect(() => {
+    if (otp.length === 4 && isIndia && otpSent && !otpVerified) {
+      verifyOtp(values["phone"]);
+    }
+  }, [otp]);
 
   // ── Handle Change ──────────────────────────────────────────────────────────
 
@@ -132,6 +158,10 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       delete updated[name];
       return updated;
     });
+
+    if (name === "country" || name === "phone") {
+      resetOtp();
+    }
   };
 
   // ── Validation ─────────────────────────────────────────────────────────────
@@ -163,10 +193,20 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       // Phone validation — digits only, 7–12 digits
       if (field.type === "phone") {
         const digits = value.replace(/\D/g, "");
-        if (digits.length < 7)
-          errors[field.name] = "Phone number must be at least 7 digits";
-        else if (digits.length > 12)
-          errors[field.name] = "Phone number must not exceed 12 digits";
+
+        if (values["phoneCode"] === "91") {
+          if (digits.length < 10) {
+            errors[field.name] = "Enter valid 10-digit mobile number";
+          } else if (digits.length > 10) {
+            errors[field.name] = "Mobile number cannot exceed 10 digits";
+          } else if (!otpSent || !otpVerified) {
+            errors[field.name] = "Please verify your mobile number first";
+          }
+        } else {
+          if (digits.length < 7 || digits.length > 12) {
+            errors[field.name] = "Enter valid phone number";
+          }
+        }
       }
 
       // Name validation
@@ -193,7 +233,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setRecaptchaError(null);  // 👈 added
+    setRecaptchaError(null);  //  added
 
     // Run validations — show field errors and stop
     const errors = validate();
@@ -202,7 +242,12 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       return;
     }
 
-    // 👇 reCAPTCHA check
+    if (isIndia && (!otpSent || !otpVerified)) {
+      setError("Please verify your mobile number first.");
+      return;
+    }
+
+    //  reCAPTCHA check
     if (!recaptchaToken) {
       setRecaptchaError("Please complete the reCAPTCHA verification.");
       return;
@@ -214,7 +259,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
     const code = values["phoneCode"] ? `+${values["phoneCode"]}` : "+91";
 
     const attributes = [
-      // ✅ Dynamic form fields
+      //  Dynamic form fields
       ...schema.fields
         .filter((field) => field.sendToLSQ !== false)
         .map((field) => {
@@ -232,13 +277,13 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
           return { Attribute: field.lsKey, Value: value };
         }),
 
-      // ✅ Page URL (dynamic)
+      //  Page URL (dynamic)
       {
         Attribute: "mx_Meta_Lead_Source_URL",
         Value: pageUrl,
       },
 
-      // ✅ Extra payload (dynamic per page)
+      //  Extra payload (dynamic per page)
       ...(schema.extraPayload
         ? Object.entries(schema.extraPayload).map(([key, value]) => ({
             Attribute: key,
@@ -251,30 +296,30 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       const res = await fetch("/api/leads", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ attributes, recaptchaToken }),  // 👈 added recaptchaToken
+        body:    JSON.stringify({ attributes, recaptchaToken }),  //  added recaptchaToken
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        // ✅ Shows actual LSQ error e.g. "Lead with same email already exists"
+        //  Shows actual LSQ error e.g. "Lead with same email already exists"
         setError(data.error || "Something went wrong. Please try again.");
         return;
       }
 
       setSubmitted(true);
       onSuccess?.();
-      router.push("/thank-you");
+      router.push("/thankyou");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
-      recaptchaRef.current?.reset();  // 👈 reset captcha after submit
-      setRecaptchaToken(null);        // 👈 clear token
+      recaptchaRef.current?.reset();  //  reset captcha after submit
+      setRecaptchaToken(null);        //  clear token
     }
   };
 
-  // ✅ Common props generator
+  // Common props generator
   const getCommonProps = (field: FormField) => {
     const id = `field-${field.name}`;
 
@@ -435,62 +480,170 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
 
           // PHONE
           if (field.type === "phone") {
+            const showSendOtp =
+              isIndia &&
+              !otpSent &&
+              values["phone"]?.length === 10;
+
             return wrap(
               field,
-              <Box sx={{ display: "flex", gap: 0 }}>
-                <TextField
-                  select
-                  value={values["phoneCode"] ?? "91"}
-                  onChange={(e) => handleChange("phoneCode", e.target.value)}
-                  size="small"
-                  sx={{ width: '100px',
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: "8px 0 0 8px",
-                      "& fieldset": {
-                        borderColor: "#D0D0D0",
-                        borderRight: 'none',
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "gray.500",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "gray.500",
-                        borderWidth: "1.5px",
-                      },
-                    },
-                    '& .MuiInputBase-input': {
+              <Box>
+                <Box sx={{ display: "flex", gap: 0, alignItems: "center" }}>
+                  <TextField
+                    select
+                    value={values["phoneCode"] ?? "91"}
+                    onChange={(e) => handleChange("phoneCode", e.target.value)}
+                    size="small"
+                    disabled={otpVerified}
+                    sx={{
+                      width: "100px",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: "8px 0 0 8px",
                         fontSize: '14px',
-                        fontFamily: 'var(--font-body)',
                         color: 'gray.800',
-                        p: '10px',
+                        height: '40.13px',
+                        "& fieldset": {
+                          borderColor: "#D0D0D0",
+                          borderRight: "none",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "gray.500",
+                          borderWidth: "1.5px",
+                          color: "gray.500",
+                        },
                       },
-                   }}
-                  slotProps={{ select: { native: true } }}
-                >
-                  {countries.map((c) => (
-                    <option key={c.id} value={c.phone_code}>
-                      +{c.phone_code}
-                    </option>
-                  ))}
-                </TextField>
+                    }}
+                    slotProps={{ select: { native: true } }}
+                  >
+                    {countries.map((c) => (
+                      <option key={c.id} value={c.phone_code}>
+                        +{c.phone_code}
+                      </option>
+                    ))}
+                  </TextField>
 
-                <TextField
-                  {...getCommonProps(field)}
-                  id={`field-${field.name}`}
-                  name={field.name}
-                  onChange={(e) => {
-                    const val = e.target.value.replace(/\D/g, "");
-                    if (val.length <= 12) handleChange(field.name, val);
-                  }}
-                  sx={{
-                    ...getCommonProps(field).sx,  
-                    "& .MuiOutlinedInput-root": {
-                      ...getCommonProps(field).sx["& .MuiOutlinedInput-root"], 
-                      borderRadius: "0 8px 8px 0",
-                    },
-                   }}
-                  inputProps={{ inputMode: "numeric", maxLength: 12 }}
-                />
+                  <Box sx={{display: 'flex', alignItems: 'center', position: 'relative', width: '100%'}}>
+                    <TextField
+                      {...getCommonProps(field)}
+                      disabled={otpVerified}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, "");
+                        if (values["phoneCode"] === "91") {
+                          if (val.length <= 10) handleChange(field.name, val);
+                        } else {
+                          if (val.length <= 12) handleChange(field.name, val);
+                        }
+                      }}
+                      sx={{
+                        ...getCommonProps(field).sx,
+                        "& .MuiOutlinedInput-root": {
+                          ...getCommonProps(field).sx["& .MuiOutlinedInput-root"],
+                          borderRadius: "0 8px 8px 0",
+                        },
+                      }}
+                    />
+
+                    {/* ✅ Send OTP Button (INLINE) */}
+                    {showSendOtp && (
+                      <Button
+                        size="small"
+                        onClick={async () => {
+                          await sendOtp(values["phone"]);
+                          setTimer(60);
+                        }}
+                        sx={{ ml: 1, position: 'absolute', backgroundColor: 'none', right: 8, fontSize: '12px', padding: '1px', borderRadius: '6px', background: 'rgba(255, 49, 133, 0.08)', fontWeight: 500 }}
+                      >
+                        Get OTP
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+
+                {/* ✅ OTP INPUT */}
+                {isIndia && otpSent && !otpVerified && (
+                  <Box mt={1}>
+                    <Box display="flex" gap={1}>
+                      {[0, 1, 2, 3].map((i) => (
+                        <TextField
+                          key={i}
+                          id={`otp-${i}`}
+                          value={otp[i] || ""}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, "");
+                            if (!val) return;
+
+                            const newOtp = otp.split("");
+                            newOtp[i] = val;
+                            setOtp(newOtp.join(""));
+
+                            document.getElementById(`otp-${i + 1}`)?.focus();
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Backspace") {
+                              const newOtp = otp.split("");
+                              newOtp[i] = "";
+                              setOtp(newOtp.join(""));
+                              document.getElementById(`otp-${i - 1}`)?.focus();
+                            }
+                          }}
+                          inputProps={{ maxLength: 1 }}
+                          sx={{ width: '25%',
+                            "& .MuiOutlinedInput-root": {
+                              borderRadius: "8px",
+                              height: '40.13px', 
+                              fontSize: '14px',
+                              color: 'gray.800'
+                            },
+                            "&.Mui-focused fieldset": {
+                              borderColor: "gray.500",
+                              borderWidth: "1.5px",
+                            },
+                            "& fieldset": {
+                              borderColor: "#D0D0D0",
+                            },
+                            "& .MuiInputBase-input": {
+                                padding: '8px',
+                                textAlign: 'center',
+                              }
+                           }}
+                        />
+                      ))}
+                    </Box>
+
+                    {/* Timer / Resend */}
+                    {timer > 0 ? (
+                      <Typography variant="body07" mt={1}>
+                        Resend OTP in {timer}s
+                      </Typography>
+                    ) : (
+                      <Button
+                        size="small"
+                        onClick={async () => {
+                          await sendOtp(values["phone"]);
+                          setTimer(60);
+                        }}
+                        sx={{ ml: 1, position: 'absolute', bottom: '0', backgroundColor: 'transparent', right: 0, fontSize: '12px', borderRadius: '4px', fontWeight: 500, py: '1px', px:'5px', lineHeight: '16px',
+                          
+                         }}
+                      >
+                        Resend OTP
+                      </Button>
+                    )}
+
+                    {otpError && (
+                      <Typography color="error" fontSize={12}>
+                        {otpError}
+                      </Typography>
+                    )}
+                  </Box>
+                )}
+
+                {/* ✅ Verified UI */}
+                {otpVerified && (
+                  <Typography color="green" fontSize={12} mt={1} sx={{display: 'flex', alignItems: 'center', gap:'2px'}}>
+                    <CheckBoxIcon sx={{fontSize: '14px'}}/>OTP Verified
+                  </Typography>
+                )}
               </Box>
             );
           }

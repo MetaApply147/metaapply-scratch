@@ -32,7 +32,7 @@ export default function TwoColumnFormSection({
 
         {/* RIGHT (COMMON DESIGN, DYNAMIC FORM) */}
         <Box>
-          <DynamicLeadForm schema={formSchema} Setwidth={formWidth}/>
+          <DynamicLeadForm schema={formSchema} Setwidth={formWidth}   />
         </Box>
       </Box>
     </Section>

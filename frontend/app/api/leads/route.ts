@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    console.log("SECRET KEY EXISTS:", !!process.env.RECAPTCHA_SECRET_KEY);
-    console.log("LSQ ACCESS EXISTS:", !!process.env.LEADSQUARED_ACCESS_KEY);
-    console.log("LSQ SECRET EXISTS:", !!process.env.LEADSQUARED_SECRET_KEY);
 
     try {
         const body = await req.json();
@@ -23,7 +20,6 @@ export async function POST(req: NextRequest) {
 
         const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
         if (!recaptchaSecret) {
-            console.error("RECAPTCHA_SECRET_KEY is not set in environment variables");
             return NextResponse.json(
                 { error: "Server config error" },
                 { status: 500 }
@@ -43,10 +39,8 @@ export async function POST(req: NextRequest) {
             }
         );
         const recaptchaData = await recaptchaRes.json();
-        console.log("RECAPTCHA RESULT:", JSON.stringify(recaptchaData));
 
         if (!recaptchaData.success) {
-            console.error("reCAPTCHA failed:", recaptchaData["error-codes"]);
             return NextResponse.json(
                 { error: "reCAPTCHA verification failed. Please try again." },
                 { status: 400 }
@@ -56,7 +50,6 @@ export async function POST(req: NextRequest) {
         const secretKey = process.env.LEADSQUARED_SECRET_KEY;
 
         if (!accessKey || !secretKey) {
-            console.error("Missing LeadSquared env variables");
             return NextResponse.json(
                 { error: "Server config error" },
                 { status: 500 }
@@ -80,7 +73,6 @@ export async function POST(req: NextRequest) {
 
         if (!res.ok) {
             const errorText = await res.text();
-            console.error("LeadSquared raw error:", errorText);
             
             // Parse LSQ error message if JSON
             let errorMessage = "Submission failed";
