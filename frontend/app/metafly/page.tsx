@@ -20,7 +20,7 @@ export default function MetaFlyPage() {
 
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero banner Section */}
       <HeroBanner slug="metafly" size="medium" />
 
       {/* Process section  */}
