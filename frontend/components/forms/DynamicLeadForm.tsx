@@ -569,7 +569,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
         <Box>
           <ReCAPTCHA
             ref={recaptchaRef}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            sitekey="6LfQraIsAAAAAEx-Hk89oJ_Pyihr2i6URrcTW3Jo"
             onChange={(token) => {
               setRecaptchaToken(token);
               setRecaptchaError(null);  // clear error when user completes captcha
