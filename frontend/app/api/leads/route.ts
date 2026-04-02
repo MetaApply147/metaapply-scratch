@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-
+console.log("SECRET KEY:", process.env.RECAPTCHA_SECRET_KEY ?? "UNDEFINED");
     try {
         const body = await req.json();
         console.log("BODY:", JSON.stringify(body));
