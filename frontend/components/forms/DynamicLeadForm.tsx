@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -14,6 +14,7 @@ import {
   FormControlLabel,
   Typography
 } from "@mui/material";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useCountries } from "@/hooks/useCountries";
 import { useStates } from "@/hooks/useStates";
 import NextLink from "next/link";
@@ -78,6 +79,7 @@ const FieldWrapper = ({ name, children, error }: FieldWrapperProps) => {
 
 export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) {
   const router = useRouter();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);  // 👈 added
 
   const [values, setValues] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = { phoneCode: "91" };
@@ -90,11 +92,13 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
 
     return initial;
   });
-  const [loading, setLoading]         = useState(false);
-  const [error, setError]             = useState<string | null>(null);
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted]     = useState(false);
-  const [pageUrl, setPageUrl] = useState("");
+  const [loading, setLoading]               = useState(false);
+  const [error, setError]                   = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors]       = useState<Record<string, string>>({});
+  const [submitted, setSubmitted]           = useState(false);
+  const [pageUrl, setPageUrl]               = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);  // 👈 added
+  const [recaptchaError, setRecaptchaError] = useState<string | null>(null);  // 👈 added
 
   const selectedCountryId = values["country"] ? Number(values["country"]) : null;
 
@@ -189,11 +193,18 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setRecaptchaError(null);  // 👈 added
 
     // Run validations — show field errors and stop
     const errors = validate();
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
+      return;
+    }
+
+    // 👇 reCAPTCHA check
+    if (!recaptchaToken) {
+      setRecaptchaError("Please complete the reCAPTCHA verification.");
       return;
     }
 
@@ -240,7 +251,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       const res = await fetch("/api/leads", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ attributes }),
+        body:    JSON.stringify({ attributes, recaptchaToken }),  // 👈 added recaptchaToken
       });
 
       const data = await res.json();
@@ -258,6 +269,8 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
+      recaptchaRef.current?.reset();  // 👈 reset captcha after submit
+      setRecaptchaToken(null);        // 👈 clear token
     }
   };
 
@@ -551,6 +564,24 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
             </Box>
           );
         })}
+
+        {/* 👇 reCAPTCHA widget — shown above submit button */}
+        <Box>
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            onChange={(token) => {
+              setRecaptchaToken(token);
+              setRecaptchaError(null);  // clear error when user completes captcha
+            }}
+            onExpired={() => setRecaptchaToken(null)}
+          />
+          {recaptchaError && (
+            <Box sx={{ color: "error.main", fontSize: 12, mt: 0.5 }}>
+              {recaptchaError}
+            </Box>
+          )}
+        </Box>
 
         {/* LSQ / server error shown above submit button */}
         {error && (

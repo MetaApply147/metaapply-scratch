@@ -7,12 +7,12 @@ export const metaflyForm: FormSchema = {
     fields: [
         ...baseFields,
         {
-        name: "email",
-        type: "email",
-        lsKey: "EmailAddress",
-        placeholder: "Enter Email ID*",
-        required: true,
-    },
+            name: "email",
+            type: "email",
+            lsKey: "EmailAddress",
+            placeholder: "Enter Email ID*",
+            required: true,
+        },
        
     ],
 };

@@ -5,12 +5,37 @@ export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
         console.log("BODY:", JSON.stringify(body));
-        const { attributes } = body;
+        const { attributes, recaptchaToken } = body;
 
         if (!attributes || !Array.isArray(attributes)) {
             return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
         }
+        //  Verify reCAPTCHA token with Google before doing anything
+        if (!recaptchaToken) {
+            return NextResponse.json(
+                { error: "reCAPTCHA token missing." },
+                { status: 400 }
+            );
+        }
 
+        const recaptchaRes = await fetch(
+            "https://www.google.com/recaptcha/api/siteverify",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+            }
+        );
+        const recaptchaData = await recaptchaRes.json();
+
+        if (!recaptchaData.success) {
+            console.error("reCAPTCHA failed:", recaptchaData["error-codes"]);
+            return NextResponse.json(
+                { error: "reCAPTCHA verification failed. Please try again." },
+                { status: 400 }
+            );
+        }
+        
         const accessKey = process.env.LEADSQUARED_ACCESS_KEY;
         const secretKey = process.env.LEADSQUARED_SECRET_KEY;
 
