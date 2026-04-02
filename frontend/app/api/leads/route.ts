@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-console.log("SECRET KEY:", process.env.RECAPTCHA_SECRET_KEY ?? "UNDEFINED");
+    console.log("SECRET KEY EXISTS:", !!process.env.RECAPTCHA_SECRET_KEY);
+    console.log("LSQ ACCESS EXISTS:", !!process.env.LEADSQUARED_ACCESS_KEY);
+    console.log("LSQ SECRET EXISTS:", !!process.env.LEADSQUARED_SECRET_KEY);
+
     try {
         const body = await req.json();
         console.log("BODY:", JSON.stringify(body));
@@ -18,15 +21,29 @@ console.log("SECRET KEY:", process.env.RECAPTCHA_SECRET_KEY ?? "UNDEFINED");
             );
         }
 
+        const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
+        if (!recaptchaSecret) {
+            console.error("RECAPTCHA_SECRET_KEY is not set in environment variables");
+            return NextResponse.json(
+                { error: "Server config error" },
+                { status: 500 }
+            );
+        }
+
+        // ✅ Use URLSearchParams to safely handle special characters in secret key
         const recaptchaRes = await fetch(
             "https://www.google.com/recaptcha/api/siteverify",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+                body: new URLSearchParams({
+                    secret: recaptchaSecret,
+                    response: recaptchaToken,
+                }).toString(),
             }
         );
         const recaptchaData = await recaptchaRes.json();
+        console.log("RECAPTCHA RESULT:", JSON.stringify(recaptchaData));
 
         if (!recaptchaData.success) {
             console.error("reCAPTCHA failed:", recaptchaData["error-codes"]);
@@ -35,7 +52,6 @@ console.log("SECRET KEY:", process.env.RECAPTCHA_SECRET_KEY ?? "UNDEFINED");
                 { status: 400 }
             );
         }
-        
         const accessKey = process.env.LEADSQUARED_ACCESS_KEY;
         const secretKey = process.env.LEADSQUARED_SECRET_KEY;
 
