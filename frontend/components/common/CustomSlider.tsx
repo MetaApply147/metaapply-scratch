@@ -39,10 +39,12 @@ export default function CustomSlider<T>({
   const prevClass = `prev-${id}`;
   const nextClass = `next-${id}`;
 
+  const shouldShowArrows = showArrows && data.length > slidesPerView;
+
   return (
     <Box sx={{ mx: "-10px", my: "-30px" }}>
       {/* ARROWS */}
-      {showArrows && (
+      {shouldShowArrows && (
         <Box
           sx={{
             display: 'flex',
@@ -69,7 +71,7 @@ export default function CustomSlider<T>({
         spaceBetween={spaceBetween}
         slidesPerView={slidesPerView}
         navigation={
-          showArrows
+          shouldShowArrows
             ? {
                 prevEl: `.${prevClass}`,
                 nextEl: `.${nextClass}`,
