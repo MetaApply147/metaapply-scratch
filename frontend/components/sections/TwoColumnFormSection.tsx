@@ -6,7 +6,7 @@ import Section from '../common/Section';
 
 type Props = {
   formSchema: any;
-  formWidth: any;
+  formWidth?: any;
   children: React.ReactNode;
 };
 

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Open_Sans  } from "next/font/google";
-import "./globals.css";
 
 import Header from "@/components/layout/Header";
 import { getServices } from "@/services/httpServices";

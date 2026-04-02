@@ -288,6 +288,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
           "&.Mui-focused fieldset": {
             borderColor: "gray.500",
             borderWidth: "1.5px",
+            color: "gray.500",
           },
         },
         "& .MuiInputBase-input": {
@@ -375,13 +376,14 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <Box width={Setwidth} sx={{
+    <Box sx={{
       boxShadow: '0px 20px 38px 0px #9C9C9C80',
       borderRadius: 4,
       backgroundColor: 'common.white',
       px: 4,
       pt: 3,
       pb: 4,
+      width: Setwidth,
     }}>
       <Typography variant="heading11" component='h5' sx={{textAlign: 'center', mb: 3.5}}>Enquire Now</Typography>
     
