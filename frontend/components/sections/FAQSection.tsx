@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import {
@@ -9,7 +9,8 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { getServices } from "@/services/httpServices";
 import SectionHeader from "../common/SectionHeader";
 import Section from "../common/Section";
@@ -75,7 +76,7 @@ export default function FAQSection({ page }: Props) {
           FAQ_CATEGORY_MAP[page as keyof typeof FAQ_CATEGORY_MAP];
 
         const orderedCategories = (categoryOrder || []).filter(
-          (cat) => groupedData[cat]
+          (cat) => groupedData[cat],
         );
 
         setGrouped(groupedData);
@@ -98,104 +99,128 @@ export default function FAQSection({ page }: Props) {
 
   return (
     <Section spacing="lg">
-        <Box>
+      <Box>
         {/* ================= HEADING ================= */}
-        <SectionHeader
-            title="Frequently Asked"
-            highlight="Questions"
-        />
+        <SectionHeader title="Frequently Asked" highlight="Questions" />
 
         {/* ================= TABS ================= */}
         {isTabView && (
-            <Box
+          <Box
             display="flex"
             gap={1}
             sx={{
-                background: "#FFF0F6",
-                border: '1px solid #FFBDD8',
-                p: "12px",
-                borderRadius: "51px",
-                width: "fit-content",
+              background: "#FFF0F6",
+              border: "1px solid #FFBDD8",
+              p: "12px",
+              borderRadius: "51px",
+              width: "fit-content",
             }}
-            >
+          >
             {categories.map((cat) => (
-                <Button
-                  key={cat}
-                  onClick={() => {
-                      setActiveTab(cat);
-                      setExpanded(false); // close accordion on tab change
-                  }}
-                  disableRipple
-                  disableTouchRipple
-                  sx={{
-                      borderRadius: "30px",
-                      px: 4.5,
-                      py: 1.5,
-                      background:
-                      activeTab === cat
-                          ? 'linear-gradient(90deg, #BF0E2E 0%, #EE0081 100%)'
-                          : "#FFF0F6",
-                      color: activeTab === cat ? "common.white" : "text.primary",
-                      boxShadow: activeTab === cat ? '0px 4px 19px 0px #FF99CE' : 'none',
-                      // transition: "0.3s",
-                      "&:hover": {
-                          boxShadow: activeTab === cat ? '0px 4px 19px 0px #FF99CE' : 'none',
-                      },
-                      
-                  }}
-                >
-                
-                <Typography variant="heading12" component='h6' fontWeight={500}>{cat}</Typography>
-                </Button>
+              <Button
+                key={cat}
+                onClick={() => {
+                  setActiveTab(cat);
+                  setExpanded(false); 
+                }}
+                disableRipple
+                disableTouchRipple
+                sx={{
+                  borderRadius: "30px",
+                  px: 4.5,
+                  py: 1.5,
+                  background:
+                    activeTab === cat
+                      ? "linear-gradient(90deg, #BF0E2E 0%, #EE0081 100%)"
+                      : "#FFF0F6",
+                  color: activeTab === cat ? "common.white" : "text.primary",
+                  boxShadow:
+                    activeTab === cat ? "0px 4px 19px 0px #FF99CE" : "none",
+                  "&:hover": {
+                    boxShadow:
+                      activeTab === cat ? "0px 4px 19px 0px #FF99CE" : "none",
+                  },
+                }}
+              >
+                <Typography variant="heading12" component="h6" fontWeight={500}>
+                  {cat}
+                </Typography>
+              </Button>
             ))}
-            </Box>
+          </Box>
         )}
 
         {/* ================= FAQ LIST ================= */}
         <Box mt={4}>
-            {currentFaqs?.map((faq) => (
+          {currentFaqs?.map((faq) => (
             <Accordion
-                key={faq.id}
-                expanded={expanded === faq.id}
-                onChange={handleChange(faq.id)}
-                disableGutters
-                elevation={0}
-                sx={{
+              key={faq.id}
+              expanded={expanded === faq.id}
+              onChange={handleChange(faq.id)}
+              disableGutters
+              elevation={0}
+              sx={{
                 mb: 2.5,
                 borderRadius: "16px !important",
-                boxShadow: expanded === faq.id ? '0px 2px 2px 0px #48505814' : '0',
-                background: expanded === faq.id ? "linear-gradient(90deg, #FFFDE7 0%, #FFE5F0 100%)"
-                  : "linear-gradient(90.19deg, rgba(255, 229, 240, 0.5) 9.4%, #F8E7FF 94.98%)",
+                boxShadow:
+                  expanded === faq.id ? "0px 2px 2px 0px #48505814" : "0",
+                background:
+                  expanded === faq.id
+                    ? "linear-gradient(90deg, #FFFDE7 0%, #FFE5F0 100%)"
+                    : "linear-gradient(90.19deg, rgba(255, 229, 240, 0.5) 9.4%, #F8E7FF 94.98%)",
                 "&:before": { display: "none" },
                 transition: "all 0.3s ease",
-                }}
+              }}
             >
-                <AccordionSummary sx={{
-                    px: 3, py: 1,
+              <AccordionSummary
+                sx={{
+                  px: 3,
+                  py: 1,
+                  fontWeight: 500,
+                  "& .MuiTypography-root": {
                     fontWeight: 500,
-                    '&.Mui-expanded .MuiTypography-root': {
-                      fontWeight: 600,
-                    },
-
-                  }}
-                  expandIcon={
-                      <ExpandMoreIcon />
-                  }
-                  >
-                  <Typography variant="body03" component='p'>
-                      {faq.question}
-                  </Typography>
-                </AccordionSummary>
-
-                <AccordionDetails sx={{px: 3, pb: 3, pt: 0}}>
-                <Typography color="text.secondary" variant="body04" component='p'>
-                    {faq.answer}
+                  },
+                  "&.Mui-expanded .MuiTypography-root": {
+                    fontWeight: 600,
+                  },
+                  "& .addIcon": {
+                    display: "block",
+                  },
+                  "& .removeIcon": {
+                    display: "none",
+                  },
+                  "&.Mui-expanded .addIcon": {
+                    display: "none",
+                  },
+                  "&.Mui-expanded .removeIcon": {
+                    display: "block",
+                  },
+                }}
+                expandIcon={
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <AddIcon className="addIcon" sx={{ fontSize: 24 }} />
+                    <RemoveIcon className="removeIcon" sx={{ fontSize: 24 }} />
+                  </Box>
+                }
+              >
+                <Typography variant="body03" component="p">
+                  {faq.question}
                 </Typography>
-                </AccordionDetails>
+              </AccordionSummary>
+
+              <AccordionDetails sx={{ px: 3, pb: 3, pt: 0 }}>
+                <Typography
+                  color="text.secondary"
+                  variant="body04"
+                  component="p"
+                >
+                  {faq.answer}
+                </Typography>
+              </AccordionDetails>
             </Accordion>
-            ))}
+          ))}
         </Box>
-        </Box>
+      </Box>
     </Section>
   );
 }
