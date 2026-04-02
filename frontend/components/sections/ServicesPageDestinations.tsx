@@ -98,10 +98,7 @@ export default function ServingDestinations() {
 
     return (
         <Section spacing="lg">
-            <SectionHeader
-                title="Destinations"
-                highlight="We are serving"
-            />
+            <SectionHeader highlight="Destinations" title="We are serving" highlightPosition="start" />
 
             <Box>
                 {error && <Alert severity="error">{error}</Alert>}

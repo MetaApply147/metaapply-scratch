@@ -21,10 +21,10 @@ export default function MetaStayPage() {
             <MetaStayLeftInfo />
       </TwoColumnFormSection>
 
-      {/* <ComfortConvenience/> */}
+      <ComfortConvenience/>
 
       {/* SUCCESS STORIES */}
-      <SuccessStories page="metastay" type="testimonial" />
+      <SuccessStories page="metastay" type="testimonial" bgColor={'#F2F2F285'} />
 
       {/* FAQ */}
       <FAQSection page="metastay" />
