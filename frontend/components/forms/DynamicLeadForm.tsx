@@ -204,7 +204,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       const value = String(values[field.name] ?? "").trim();
       const label = field.placeholder?.replace("*", "").trim() ?? field.name;
 
-      // Required check
+      // Required checks
       if (field.required && !value) {
         errors[field.name] = `${label} is required`;
         return;
