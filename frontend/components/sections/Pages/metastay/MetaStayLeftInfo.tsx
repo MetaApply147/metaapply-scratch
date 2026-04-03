@@ -46,9 +46,10 @@ export default function MetaStayLeftInfo() {
 
       <Typography
         variant="body05"
+        component='p'
         sx={{
           color: 'text.secondary',
-          mb: 5,
+          mb: 7.5,
           mt: 3,
           display: 'block',
         }}
@@ -63,7 +64,9 @@ export default function MetaStayLeftInfo() {
         sx={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: 3,
+          gap: 4,
+          maxWidth: '75%',
+          m: '0 auto',
         }}
       >
         {cards.map((item) => (
@@ -72,23 +75,24 @@ export default function MetaStayLeftInfo() {
             sx={{
               backgroundColor: 'common.white',
               borderRadius: '12px',
-              py: 3,
-              px: 2,
+              pt: 1.5,
+              px: 1.5,
+              pb: 2,
               textAlign: 'center',
               boxShadow: '0px 8px 28px 0px #DDDDDD66',
             }}
           >
-            <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{display: 'flex', justifyContent: 'center', height: '80px', width: '80px', m: '0 auto 10px' }}>
               <Image
                 src={item.icon}
                 alt={item.title}
-                width={100}
-                height={78}
-                style={{ objectFit: 'contain' }}
+                height={80}
+                width={80}
+                style={{ objectFit: 'contain', }}
               />
             </Box>
 
-            <Typography variant="body03" sx={{ fontWeight: 600 }}>
+            <Typography variant="body03" component='h6'>
               {item.title}
             </Typography>
           </Box>

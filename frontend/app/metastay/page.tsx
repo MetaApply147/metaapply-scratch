@@ -6,6 +6,8 @@ import MetaStayLeftInfo from '@/components/sections/Pages/metastay/MetaStayLeftI
 import MetaStayProcess from '@/components/sections/Pages/metastay/MetaStayProcess';
 import SuccessStories from '@/components/sections/SuccessStories';
 import { metaflyForm } from "@/config/forms/metafly.form";
+import AccomodationDestination from '@/components/sections/Pages/metastay/AccomodationDestination';
+import AccommodationOptions from '@/components/sections/Pages/metastay/AccomodationOptions';
 
 export default function MetaStayPage() {
   return (
@@ -16,10 +18,16 @@ export default function MetaStayPage() {
       {/* PROCESS */}
       <MetaStayProcess />
 
+      {/* Accomodation Destination */}
+      <AccomodationDestination/>
+
       {/* TWO COLUMN SECTION */}
-      <TwoColumnFormSection formSchema={metaflyForm}>
+      <TwoColumnFormSection formSchema={metaflyForm} formWidth={'84%'}>
         <MetaStayLeftInfo />
       </TwoColumnFormSection>
+
+      {/* Accomodation Optinons */}
+      <AccommodationOptions/>
 
       <ComfortConvenience/>
 
