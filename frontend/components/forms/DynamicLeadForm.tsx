@@ -45,7 +45,7 @@ export interface FormSchema {
 interface Props {
   schema: FormSchema;
   onSuccess?: () => void;
-  Setwidth?: number;
+  Setwidth?: any;
 }
 
 type FieldWrapperProps = {
@@ -686,7 +686,22 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
           if (field.type === "textarea") {
             return wrap(
               field,
-              <TextField {...getCommonProps(field)} multiline minRows={3} />
+              <TextField {...getCommonProps(field)} multiline minRows={1} 
+              sx={{
+                ...getCommonProps(field).sx,
+
+                "& .MuiOutlinedInput-root": {
+                  ...getCommonProps(field).sx?.["& .MuiOutlinedInput-root"],
+                  alignItems: "flex-start", 
+                },
+
+                "& .MuiInputBase-input": {
+                  ...getCommonProps(field).sx?.["& .MuiInputBase-input"],
+                  height: "50px !important", 
+                  overflow: "auto !important",
+                  p: 0,
+                },
+              }}/>
             );
           }
 

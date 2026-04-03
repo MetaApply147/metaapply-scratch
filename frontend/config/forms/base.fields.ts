@@ -9,6 +9,13 @@ export const baseFields: FormField[] = [
         required: true,
     },
     {
+        name: "email",
+        type: "email",
+        lsKey: "EmailAddress",
+        placeholder: "Enter Email ID*",
+        required: true,
+    },
+    {
         name: "phone",
         type: "phone",
         lsKey: "Phone",
@@ -27,6 +34,13 @@ export const baseFields: FormField[] = [
         type: "state",
         lsKey: "mx_State",
         placeholder: "Select State*",
+        required: true,
+    },
+    {
+        name: "message",
+        type: "textarea",
+        lsKey: "notes",
+        placeholder: "Enter Message",
         required: true,
     },
     // ✅ CHECKBOX 1
