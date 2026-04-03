@@ -28,7 +28,7 @@ export default function BankingPartnerSlider({
   data,
 }: Props) {
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{backgroundColor: 'gray.50'}}>
       <Box sx={{ position: "relative" }}>
         {/* HEADER */}
         <SectionHeader
@@ -60,7 +60,7 @@ const PartnerCard = ({ item }: { item: PartnerItem }) => {
         alignItems: "center",
         justifyContent: "center",
         borderRadius: "16px",
-        boxShadow: "0px 6px 18px rgba(0,0,0,0.06)",     
+        boxShadow: "0px 10px 32px 0px #E3E3E3CC",     
       }}
     >
       <Image

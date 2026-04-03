@@ -46,15 +46,22 @@ export default function ComfortConvenience() {
                 py: 1,
               }}
             >
-              <Image
-                src={item.icon}
-                alt={item.title}
-                width={100}
-                height={100}
-                style={{ objectFit: "contain" }}
-              />
+              <Box sx={{
+                height: '100px',
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+                <Image
+                  src={item.icon}
+                  alt={item.title}
+                  width={100}
+                  height={100}
+                  style={{ objectFit: "contain" }}
+                />
+              </Box>
               <Typography
                 variant="body03"
+                component='h6'
                 sx={{
                   fontWeight: 600,
                   textAlign: "center",

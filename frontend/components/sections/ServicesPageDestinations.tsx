@@ -17,6 +17,10 @@ type Destination = {
     flagUrl: string;
 };
 
+type Props = {
+  bgColor?: string 
+};
+
 /* ================= CONFIG ================= */
 
 const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -39,7 +43,7 @@ const getImageUrl = (url?: string): string | null => {
 
 /* ================= COMPONENT ================= */
 
-export default function ServingDestinations() {
+export default function ServingDestinations({bgColor}: Props) {
     const [data, setData] = useState<Destination[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -97,7 +101,7 @@ export default function ServingDestinations() {
     }, []);
 
     return (
-        <Section spacing="lg">
+        <Section spacing="lg" sx={{backgroundColor: bgColor}}>
             <SectionHeader highlight="Destinations" title="We are serving" highlightPosition="start" />
 
             <Box>

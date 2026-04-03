@@ -6,6 +6,7 @@ import Image from "next/image";
 export default function ContentSection() {
   return (
     <Box
+      component='section'
       sx={{
         mx: "30px",
         borderRadius: "0px 80px 0px 80px",
@@ -24,12 +25,12 @@ export default function ContentSection() {
           <Box
             sx={{
               maxWidth: "600px",
-              color: "#fff",
+              color: "common.white",
               py: { xs: 5, md: 10 },
             }}
           >
             <Typography
-              variant="heading06"
+              variant="heading05"
               component="h2"
               fontWeight={400}
               sx={{ lineHeight: 1.2 }}

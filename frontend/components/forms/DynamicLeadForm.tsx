@@ -580,7 +580,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
                           await sendOtp(values["phone"]);
                           setTimer(60);
                         }}
-                        sx={{ ml: 1, position: 'absolute', backgroundColor: 'none', right: 8, fontSize: '12px', padding: '1px', borderRadius: '6px', background: 'rgba(255, 49, 133, 0.08)', fontWeight: 500 }}
+                        sx={{ ml: 1, position: 'absolute', right: 8, fontSize: '12px', padding: '1px', borderRadius: '6px', background: '#0066ff10', color: 'blueSelected', fontWeight: 500 }}
                       >
                         Get OTP
                       </Button>
@@ -641,7 +641,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
 
                     {/* Timer / Resend */}
                     {timer > 0 ? (
-                      <Typography variant="body07" mt={1}>
+                      <Typography variant="body07" mt={1} sx={{color: 'error.main'}}>
                         Resend OTP in {timer}s
                       </Typography>
                     ) : (
@@ -651,7 +651,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
                           await sendOtp(values["phone"]);
                           setTimer(60);
                         }}
-                        sx={{ ml: 1, position: 'absolute', bottom: '0', backgroundColor: 'transparent', right: 0, fontSize: '12px', borderRadius: '4px', fontWeight: 500, py: '1px', px:'5px', lineHeight: '16px',
+                        sx={{ ml: 1, position: 'absolute', bottom: '0', background: '#0066ff10', color: 'blueSelected', right: 0, fontSize: '12px', borderRadius: '4px', fontWeight: 500, py: '1px', px:'5px', lineHeight: '16px',
                           
                          }}
                       >
@@ -726,7 +726,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
                           href="/terms-and-conditions"
                           target="_blank"
                           rel="noopener noreferrer"
-                          sx={{ color: "primary.main", fontWeight: 600, textDecoration: 'none' }}
+                          sx={{ color: "blueSelected", fontWeight: 500, textDecoration: 'none' }}
                         >
                           Terms and Conditions
                         </MuiLink>

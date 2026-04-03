@@ -18,13 +18,16 @@ export default function MetaStayPage() {
 
       {/* TWO COLUMN SECTION */}
       <TwoColumnFormSection formSchema={metaflyForm}>
-            <MetaStayLeftInfo />
+        <MetaStayLeftInfo />
       </TwoColumnFormSection>
 
       <ComfortConvenience/>
 
       {/* SUCCESS STORIES */}
-      <SuccessStories page="metastay" type="testimonial" bgColor={'#F2F2F285'} />
+      <SuccessStories page="metastay" type="testimonial" bgColor={'#F2F2F285'}  cta={{
+        label: "Talk to Our Expert",
+        link: "/#",
+      }} />
 
       {/* FAQ */}
       <FAQSection page="metastay" />

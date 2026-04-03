@@ -10,6 +10,7 @@ import MetaFlyLeftInfo from '@/components/sections/Pages/metafly/MetaFlyLeftInfo
 export default function MetaFlyPage() {
   const schema = {
     ...metaflyForm,
+    
 
     extraPayload: {
       mx_Program_Products: "Study Abroad",
@@ -26,12 +27,12 @@ export default function MetaFlyPage() {
       <MetaFlyProcess/>
 
       {/* MetaFly Content Form Section */}
-      <TwoColumnFormSection formSchema={schema} formWidth={'84%'}>
+      <TwoColumnFormSection formSchema={schema} formWidth={'84%'} bgColor="#F7FBFF">
         <MetaFlyLeftInfo />
       </TwoColumnFormSection>
 
       {/* Services */}
-      <ServingDestinations />
+      <ServingDestinations/>
 
       {/* Success Story */}
       <SuccessStories page="metafly" type="testimonial" bgColor={'#F2F2F285'} 

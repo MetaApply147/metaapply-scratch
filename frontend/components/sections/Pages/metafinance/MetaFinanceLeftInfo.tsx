@@ -1,5 +1,6 @@
 'use client';
 
+import SectionHeader from '@/components/common/SectionHeader';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
@@ -21,7 +22,7 @@ export default function MetaFinanceLeftInfo() {
 
   return (
     <Box>
-      <Typography
+      {/* <Typography
         variant="heading07"
         sx={{
           mb: 4,
@@ -33,30 +34,32 @@ export default function MetaFinanceLeftInfo() {
         <Box component="span" sx={{ color: 'primary.main' }}>
           Education Loan
         </Box>
-      </Typography>
+      </Typography> */}
+      <SectionHeader title='Types of' highlight='Education Loan'/>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3.5 }}>
         {cards.map((item) => (
           <Box
             key={item.id}
             sx={{
               display: 'flex',
-              gap: 4,
+              gap: 3,
               alignItems: 'center',
               backgroundColor: 'common.white',
               borderRadius: '16px',
-              pr: 6,
-              pl: 3.5,
+              pr: 4,
+              pl: 3,
               py: 3,
-              boxShadow: '0px 8px 28px 0px #DDDDDD66',
+              boxShadow: '0px 8px 32px 0px #A5A5A526',
             }}
           >
             <Box
               sx={{
                 position: 'relative',
-                width: 350,
-                height: 180,
-                borderRadius: '12px',               
+                width: 162,
+                height: 200,
+                borderRadius: '12px',   
+                minWidth: 162            
               }}
             >
               <Image
@@ -69,11 +72,12 @@ export default function MetaFinanceLeftInfo() {
 
             <Box>
               <Typography
-                variant="body01"
+                variant="heading10"
+                component='h5'
                 sx={{
                   fontWeight: 500,
                   color: 'secondary.main',
-                  mb: 1,
+                  mb: 2,
                   display: 'block',
                 }}
               >
@@ -81,6 +85,7 @@ export default function MetaFinanceLeftInfo() {
               </Typography>
               <Typography
                 variant="body05"
+                component='p'
                 sx={{
                   color: 'text.secondary',
                   lineHeight: 1.6,

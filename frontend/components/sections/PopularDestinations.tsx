@@ -23,6 +23,10 @@ type Destination = {
   exploreMoreLink?: string;
 };
 
+type Props = {
+  bgColor?: string
+}
+
 /* ================= CONFIG ================= */
 
 const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -41,7 +45,7 @@ const getImageUrl = (url?: string): string | null => {
 
 /* ================= COMPONENT ================= */
 
-export default function PopularDestinations() {
+export default function PopularDestinations({bgColor}: Props) {
   const [data, setData] = useState<Destination[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -95,7 +99,7 @@ export default function PopularDestinations() {
   }, []);
 
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{backgroundColor: bgColor}}>
       <SectionHeader
         title="Popular"
         highlight="Destinations"

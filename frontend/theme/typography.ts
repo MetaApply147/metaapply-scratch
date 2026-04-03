@@ -96,7 +96,8 @@ const typography = {
   heading14: {
     fontFamily: "var(--font-heading)",
     fontSize: "16px",
-    fontWeight: 600
+    fontWeight: 600,
+    lineHeight: '24px'
   },
 
   heading15: {

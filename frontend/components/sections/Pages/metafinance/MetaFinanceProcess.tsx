@@ -16,8 +16,8 @@ export default function MetaFinanceProcess() {
 <Box component="section">
   <Container maxWidth="lg">
     <ServicesProcessSlider 
-      highlightText=" Education Loan Process"
       title="MetaFinance"
+      highlightText=" Education Loan Process"
       data={metaFinanceData}
       slidesPerView={6}
     />

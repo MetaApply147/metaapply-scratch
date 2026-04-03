@@ -12,8 +12,6 @@ export type GridItem = {
   title: string;
   description?: string;
   icon: string;
-  // NOTE: bgColor removed — your images already have their own background built in.
-  // Do NOT add a bg wrapper around the icon. Just render the image directly.
 };
 
 type Props = {
@@ -28,14 +26,12 @@ type Props = {
 export default function ImportanceGridSection({
   title,
   highlightText,
-  highlightPosition = "end",
   data,
 }: Props) {
-  // Cap at 6 columns max; if you have 5 items → 5 equal columns on desktop
   const colCount = Math.min(data.length, 6);
 
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{backgroundColor: '#F7FBFF'}}>
       <Box>
         {/* ── Heading ── */}
         <SectionHeader
@@ -53,7 +49,7 @@ export default function ImportanceGridSection({
               lg: `repeat(${colCount}, 1fr)`,
             },
             gap: { xs: 2, md: 3 },
-            mt: { xs: 4, md: 5 },
+            // mt: { xs: 4, md: 5 },
           }}
         >
           {data.map((item) => (
@@ -71,22 +67,17 @@ const GridCard = ({ item }: { item: GridItem }) => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        display: 'flex',
+        flexDirection: 'column',
         textAlign: "center",
       }}
     >
     
       <Box
         sx={{
-          my: 2,
-          width: 100,
-          height: 100,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          flexShrink: 0,
         }}
       >
         <Image
@@ -108,24 +99,27 @@ const GridCard = ({ item }: { item: GridItem }) => {
           px: 2.5,
           py: 2.5,
           borderRadius: "12px",
-          background: "#fff",
-          boxShadow: "0px 26.7px 26.7px 0px #ABABAB17",
-          flexGrow: 1,
-          mt: '-15px',
+          backgroundColor: "common.white",
+          boxShadow: "0px 6.89px 14.64px 0px #ABABAB1A, 0px 26.7px 26.7px 0px #ABABAB17",
+          position: 'relative',
+          mt: '-20px',
+          zIndex: 0,
+          height: '100%'
         }}
       >
         <Typography variant="heading13"        
           color="text.primary"
-          component= "h3"
+          component= "h6"
+          sx={{lineHeight: '22px'}}
         >
           {item.title}
         </Typography>
 
         {item.description && (
           <Typography
-            variant="body06"
+            variant="body05"
             color="text.secondary"
-            mt={1} 
+            mt={2} 
             component="p"          
           >
             {item.description}

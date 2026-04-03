@@ -38,7 +38,6 @@ export default function MetaInsuranceImportance() {
     <ImportanceGridSection
       title="Importance of"
       highlightText="International Insurance"
-      highlightPosition="end"
       data={insuranceData}
     />
   );

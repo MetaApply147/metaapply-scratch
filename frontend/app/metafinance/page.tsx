@@ -2,7 +2,6 @@ import HeroBanner from '@/components/banner/HeroBanner';
 import FAQSection from '@/components/sections/FAQSection';
 import SuccessStories from '@/components/sections/SuccessStories';
 import TwoColumnFormSection from '@/components/sections/TwoColumnFormSection';
-import { metaflyForm } from "@/config/forms/metafly.form";
 import MetaFinanceLeftInfo from '@/components/sections/Pages/metafinance/MetaFinanceLeftInfo';
 import MetaFinanceProcess from '@/components/sections/Pages/metafinance/MetaFinanceProcess';
 import PopularDestinations from '@/components/sections/PopularDestinations';
@@ -10,9 +9,19 @@ import MetaFinanceImportance from '@/components/sections/Pages/metafinance/MetaF
 import ContentSection from '@/components/sections/Pages/metafinance/ContentSection';
 import EligibleRequirement from '@/components/sections/Pages/metafinance/EligibleRequirement';
 import BankingPartners from '@/components/sections/Pages/metafinance/BankingPartners';
+import { metainsureform } from '@/config/forms/metainsure.form';
 
 
 export default function MetaFinancePage() {
+    const schema = {
+    ...metainsureform,
+    
+
+    extraPayload: {
+      mx_Program_Products: "",
+      mx_Marketing_Pages: ""
+    },
+  };
     return (
         <>
             <HeroBanner slug="metafinance" size="medium"/>
@@ -30,7 +39,7 @@ export default function MetaFinancePage() {
             <ContentSection/>
 
             {/* TWO COLUMN SECTION */}
-            <TwoColumnFormSection formSchema={metaflyForm}>
+            <TwoColumnFormSection formSchema={schema} formWidth={'84%'}>
                     <MetaFinanceLeftInfo />
             </TwoColumnFormSection>
 
@@ -38,10 +47,13 @@ export default function MetaFinancePage() {
             <MetaFinanceProcess/>
 
             {/* Popular Destination section */}
-            <PopularDestinations/>
+            <PopularDestinations bgColor='#F7FBFF'/>
 
             {/* Success Story */}
-            <SuccessStories page="metafinance" type="testimonial" />
+            <SuccessStories page="metafinance" type="testimonial" cta={{
+                label: "Talk to Our Expert",
+                link: "/#",
+            }}/>
 
             <FAQSection page="metafinance" />
         </>

@@ -17,6 +17,7 @@ type ProcessItem = {
 type Props = {
   title: string;
   highlightText: string;
+  highlightPosition?: "start";
   data: ProcessItem[];
   slidesPerView?: number;
 };
@@ -26,6 +27,7 @@ type Props = {
 export default function ServicesProcessSlider({
   highlightText,
   title,
+  highlightPosition,
   data,
   slidesPerView = 5,
 }: Props) {
@@ -33,7 +35,7 @@ export default function ServicesProcessSlider({
     <Section spacing="lg">
       <Box sx={{ position: "relative" }}>
         {/* Heading */}
-        <SectionHeader highlight={highlightText} title={title} highlightPosition="start" />
+        <SectionHeader highlight={highlightText} title={title} highlightPosition={highlightPosition} />
         {/* Slider */}
         <CustomSlider
           data={data}
@@ -62,8 +64,7 @@ const ProcessCard = ({ item }: { item: ProcessItem }) => {
         pb: 1.5,
         minHeight: "130px",
         background: "linear-gradient(64.71deg, #FFFBEE 15.36%, #FFECF4 83.03%)",
-        clipPath:
-          "polygon(0% 0%, 78% 0%, 100% 50%, 78% 100%, 0% 100%, 20% 50%)",
+        clipPath:"polygon(0% 0%, 78% 0%, 100% 50%, 78% 100%, 0% 100%, 20% 50%)",
       }}
     >
       <Box

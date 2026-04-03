@@ -31,6 +31,7 @@ export default function MetaStayLeftInfo() {
     <Box>
       <Typography
         variant="heading07"
+        component='h2'
         sx={{
           mb: 2,
           fontWeight: 600,
@@ -47,7 +48,6 @@ export default function MetaStayLeftInfo() {
         variant="body05"
         sx={{
           color: 'text.secondary',
-          lineHeight: 1.7,
           mb: 5,
           mt: 3,
           display: 'block',

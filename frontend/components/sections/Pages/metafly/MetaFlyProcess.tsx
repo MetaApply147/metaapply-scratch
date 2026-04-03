@@ -15,6 +15,7 @@ export default function MetaFlyProcess() {
     <ServicesProcessSlider 
       highlightText="MetaFly"
       title="Easy Process"
+      highlightPosition="start"
       data={metaFlyData}
       slidesPerView={6}
     />
