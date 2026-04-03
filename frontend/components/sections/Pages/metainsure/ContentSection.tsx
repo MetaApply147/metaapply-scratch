@@ -8,19 +8,7 @@ export default function ContentSection() {
   return (
     <Section spacing="lg">
       <Box sx={{ textAlign: "center" }}>
-        {/* <Typography
-          variant="heading07"
-
-          sx={{
-            display: "block",
-            mb: 3,
-          }}
-        >
-          What is{" "}
-          <Box component="span" sx={{ color: "primary.main" }}>
-            International Insurance Policy?
-          </Box>
-        </Typography> */}
+        
         <SectionHeader title="What is" highlight="International Insurance Policy?"/>
 
         <Typography

@@ -9,8 +9,8 @@ export default function PlanYourJourney() {
       sx={{
         position: "relative",
         backgroundColor: "navyBlue.600",
-        borderRadius: "24px",
-        overflow: "hidden",
+        borderRadius: "0 80px 0 80px",
+    overflow: "hidden",
         mx: "30px",
       }}
     >
@@ -73,7 +73,7 @@ export default function PlanYourJourney() {
           fill
           style={{
             objectFit: "cover",
-            borderRadius: "0 24px 24px 0",
+            borderRadius: "0px",
           }}
         />
       </Box>

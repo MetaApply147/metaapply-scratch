@@ -37,7 +37,11 @@ export default function MetaInsurePage() {
             <ServingDestinations  bgColor="gray.50"/>
 
             {/* Success Story */}
-            <SuccessStories page="metainsure" type="testimonial" />
+            <SuccessStories page="metainsure" type="testimonial" cta={{
+                label: "Talk to Our Expert",
+                link: "/#",
+                }}
+            />
 
             <FAQSection page="metainsure" />
         </>
