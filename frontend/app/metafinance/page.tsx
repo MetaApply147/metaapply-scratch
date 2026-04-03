@@ -9,19 +9,18 @@ import MetaFinanceImportance from '@/components/sections/Pages/metafinance/MetaF
 import ContentSection from '@/components/sections/Pages/metafinance/ContentSection';
 import EligibleRequirement from '@/components/sections/Pages/metafinance/EligibleRequirement';
 import BankingPartners from '@/components/sections/Pages/metafinance/BankingPartners';
-import { metainsureform } from '@/config/forms/metainsure.form';
+import { baseFields } from '@/config/forms/base.fields';
 
 
 export default function MetaFinancePage() {
     const schema = {
-    ...metainsureform,
-    
-
-    extraPayload: {
-      mx_Program_Products: "",
-      mx_Marketing_Pages: ""
-    },
-  };
+        formId: "k-12",
+        fields: baseFields,
+        extraPayload: {
+            mx_Program_Products: "",
+            mx_Marketing_Pages: ""
+        },
+    };
     return (
         <>
             <HeroBanner slug="metafinance" size="medium"/>

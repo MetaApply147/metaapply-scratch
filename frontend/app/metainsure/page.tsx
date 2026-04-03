@@ -6,18 +6,17 @@ import MetaInsureLeftInfo from '@/components/sections/Pages/metainsure/MetaInsur
 import ContentSection from '@/components/sections/Pages/metainsure/ContentSection';
 import TwoColumnFormSection from '@/components/sections/TwoColumnFormSection';
 import InsuranceImportance from '@/components/sections/Pages/metainsure/InsuranceImportance';
-import { metainsureform } from '@/config/forms/metainsure.form';
+import { baseFields } from '@/config/forms/base.fields';
 
 export default function MetaInsurePage() {
     const schema = {
-        ...metainsureform,
-        
-    
+        formId: "k-12",
+        fields: baseFields,
         extraPayload: {
-          mx_Program_Products: "Study Abroad",
-          mx_Marketing_Pages: "MetaInsure page"
+            mx_Program_Products: "",
+            mx_Marketing_Pages: ""
         },
-      };
+    };
     return (
         <>
             <HeroBanner slug="metainsure" size="medium" />

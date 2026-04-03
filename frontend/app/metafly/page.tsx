@@ -2,20 +2,19 @@ import FAQSection from '@/components/sections/FAQSection';
 import ServingDestinations from '@/components/sections/ServicesPageDestinations';
 import SuccessStories from '@/components/sections/SuccessStories';
 import HeroBanner from '@/components/banner/HeroBanner';
-import { metaflyForm } from "@/config/forms/metafly.form";
+import { baseFields } from '@/config/forms/base.fields';
 import MetaFlyProcess from '@/components/sections/Pages/metafly/MetaFlyProcess';
 import TwoColumnFormSection from '@/components/sections/TwoColumnFormSection';
 import MetaFlyLeftInfo from '@/components/sections/Pages/metafly/MetaFlyLeftInfo';
 
 export default function MetaFlyPage() {
   const schema = {
-    ...metaflyForm,
-    
-
-    extraPayload: {
-      mx_Program_Products: "Study Abroad",
-      mx_Marketing_Pages: "MetaFly page"
-    },
+      formId: "k-12",
+      fields: baseFields,
+      extraPayload: {
+          mx_Program_Products: "",
+          mx_Marketing_Pages: ""
+      },
   };
 
   return (

@@ -5,11 +5,19 @@ import ComfortConvenience from '@/components/sections/Pages/metastay/ComfortConv
 import MetaStayLeftInfo from '@/components/sections/Pages/metastay/MetaStayLeftInfo';
 import MetaStayProcess from '@/components/sections/Pages/metastay/MetaStayProcess';
 import SuccessStories from '@/components/sections/SuccessStories';
-import { metaflyForm } from "@/config/forms/metafly.form";
 import AccomodationDestination from '@/components/sections/Pages/metastay/AccomodationDestination';
 import AccommodationOptions from '@/components/sections/Pages/metastay/AccomodationOptions';
+import { baseFields } from '@/config/forms/base.fields';
 
 export default function MetaStayPage() {
+  const schema = {
+      formId: "k-12",
+      fields: baseFields,
+      extraPayload: {
+          mx_Program_Products: "",
+          mx_Marketing_Pages: ""
+      },
+  };
   return (
     <>
       {/* HERO */}
@@ -22,7 +30,7 @@ export default function MetaStayPage() {
       <AccomodationDestination/>
 
       {/* TWO COLUMN SECTION */}
-      <TwoColumnFormSection formSchema={metaflyForm} formWidth={'84%'}>
+      <TwoColumnFormSection formSchema={schema} formWidth={'84%'}>
         <MetaStayLeftInfo />
       </TwoColumnFormSection>
 
