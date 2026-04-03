@@ -3,8 +3,9 @@
 import { Box, colors } from '@mui/material';
 import { useId } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules'; 
 import 'swiper/css';
+import 'swiper/css/pagination';
 
 // Icons
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -47,7 +48,7 @@ export default function CustomSlider<T>({
       {shouldShowArrows && (
         <Box
           sx={{
-            display: 'flex',
+            display: { xs: 'none', md: 'flex' }, // ← was: display: 'flex'
             justifyContent: 'flex-end',
             gap: 1,
             position: "absolute",
@@ -66,34 +67,48 @@ export default function CustomSlider<T>({
       )}
 
       {/* SLIDER */}
-      <Swiper
-        modules={[Navigation]}
-        spaceBetween={spaceBetween}
-        slidesPerView={slidesPerView}
-        navigation={
-          shouldShowArrows
-            ? {
-                prevEl: `.${prevClass}`,
-                nextEl: `.${nextClass}`,
-              }
-            : false
-        }
-        breakpoints={
-          breakpoints || {
-            0: { slidesPerView: 1 },
-            600: { slidesPerView: 2 },
-            900: { slidesPerView },
-          }
-        }
+      {/* ↓ added wrapper Box for pagination dot styles on mobile only */}
+      <Box
+        sx={{
+          '.swiper': { pb: { xs: '36px', md: '0px' } },
+          '.swiper-pagination': { display: { xs: 'block', md: 'none' } },
+          '--swiper-pagination-color': palette.pink[400],
+          '--swiper-pagination-bullet-inactive-color': palette.gray[200],
+          '--swiper-pagination-bullet-inactive-opacity': '1',
+          '--swiper-pagination-bullet-size': '8px',
+          '--swiper-pagination-bullet-horizontal-gap': '4px',
+        }}
       >
-        {data.map((item: any) => (
-          <SwiperSlide key={item.id} style={{ display: 'flex', height: 'auto' }}>
-            <Box sx={{ px: "10px", py: "30px", width: "100%" }}>
-              {renderItem(item)}
-            </Box>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <Swiper
+          modules={[Navigation, Pagination]} // ← added Pagination
+          spaceBetween={spaceBetween}
+          slidesPerView={slidesPerView}
+          navigation={
+            shouldShowArrows
+              ? {
+                  prevEl: `.${prevClass}`,
+                  nextEl: `.${nextClass}`,
+                }
+              : false
+          }
+          pagination={{ clickable: true }} // ← added
+          breakpoints={
+            breakpoints || {
+              0: { slidesPerView: 1 },
+              600: { slidesPerView: 2 },
+              900: { slidesPerView },
+            }
+          }
+        >
+          {data.map((item: any) => (
+            <SwiperSlide key={item.id} style={{ display: 'flex', height: 'auto' }}>
+              <Box sx={{ px: "10px", py: "30px", width: "100%" }}>
+                {renderItem(item)}
+              </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
     </Box>
   );
 }

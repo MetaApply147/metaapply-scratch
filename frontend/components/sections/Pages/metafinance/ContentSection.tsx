@@ -21,6 +21,7 @@ export default function ContentSection() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 py: 3,
+                flexDirection: { xs: "column", md: "row" },
             }}>
           <Box
             sx={{
@@ -33,10 +34,12 @@ export default function ContentSection() {
               variant="heading05"
               component="h2"
               fontWeight={400}
-              sx={{ lineHeight: 1.2 }}
+              sx={{ lineHeight: 1.2, }}
             >
+              <Box component="p">
               Compare Best Deals on{" "}
-              <Box component="span" fontWeight={600}>
+              </Box>
+              <Box component="p" fontWeight={600}>
                 Education Loan
               </Box>{" "}
              
@@ -55,10 +58,10 @@ export default function ContentSection() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "0%", md: "45%" },
+            width: { xs: "100%", md: "45%" },
             textAlign: "right",
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: { xs: "center", md: "flex-end" },
           }}
         >
           <Image
@@ -67,7 +70,7 @@ export default function ContentSection() {
             width={500}  
             height={400}
             style={{
-              maxWidth: '450px',
+              maxWidth: "100%",
               objectFit: "contain",
             }}
           />
