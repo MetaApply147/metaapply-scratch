@@ -18,7 +18,7 @@ export default function TwoColumnFormSection({
   bgColor
 }: Props) {
   return (
-    <Section component="section" sx={{ backgroundColor: bgColor }}>
+    <Section sx={{ backgroundColor: bgColor }}>
       <Box
         sx={{
           display: 'grid',
