@@ -69,7 +69,7 @@ const PartnerCard = ({ item }: { item: PartnerItem }) => {
         width={300}
         height={112}
         style={{
-          width: "auto",
+          width: "100%",
           height: "100%",
           objectFit: "contain",
         }}

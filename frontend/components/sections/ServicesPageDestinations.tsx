@@ -120,6 +120,14 @@ export default function ServingDestinations({bgColor}: Props) {
                         data={data}
                         spaceBetween={20}
                         slidesPerView={8}
+                        breakpoints={{
+                            0: { slidesPerView: 2.2, spaceBetween: 10 },
+                            480: { slidesPerView: 3, spaceBetween: 12 },
+                            600: { slidesPerView: 4, spaceBetween: 14 },
+                            900: { slidesPerView: 5, spaceBetween: 16 },
+                            1200: { slidesPerView: 7, spaceBetween: 18 },
+                            1400: { slidesPerView: 8, spaceBetween: 20 },
+                        }}
                         renderItem={(item) => (
                             <Link href="#">
                                 <Box
