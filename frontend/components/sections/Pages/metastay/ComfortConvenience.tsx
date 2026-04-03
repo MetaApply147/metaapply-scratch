@@ -30,9 +30,14 @@ export default function ComfortConvenience() {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            rowGap: 5,
-            columnGap: 3,
+            gridTemplateColumns: {
+              xs: "repeat(2, 1fr)",   
+              sm: "repeat(3, 1fr)",   
+              md: "repeat(4, 1fr)",
+              lg: "repeat(5, 1fr)",   
+            },
+            rowGap: { xs: 3, sm: 4, md: 5 },
+            columnGap: { xs: 2, sm: 3, md: 3 },
           }}
         >
           {amenities.map((item) => (
@@ -42,30 +47,48 @@ export default function ComfortConvenience() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 0.5,
-                py: 1,
+                gap: { xs: 0.8, sm: 1, md: 0.5 },
+                py: { xs: 1.5, sm: 2, md: 1 },
               }}
             >
-              <Box sx={{
-                height: '100px',
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <Image
-                  src={item.icon}
-                  alt={item.title}
-                  width={100}
-                  height={100}
-                  style={{ objectFit: "contain" }}
-                />
-              </Box>
+            <Box
+              sx={{
+                height: { xs: "70px", sm: "85px", md: "100px" },
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                src={item.icon}
+                alt={item.title}
+                width={100}
+                height={100}
+                style={{
+                  objectFit: "contain",
+                  width: "auto",
+                  height: "100%", 
+                }}
+              />
+            </Box>
               <Typography
                 variant="body03"
-                component='h6'
+                component="h6"
                 sx={{
                   fontWeight: 600,
                   textAlign: "center",
-                  pt: 1,
+                  pt: { xs: 0.5, sm: 1 },
+
+                  fontSize: {
+                    xs: "12px",
+                    sm: "16px",
+                    md: "inherit", 
+                  },
+
+                  lineHeight: {
+                    xs: "16px",
+                    sm: "20px",
+                    md: "inherit",
+                  },
                 }}
               >
                 {item.title}
