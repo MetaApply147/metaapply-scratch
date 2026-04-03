@@ -14,6 +14,7 @@ export default function MetaStayProcess() {
     <ServicesProcessSlider     
       highlightText="MetaStay"
       title="Process"
+      highlightPosition='start'
       data={metaStayData}
       slidesPerView={5}
     />  

@@ -9,12 +9,14 @@ export default function MetaFinanceLeftInfo() {
     {
       id: 1,
       title: 'Secured',
+      tag: 'Collateral',
       desc: 'Refers to loan that is given to the applicant in the form of a collateral, like property or fixed deposit. A secured loan has less rate of interest. ',
       image: '/Services-images/secured.webp',
     },
     {
       id: 2,
       title: 'Unsecured',
+      tag: 'Collateral Free',
       desc: 'Refers to a loan type without any collaterals. However, banks do check the applicant’s financial profile. An unsecured loan carries a high interest rate.',
       image: '/Services-images/unsecured.webp',
     },
@@ -22,19 +24,7 @@ export default function MetaFinanceLeftInfo() {
 
   return (
     <Box>
-      {/* <Typography
-        variant="heading07"
-        sx={{
-          mb: 4,
-          fontWeight: 600,
-          display: 'block',
-        }}
-      >
-        Types of{' '}
-        <Box component="span" sx={{ color: 'primary.main' }}>
-          Education Loan
-        </Box>
-      </Typography> */}
+      
       <SectionHeader title='Types of' highlight='Education Loan'/>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3.5 }}>
@@ -76,12 +66,21 @@ export default function MetaFinanceLeftInfo() {
                 component='h5'
                 sx={{
                   fontWeight: 500,
-                  color: 'secondary.main',
-                  mb: 2,
+                  color: 'secondary.main',                  
                   display: 'block',
                 }}
               >
                 {item.title}
+              </Typography>
+              <Typography
+                variant="body05"
+                component='p'
+                sx={{
+                  fontWeight: 600,
+                  mb: 2,
+                }}
+              >
+                {item.tag}
               </Typography>
               <Typography
                 variant="body05"

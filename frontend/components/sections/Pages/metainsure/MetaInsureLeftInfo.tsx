@@ -16,25 +16,13 @@ export default function MetaInsureLeftInfo() {
       id: 2,
       title: 'Health Insurance',
       desc: 'Covers hospitalisation, doctor visits, prescription drugs, and emergency medical treatments while you\'re studying abroad.',
-      image: '/Services-images/travel-insurance.webp',
+      image: '/Services-images/health-insurance.webp',
     },
   ];
 
   return (
     <Box>
-      {/* <Typography
-        variant="heading07"
-        sx={{
-          mb: 4,
-          fontWeight: 600,
-          display: 'block',
-        }}
-      >
-        Types of{' '}
-        <Box component="span" sx={{ color: 'primary.main' }}>
-          International Insurance
-        </Box>
-      </Typography> */}
+     
       <SectionHeader title='Types of' highlight='International Insurance'/>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3.5 }}>
