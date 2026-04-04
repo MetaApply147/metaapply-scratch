@@ -379,13 +379,13 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
           },
         },
         "& .MuiInputBase-input": {
-          fontSize: "14px",
+          fontSize: "12px",
           fontFamily: "var(--font-body)",
           color: 'gray.800',
           padding: '10px 16px',
         },
         "& .MuiInputLabel-root": {
-          fontSize: "14px",
+          fontSize: "12px",
           fontFamily: "var(--font-body)",
           color: 'gray.600',
         },
@@ -417,7 +417,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
 
           "& .MuiOutlinedInput-root": {
             ...commonProps.sx?.["& .MuiOutlinedInput-root"], 
-            height: "40.13px",
+            height: "37.25px",
             display: "flex",
             alignItems: "center",
           },
@@ -472,7 +472,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
       pb: 4,
       width: Setwidth,
     }}>
-      <Typography variant="heading11" component='h5' sx={{textAlign: 'center', mb: 3.5}}>{schema.submitLabel ?? "Enquire Now"}</Typography>
+      <Typography variant="heading12" component='h5' sx={{textAlign: 'center', mb: 2.5}}>{schema.submitLabel ?? "Enquire Now"}</Typography>
     
       <Box
         component="form"
@@ -528,9 +528,9 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
                       width: "100px",
                       "& .MuiOutlinedInput-root": {
                         borderRadius: "8px 0 0 8px",
-                        fontSize: '14px',
+                        fontSize: '12px',
                         color: 'gray.800',
-                        height: '40.13px',
+                        height: '37.25px',
                         "& fieldset": {
                           borderColor: "#D0D0D0",
                           borderRight: "none",
@@ -619,8 +619,8 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
                           sx={{ width: '25%',
                             "& .MuiOutlinedInput-root": {
                               borderRadius: "8px",
-                              height: '40.13px', 
-                              fontSize: '14px',
+                              height: '37.25px', 
+                              fontSize: '12px',
                               color: 'gray.800'
                             },
                             "&.Mui-focused fieldset": {
@@ -670,7 +670,7 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
                 {/* ✅ Verified UI */}
                 {otpVerified && (
                   <Typography color="green" fontSize={12} mt={1} sx={{display: 'flex', alignItems: 'center', gap:'2px'}}>
-                    <CheckBoxIcon sx={{fontSize: '14px'}}/>OTP Verified
+                    <CheckBoxIcon sx={{fontSize: '12px'}}/>OTP Verified
                   </Typography>
                 )}
               </Box>

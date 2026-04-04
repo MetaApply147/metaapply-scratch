@@ -23,15 +23,17 @@ export default function HeroSection() {
         backgroundPosition: "center",
         display: "flex",
         alignItems: "center",
-        "&::before": {
-        //   content: '""',
-        //   position: "absolute",
-        //   inset: 0,
-        //   background:
-        //     "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.2) 100%)",
-        },
+        '&:before': {
+          content: '""',
+          position: 'absolute',
+          height: '100%',
+          width: '100%',
+          background: 'url(/k12/banner-ovrlay.svg)',
+          backgroundRepeat: 'no-repeat',
+        }
       }}
     >
+      
       <Box
         sx={{
           position: "relative",

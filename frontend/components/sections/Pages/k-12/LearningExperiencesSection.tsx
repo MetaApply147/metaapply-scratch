@@ -1,108 +1,97 @@
 "use client";
+import Section from "@/components/common/Section";
+import SectionHeader from "@/components/common/SectionHeader";
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 
 const cards = [
   {
     label: "Aspirational\nCurriculum",
-    image: "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80",
+    image: "/k12/curriculum.webp",
   },
   {
     label: "Beyond the\nClassroom",
-    image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80",
+    image: "/k12/beyond-classroom.webp",
   },
   {
     label: "Dedicated\nTransition",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80",
+    image: "/k12/transition.webp",
   },
   {
     label: "Innovative\nFacilities",
-    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80",
+    image: "/k12/facilities.webp",
   },
 ];
 
 export default function LearningExperiencesSection() {
   return (
-    <Box sx={{ backgroundColor: "#fff", py: "64px" }}>
-      <Box sx={{ maxWidth: "1200px", mx: "auto", px: { xs: "16px", md: "24px" } }}>
-
-        <Typography
-          align="center"
-          sx={{ fontWeight: 700, mb: "40px", fontSize: "1.75rem", color: "#111" }}
-        >
-          Redefining{" "}
-          <Box component="span" sx={{ color: "#E05A9B" }}>
-            Learning Experiences
-          </Box>
-        </Typography>
+    <Section spacing="lg" sx={{textAlign: 'center'}}>
+        <SectionHeader title="Redefining" highlight="Learning Experiences"/>
 
         {/* 4-column CSS grid */}
-        <div
-          style={{
+        <Box
+          sx={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "16px",
+            gap: "24px",
           }}
         >
           {cards.map((card, i) => (
-            <div
+            <Box
               key={i}
-              style={{
+              sx={{
                 position: "relative",
-                borderRadius: "12px",
+                borderRadius: "25px",
                 overflow: "hidden",
-                height: "230px",
+                height: "350px",
                 cursor: "pointer",
+                p: '1.2em',
+                background: `url(${card.image})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
               }}
             >
-              {/* Photo */}
-              <img
-                src={card.image}
-                alt={card.label}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                  transition: "transform 0.4s ease",
-                }}
-              />
 
               {/* Pink gradient overlay */}
-              <div
-                style={{
+              <Box
+                sx={{
                   position: "absolute",
+                  width: '100%',
                   inset: 0,
-                  background:
-                    "linear-gradient(to top, rgba(200,50,90,0.85) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)",
+                  height: '60%',
+                  background: i % 2 === 0 ? "linear-gradient(180deg, rgb(255 255 255 / 2%) 0%, rgb(255 49 133 / 60%) 90%)" : 'linear-gradient(180deg, rgb(255 255 255 / 2%) 0%, rgb(22 49 127 / 60%) 90%)',
+                  top: 'auto',
+                  bottom: 0,
                 }}
               />
 
               {/* Label */}
-              <div
-                style={{
+              <Box
+                sx={{
                   position: "absolute",
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  padding: "14px 16px",
+                  padding: "1.8em",
+                  textAlign: 'center'
                 }}
               >
                 <Typography
+                variant="heading11"
+                component='h5'
                   sx={{
-                    color: "#fff",
-                    fontWeight: 700,
-                    fontSize: "0.88rem",
-                    lineHeight: 1.35,
+                    color: "common.white",
                     whiteSpace: "pre-line",
+                    lineHeight: 'normal'
                   }}
                 >
                   {card.label}
                 </Typography>
-              </div>
-            </div>
+              </Box>
+            </Box>
           ))}
-        </div>
-      </Box>
-    </Box>
+        </Box>
+    </Section>
   );
 }
