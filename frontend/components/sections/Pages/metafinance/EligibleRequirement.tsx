@@ -36,7 +36,7 @@ export default function EligibleRequirement() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: 10,
+          gap: { xs: 4, md: 8 },
           flexDirection: { xs: "column", md: "row" },
         }}
       >
@@ -76,7 +76,7 @@ export default function EligibleRequirement() {
         </Box>
 
         {/* RIGHT IMAGE */}
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
+        <Box sx={{ display: "block",  }}>
           <Image
             src="/services-images/loan-man.webp"
             alt="Student"
@@ -84,8 +84,8 @@ export default function EligibleRequirement() {
             height={585}
             
             style={{ borderRadius: "20px",   
-                maxWidth: "572px", 
-                 }}
+                maxWidth: "100%", 
+            }}
           />
         </Box>
       </Box>

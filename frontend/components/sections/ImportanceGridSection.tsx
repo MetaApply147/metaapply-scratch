@@ -48,7 +48,7 @@ export default function ImportanceGridSection({
               md: "repeat(3, 1fr)",
               lg: `repeat(${colCount}, 1fr)`,
             },
-            gap: { xs: 2, md: 3 },
+            gap: { xs: 5, md: 3 },
             // mt: { xs: 4, md: 5 },
           }}
         >
@@ -97,7 +97,7 @@ const GridCard = ({ item }: { item: GridItem }) => {
         sx={{
           width: "100%",
           px: 2.5,
-          py: 2.5,
+          py: { xs: 5, md: 2.5 },
           borderRadius: "12px",
           backgroundColor: "common.white",
           boxShadow: "0px 6.89px 14.64px 0px #ABABAB1A, 0px 26.7px 26.7px 0px #ABABAB17",

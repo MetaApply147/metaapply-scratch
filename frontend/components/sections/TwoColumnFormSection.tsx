@@ -18,12 +18,12 @@ export default function TwoColumnFormSection({
   bgColor
 }: Props) {
   return (
-    <Section sx={{ backgroundColor: bgColor }}>
+    <Section spacing="lg" sx={{ backgroundColor: bgColor }}>
       <Box
         sx={{
           display: 'grid',
           gridTemplateColumns: { xs: '1fr', md: '1.1fr 1fr' },
-          gap: '8em',
+          gap: {xs: 3, sm: 4, md: 6},
           alignItems: 'center',
         }}
       >

@@ -34,7 +34,9 @@ export default function ContentSection() {
               variant="heading05"
               component="h2"
               fontWeight={400}
-              sx={{ lineHeight: 1.2, }}
+              sx={{ lineHeight: 1.2,
+                    fontSize: {xs: '24px', sm: '32px', md: '42px', lg: '52px' },
+               }}
             >
               <Box component="p">
               Compare Best Deals on{" "}

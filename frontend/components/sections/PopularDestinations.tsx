@@ -149,8 +149,8 @@ export default function PopularDestinations({bgColor}: Props) {
                         position: 'absolute',
                         top: 15,
                         left: 12,
-                        px: 1.8,
-                        py: 0.3,
+                        px: 1.9,
+                        py: 0.7,
                         borderRadius: 2,
                         color: 'common.white',
                         background: item.tagColor || '#000',
@@ -182,7 +182,7 @@ export default function PopularDestinations({bgColor}: Props) {
                     </Typography>
                   </Box>
 
-                  <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }} mt={5}>
+                  <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexDirection: { xs: 'column', md: 'column', lg: 'row' } }} mt={5}>
                     <Button variant="contained" size="medium" sx={{ fontWeight: 500, padding: '16px 30px' }}>
                       <Image src='/Home/download_arrow.svg' height={16} width={16} alt='Download' style={{ marginRight: "6px" }} /> Country Guide
                     </Button>

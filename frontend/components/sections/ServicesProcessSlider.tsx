@@ -43,19 +43,19 @@ export default function ServicesProcessSlider({
           slidesPerView={slidesPerView}
           breakpoints={{
             0: {
-              slidesPerView: 1.2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 1.5,
-              spaceBetween: 10,
+              slidesPerView: 2,
+              spaceBetween: -10,
             },
             600: {
-              slidesPerView: 2,
-              spaceBetween: 12,
+              slidesPerView: 3,
+              spaceBetween: -12,
             },
             900: {
-              slidesPerView: 3,
+              slidesPerView: 4,
               spaceBetween: -20,
             },
             1200: {
@@ -85,7 +85,7 @@ const ProcessCard = ({ item }: { item: ProcessItem }) => {
         alignItems: "center",
         textAlign: 'center',
         gap: 1.8,
-        px: 6,
+        px: 4,
         pt: 5,
         pb: 1.5,
         minHeight: "130px",
