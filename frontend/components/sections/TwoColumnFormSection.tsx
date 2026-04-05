@@ -8,14 +8,16 @@ type Props = {
   formSchema: any;
   formWidth?: any;
   children: React.ReactNode;
-  bgColor?: string 
+  bgColor?: string ;
+  alignEnd?: boolean;
 };
 
 export default function TwoColumnFormSection({
   formSchema,
   children,
   formWidth,
-  bgColor
+  bgColor,
+  alignEnd = false
 }: Props) {
   return (
     <Section spacing="lg" sx={{ backgroundColor: bgColor }}>
@@ -33,7 +35,7 @@ export default function TwoColumnFormSection({
         </Box>
 
         {/* RIGHT (COMMON DESIGN, DYNAMIC FORM) */}
-        <Box sx={{display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{display: 'flex', justifyContent: alignEnd ? 'flex-end' : 'center'}}>
           <DynamicLeadForm schema={formSchema} Setwidth={formWidth}   />
         </Box>
       </Box>

@@ -11,7 +11,12 @@ type CounterItem = {
   leadingZero?: boolean;
 };
 
-const counterData: CounterItem[] = [
+type CounterSectionProps = {
+  counterWidth?: 'full' | 'default';
+  data?: CounterItem[];
+};
+
+const defaultCounterData: CounterItem[] = [
   { id: 1, value: 40, suffix: '+', label: 'Study\nDestinations' },
   { id: 2, value: 75, suffix: 'K+', label: 'Student\nCommunity' },
   { id: 3, value: 5, suffix: 'K+', label: 'Enrolled\nStudents' },
@@ -158,37 +163,26 @@ function CounterCard({
   );
 }
 
-export default function CounterSection() {
+export default function CounterSection({counterWidth = 'default', data = defaultCounterData}: CounterSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isVisible = useInView(containerRef);
 
   return (
-    <Box
-      ref={containerRef}
-      component="section"
+    <Grid ref={containerRef} container
       sx={{
-        py: { xs: 0, md: 0 },
-        backgroundColor: 'common.white',
-      }}
+        maxWidth: { xs: '100%', md: counterWidth === 'full' ? '100%' : '80%', },
+        margin: '0 auto'
+      }}  
     >
-      <Container maxWidth="xl">
-        <Grid container
-          sx={{
-            maxWidth: { xs: '100%', md: '80%' },
-            margin: '0 auto'
-          }}  
-        >
-          {counterData.map((item, index) => (
-            <Grid size={{ xs: 6, md: 3 }} key={item.id}>
-              <CounterCard
-                {...item}
-                showDivider={index !== counterData.length - 1}
-                isVisible={isVisible}
-              />
-            </Grid>
-          ))}
+      {data.map((item, index) => (
+        <Grid size={{ xs: 6, md: 3 }} key={item.id}>
+          <CounterCard
+            {...item}
+            showDivider={index !== data.length - 1}
+            isVisible={isVisible}
+          />
         </Grid>
-      </Container>
-    </Box>
+      ))}
+    </Grid>
   );
 }

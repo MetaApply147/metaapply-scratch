@@ -564,7 +564,13 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   attributes: {
     answer: Schema.Attribute.Text;
     category: Schema.Attribute.Enumeration<
-      ['Study Abroad', 'TestPrep', 'University Partner']
+      [
+        'Study Abroad',
+        'TestPrep',
+        'University Partner',
+        'For Students',
+        'For Institutions',
+      ]
     >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

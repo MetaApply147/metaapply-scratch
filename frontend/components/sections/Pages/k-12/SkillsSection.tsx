@@ -5,16 +5,16 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 const skills = [
-  { label: "Innovation\nManagement",      Icon: '/k12/AI-Enhanced.svg' },
-  { label: "AI-Enhanced\nLearning",       Icon: '/k12/Digital.svg' },
-  { label: "Drills\n& Yoga",             Icon: '/k12/Digital.svg' },
-  { label: "Music\n& Dance",             Icon: '/k12/Digital.svg' },
+  { label: "Innovation\nManagement",      Icon: '/k12/Innovation-Management.svg' },
+  { label: "AI-Enhanced\nLearning",       Icon: '/k12/AI-Enhanced.svg' },
+  { label: "Drills\n& Yoga",             Icon: '/k12/Yoga.svg' },
+  { label: "Music\n& Dance",             Icon: '/k12/Music.svg' },
   { label: "Digital\nLiteracy",          Icon: '/k12/Digital.svg' },
-  { label: "Tinkering\nLab",             Icon: '/k12/Digital.svg' },
-  { label: "General\nScience Lab",       Icon: '/k12/Digital.svg' },
-  { label: "Drama\nArts & Crafts",       Icon: '/k12/Digital.svg' },
-  { label: "Global & Cultural\nAwareness", Icon: '/k12/Digital.svg' },
-  { label: "Sports\n& Athletics",        Icon: '/k12/Digital.svg' },
+  { label: "Tinkering\nLab",             Icon: '/k12/Lab.svg' },
+  { label: "General\nScience Lab",       Icon: '/k12/Science.svg' },
+  { label: "Drama\nArts & Crafts",       Icon: '/k12/Drama.svg' },
+  { label: "Global & Cultural\nAwareness", Icon: '/k12/Global&Cultural-Awareness.svg' },
+  { label: "Sports\n& Athletics",        Icon: '/k12/Sports.svg' },
 ];
 
 export default function SkillsSection() {

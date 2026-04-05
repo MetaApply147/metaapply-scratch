@@ -22,7 +22,9 @@
       "enum": [
         "Study Abroad",
         "TestPrep",
-        "University Partner"
+        "University Partner",
+        "For Students",
+        "For Institutions"
       ]
     },
     "order": {

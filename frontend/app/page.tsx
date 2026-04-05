@@ -9,6 +9,7 @@ import PlanYourJourney from '@/components/sections/home/PlanYourJourney';
 import HomeRecruitmentPartner from '@/components/sections/home/HomeRecruitmentPartner';
 import EventsOffers from '@/components/sections/home/EventsOffers';
 import HeroBanner from '@/components/banner/HeroBanner';
+import Section from "@/components/common/Section";
 
 export default function Home() {
   return (
@@ -18,7 +19,9 @@ export default function Home() {
       <HeroBanner slug="home" minHeight={796} />
 
       {/* Counters */}
-      <CounterSection />
+      <Section spacing="lg" sx={{p: '0 !important'}}>
+        <CounterSection />
+      </Section>
 
       {/* Partnered Universities */}
       <PartneredUniversities />
