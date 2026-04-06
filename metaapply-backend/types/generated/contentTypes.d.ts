@@ -580,7 +580,15 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     order: Schema.Attribute.Integer;
     page: Schema.Attribute.Enumeration<
-      ['home', 'metafly', 'metainsure', 'metastay', 'metafinance']
+      [
+        'home',
+        'metafly',
+        'metainsure',
+        'metastay',
+        'metafinance',
+        'k-12',
+        'nextstep',
+      ]
     >;
     publishedAt: Schema.Attribute.DateTime;
     question: Schema.Attribute.String;

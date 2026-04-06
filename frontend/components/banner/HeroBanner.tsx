@@ -10,9 +10,10 @@ type Props = {
   slug: string;
   minHeight?: number;
   size?: 'default' | 'medium';
+  leftExtra?: React.ReactNode;
 };
 
-export default function HeroBanner({ slug, minHeight, size }: Props) {
+export default function HeroBanner({ slug, minHeight, size, leftExtra }: Props) {
   const [hero, setHero] = useState<any>(null);
 
   useEffect(() => {
@@ -52,18 +53,23 @@ export default function HeroBanner({ slug, minHeight, size }: Props) {
       overlay={hero.overlay}
       minHeight={minHeight}
       left={
-        <BannerContent
-          logo={getImageUrl(hero.logo)}
-          showLogo={hero.showLogo}
-          title={hero.title}
-          highlight={hero.highlight}
-          description={hero.description}
-          ctaText={hero.ctaText}
-          ctaUrl={hero.ctaUrl}
-          ctaTarget={hero.ctaTarget}
-          textColor={hero.textColor}
-          size={size}
-        />
+        <>
+          <BannerContent
+            logo={getImageUrl(hero.logo)}
+            showLogo={hero.showLogo}
+            title={hero.title}
+            highlight={hero.highlight}
+            description={hero.description}
+            ctaText={hero.ctaText}
+            ctaUrl={hero.ctaUrl}
+            ctaTarget={hero.ctaTarget}
+            textColor={hero.textColor}
+            size={size}
+          />
+
+          {leftExtra}
+        </>
+        
       }
       right={
         hero.rightImage && (

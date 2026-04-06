@@ -10,13 +10,14 @@ import HomeRecruitmentPartner from '@/components/sections/home/HomeRecruitmentPa
 import EventsOffers from '@/components/sections/home/EventsOffers';
 import HeroBanner from '@/components/banner/HeroBanner';
 import Section from "@/components/common/Section";
+import StepperForm from "@/components/sections/home/StepperForm";
 
 export default function Home() {
   return (
     <>
     
       {/*  Hero Section */}
-      <HeroBanner slug="home" minHeight={796} />
+      <HeroBanner slug="home" minHeight={796} leftExtra={<StepperForm />}/>
 
       {/* Counters */}
       <Section spacing="lg" sx={{p: '0 !important'}}>

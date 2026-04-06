@@ -1,5 +1,10 @@
+import FAQSection from "@/components/sections/FAQSection";
 import AboutNextstep from "@/components/sections/Pages/nextstep/AboutNextstep";
+import HelpsStudents from "@/components/sections/Pages/nextstep/HelpsStudents";
 import HeroBanner from "@/components/sections/Pages/nextstep/HeroBanner";
+import NextStepCTA from "@/components/sections/Pages/nextstep/NextstepCTA";
+import NextstepSuccessStories from "@/components/sections/Pages/nextstep/NextstepSuccessStories";
+import ProgramFormats from "@/components/sections/Pages/nextstep/ProgramFormat";
 import WhatMakesNextStep from "@/components/sections/Pages/nextstep/UniqueNextstep";
 import WhyNextStep from "@/components/sections/Pages/nextstep/WhyNextstep";
 import TwoColumnFormSection from "@/components/sections/TwoColumnFormSection";
@@ -29,6 +34,21 @@ export default function NextStep() {
 
             {/* Why nextstep */}
             <WhyNextStep/>
+
+            {/* Nextstep helps students */}
+            <HelpsStudents/>
+
+            {/* Program Format */}
+            <ProgramFormats/>
+
+            {/* Nextstep CTA */}
+            <NextStepCTA/>
+
+            {/* Success Story */}
+            <NextstepSuccessStories/>
+
+            {/* FAQs */}
+            <FAQSection page="nextstep"/>
         </>
     )
 }
