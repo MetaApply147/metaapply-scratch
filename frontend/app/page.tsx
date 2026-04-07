@@ -10,7 +10,7 @@ import HomeRecruitmentPartner from '@/components/sections/home/HomeRecruitmentPa
 import EventsOffers from '@/components/sections/home/EventsOffers';
 import HeroBanner from '@/components/banner/HeroBanner';
 import Section from "@/components/common/Section";
-import StepperForm from "@/components/sections/home/StepperForm";
+import StepperForm from "@/components/sections/home/StepperForm/StepperForm";
 
 export default function Home() {
   return (

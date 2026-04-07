@@ -126,7 +126,7 @@ export default function Header({ menus, tabs }: HeaderProps) {
                       >
                         <Typography
                           sx={{
-                            fontWeight: 500,
+                            fontWeight: 400,
                             color: isActive
                               ? "primary.main"
                               : "text.primary",
@@ -139,7 +139,7 @@ export default function Header({ menus, tabs }: HeaderProps) {
                       <Typography
                         onClick={() => handleToggleMenu(menu)}
                         sx={{
-                          fontWeight: 500,
+                          fontWeight: 400,
                           color: isActive
                             ? "primary.main"
                             : "text.primary",
