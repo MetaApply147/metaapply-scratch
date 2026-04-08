@@ -1,4 +1,6 @@
-const typography = {
+import { Theme } from "@mui/material/styles";
+
+const typography = (theme: Theme) => ({
 
   fontFamily: "var(--font-body)",
 
@@ -53,8 +55,25 @@ const typography = {
 
   heading07: {
     fontFamily: "var(--font-heading)",
-    fontSize: "40px",
-    fontWeight: 600
+    fontSize: "10px",
+    fontWeight: 600,
+
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "20px",
+      lineHeight: "36px",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "30px",
+      lineHeight: "40px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "36px",
+      lineHeight: "44px",
+    },
+    [theme.breakpoints.up("xl")]: {
+      fontSize: "40px",
+      lineHeight: "48px",
+    },
   },
 
   heading08: {
@@ -156,6 +175,6 @@ const typography = {
     fontWeight: 400
   }
 
-};
+});
 
 export default typography;

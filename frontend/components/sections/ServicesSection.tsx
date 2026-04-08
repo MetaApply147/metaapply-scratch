@@ -66,7 +66,7 @@ export default function ServicesSection() {
         <Box
             display="grid"
             gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))"
-            gap={5}
+            gap={{xs: 2, md: 4, xl: 5}}
         >
             {services.map((service, index) => (
             <Link href={service.link} key={index}>
@@ -79,6 +79,7 @@ export default function ServicesSection() {
                     boxShadow: "0px 10px 10px 0px #C3C3C340",
                     border: `1px solid ${service.borderColor}`,
                     display: 'flex',
+                    height: '100%',
                     flexDirection: 'column',
                     "&:hover": {
                         transform: "translateY(-6px)",

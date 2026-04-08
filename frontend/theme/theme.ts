@@ -3,7 +3,7 @@ import palette from './palette';
 import typography from './typography';
 import components from './components';
 
-const theme = createTheme({
+let theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -46,7 +46,7 @@ const theme = createTheme({
     blueSelected: palette.blueSelected,
   },
 
-  typography,
+  /*typography,*/
 
   components: {
     ...components,
@@ -69,17 +69,25 @@ const theme = createTheme({
           },
           [theme.breakpoints.up("md")]: {
             maxWidth: 960,
+            paddingLeft: "32px",
+            paddingRight: "32px",
           },
           [theme.breakpoints.up("lg")]: {
             maxWidth: 1200,
           },
           [theme.breakpoints.up("xl")]: {
             maxWidth: 1352,
+            paddingLeft: "16px",
+            paddingRight: "16px",
           },
         }),
       },
     }
   },
+});
+
+theme = createTheme(theme, {
+  typography: typography(theme),
 });
 
 export default theme;

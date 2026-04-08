@@ -32,7 +32,7 @@ export default function PlanYourJourney() {
               zIndex: 2,
             }}
           >
-            <Typography variant="heading06" component="h2" lineHeight={1.1} sx={{maxWidth: "90%"}}>
+            <Typography variant="heading06" component="h2" lineHeight={1.1} sx={{maxWidth: "90%", fontSize: {lg: '42px', xl: '48px'}}}>
               Plan Your Complete{" "}
               <Box component="span" sx={{ color: "primary.main" }}>
                 Study Abroad Journey

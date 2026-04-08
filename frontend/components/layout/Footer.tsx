@@ -110,7 +110,7 @@ const AccordionFooter = ({ groupedSections }: any) => {
 };
 
 const FooterLinkItem = ({ name, url }: { name: string; url: string }) => (
-  <Link href={url || "#"} aria-label={name} style={{ width: "max-content", display: "block" }}>
+  <Link href={url || "#"} aria-label={name} style={{ width: "fit-content", display: "block", wordWrap: 'break-word' }}>
     <Typography
       variant="body06"
       fontWeight={600}

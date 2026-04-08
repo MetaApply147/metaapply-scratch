@@ -130,6 +130,7 @@ export default function CityExpertsSection() {
                 onClick={() => setActiveCity(item.city)}
                 variant="heading12"
                 sx={{
+                fontSize: {lg: '18px' ,xl: '20px'},
                 cursor: "pointer",
                 fontWeight: 500,
                 px: 1.5,
