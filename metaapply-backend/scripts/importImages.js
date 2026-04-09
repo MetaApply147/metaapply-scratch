@@ -5,7 +5,7 @@ const axios = require("axios");
 const FormData = require("form-data");
 
 const STRAPI_URL = "https://strapi-backend.azurewebsites.net/api/upload";
-const TOKEN = "0737862a10d456de1ecec48d74c43579498ddf132da3755a917256fb1e5ff1e67de6780303fa8b32f1ab82a99d9562251df208e092627d00623dd4380096d75bf354345532d2ce367beb6a01045c143839194127447ba0d1d3451cba267dd688bf17726638eb7347e3cccb749d0b269023154f35aef5c2589f38ba4257096d34"; // 🔥 replace this
+const TOKEN = "4c0b810bda1208d575232acea0d911a02ff4b8ebf59694aff66b834754b139013a61b20dc5ffc9df870a92f30e471bdf0940aaa856de2d8469b4380b08a70c7e24d465b5bd34cab89725dc2ed0774acb7cbb241dca2b06920033b1bb3825e02ced28de71b3582abe18bfd761c4806f70f9a768d277d765c53379f07808058c2f"; // 🔥 replace this
 
 const importImages = async () => {
   const imageUrls = [];

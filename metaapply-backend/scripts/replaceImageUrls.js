@@ -1,83 +1,130 @@
+const fs = require("fs");
 const axios = require("axios");
+const path = require("path");
 
 const BASE_URL = "https://strapi-backend.azurewebsites.net";
-const TOKEN = "0737862a10d456de1ecec48d74c43579498ddf132da3755a917256fb1e5ff1e67de6780303fa8b32f1ab82a99d9562251df208e092627d00623dd4380096d75bf354345532d2ce367beb6a01045c143839194127447ba0d1d3451cba267dd688bf17726638eb7347e3cccb749d0b269023154f35aef5c2589f38ba4257096d34";
+const POSTS_URL = `${BASE_URL}/api/posts`;
+const TOKEN = "4c0b810bda1208d575232acea0d911a02ff4b8ebf59694aff66b834754b139013a61b20dc5ffc9df870a92f30e471bdf0940aaa856de2d8469b4380b08a70c7e24d465b5bd34cab89725dc2ed0774acb7cbb241dca2b06920033b1bb3825e02ced28de71b3582abe18bfd761c4806f70f9a768d277d765c53379f07808058c2f"; // keep your token here
 
-// Fetch uploads
-const getUploads = async () => {
-  const res = await axios.get(`${BASE_URL}/api/upload/files`, {
-    headers: { Authorization: `Bearer ${TOKEN}` },
-    params: { pagination: { pageSize: 1000 } },
-  });
-  return res.data;
-};
+// -------------------------
+// LOAD IMAGE MAPPING
+// -------------------------
+const imageMapping = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, "image-mapping.json"),
+    "utf-8"
+  )
+);
 
-// Map filename → url
-const buildMap = (files) => {
-  const map = {};
-  files.forEach((f) => {
-    map[f.name] = f.url;
-  });
-  return map;
-};
+console.log("📦 Total mappings loaded:", imageMapping.length);
 
-// Replace ONLY markdown URLs
-const replaceMarkdown = (content, map) => {
-  return content.replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, url) => {
-    if (!url.startsWith("http")) return match;
+// -------------------------
+// MAIN FUNCTION
+// -------------------------
+const replaceImageUrls = async () => {
+  console.log("🚀 Starting image URL replacement...");
 
-    const fileName = url.split("/").pop().split("?")[0];
+  try {
+    let page = 1;
+    let hasMore = true;
 
-    if (map[fileName]) {
-      console.log("🔁 Replacing:", fileName);
-      return `![${alt}](${map[fileName]})`;
-    }
+    while (hasMore) {
+      console.log(`📄 Fetching page ${page}...`);
 
-    return match;
-  });
-};
+      const res = await axios.get(POSTS_URL, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+        params: {
+          "pagination[page]": page,
+          "pagination[pageSize]": 50,
+        },
+      });
 
-// Fetch posts
-const getPosts = async () => {
-  const res = await axios.get(`${BASE_URL}/api/posts`, {
-    headers: { Authorization: `Bearer ${TOKEN}` },
-    params: { pagination: { pageSize: 1000 } },
-  });
-  return res.data.data;
-};
+      const posts = res.data.data;
 
-// Update post
-const updatePost = async (id, content) => {
-  await axios.put(
-    `${BASE_URL}/api/posts/${id}`,
-    { content },
-    {
-      headers: { Authorization: `Bearer ${TOKEN}` },
-    }
-  );
-};
+      console.log(`➡️ Posts fetched: ${posts.length}`);
 
-const run = async () => {
-  const uploads = await getUploads();
-  const map = buildMap(uploads);
+      if (!posts.length) {
+        hasMore = false;
+        break;
+      }
 
-  const posts = await getPosts();
+    for (const post of posts) {
+      
+  console.log("🔍 Checking post:", post.id);
+// console.log("🧾 FULL POST:", post);
+  const attributes = post.attributes || post;
 
-  for (const post of posts) {
-    const id = post.id;
-    const content = post.content;
+  let content =
+    attributes?.content ||
+    attributes?.description ||
+    attributes?.body ||
+    attributes?.post_content ||
+    "";
 
-    if (!content) continue;
-
-    const updated = replaceMarkdown(content, map);
-
-    if (content !== updated) {
-      console.log("✏️ Updating post:", id);
-      await updatePost(id, updated);
-    }
+  if (!content) {
+    console.log("⚠️ No content found");
+    continue;
   }
 
-  console.log("🚀 DONE");
+  let updatedContent = content;
+  let replaced = false;
+
+  imageMapping.forEach(({ original, uploaded }) => {
+  const filename = original.split("/").pop().split("?")[0];
+
+  // Escape filename for regex safety
+  const safeFilename = filename.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  // ✅ Match ANY URL containing that filename (Markdown + HTML)
+  const regex = new RegExp(
+    `(https?:\\/\\/[^\\s)"']*${safeFilename}(\\?[^\\s)"']*)?)`,
+    "g"
+  );
+
+  if (regex.test(updatedContent)) {
+    console.log("🔁 Replacing file:", filename);
+
+    updatedContent = updatedContent.replace(regex, uploaded);
+    replaced = true;
+  }
+});;
+
+  if (replaced && updatedContent !== content) {
+  console.log(`✏️ Updating post ID: ${post.id}`);
+
+  await axios.put(
+    `${POSTS_URL}/${post.documentId}`, // ✅ FIXED
+    {
+      data: {
+        content: updatedContent,
+      },
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+}else {
+    console.log("⏭️ No match found");
+  }
+}
+
+      page++;
+    }
+
+    console.log("✅ All image URLs replaced successfully!");
+  } catch (error) {
+    console.error("❌ Error:", error.response?.data || error.message);
+  }
 };
 
-run();
+// -------------------------
+// EXECUTE SCRIPT
+// -------------------------
+(async () => {
+  console.log("🔥 Script started...");
+  await replaceImageUrls();
+})();

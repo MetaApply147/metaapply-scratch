@@ -1,81 +1,148 @@
+const fs = require("fs");
+const path = require("path");
+const csv = require("csv-parser");
 const axios = require("axios");
+const FormData = require("form-data");
 
 const BASE_URL = "https://strapi-backend.azurewebsites.net";
-const TOKEN = "0737862a10d456de1ecec48d74c43579498ddf132da3755a917256fb1e5ff1e67de6780303fa8b32f1ab82a99d9562251df208e092627d00623dd4380096d75bf354345532d2ce367beb6a01045c143839194127447ba0d1d3451cba267dd688bf17726638eb7347e3cccb749d0b269023154f35aef5c2589f38ba4257096d34";
+const UPLOAD_URL = `${BASE_URL}/api/upload`;
+const TOKEN = "4c0b810bda1208d575232acea0d911a02ff4b8ebf59694aff66b834754b139013a61b20dc5ffc9df870a92f30e471bdf0940aaa856de2d8469b4380b08a70c7e24d465b5bd34cab89725dc2ed0774acb7cbb241dca2b06920033b1bb3825e02ced28de71b3582abe18bfd761c4806f70f9a768d277d765c53379f07808058c2f"; // 🔴 replace this
+const FOLDER_ID = 2;
 
-// Fetch uploads
-const getUploads = async () => {
-  const res = await axios.get(`${BASE_URL}/api/upload/files`, {
-    headers: { Authorization: `Bearer ${TOKEN}` },
-    params: { pagination: { pageSize: 1000 } },
+// ✅ Decode escaped HTML (important for WP exports)
+const decodeHtml = (html = "") => {
+  return html
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&");
+};
+
+// ✅ Extract images from BOTH markdown + HTML
+const extractImages = (content) => {
+  const urls = [];
+  let match;
+
+  // Markdown images ![alt](url)
+  const mdRegex = /!\[.*?\]\((.*?)\)/g;
+  while ((match = mdRegex.exec(content)) !== null) {
+    urls.push(match[1]);
+  }
+
+  // HTML images <img src="...">
+  const htmlRegex = /<img[^>]+src="([^">]+)"/g;
+  while ((match = htmlRegex.exec(content)) !== null) {
+    urls.push(match[1]);
+  }
+
+  return urls;
+};
+
+const uploadInnerImages = async () => {
+  const rows = [];
+
+  // ✅ Load CSV
+  await new Promise((resolve) => {
+    fs.createReadStream(path.join(__dirname, "post.csv"))
+      .pipe(csv())
+      .on("data", (row) => rows.push(row))
+      .on("end", () => {
+        console.log("✅ Columns:", Object.keys(rows[0]));
+        resolve();
+      });
   });
-  return res.data;
-};
 
-// Map filename → url
-const buildMap = (files) => {
-  const map = {};
-  files.forEach((f) => {
-    map[f.name] = f.url;
-  });
-  return map;
-};
+  console.log("✅ Rows loaded:", rows.length);
 
-// Replace ONLY markdown URLs
-const replaceMarkdown = (content, map) => {
-  return content.replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, url) => {
-    if (!url.startsWith("http")) return match;
+  const uploadedSet = new Set();
 
-    const fileName = url.split("/").pop().split("?")[0];
+  for (const [index, row] of rows.entries()) {
+    try {
+      // ✅ Get content safely
+      let content =
+        row.post_content ||
+        row.content ||
+        row.description ||
+        row.body ||
+        "";
 
-    if (map[fileName]) {
-      return `![${alt}](${map[fileName]})`;
-    }
+      if (!content) continue;
 
-    return match;
-  });
-};
+      // ✅ Decode HTML if escaped
+      content = decodeHtml(content);
 
-// Fetch posts
-const getPosts = async () => {
-  const res = await axios.get(`${BASE_URL}/api/posts`, {
-    headers: { Authorization: `Bearer ${TOKEN}` },
-    params: { pagination: { pageSize: 1000 } },
-  });
-  return res.data.data;
-};
+      // 🧪 Debug (only first few rows)
+      if (index < 2) {
+        console.log("\n🔍 Sample Content:\n", content.slice(0, 500));
+      }
 
-// Update content only
-const updatePost = async (id, content) => {
-  await axios.put(
-    `${BASE_URL}/api/posts/${id}`,
-    { data: { content } },
-    { headers: { Authorization: `Bearer ${TOKEN}` } }
-  );
-};
+      const imageUrls = extractImages(content);
 
-const run = async () => {
-  const uploads = await getUploads();
-  const map = buildMap(uploads);
+      console.log(`📸 Row ${index + 1}: Found ${imageUrls.length} images`);
 
-  const posts = await getPosts();
-  console.log(posts[0]);
+      for (const imageUrl of imageUrls) {
+        try {
+          if (!imageUrl.startsWith("http")) continue;
 
-  for (const post of posts) {
-    const id = post.id;
-    const content = post.content;
+          const fileName = imageUrl.split("/").pop().split("?")[0];
 
-    if (!content) continue;
+          if (!fileName) continue;
 
-    const updated = replaceMarkdown(content, map);
+          if (uploadedSet.has(fileName)) {
+            console.log("♻️ Already processed:", fileName);
+            continue;
+          }
 
-    if (content !== updated) {
-      console.log("Updating post:", id);
-      await updatePost(id, updated);
+          // ✅ Check if already exists in Strapi
+          const existingRes = await axios.get(
+            `${BASE_URL}/api/upload/files?filters[name][$eq]=${fileName}`,
+            {
+              headers: {
+                Authorization: `Bearer ${TOKEN}`,
+              },
+            }
+          );
+
+          if (existingRes.data.length > 0) {
+            console.log("♻️ Already exists in Strapi:", fileName);
+            uploadedSet.add(fileName);
+            continue;
+          }
+
+          console.log("⬇️ Downloading:", imageUrl);
+
+          const imageRes = await axios.get(imageUrl, {
+            responseType: "stream",
+          });
+
+          const formData = new FormData();
+          formData.append("files", imageRes.data, {
+            filename: fileName,
+          });
+
+          formData.append("folder", FOLDER_ID);
+
+          const uploadRes = await axios.post(UPLOAD_URL, formData, {
+            headers: {
+              ...formData.getHeaders(),
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          });
+
+          console.log("✅ Uploaded:", uploadRes.data[0].url);
+
+          uploadedSet.add(fileName);
+        } catch (err) {
+          console.log("❌ Error uploading:", imageUrl);
+          console.log(err.response?.data || err.message);
+        }
+      }
+    } catch (err) {
+      console.log("❌ Row error:", err.message);
     }
   }
 
-  console.log("DONE ✅");
+  console.log("\n🚀 DONE uploading inner images");
 };
 
-run();
+uploadInnerImages();
