@@ -11,7 +11,7 @@ export default function MetaFinanceLeftInfo() {
       title: 'Secured',
       tag: 'Collateral',
       desc: 'Refers to loan that is given to the applicant in the form of a collateral, like property or fixed deposit. A secured loan has less rate of interest. ',
-      image: '/Services-images/secured.webp',
+      image: '/Services-images/Secured.webp',
     },
     {
       id: 2,
