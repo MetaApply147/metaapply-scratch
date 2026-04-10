@@ -67,7 +67,7 @@ export default function ContentSection() {
           }}
         >
           <Image
-            src="/services-images/loan-calculator.webp"
+            src="/Services-images/loan-calculator.webp"
             alt="Loan calculator"
             width={500}  
             height={400}
