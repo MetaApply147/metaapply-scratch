@@ -11,12 +11,52 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "pageTitle": {
       "type": "string"
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "pageTitle"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "eventTitle": {
+      "type": "string"
+    },
+    "eventDate": {
+      "type": "date"
+    },
+    "eventDuration": {
+      "type": "string"
+    },
+    "eventLocation": {
+      "type": "string"
+    },
+    "eventRegistrationDetails": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "eventLogo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "webinarAgenda": {
+      "type": "text"
+    },
+    "registerToday": {
+      "type": "text"
     },
     "featuredImage": {
       "type": "media",
@@ -27,15 +67,6 @@
         "videos",
         "audios"
       ]
-    },
-    "date": {
-      "type": "date"
-    },
-    "time": {
-      "type": "time"
-    },
-    "location": {
-      "type": "string"
     },
     "category": {
       "type": "enumeration",
