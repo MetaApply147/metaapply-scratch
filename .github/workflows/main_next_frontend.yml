@@ -26,10 +26,13 @@ jobs:
       - name: Build Next.js
         working-directory: frontend
         run: npm run build
+
+      - name: Copy public assets
+        run: cp -r frontend/public frontend/.next/standalone/public
  
       - name: Deploy to Azure
         uses: azure/webapps-deploy@v3
         with:
           app-name: "next-frontend"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_NEXT_FRONTEND }}
-          package: ./frontend
+          package: ./frontend/.next/standalone
