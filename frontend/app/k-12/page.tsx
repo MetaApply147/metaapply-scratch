@@ -32,7 +32,7 @@ export default function MetaFlyPage() {
             <CTABannerSection />
         
             {/* <FAQSection /> */}
-            <FAQSection page="metafly" />
+            <FAQSection page="k-12" />
 
         </>
     );
