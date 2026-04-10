@@ -44,11 +44,11 @@
         "past"
       ]
     },
-    "description": {
-      "type": "blocks"
-    },
     "order": {
       "type": "integer"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
