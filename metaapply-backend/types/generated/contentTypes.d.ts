@@ -591,23 +591,30 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    date: Schema.Attribute.Date;
-    description: Schema.Attribute.Blocks;
+    description: Schema.Attribute.RichText;
+    email: Schema.Attribute.String;
+    eventDate: Schema.Attribute.Date;
+    eventDuration: Schema.Attribute.String;
+    eventLocation: Schema.Attribute.String;
+    eventLogo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    eventRegistrationDetails: Schema.Attribute.String;
+    eventTitle: Schema.Attribute.String;
     featuredImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
-    location: Schema.Attribute.String;
     order: Schema.Attribute.Integer;
+    pageTitle: Schema.Attribute.String;
+    phone: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
-    time: Schema.Attribute.Time;
-    title: Schema.Attribute.String;
+    registerToday: Schema.Attribute.Text;
+    slug: Schema.Attribute.UID<'pageTitle'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    webinarAgenda: Schema.Attribute.Text;
   };
 }
 
