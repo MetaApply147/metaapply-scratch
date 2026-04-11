@@ -58,7 +58,7 @@ export default function EligibleRequirement() {
                 }}
               >
                 <Image
-                  src="/services-images/blue-star.svg"
+                  src="/Services-images/blue-star.svg"
                   alt="star"
                   width={40}
                   height={40}
@@ -78,7 +78,7 @@ export default function EligibleRequirement() {
         {/* RIGHT IMAGE */}
         <Box sx={{ display: "block",  }}>
           <Image
-            src="/services-images/loan-man.webp"
+            src="/Services-images/loan-man.webp"
             alt="Student"
             width={572}
             height={585}

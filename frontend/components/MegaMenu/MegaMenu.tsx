@@ -79,7 +79,7 @@ export default function MegaMenu({
         zIndex: 10,
       }}
     >
-      <Container maxWidth="xl" sx={{ p: 0 }}>
+      <Container maxWidth="xl" sx={{ p: '0 !important' }}>
         <Box
           display="flex"
           flexDirection={{

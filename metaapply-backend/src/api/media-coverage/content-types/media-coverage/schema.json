@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "media_coverages",
+  "info": {
+    "singularName": "media-coverage",
+    "pluralName": "media-coverages",
+    "displayName": "media-coverage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "published_date": {
+      "type": "date"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "media_url": {
+      "type": "text"
+    }
+  }
+}

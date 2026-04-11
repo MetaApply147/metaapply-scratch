@@ -56,7 +56,7 @@ export default function StepOne({
           <span style={{ color: "#EE0004" }}>*</span>
         </Typography>
 
-        <Image src="/home/Degree.svg" alt="degree" height={52} width={52} />
+        <Image src="/Home/Degree.svg" alt="degree" height={52} width={52} />
       </Box>
 
       <Stack direction="row" spacing={1.5} flexWrap="wrap">

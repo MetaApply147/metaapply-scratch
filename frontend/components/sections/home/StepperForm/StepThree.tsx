@@ -70,7 +70,7 @@ export default function StepThree({
                 <span style={{ color: "#EE0004" }}>(Max 3)*</span>
             </Typography>
 
-            <Image src="/home/Destination.svg" alt="degree" height={52} width={52} />
+            <Image src="/Home/Destination.svg" alt="degree" height={52} width={52} />
           </Box>
 
           <Box ref={countryDropdownRef} sx={{ position: "relative" }}>

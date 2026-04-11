@@ -6,24 +6,24 @@ import { Box, Typography } from "@mui/material";
 const levels = [
   {
     title: "Elementary School",
-    grade: "Grade 1–5",
-    body: "The foundation stage builds essential literacy and numeracy skills while encouraging social and emotional development.",
+    grade: "Grade K-5",
+    body: "This foundational stage builds essential literacy, numeracy, and critical thinking skills while promoting social and emotional development.",
   },
   {
     title: "Middle School",
-    grade: "Grades 6–8",
-    body: "During these transformative years, students develop their knowledge and develop independence and critical thinking skills.",
+    grade: "Grades 6-8",
+    body: "During these transformative years, students enhance their academic knowledge and develop independence and critical thinking skills.",
   },
   {
     title: "High School",
-    grade: "Grades 9–12",
-    body: "In high school, students advance academically while preparing for college and careers, focusing on critical thinking and personal responsibilities.",
+    grade: "Grades 9-12",
+    body: "In high school, students enhance academic skills and explore various subjects to prepare for college and careers, focusing on critical thinking and personal responsibility.",
   },
 ];
 
 export default function K12GuideSection() {
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{textAlign: 'center'}}>
         <SectionHeader title="A Comprehensive Guide to" highlight="K-12 Education"/>
 
         <Box
@@ -41,7 +41,6 @@ export default function K12GuideSection() {
                 borderRadius: "30px",
                 boxShadow: "0 23.11px 33.78px 0 rgb(0 0 0 / 7%)",
                 padding: "2.5em 4em",
-                textAlign: 'center'
               }}
             >
               <Typography variant="heading11" component='h5' sx={{color: 'navyBlue.400'}}>
