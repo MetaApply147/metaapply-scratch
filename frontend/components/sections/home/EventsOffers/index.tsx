@@ -66,8 +66,8 @@ export default function EventsOffers() {
               <Box
                 onClick={() => setTab("events")}
                 sx={{
-                  px: 6.2,
-                  py: 1.3,
+                  px: {xs: 4,sm: 6.2},
+                  py: {xs: 1,sm: 1.3},
                   borderRadius: "30px",
                   cursor: "pointer",
                   background:
@@ -86,8 +86,8 @@ export default function EventsOffers() {
               <Box
                 onClick={() => setTab("offers")}
                 sx={{
-                  px: 6.2,
-                  py: 1.3,
+                  px: {xs: 4,sm: 6.2},
+                  py: {xs: 1,sm: 1.3},
                   borderRadius: "30px",
                   cursor: "pointer",
                   background:

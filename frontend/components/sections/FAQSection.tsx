@@ -113,40 +113,45 @@ export default function FAQSection({ page }: Props) {
               border: "1px solid #FFBDD8",
               p: "12px",
               borderRadius: "51px",
-              width: "fit-content",
+              width: {xs: "100%", sm: "fit-content"},
+              overflow: 'auto'
             }}
           >
-            {categories.map((cat) => (
-              <Button
-                key={cat}
-                onClick={() => {
-                  setActiveTab(cat);
-                  setExpanded(false); 
-                }}
-                disableRipple
-                disableTouchRipple
-                sx={{
-                  borderRadius: "30px",
-                  px: 4.5,
-                  py: 1.5,
-                  background:
-                    activeTab === cat
-                      ? "linear-gradient(90deg, #BF0E2E 0%, #EE0081 100%)"
-                      : "#FFF0F6",
-                  color: activeTab === cat ? "common.white" : "text.primary",
-                  boxShadow:
-                    activeTab === cat ? "0px 4px 19px 0px #FF99CE" : "none",
-                  "&:hover": {
+            <Box sx={{display: 'flex'}}>
+              {categories.map((cat) => (
+                <Button
+                  key={cat}
+                  onClick={() => {
+                    setActiveTab(cat);
+                    setExpanded(false); 
+                  }}
+                  disableRipple
+                  disableTouchRipple
+                  sx={{
+                    borderRadius: "30px",
+                    px: {xs: 2,sm: 3, md: 4.5},
+                    py: {xs: 1,sm: 1.2, md: 1.5},
+                    minWidth: {xs: 100,sm: 'unset'},
+                    whiteSpace: 'nowrap',
+                    background:
+                      activeTab === cat
+                        ? "linear-gradient(90deg, #BF0E2E 0%, #EE0081 100%)"
+                        : "#FFF0F6",
+                    color: activeTab === cat ? "common.white" : "text.primary",
                     boxShadow:
                       activeTab === cat ? "0px 4px 19px 0px #FF99CE" : "none",
-                  },
-                }}
-              >
-                <Typography variant="heading12" component="h6" fontWeight={500}>
-                  {cat}
-                </Typography>
-              </Button>
-            ))}
+                    "&:hover": {
+                      boxShadow:
+                        activeTab === cat ? "0px 4px 19px 0px #FF99CE" : "none",
+                    },
+                  }}
+                >
+                  <Typography variant="heading12" component="h6" fontWeight={500} sx={{fontSize: {xs: 16,md: 18,lg: 20}}}>
+                    {cat}
+                  </Typography>
+                </Button>
+              ))}
+            </Box>
           </Box>
         )}
 
@@ -180,9 +185,6 @@ export default function FAQSection({ page }: Props) {
                   "& .MuiTypography-root": {
                     fontWeight: 500,
                   },
-                  "&.Mui-expanded .MuiTypography-root": {
-                    fontWeight: 600,
-                  },
                   "& .addIcon": {
                     display: "block",
                   },
@@ -203,7 +205,7 @@ export default function FAQSection({ page }: Props) {
                   </Box>
                 }
               >
-                <Typography variant="body03" component="p">
+                <Typography variant="body03" component="p" sx={{fontSize: {xs: 16,sm: 18, lg: 20}}} pr={{sm: 2,md: 0}}>
                   {faq.question}
                 </Typography>
               </AccordionSummary>
@@ -213,6 +215,8 @@ export default function FAQSection({ page }: Props) {
                   color="text.secondary"
                   variant="body04"
                   component="p"
+                  sx={{fontSize: {xs: 14, sm: 16,lg: 18}}}
+                  pr={{sm: 2,md: 0}}
                 >
                   {faq.answer}
                 </Typography>

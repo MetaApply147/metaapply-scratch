@@ -8,7 +8,7 @@ import { getServices } from '@/services/httpServices';
 
 type Props = {
   slug: string;
-  minHeight?: number;
+  minHeight?: any;
   size?: 'default' | 'medium';
   leftExtra?: React.ReactNode;
 };

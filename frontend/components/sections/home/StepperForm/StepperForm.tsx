@@ -99,7 +99,7 @@ export default function StepperFormol() {
           0px 6px 60px 0px #FFC4DC4D,
           0px 6px 40px 0px #C6C6C64D
         `,
-        p: 3.5,
+        p: {xs: 2.8, sm: 3.5},
       }}
     >
       {/* Stepper */}
@@ -150,8 +150,8 @@ export default function StepperFormol() {
               <Box
                 key={s}
                 sx={{
-                  width: 24.8,
-                  height: 24.8,
+                  width: {xs: 20, sm: 24.8},
+                  height: {xs: 20, sm: 24.8},
                   borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
@@ -179,8 +179,8 @@ export default function StepperFormol() {
                 ) : (
                   <Box
                     sx={{
-                      width: 7.75,
-                      height: 7.75,
+                      width: {xs: 6.5, sm: 7.75},
+                      height: {xs: 6.5, sm: 7.75},
                       borderRadius: "50%",
                       backgroundColor: isCurrent ? "#15803d" : "#D1D5DB",
                     }}

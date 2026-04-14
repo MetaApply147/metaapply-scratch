@@ -64,7 +64,7 @@ export default function SuccessStories({ page, type, limit, bgColor, cta }: Prop
       return (
         <Box sx={{borderRadius: 4}}>
           <Box position="relative">
-            <Box position="relative" sx={{ width: "100%", height: 250 }}>
+            <Box position="relative" sx={{ width: "100%", height: {xs: 180,sm: 150,md: 180,lg: 250} }}>
               <Image
                 src={image}
                 alt={item.title}
@@ -83,16 +83,16 @@ export default function SuccessStories({ page, type, limit, bgColor, cta }: Prop
             </Link>
           </Box>
 
-          <Box p={3.5} sx={{borderRadius: 4, boxShadow: `0px 8.19px 18.43px 0px #A1A1A11A, 0px 137.23px 55.3px 0px #A1A1A103` }}>
+          <Box sx={{borderRadius: 4, boxShadow: `0px 8.19px 18.43px 0px #A1A1A11A, 0px 137.23px 55.3px 0px #A1A1A103`, p: {xs: 2.5,lg: 3.5} }}>
             <Typography variant="body05" component="p" color="#4B4B4B">
               {item.description}
             </Typography>
 
-            <Typography variant="heading12" component="p" sx={{color: "primary.main"}} mt={2}>
+            <Typography variant="heading12" component="p" sx={{color: "primary.main", fontSize: {xs: 18, sm: 20}}} mt={2}>
               {item.title}
             </Typography>
 
-            <Typography variant="body05" sx={{color: "primary.main"}}>
+            <Typography variant="body05" sx={{color: "primary.main", fontSize: {xs: 14, sm: 16}}}>
               {item.role}
             </Typography>
           </Box>

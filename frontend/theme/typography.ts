@@ -58,12 +58,12 @@ const typography = (theme: Theme) => ({
     fontSize: "10px",
     fontWeight: 600,
 
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "20px",
+    [theme.breakpoints.up("xs")]: {
+      fontSize: "28px",
       lineHeight: "36px",
     },
-    [theme.breakpoints.up("md")]: {
-      fontSize: "30px",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "32px",
       lineHeight: "40px",
     },
     [theme.breakpoints.up("lg")]: {

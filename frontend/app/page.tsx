@@ -17,7 +17,7 @@ export default function Home() {
     <>
     
       {/*  Hero Section */}
-      <HeroBanner slug="home" minHeight={796} leftExtra={<StepperForm />}/>
+      <HeroBanner slug="home" minHeight={{ xs: 400, sm: 600, lg: 796 }} leftExtra={<StepperForm />}/>
 
       {/* Counters */}
       <Section spacing="lg" sx={{p: '0 !important'}}>

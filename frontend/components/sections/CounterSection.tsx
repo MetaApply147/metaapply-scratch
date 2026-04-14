@@ -118,6 +118,7 @@ function CounterCard({
             background: 'linear-gradient(180deg, #FFEADD 1.31%, #FF9CC5 33.87%, #FF3185 49.66%, #FFACCE 70.39%, #FFE4D2 99.99%)',
             borderRadius: '2px',
           }}/>
+          
         </Box>
       )}
 
@@ -135,6 +136,7 @@ function CounterCard({
           fontWeight={700}
           sx={{
             lineHeight: '100%',
+            fontSize: {xs: 26, sm: 28, md: 32}
           }}
           aria-live="polite"
           aria-label={`${formattedCount}${suffix}`}
@@ -150,6 +152,7 @@ function CounterCard({
             color: 'text.secondary',
             textAlign: 'center',
             lineHeight: "130%",
+            fontSize: {xs: 14, sm: 14, md: 16}
           }}
         >
           {lines.map((line, index) => (
@@ -175,7 +178,7 @@ export default function CounterSection({counterWidth = 'default', data = default
       }}  
     >
       {data.map((item, index) => (
-        <Grid size={{ xs: 6, md: 3 }} key={item.id}>
+        <Grid size={{ xs: 6, sm: 3 }} key={item.id}>
           <CounterCard
             {...item}
             showDivider={index !== data.length - 1}

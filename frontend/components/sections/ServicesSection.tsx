@@ -7,6 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import Section from '../common/Section';
 import Link from "next/link";
 import { link } from "fs";
+import { relative } from "path";
 
 /* ================= DATA ================= */
 
@@ -65,8 +66,8 @@ export default function ServicesSection() {
         {/* Cards */}
         <Box
             display="grid"
-            gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))"
-            gap={{xs: 2, md: 4, xl: 5}}
+            gridTemplateColumns={{sm: 'repeat(2, 1fr)',lg: 'repeat(4, 1fr)'}}
+            gap={{xs: 2, md: 3, lg: 3.5, xl: 5}}
         >
             {services.map((service, index) => (
             <Link href={service.link} key={index}>
@@ -93,16 +94,21 @@ export default function ServicesSection() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        py: 4.2
+                        py: {xs: 3.5,sm: 4.2},
                     }}
                     >
-                        <Image
-                            src={service.image}
-                            alt={service.title}
-                            width={100}
-                            height={100}
-                            style={{width: 'auto', height: '100px'}}
-                        />
+                        <Box sx={{height: { xs: 80, sm: 80, md: 100 },position: 'relative', display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',}}>
+                            <Image
+                                src={service.image}
+                                alt={service.title}
+                                width={100}
+                                height={100}
+                                sizes="(max-width: 600px) 60px, (max-width: 900px) 80px, 100px"
+                                style={{width: 'auto', height: '100%', objectFit: 'contain',}}
+                            />
+                        </Box>
                     </Box>
 
                     {/* BOTTOM CONTENT */}

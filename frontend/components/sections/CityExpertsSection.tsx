@@ -123,14 +123,14 @@ export default function CityExpertsSection() {
         />
         
         {/* ================= TABS ================= */}
-        <Box display="flex" gap={5} mb={4} flexWrap="wrap">
+        <Box display="flex" gap={{sm: 1, md: 2, lg:5}} mb={4} sx={{overflow: 'auto', pb: '12px'}}>
             {data.map((item) => (
             <Typography
                 key={item.id}
                 onClick={() => setActiveCity(item.city)}
                 variant="heading12"
                 sx={{
-                fontSize: {lg: '18px' ,xl: '20px'},
+                fontSize: {xs: 16, md: '18px' ,lg: '18px' ,xl: '20px'},
                 cursor: "pointer",
                 fontWeight: 500,
                 px: 1.5,
@@ -158,21 +158,23 @@ export default function CityExpertsSection() {
         <Box
             display="grid"
             gridTemplateColumns={{ xs: "1fr", md: "1.5fr 2fr" }}
-            gap={7}
+            gap={{ xs: 3,md: 2, lg: 7}}
         >
             {/* LEFT IMAGE */}
             <Box
             sx={{
-                borderRadius: "0",
+                borderRadius: {xs: '16px', sm: '20px'},
                 overflow: "hidden",
+                position: 'relative',
+                height: {xs: '400px',sm: '638px'},
+                width: '100%',
             }}
             >
             <Image
                 src={getImageUrl(activeData.image?.url)}
                 alt={activeData.city}
-                width={540}
-                height={638}
-                style={{ width: "auto", height: "100%", objectFit: "cover", borderRadius: "0" }}
+                fill
+                style={{  objectFit: "cover" }}
             />
             </Box>
 
@@ -183,21 +185,23 @@ export default function CityExpertsSection() {
                     <Box
                         sx={{
                         py: 3.5,
-                        px: 5,
+                        px: {xs: 3, lg: 5},
                         borderRadius: 6,
                         backgroundColor: "common.white",
                         boxShadow: "0 8px 24px -8px #C0C0C040",
                         color: "text.secondary",
                         mb: 3,
                         display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: 2,
+                        gridTemplateColumns: {xs: "1fr", sm: "1fr 1fr"},
+                        gap: {xs: 1 ,lg: 2},
                         }}
                     >
                         {activeData.features?.map((f, i) => (
-                        <Box key={i} display="flex" gap={1} alignItems="center">
-                            <Image src="../green-circle-check.svg" height={20} width={20} alt="check"/>
-                            <Typography variant="body05">{f.title}</Typography>
+                        <Box key={i} display="flex" gap={1} alignItems="start">
+                            <Box sx={{height: {xs: 18, sm: 20}, width: {xs: 18, sm: 20}, position: 'relative'}}>
+                                <Image src='../green-circle-check.svg' fill alt="Check" style={{objectFit: 'cover'}}/>
+                            </Box>
+                            <Typography variant="body05" sx={{fontSize: {md: 14, lg: 16}}}>{f.title}</Typography>
                         </Box>
                         ))}
                     </Box>
@@ -206,7 +210,7 @@ export default function CityExpertsSection() {
                     <Box
                         sx={{
                         py: 3,
-                        px: 5,
+                        px: {xs: 3, sm: 5},
                         borderRadius: 6,
                         backgroundColor: "common.white",
                         boxShadow: "0 8px 24px -8px #C0C0C040",
@@ -235,19 +239,21 @@ export default function CityExpertsSection() {
 
                         {/* USER */}
                         <Box display="flex" alignItems="center" gap={2}>
-                            <Image
-                                src={getImageUrl(avatarUrl) || "/default-avatar.png"}
-                                alt={activeData.testimonial?.name}
-                                width={90}
-                                height={90}
-                                style={{ borderRadius: "50%" }}
-                            />
+                            <Box sx={{height: {xs: 75,lg: 90}, 
+                            width: {xs: 75,lg: 90}, position: "relative"}}>
+                              <Image
+                                  src={getImageUrl(avatarUrl) || "/default-avatar.png"}
+                                  alt={activeData.testimonial?.name}
+                                  fill
+                                  style={{ borderRadius: "50%", objectFit: "contain" }}
+                              />
+                            </Box>
 
                             <Box>
-                                <Typography variant="heading12">
+                                <Typography variant="heading12" sx={{fontSize: {xs: 18, sm: 20}}}>
                                 {activeData.testimonial?.name}
                                 </Typography>
-                                <Typography variant="body05" component="p" sx={{color: "text.secondary"}}>
+                                <Typography variant="body05" component="p" sx={{color: "text.secondary",fontSize: {xs: 14, sm: 16}}}>
                                 {activeData.testimonial?.designation}
                                 </Typography>
                             </Box>

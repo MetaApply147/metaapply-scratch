@@ -32,7 +32,8 @@ export default function BannerContent({
 
   const sizeStyles = {
     default: {
-      lineHeight: '88px',
+      lineHeight: {xs: 1.3,lg: 1.3},
+      fontSize: {xs: 36, sm: 46 ,md: 48,lg: 68},
     },
     medium: {
       fontSize: '52px',
@@ -88,6 +89,7 @@ export default function BannerContent({
           variant="heading12"
           component="p"
           fontWeight={400}
+          sx={{fontSize: {xs: 18, sm: 20}}}
         >
           {description}
         </Typography>

@@ -9,9 +9,9 @@ export default function PlanYourJourney() {
       sx={{
         position: "relative",
         backgroundColor: "navyBlue.600",
-        borderRadius: "0 80px 0 80px",
-    overflow: "hidden",
-        mx: "30px",
+        borderRadius: {xs: '24px',sm: '0 40px 0 40px', md: '0 40px 0 40px', lg: '0 50px 0 50px', xl: '0 80px 0 80px'},
+        overflow: "hidden",
+        mx: {xs: '16px',md: '30px'},
       }}
     >
       {/* LEFT CONTENT (INSIDE CONTAINER) */}
@@ -28,11 +28,14 @@ export default function PlanYourJourney() {
               flexDirection: "column",
               justifyContent: "center",
               color: "common.white",
-              py: { xs: 5, md: 15 },
+              py: { xs: 6,sm: 7, md: 8, lg: 15 },
               zIndex: 2,
+              pl: {xs: 0,md: 0,lg: 2,xl: 0},
+              textAlign: {xs: 'center', md: 'left'},
+              alignItems: {xs: 'center', md: 'start'}
             }}
           >
-            <Typography variant="heading06" component="h2" lineHeight={1.1} sx={{maxWidth: "90%", fontSize: {lg: '42px', xl: '48px'}}}>
+            <Typography variant="heading06" component="h2" lineHeight={{xs: 1.3, sm: 1.1}} sx={{maxWidth: "90%", fontSize: { xs: '24px',sm: '36px',md: '36px',lg: '42px', xl: '48px'}}}>
               Plan Your Complete{" "}
               <Box component="span" sx={{ color: "primary.main" }}>
                 Study Abroad Journey
@@ -42,7 +45,7 @@ export default function PlanYourJourney() {
 
             <Typography
               variant="body05"
-              sx={{ maxWidth: "80%" }}
+              sx={{ maxWidth: {xs: '100%',md: "80%"} }}
               mt={2.5}
               mb={5}
             >
@@ -60,11 +63,11 @@ export default function PlanYourJourney() {
       {/* RIGHT IMAGE (FULL BLEED) */}
       <Box
         sx={{
-          position: "absolute",
+          position: {xs: "relative",md:"absolute"},
           top: 0,
           right: 0,
           width: { xs: "100%", md: "50%" },
-          height: "100%",
+          height: {xs: "240px",sm: "330px", md: "100%"},
         }}
       >
         <Image

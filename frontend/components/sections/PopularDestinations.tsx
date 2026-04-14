@@ -149,45 +149,45 @@ export default function PopularDestinations({bgColor}: Props) {
                         position: 'absolute',
                         top: 15,
                         left: 12,
-                        px: 1.9,
-                        py: 0.7,
+                        px: {xs: 1.2, md: 1.9},
+                        py: {xs: 0.4, md: 0.7},
                         borderRadius: 2,
                         color: 'common.white',
                         background: item.tagColor || '#000',
                         border: `1px solid #fff`
                       }}
                     >
-                      <Typography variant='heading15' fontWeight={500}>{item.tag}</Typography>
+                      <Typography variant='heading15' fontWeight={500} sx={{fontSize: {xs: 12,md: 14}}}>{item.tag}</Typography>
                     </Box>
                   )}
                 </Box>
 
                 {/* CONTENT */}
                 <Box sx={{ px: 2, pt: 2, pb: 3.8 }}>
-                  <Typography mb={1} variant='heading11' component='h5' color='navyBlue.500' >
+                  <Typography mb={1} variant='heading11' component='h5' color='navyBlue.500' sx={{fontSize: {xs: 20, md: 20, lg: 22, xl: 24}}}>
                     {item.title}
                   </Typography>
 
                   <Box sx={{ display: 'flex', gap: 1.2 }} mb={1.75}>
                     <CheckIcon sx={{ color: 'navyBlue.500', fontSize: 20 }} />
-                    <Typography variant="body05" mb={0} color='text.secondary' component='p'>
+                    <Typography variant="body05" mb={0} color='text.secondary' component='p' sx={{fontSize: {xs: 14, lg: 16}}}>
                       Popular Courses: <span style={{ fontWeight: 600 }}>{item.popularCourses}</span>
                     </Typography>
                   </Box>
 
                   <Box sx={{ display: 'flex', gap: 1.2 }}>
                     <CheckIcon sx={{ color: 'navyBlue.500', fontSize: 20 }} />
-                    <Typography variant="body05" mb={0} color='text.secondary' component='p'>
+                    <Typography variant="body05" mb={0} color='text.secondary' component='p' sx={{fontSize: {xs: 14, lg: 16}}}>
                       Student Friendly Cities - <span style={{ fontWeight: 600 }}>{item.studentCities}</span>
                     </Typography>
                   </Box>
 
-                  <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexDirection: { xs: 'column', md: 'column', lg: 'row' } }} mt={5}>
-                    <Button variant="contained" size="medium" sx={{ fontWeight: 500, padding: {lg: '16px 20px', xl: '16px 30px'} }}>
+                  <Box sx={{ display: 'flex', gap: {xs: 1.5, xl: 2}, justifyContent: 'center', flexDirection: { xs: 'row', md: 'column', lg: 'row' } }} mt={5}>
+                    <Button variant="contained" size="medium" sx={{ fontWeight: 500, padding: {xs: "12px 12px",lg: '16px 20px', xl: '16px 30px'} }}>
                       <Image src='/Home/download_arrow.svg' height={16} width={16} alt='Download' style={{ marginRight: "6px" }} /> Country Guide
                     </Button>
 
-                    <Button variant="outlined" size="medium" sx={{ fontWeight: 500, padding: '16px 30px' }}>
+                    <Button variant="outlined" size="medium" sx={{ fontWeight: 500, padding: { xs: "12px 12px",lg: '16px 20px', xl: '16px 30px'} }}>
                       Explore More
                     </Button>
                   </Box>

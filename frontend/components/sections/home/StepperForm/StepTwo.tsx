@@ -39,7 +39,8 @@ export default function StepTwo({
                 left: '-3px',
                 textAlign: 'center',
                 p: 0.75,
-                top: '-36px',
+                top: {xs: '-33px', sm: '-36px'},
+                fontSize: {xs: 12, sm: 14}
               }}
             >
               Great pick(s) 👏You’re one step closer to your goal.
@@ -58,7 +59,7 @@ export default function StepTwo({
             <Typography
               variant="heading12"
               component="h5"
-              sx={{ color: "#161F9B" }}
+              sx={{ color: "#161F9B", fontSize: {xs: 18, md: 20} }}
             >
                 <KeyboardBackspaceIcon sx={{fontSize: '18px', color: 'neutralBlue.700', cursor: 'pointer', mr: '5px'}}  onClick={() => setStep(1)}/> 
                 Which course are you interested in?{" "}
@@ -77,7 +78,7 @@ export default function StepTwo({
                 pl: 2.5,
                 pr: 1.25,
                 py: 1,
-                minHeight: 60,
+                minHeight: {xs: 50, sm: 60},
                 display: "flex",
                 alignItems: "center",
                 flexWrap: "wrap",
@@ -88,9 +89,9 @@ export default function StepTwo({
             >
               {selectedCourses.length === 0 ? (
                 <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
-                    <Typography variant="heading13" component='span' fontWeight={400}>Choose Courses</Typography>
+                    <Typography variant="heading13" component='span' fontWeight={400} sx={{fontSize: {xs: 16, sm: 18}}}>Choose Courses</Typography>
                     <Box sx={{
-                        backgroundColor: '#E6EFFF', borderRadius: '12px', p: '9.5px 8.5px', 
+                        backgroundColor: '#E6EFFF', borderRadius: '12px', p: {xs: '7.5px 6.5px', sm: '9.5px 8.5px'}, 
                     }}>
                         <ExpandMoreIcon sx={{color: '#000000', fontSize: '30px'}}/></Box>
                 </Box>
