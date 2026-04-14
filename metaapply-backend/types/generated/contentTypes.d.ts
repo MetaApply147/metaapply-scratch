@@ -731,6 +731,38 @@ export interface ApiHomeOffersSectionHomeOffersSection
   };
 }
 
+export interface ApiMediaCoverageMediaCoverage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'media_coverages';
+  info: {
+    displayName: 'media-coverage';
+    pluralName: 'media-coverages';
+    singularName: 'media-coverage';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    channel: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::media-coverage.media-coverage'
+    > &
+      Schema.Attribute.Private;
+    media_url: Schema.Attribute.Text;
+    published_date: Schema.Attribute.Date;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMegaMenuTabMegaMenuTab extends Struct.CollectionTypeSchema {
   collectionName: 'mega_menu_tabs';
   info: {
@@ -1541,6 +1573,7 @@ declare module '@strapi/strapi' {
       'api::faq.faq': ApiFaqFaq;
       'api::footer.footer': ApiFooterFooter;
       'api::home-offers-section.home-offers-section': ApiHomeOffersSectionHomeOffersSection;
+      'api::media-coverage.media-coverage': ApiMediaCoverageMediaCoverage;
       'api::mega-menu-tab.mega-menu-tab': ApiMegaMenuTabMegaMenuTab;
       'api::menu.menu': ApiMenuMenu;
       'api::page.page': ApiPagePage;
