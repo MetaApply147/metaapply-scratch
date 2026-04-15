@@ -51,6 +51,26 @@ let theme = createTheme({
   components: {
     ...components,
 
+    MuiUseMediaQuery: {
+      defaultProps: {
+        ssrMatchMedia: (query: string) => {
+          const width = 375; // simulate lg screen
+
+          if (query.includes("max-width")) {
+            const max = parseInt(query.match(/\d+/)?.[0] || "0", 10);
+            return { matches: width <= max };
+          }
+
+          if (query.includes("min-width")) {
+            const min = parseInt(query.match(/\d+/)?.[0] || "0", 10);
+            return { matches: width >= min };
+          }
+
+          return { matches: false };
+        },
+      },
+    },
+
     MuiContainer: {
       defaultProps: {
         maxWidth: false,

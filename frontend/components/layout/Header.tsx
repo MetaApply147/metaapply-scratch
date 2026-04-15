@@ -15,6 +15,9 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import MegaMenu from "@/components/MegaMenu/MegaMenu";
 import { Tab } from "@/types/megamenu";
+import MenuIcon from "@mui/icons-material/Menu";
+import { IconButton, useTheme, useMediaQuery } from "@mui/material";
+import MobileMenu from "@/components/MegaMenu/MobileMenu";
 
 /* ---------------- TYPES ---------------- */
 
@@ -35,8 +38,12 @@ type HeaderProps = {
 
 export default function Header({ menus, tabs }: HeaderProps) {
   const [activeMenu, setActiveMenu] = useState<Menu["Slug"] | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const headerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   /* ---------------- OUTSIDE CLICK ---------------- */
 
@@ -53,6 +60,10 @@ export default function Header({ menus, tabs }: HeaderProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   /* ---------------- DERIVED ---------------- */
 
@@ -99,97 +110,111 @@ export default function Header({ menus, tabs }: HeaderProps) {
           </Box>
 
           {/* NAV */}
-          <Box display="flex" alignItems="center" gap={3}>
-            <Button variant="outlined" color="primary">
-              Book 1:1 Counselling
-            </Button>
-
+          {isMobile ? (
+            <IconButton onClick={() => setMobileOpen(true)}>
+              <MenuIcon sx={{fontSize: 30, color: '#031621'}}/>
+            </IconButton>
+          ) : (
             <Box display="flex" alignItems="center" gap={3}>
-              {menus?.map((menu) => {
-                const isOpen = activeMenu === menu.Slug;
-                const isActive =
-                  pathname === `/${menu.Slug}` || isOpen;
-                const isLink = menu.Type === "link";
+              <Button variant="outlined" color="primary">
+                Book 1:1 Counselling
+              </Button>
 
-                return (
-                  <Box
-                    key={menu.id}
-                    display="flex"
-                    alignItems="center"
-                    sx={{ cursor: "pointer" }}
-                  >
-                    {/* TEXT */}
-                    {isLink ? (
-                      <Link
-                        href={`/${menu.Slug}`}
-                        style={{ textDecoration: "none" }}
-                      >
+              <Box display="flex" alignItems="center" gap={3}>
+                {menus?.map((menu) => {
+                  const isOpen = activeMenu === menu.Slug;
+                  const isActive =
+                    pathname === `/${menu.Slug}` || isOpen;
+                  const isLink = menu.Type === "link";
+
+                  return (
+                    <Box
+                      key={menu.id}
+                      display="flex"
+                      alignItems="center"
+                      sx={{ cursor: "pointer" }}
+                    >
+                      {/* TEXT */}
+                      {isLink ? (
+                        <Link
+                          href={`/${menu.Slug}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <Typography
+                            sx={{
+                              fontWeight: 400,
+                              color: isActive
+                                ? "primary.main"
+                                : "text.primary",
+                            }}
+                          >
+                            {menu.Title}
+                          </Typography>
+                        </Link>
+                      ) : (
                         <Typography
+                          onClick={() => handleToggleMenu(menu)}
                           sx={{
                             fontWeight: 400,
                             color: isActive
                               ? "primary.main"
                               : "text.primary",
                           }}
+                          variant="heading14"
                         >
                           {menu.Title}
                         </Typography>
-                      </Link>
-                    ) : (
-                      <Typography
-                        onClick={() => handleToggleMenu(menu)}
-                        sx={{
-                          fontWeight: 400,
-                          color: isActive
-                            ? "primary.main"
-                            : "text.primary",
-                        }}
-                        variant="heading14"
-                      >
-                        {menu.Title}
-                      </Typography>
-                    )}
+                      )}
 
-                    {/* ICON */}
-                    {menu.Type === "mega" && (
-                      <ExpandMoreIcon
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleToggleMenu(menu);
-                        }}
-                        sx={{
-                          fontSize: 22,
-                          ml: 0.5,
-                          color: isOpen
-                            ? "primary.main"
-                            : "text.primary",
-                          transform: isOpen
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                          transition: "0.3s",
-                          cursor: "pointer",
-                        }}
-                      />
-                    )}
-                  </Box>
-                );
-              })}
-            </Box>
+                      {/* ICON */}
+                      {menu.Type === "mega" && (
+                        <ExpandMoreIcon
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleMenu(menu);
+                          }}
+                          sx={{
+                            fontSize: 22,
+                            ml: 0.5,
+                            color: isOpen
+                              ? "primary.main"
+                              : "text.primary",
+                            transform: isOpen
+                              ? "rotate(180deg)"
+                              : "rotate(0deg)",
+                            transition: "0.3s",
+                            cursor: "pointer",
+                          }}
+                        />
+                      )}
+                    </Box>
+                  );
+                })}
+              </Box>
 
-            {/* RIGHT SIDE */}
-            <Box display="flex" gap={2}>
-              <Button variant="outlined" color="secondary" size="small">
-                EN
-              </Button>
-              <Button variant="outlined" color="primary" size="small">
-                Sign In
-              </Button>
+              {/* RIGHT SIDE */}
+              <Box display="flex" gap={2}>
+                <Button variant="outlined" color="secondary" size="small">
+                  EN
+                </Button>
+                <Button variant="outlined" color="primary" size="small">
+                  Sign In
+                </Button>
+              </Box>
             </Box>
-          </Box>
+          )}
+        
         </Toolbar>
 
         {/* MEGA MENU */}
-        <MegaMenu open={isMegaOpen} type={activeMenu} tabs={tabs} />
+        {!isMobile ?  
+          <MegaMenu open={isMegaOpen} type={activeMenu} tabs={tabs} />: 
+          <MobileMenu
+            open={mobileOpen}
+            onClose={() => setMobileOpen(false)}
+            tabs={tabs}
+          />
+        }
       </Container>
     </AppBar>
   );
