@@ -51,7 +51,7 @@ export default function MobileMenu({ open, onClose, tabs }: Props) {
         {/* LEFT RAIL */}
         <Box
             sx={{
-                width: 100,
+                width: {xs: 81, sm: 100},
                 background: "#FFF3F8",
                 display: "flex",
                 flexDirection: "column",
@@ -90,7 +90,7 @@ export default function MobileMenu({ open, onClose, tabs }: Props) {
                     {item.icon}
                     </Box>
 
-                    <Typography variant="heading15" component="p" sx={{ lineHeight: "normal", fontWeight: 500 }}>
+                    <Typography variant="heading15" component="p" sx={{ lineHeight: "normal", fontWeight: 500, fontSize: {xs: 12, sm: 14} }}>
                     {item.label}
                     </Typography>
                 </Box>
@@ -118,7 +118,7 @@ export default function MobileMenu({ open, onClose, tabs }: Props) {
             px={2}
             py={1.5}
           >
-            <Typography variant="heading14" sx={{color: '#15186C', fontSize: {xs: '16', md: 18}}} component='p'>
+            <Typography variant="heading14" sx={{color: '#15186C', fontSize: {xs: 16, sm: 18}}} component='p'>
               {activeMenu === "study-abroad" && "Study Abroad"}
               {activeMenu === "testprep" && "Exams"}
               {activeMenu === "explore" && "Explore"}

@@ -94,17 +94,21 @@ export default function Header({ menus, tabs }: HeaderProps) {
     >
       <Container maxWidth="xl" sx={{ position: "relative" }}>
         <Toolbar
-          sx={{ justifyContent: "space-between", py: 4 }}
+          sx={{ justifyContent: "space-between", py: {xs: 2, lg: 4} }}
           disableGutters
         >
           {/* LOGO */}
-          <Box>
+          <Box  sx={{ width: { xs: 140, sm: 140, md: 193 } }}>
             <Link href="/">
               <Image
                 src="/Header/mie-logo.svg"
                 alt="MetaApply Logo"
                 width={193}
                 height={62}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
               />
             </Link>
           </Box>
