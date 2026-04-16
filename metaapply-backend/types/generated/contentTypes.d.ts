@@ -655,6 +655,11 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'metafinance',
         'k-12',
         'nextstep',
+        'premium-counselling',
+        'recruitment-partner',
+        'franchise-partner',
+        'university-partner',
+        'metaapply-amplify',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1013,7 +1018,16 @@ export interface ApiSuccessStorySuccessStory
       Schema.Attribute.Private;
     order: Schema.Attribute.Integer;
     page: Schema.Attribute.Enumeration<
-      ['home', 'metafly', 'metafinance', 'metastay', 'metainsure']
+      [
+        'home',
+        'metafly',
+        'metafinance',
+        'metastay',
+        'metainsure',
+        'recruitment-partner',
+        'university-partner',
+        'metaapply-amplify',
+      ]
     > &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;

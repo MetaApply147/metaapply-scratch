@@ -23,7 +23,7 @@ export default function EventsSlider({ data }: any) {
         <Link href={`/events/${event.slug}`} key={event.id}>
           <Image
             src={getImageUrl(event.featuredImage?.url)}
-            alt={event.title}
+            alt={event.eventTitle}
             width={600}
             height={320}
             style={{

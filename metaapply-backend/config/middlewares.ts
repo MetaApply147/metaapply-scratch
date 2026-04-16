@@ -13,6 +13,7 @@ const config: Core.Config.Middlewares = [
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       headers: '*',
+      credentials: true,
     },
   },
   'strapi::poweredBy',
