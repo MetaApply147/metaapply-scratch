@@ -10,7 +10,7 @@ export default function RecruitmentPartnerPage() {
 
     return (
         <>
-            <HeroBanner slug="recruitment-partner" size="medium" />
+            <HeroBanner slug="recruitment-partner" minHeight={{ xs: 400, sm: 500, lg: 600 }} size="medium" />
 
             {/* Partnered Universities */}
             <PartneredUniversities />
@@ -22,13 +22,9 @@ export default function RecruitmentPartnerPage() {
             <PopularDestinations bgColor='#F7FBFF' />
 
             {/* Success Story */}
-            <SuccessStories page="recruitment-partner" type="testimonial" cta={{
-                label: "Talk to Our Expert",
-                link: "/#",
-            }} />
+            <SuccessStories page="recruitment-partner" type="testimonial" />
 
             <FAQSection page="recruitment-partner" />
         </>
     );
 }
-
