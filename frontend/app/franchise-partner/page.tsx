@@ -3,7 +3,7 @@ import HeroBanner from '@/components/banner/HeroBanner';
 
 import { baseFields } from '@/config/forms/base.fields';
 
-export default function MetaapplyAmplifyPage() {
+export default function FranchisePartnerPage() {
 
     return (
         <>
