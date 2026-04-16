@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 const API_URL = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api`;
-// const API_URL = `http://localhost:1337/api`;
+
 export const getServices = async (url: string, params?: any) => {
     try {
         const response = await axios.get(`${API_URL}${url}`, { params });
