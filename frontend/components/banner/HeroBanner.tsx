@@ -11,9 +11,13 @@ type Props = {
   minHeight?: any;
   size?: 'default' | 'medium';
   leftExtra?: React.ReactNode;
+  disableSectionPadding?: boolean;
+  rightMaxWidth?: number | string;
+  alignSelf? : string;
+  rightComponent?: React.ReactNode;
 };
 
-export default function HeroBanner({ slug, minHeight, size, leftExtra }: Props) {
+export default function HeroBanner({ slug, minHeight, size, leftExtra, disableSectionPadding, rightMaxWidth, alignSelf, rightComponent }: Props) {
   const [hero, setHero] = useState<any>(null);
 
   useEffect(() => {
@@ -52,6 +56,9 @@ export default function HeroBanner({ slug, minHeight, size, leftExtra }: Props) 
       backgroundImage={getImageUrl(hero.backgroundImage)}
       overlay={hero.overlay}
       minHeight={minHeight}
+      disableSectionPadding={disableSectionPadding}
+      rightMaxWidth={rightMaxWidth}
+      alignSelf={alignSelf}
       left={
         <>
           <BannerContent
@@ -72,9 +79,11 @@ export default function HeroBanner({ slug, minHeight, size, leftExtra }: Props) 
         
       }
       right={
-        hero.rightImage && (
-          <BannerImage src={getImageUrl(hero.rightImage)} />
-        )
+        rightComponent
+          ? rightComponent
+          : hero.rightImage && (
+              <BannerImage src={getImageUrl(hero.rightImage)} />
+            )
       }
     />
   );

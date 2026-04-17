@@ -9,6 +9,9 @@ type Props = {
   backgroundImage?: string;
   minHeight?: number;
   overlay?: boolean;
+  disableSectionPadding?: boolean;
+  rightMaxWidth?: number | string;
+  alignSelf? : string;
 };
 
 export default function BaseBanner({
@@ -18,6 +21,9 @@ export default function BaseBanner({
   backgroundImage,
   minHeight = 200,
   overlay = false,
+  disableSectionPadding= false,
+  rightMaxWidth,
+  alignSelf
 }: Props) {
   return (
     <Box
@@ -30,7 +36,7 @@ export default function BaseBanner({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        py: 9.5,
+        py: disableSectionPadding ? 0 : 9.5,
         minHeight,
         display: 'flex',
       }}
@@ -59,11 +65,20 @@ export default function BaseBanner({
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: 4,
+            height: '100%'
           }}
         >
           <Box flex={1}>{left}</Box>
 
-          {right && <Box sx={{textAlign: 'right'}}>{right}</Box>}
+          {right && 
+          <Box 
+            sx={{
+                alignSelf: alignSelf,
+                textAlign: 'right',
+                maxWidth: rightMaxWidth || '100%',
+              }}>
+              {right}
+            </Box>}
         </Box>
       </Container>
     </Box>

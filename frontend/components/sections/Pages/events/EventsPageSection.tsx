@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { fetchEvents } from "@/services/events";
 import EventsTabs from "./EventsTabs";
+import UpcomingTable from "./UpcomingTable";
 
 const EventsPageSection = () => {
   const [events, setEvents] = useState<any[]>([]);
   const [upcoming, setUpcoming] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [past, setPast] = useState<any[]>([]);
 
   useEffect(() => {
@@ -27,6 +29,8 @@ const EventsPageSection = () => {
       setEvents(data);
       setUpcoming(upcomingEvents);
       setPast(pastEvents);
+
+      setLoading(false);
     };
 
     loadEvents();
@@ -34,7 +38,9 @@ const EventsPageSection = () => {
 
   return (
     <>
-      <EventsTabs upcoming={upcoming} past={past} />
+      <UpcomingTable events={upcoming} loading={loading}/>
+
+      <EventsTabs upcoming={upcoming} past={past} loading={loading}/>
     </>
   );
 };
