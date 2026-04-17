@@ -205,7 +205,7 @@ export default function FAQSection({ page }: Props) {
                   </Box>
                 }
               >
-                <Typography variant="body03" component="p" sx={{fontSize: {xs: 16,sm: 18, lg: 20}}} pr={{sm: 2,md: 0}}>
+                <Typography variant="heading12" component="p" sx={{fontSize: {xs: 16,sm: 18, lg: 20}}} pr={{sm: 2,md: 0}}>
                   {faq.question}
                 </Typography>
               </AccordionSummary>
