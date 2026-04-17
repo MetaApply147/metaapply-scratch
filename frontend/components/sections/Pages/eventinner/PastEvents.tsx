@@ -31,7 +31,7 @@ const PastEvents = ({ events }: Props) => {
 
         {/* Slider */}
         <CustomSlider
-          data={events.slice(0, 8)}
+          data={events.slice(0, 16)}
           slidesPerView={4}
           spaceBetween={10}
           breakpoints={{

@@ -9,6 +9,8 @@ import ThemeProviderWrapper from "@/theme/ThemeProviderWrapper";
 import ThemeRegistry from "@/theme/ThemeRegistry";
 import Footer from "@/components/layout/Footer";
 import { FooterData } from "@/types/footer";
+import ScrollManager from "@/components/common/ScrollManager";
+
 
 const headingFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export default async function RootLayout({
   children,
@@ -55,6 +57,7 @@ export default async function RootLayout({
       >
         <ThemeRegistry>
           <ThemeProviderWrapper>
+            <ScrollManager />
             <Header menus={menus} tabs={tabs}/>
               <main>{children}</main>
             <Footer footer={footer} />

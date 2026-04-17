@@ -25,7 +25,7 @@ const EventHero = ({ event }: any) => {
             <Typography
                 variant="heading05"
                 component="h1"
-                sx={{color: 'common.white', width: '48%', lineHeight: 'normal'}}
+                sx={{color: 'common.white', width: '55%', lineHeight: 'normal'}}
             >
                 {event.pageTitle}
             </Typography>
