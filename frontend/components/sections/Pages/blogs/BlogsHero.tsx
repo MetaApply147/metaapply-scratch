@@ -140,7 +140,7 @@ const SlideCard = ({
                 <Box sx={{display: 'flex', alignItems: 'center', gap: '12px'}}>
                     <Box>Author Image</Box>
                     <Box>
-                        <Typography variant="body05" component='p'>author name</Typography>
+                        <Typography variant="body05" component='p'>Author Name</Typography>
                         <Typography
                             variant="body06"
                             component='p'
