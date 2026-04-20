@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
 
   const page = searchParams.get("page") || "1";
-  const pageSize = searchParams.get("pageSize") || "15";
+  const pageSize = searchParams.get("pageSize") || "14";
   const tag = searchParams.get("tag") || "";
   const search = searchParams.get("search") || "";
 

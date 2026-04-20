@@ -16,6 +16,12 @@ type Props = {
     blogs: any[];
 };
 
+const truncateWords = (text: string = "", limit: number = 10): string => {
+  const words = text.split(" ");
+  return words.length > limit ? words.slice(0, limit).join(" ") + "..." : text;
+};
+
+
 const getBlogDescription = (blog: any) => {
   if (blog.excerpt?.trim()) return blog.excerpt;
 
@@ -42,7 +48,7 @@ export default function BlogsHero({ blogs }: Props) {
     if (!blogs?.length) return null;
 
     return (
-        <Section spacing="lg" 
+        <Section spacing="lg"
             sx={{
                 background: 'url(/blogs/Hero-blog.webp)',
                 backgroundRepeat: 'no-repeat',
@@ -82,6 +88,7 @@ const SlideCard = ({
         style={{
             textDecoration: "none",
             color: "inherit",
+            marginBottom: 32
         }}
     >
         <Grid
@@ -124,7 +131,7 @@ const SlideCard = ({
                         lineHeight: 'normal'
                     }}
                 >
-                    {blog.title}
+                    {truncateWords(blog.title, 10)}
                 </Typography>
 
                 <Typography
@@ -145,7 +152,7 @@ const SlideCard = ({
                         )} alt={blog.author.name} fill style={{objectFit: 'contain'}}/>
                     </Box>
                     <Box>
-                        <Typography variant="body05" component='p'>Author Name</Typography>
+                        <Typography variant="body05" component='p'>{blog.author.name}</Typography>
                         <Typography
                             variant="body06"
                             component='p'

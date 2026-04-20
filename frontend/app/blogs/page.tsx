@@ -3,7 +3,7 @@ import BlogsHero from "@/components/sections/Pages/blogs/BlogsHero";
 import BlogsDiscover from "@/components/sections/Pages/blogs/BlogsDiscover";
 
 export default async function BlogsPage() {
-  const { blogs, pagination } = await fetchBlogs(1, 15);
+  const { blogs, pagination } = await fetchBlogs(1, 14);
 
   return (
     <>

@@ -22,7 +22,7 @@ type Props = {
   totalCount: number;
 };
 
-const ITEMS_PER_PAGE = 15;
+const ITEMS_PER_PAGE = 14;
 
 const TAGS = [
   "Latest Blogs",
@@ -221,7 +221,7 @@ export default function BlogsDiscover({ initialBlogs, totalPages }: Props) {
           ) : (
             <>
               {/* BLOG GRID */}
-              <Grid container spacing={3}>
+              <Grid container spacing={4.5}>
                 {blogs.map((blog: any) => (
                   <Grid key={blog.id} size={{ xs: 12, sm: 6, md: 6 }}>
                     <BlogCard blog={blog} />
@@ -241,11 +241,47 @@ export default function BlogsDiscover({ initialBlogs, totalPages }: Props) {
               {/* PAGINATION */}
               {pageCount > 1 && (
                 <Box mt={5} display="flex" justifyContent="center">
-                  <Pagination
+                  <Pagination 
                     count={pageCount}
                     page={page}
                     color="primary"
+                    siblingCount={0}
+                    boundaryCount={1}
                     onChange={handlePageChange}
+                   sx={{
+                        // "& .MuiButtonBase-root": {
+                        //     overflow: "hidden",
+                        //     WebkitTapHighlightColor: "transparent",
+                        // },
+
+                        "& .MuiTouchRipple-root": {
+                            display: "none",
+                        },
+
+                        "& .MuiPaginationItem-root": {
+                            fontFamily: "var(--font-body)",
+                            fontSize: "12px",
+                            fontWeight: 600,
+                            color: "text.primary",
+                            border: "1px solid #F1F0F4",
+                            height: 32,
+                            width: 32,
+                            minWidth: 32,
+                            display: 'flex',
+                            justifyContent:'center',
+                            alignItems: 'center',
+
+                            "&:hover": {
+                                backgroundColor: "transparent",
+                                border: "1px solid #FF3185",
+                            },
+                        },
+
+                        "& .MuiPaginationItem-root.Mui-selected": {
+                            backgroundColor: "primary.main",
+                            color: "common.white",
+                        },
+                    }}
                   />
                 </Box>
               )}
