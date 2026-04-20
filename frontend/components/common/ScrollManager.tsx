@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function ScrollManager() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Disable browser restoring previous scroll
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
@@ -20,7 +18,7 @@ export default function ScrollManager() {
       left: 0,
       behavior: "instant" as ScrollBehavior,
     });
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }
