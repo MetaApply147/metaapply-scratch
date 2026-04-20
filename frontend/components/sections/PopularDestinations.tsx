@@ -58,6 +58,9 @@ export default function PopularDestinations({bgColor}: Props) {
         const res = await getServices('/popular-destinations', {
           populate: 'image',
           sort: ['order:asc'],
+          pagination: {
+            pageSize: 100,
+          },
         });
 
         if (!res.isSuccess) {
@@ -68,24 +71,18 @@ export default function PopularDestinations({bgColor}: Props) {
           );
         }
 
-        const mapped = (res.data?.data || [])
-          .map((item: any) => {
-            const imageUrl = getImageUrl(item?.image?.url);
-            if (!imageUrl) return null;
-
-            return {
-              id: item.id,
-              title: item.title,
-              imageUrl,
-              tag: item.tag,
-              tagColor: item.tagColor,
-              popularCourses: item.popularCourses,
-              studentCities: item.studentCities,
-              countryGuideLink: item.countryGuideLink,
-              exploreMoreLink: item.exploreMoreLink,
-            };
-          })
-          .filter(Boolean) as Destination[];
+        const mapped = (res.data?.data || []).map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          imageUrl:
+            getImageUrl(item?.image?.url) || "/default-destination.jpg",
+          tag: item.tag,
+          tagColor: item.tagColor,
+          popularCourses: item.popularCourses,
+          studentCities: item.studentCities,
+          countryGuideLink: item.countryGuideLink,
+          exploreMoreLink: item.exploreMoreLink,
+        }));
 
         setData(mapped);
       } catch (err: any) {

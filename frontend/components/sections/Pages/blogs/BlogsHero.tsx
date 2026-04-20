@@ -138,7 +138,11 @@ const SlideCard = ({
                 </Typography>
 
                 <Box sx={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-                    <Box>Author Image</Box>
+                    <Box sx={{height: '40px', width: '40px', position: 'relative'}}>
+                        <Image src={getImage(
+                            blog.author.image?.url
+                        )} alt={blog.author.name} fill style={{objectFit: 'contain'}}/>
+                    </Box>
                     <Box>
                         <Typography variant="body05" component='p'>Author Name</Typography>
                         <Typography
