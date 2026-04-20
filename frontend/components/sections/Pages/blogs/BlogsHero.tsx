@@ -57,7 +57,8 @@ export default function BlogsHero({ blogs }: Props) {
                     slidesPerView={1}
                     spaceBetween={0}
                     showArrows={false}
-
+                    showPagination={true}
+                    paginationOnDesktop={true}
                     breakpoints={{
                         0: { slidesPerView: 1 },
                     }}
@@ -137,7 +138,7 @@ const SlideCard = ({
                     {getBlogDescription(blog)}
                 </Typography>
 
-                <Box sx={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+                <Box mt={7} sx={{display: 'flex', alignItems: 'center', gap: '12px'}}>
                     <Box sx={{height: '40px', width: '40px', position: 'relative'}}>
                         <Image src={getImage(
                             blog.author.image?.url

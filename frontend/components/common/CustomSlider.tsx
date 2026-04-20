@@ -23,6 +23,8 @@ type CustomSliderProps<T> = {
   spaceBetween?: number;
   breakpoints?: any;
   showArrows?: boolean;
+  showPagination?: boolean;
+  paginationOnDesktop?: boolean;
 };
 
 /* ================= COMPONENT ================= */
@@ -34,6 +36,8 @@ export default function CustomSlider<T>({
   spaceBetween = 12,
   breakpoints,
   showArrows = true,
+  showPagination = false,
+  paginationOnDesktop = false,
 }: CustomSliderProps<T>) {
   const id = useId();
 
@@ -71,7 +75,13 @@ export default function CustomSlider<T>({
       <Box
         sx={{
           '.swiper': { pb: { xs: '36px', md: '0px' } },
-          '.swiper-pagination': { display: { xs: 'block', md: 'none' } },
+          '.swiper-pagination': {
+            display: showPagination
+              ? paginationOnDesktop
+                ? 'block'
+                : { xs: 'block', md: 'none' }
+              : 'none',
+          },
           '--swiper-pagination-color': palette.pink[400],
           '--swiper-pagination-bullet-inactive-color': palette.gray[200],
           '--swiper-pagination-bullet-inactive-opacity': '1',
@@ -91,7 +101,11 @@ export default function CustomSlider<T>({
                 }
               : false
           }
-          pagination={{ clickable: true }} // ← added
+          pagination={
+            showPagination
+              ? { clickable: true }
+              : false
+          }
           breakpoints={
             breakpoints || {
               0: { slidesPerView: 1 },

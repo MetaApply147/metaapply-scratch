@@ -1,8 +1,18 @@
 import { fetchBlogs } from "@/services/blogs";
-import BlogsHero from "@/components/sections/Pages/blogs/BlogsHero"
+import BlogsHero from "@/components/sections/Pages/blogs/BlogsHero";
+import BlogsDiscover from "@/components/sections/Pages/blogs/BlogsDiscover";
 
 export default async function BlogsPage() {
-  const blogs = await fetchBlogs();
+  const { blogs, pagination } = await fetchBlogs(1, 15);
 
-  return <BlogsHero blogs={blogs} />;
+  return (
+    <>
+      <BlogsHero blogs={blogs} />
+      <BlogsDiscover
+        initialBlogs={blogs}
+        totalPages={pagination.pageCount}
+        totalCount={pagination.total}
+      />
+    </>
+  );
 }
