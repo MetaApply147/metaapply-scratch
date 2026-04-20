@@ -3,8 +3,8 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import CustomSlider from '@/components/common/CustomSlider';
-import SectionHeader from '../common/SectionHeader';
-import Section from '../common/Section';
+import SectionHeader from '@/components/common/SectionHeader';
+import Section from '@/components/common/Section';
 
 /* ================= TYPES ================= */
 
