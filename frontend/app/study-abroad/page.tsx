@@ -8,7 +8,7 @@ export default function StudyAbroadPage() {
 
     return (
         <>
-            <HeroBanner slug="metaapply-amplify" size="medium" />
+            <HeroBanner slug="study-abroad" size="medium" />
 
             <PartneredUniversities />
 
@@ -16,7 +16,7 @@ export default function StudyAbroadPage() {
 
             <SuccessStories page="home" type="video" />
 
-            <FAQSection page="metaapply-amplify" />
+            <FAQSection page="study-abroad" />
         </>
     );
 }

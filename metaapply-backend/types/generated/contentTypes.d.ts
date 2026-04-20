@@ -661,6 +661,7 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'franchise-partner',
         'university-partner',
         'metaapply-amplify',
+        'study-abroad',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1028,6 +1029,7 @@ export interface ApiSuccessStorySuccessStory
         'recruitment-partner',
         'university-partner',
         'metaapply-amplify',
+        'study-abroad',
       ]
     > &
       Schema.Attribute.Required;
