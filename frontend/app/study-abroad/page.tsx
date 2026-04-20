@@ -3,7 +3,7 @@ import PartneredUniversities from '@/components/sections/PartneredUniversities';
 import FAQSection from '@/components/sections/FAQSection';
 import SuccessStories from '@/components/sections/SuccessStories';
 import PopularDestinations from '@/components/sections/PopularDestinations';
-
+import ServicesSection from '@/components/sections/ServicesSection';
 export default function StudyAbroadPage() {
 
     return (
@@ -13,7 +13,7 @@ export default function StudyAbroadPage() {
             <PartneredUniversities />
 
             <PopularDestinations />
-
+            <ServicesSection />
             <SuccessStories page="home" type="video" />
 
             <FAQSection page="study-abroad" />
