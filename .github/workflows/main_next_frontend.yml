@@ -3,7 +3,7 @@ name: Deploy Next.js Frontend to Azure
 on:
   push:
     branches:
-      - main
+      - dev
   workflow_dispatch:
  
 jobs:
