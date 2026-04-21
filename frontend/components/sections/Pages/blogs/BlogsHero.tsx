@@ -56,7 +56,7 @@ export default function BlogsHero({ blogs }: Props) {
                 backgroundPosition: 'center'
             }}>
                 {/* Heading */}
-                <SectionHeader title="MetaApply" highlight="Blogs"/>
+                <SectionHeader title="MetaApply" highlight="Blogssssss"/>
 
                 <CustomSlider
                     data={blogs.slice(0, 5)}
