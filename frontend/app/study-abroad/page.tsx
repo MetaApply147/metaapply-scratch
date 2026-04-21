@@ -10,7 +10,7 @@ export default function StudyAbroadPage() {
         <>
             <HeroBanner slug="study-abroad" size="medium" />
 
-            <PartneredUniversities />
+            {/* <PartneredUniversities /> */}
 
             <PopularDestinations />
             <ServicesSection />
