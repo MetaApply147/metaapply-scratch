@@ -28,11 +28,12 @@ type FAQ = {
 
 type Props = {
   page: string;
+  backgroundColor?: string;
 };
 
 /* ================= COMPONENT ================= */
 
-export default function FAQSection({ page }: Props) {
+export default function FAQSection({ page, backgroundColor }: Props) {
   const [data, setData] = useState<FAQ[]>([]);
   const [grouped, setGrouped] = useState<Record<string, FAQ[]>>({});
   const [activeTab, setActiveTab] = useState("");
@@ -98,7 +99,7 @@ export default function FAQSection({ page }: Props) {
     };
 
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{backgroundColor: backgroundColor}} >
       <Box>
         {/* ================= HEADING ================= */}
         <SectionHeader title="Frequently Asked" highlight="Questions" />

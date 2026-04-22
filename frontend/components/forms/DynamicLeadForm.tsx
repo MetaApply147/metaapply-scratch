@@ -46,6 +46,9 @@ interface Props {
   schema: FormSchema;
   onSuccess?: () => void;
   Setwidth?: any;
+  boxShadow?: boolean;
+  borderRadius?: boolean;
+  showTitle?: boolean;
 }
 
 type FieldWrapperProps = {
@@ -79,7 +82,7 @@ const FieldWrapper = ({ name, children, error }: FieldWrapperProps) => {
   );
 };
 
-export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) {
+export default function DynamicLeadForm({ schema, onSuccess, Setwidth, boxShadow= true, borderRadius= true, showTitle = true }: Props) {
   const router = useRouter();
   const recaptchaRef = useRef<ReCAPTCHA>(null);  // 👈 added
 
@@ -464,15 +467,15 @@ export default function DynamicLeadForm({ schema, onSuccess, Setwidth }: Props) 
 
   return (
     <Box sx={{
-      boxShadow: '0px 20px 38px 0px #9C9C9C80',
-      borderRadius: 4,
+      boxShadow: boxShadow ? '0px 20px 38px 0px #9C9C9C80' : 'none',
+      borderRadius: borderRadius? '16px': 0,
       backgroundColor: 'common.white',
       px: 4,
       pt: 3,
       pb: 4,
       width: Setwidth,
     }}>
-      <Typography variant="heading12" component='h5' sx={{textAlign: 'center', mb: 2.5}}>{schema.submitLabel ?? "Enquire Now"}</Typography>
+      <Typography variant="heading12" component='h5' sx={{textAlign: 'center', mb: 2.5, display: showTitle? 'block' : 'none' }}>{schema.submitLabel ?? "Enquire Now"}</Typography>
     
       <Box
         component="form"

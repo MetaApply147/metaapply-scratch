@@ -1,5 +1,17 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface FaqFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_faq_faq_items';
+  info: {
+    displayName: 'FAQ Item';
+  };
+  attributes: {
+    answer: Schema.Attribute.Text;
+    faq_id: Schema.Attribute.String;
+    question: Schema.Attribute.String;
+  };
+}
+
 export interface FooterDestinationsDestinations extends Struct.ComponentSchema {
   collectionName: 'components_footer_destinations_destinations';
   info: {
@@ -148,6 +160,7 @@ export interface SuccessStoryVideoStory extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'faq.faq-item': FaqFaqItem;
       'footer-destinations.destinations': FooterDestinationsDestinations;
       'footer.destination-item': FooterDestinationItem;
       'footer.footer-link': FooterFooterLink;
