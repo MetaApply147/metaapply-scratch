@@ -1,9 +1,8 @@
 "use client";
 
 import Section from "@/components/common/Section";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { relative } from "path";
 
 const EventHero = ({ event }: any) => {
   return (

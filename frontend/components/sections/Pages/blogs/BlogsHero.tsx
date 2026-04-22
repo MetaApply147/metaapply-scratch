@@ -84,7 +84,7 @@ const SlideCard = ({
     blog: any;
 }) => (
     <Link
-        href={`/blog/${blog.slug}`}
+        href={`/blogs/${blog.slug}`}
         style={{
             textDecoration: "none",
             color: "inherit",

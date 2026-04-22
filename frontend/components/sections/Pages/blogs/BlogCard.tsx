@@ -31,9 +31,12 @@ const getBlogDescription = (blog: any) => {
 export default function BlogCard({ blog }: any) {
   return (
     <Link
-      href={`/blog/${blog.slug}`}
+      href={`/blogs/${blog.slug}`}
       style={{
         textDecoration: "none",
+        display: 'flex',
+          flexDirection: 'column',
+          height: "100%",
       }}
     >
       <Box
