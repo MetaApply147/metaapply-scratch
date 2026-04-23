@@ -922,6 +922,7 @@ export interface ApiPopularDestinationPopularDestination
     tag: Schema.Attribute.String;
     tagColor: Schema.Attribute.String;
     title: Schema.Attribute.String;
+    universityNumber: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
