@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import BlogDetailsContent from "@/components/sections/Pages/bloginner/BlogDetailsContainer";
 import BlogSidebarForm from "@/components/sections/Pages/bloginner/BlogSidebarForm";
 import RelatedBlogs from "@/components/sections/Pages/bloginner/RelatedBlogs";
-import FAQSection from "@/components/sections/FAQSection";
+import BlogFaqs from "@/components/sections/Pages/bloginner/BlogFaqs";
 
 type Props = {
   params: Promise<{
@@ -37,7 +37,7 @@ export default async function BlogInnerPage({
         blog={blog}
         sidebar={<BlogSidebarForm />}
       />
-      <FAQSection page="metafly"/>
+      <BlogFaqs faqs={blog?.faqs} />
       <RelatedBlogs blogs={blogs} />
     </>
   );
