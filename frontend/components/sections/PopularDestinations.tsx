@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Box, Typography, Skeleton, Alert, Button } from '@mui/material';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { getServices } from '@/services/httpServices';
-import CustomSlider from '@/components/common/CustomSlider';
-import SectionHeader from '../common/SectionHeader';
-import Section from '../common/Section';
-import CheckIcon from '@mui/icons-material/Check';
+import { Box, Typography, Skeleton, Alert, Button } from "@mui/material";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { getServices } from "@/services/httpServices";
+import CustomSlider from "@/components/common/CustomSlider";
+import SectionHeader from "../common/SectionHeader";
+import Section from "../common/Section";
+import CheckIcon from "@mui/icons-material/Check";
 
 /* ================= TYPES ================= */
 
@@ -24,28 +24,28 @@ type Destination = {
 };
 
 type Props = {
-  bgColor?: string
-}
+  bgColor?: string;
+};
 
 /* ================= CONFIG ================= */
 
 const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 if (!BASE_URL) {
-  throw new Error('Missing API URL');
+  throw new Error("Missing API URL");
 }
 
 /* ================= HELPERS ================= */
 
 const getImageUrl = (url?: string): string | null => {
   if (!url) return null;
-  if (url.startsWith('http')) return url;
-  return `${BASE_URL}${url.startsWith('/') ? url : `/${url}`}`;
+  if (url.startsWith("http")) return url;
+  return `${BASE_URL}${url.startsWith("/") ? url : `/${url}`}`;
 };
 
 /* ================= COMPONENT ================= */
 
-export default function PopularDestinations({bgColor}: Props) {
+export default function PopularDestinations({ bgColor }: Props) {
   const [data, setData] = useState<Destination[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -55,9 +55,9 @@ export default function PopularDestinations({bgColor}: Props) {
       try {
         setLoading(true);
 
-        const res = await getServices('/popular-destinations', {
-          populate: 'image',
-          sort: ['order:asc'],
+        const res = await getServices("/popular-destinations", {
+          populate: "image",
+          sort: ["order:asc"],
           pagination: {
             pageSize: 100,
           },
@@ -65,17 +65,16 @@ export default function PopularDestinations({bgColor}: Props) {
 
         if (!res.isSuccess) {
           throw new Error(
-            typeof res.message === 'string'
+            typeof res.message === "string"
               ? res.message
-              : res.message?.message || 'Failed to fetch'
+              : res.message?.message || "Failed to fetch",
           );
         }
 
         const mapped = (res.data?.data || []).map((item: any) => ({
           id: item.id,
           title: item.title,
-          imageUrl:
-            getImageUrl(item?.image?.url) || "/default-destination.jpg",
+          imageUrl: getImageUrl(item?.image?.url) || "/default-destination.jpg",
           tag: item.tag,
           tagColor: item.tagColor,
           popularCourses: item.popularCourses,
@@ -86,7 +85,7 @@ export default function PopularDestinations({bgColor}: Props) {
 
         setData(mapped);
       } catch (err: any) {
-        setError(err?.message || 'Something went wrong');
+        setError(err?.message || "Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -96,19 +95,15 @@ export default function PopularDestinations({bgColor}: Props) {
   }, []);
 
   return (
-    <Section spacing="lg" sx={{backgroundColor: bgColor}}>
-      <SectionHeader
-        title="Popular"
-        highlight="Destinations"
-      />
+    <Section spacing="lg" sx={{ backgroundColor: bgColor }}>
+      <SectionHeader title="Popular" highlight="Destinations" />
       <Box>
-
         {/* ERROR */}
         {error && <Alert severity="error">{error}</Alert>}
 
         {/* LOADING */}
         {loading && (
-          <Box sx={{ display: 'flex', gap: 2 }}>
+          <Box sx={{ display: "flex", gap: 2 }}>
             {Array.from({ length: 3 }).map((_, i) => (
               <Skeleton key={i} variant="rounded" width="100%" height={300} />
             ))}
@@ -125,66 +120,154 @@ export default function PopularDestinations({bgColor}: Props) {
               <Box
                 sx={{
                   borderRadius: 3,
-                  overflow: 'hidden',
+                  overflow: "hidden",
                   boxShadow: `0px 8.19px 18.43px 0px #A1A1A11A, 0px 137.23px 55.3px 0px #A1A1A103`,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 {/* IMAGE */}
-                <Box sx={{ position: 'relative' }}>
+                <Box sx={{ position: "relative" }}>
                   <Image
                     src={item.imageUrl}
                     alt={item.title}
                     width={400}
                     height={220}
                     sizes="(max-width: 768px) 100vw, 400px"
-                    style={{ width: '100%', height: 'auto' }}
+                    style={{ width: "100%", height: "auto" }}
                   />
 
                   {item.tag && (
                     <Box
                       sx={{
-                        position: 'absolute',
+                        position: "absolute",
                         top: 15,
                         left: 12,
-                        px: {xs: 1.2, md: 1.9},
-                        py: {xs: 0.4, md: 0.7},
+                        px: { xs: 1.2, md: 1.9 },
+                        py: { xs: 0.4, md: 0.7 },
                         borderRadius: 2,
-                        color: 'common.white',
-                        background: item.tagColor || '#000',
-                        border: `1px solid #fff`
+                        color: "common.white",
+                        background: item.tagColor || "#000",
+                        border: `1px solid #fff`,
                       }}
                     >
-                      <Typography variant='heading15' fontWeight={500} sx={{fontSize: {xs: 12,md: 14}}}>{item.tag}</Typography>
+                      <Typography
+                        variant="heading15"
+                        fontWeight={500}
+                        sx={{ fontSize: { xs: 12, md: 14 } }}
+                      >
+                        {item.tag}
+                      </Typography>
                     </Box>
                   )}
                 </Box>
 
                 {/* CONTENT */}
-                <Box sx={{ px: 2, pt: 2, pb: 3.8 }}>
-                  <Typography mb={1} variant='heading11' component='h5' color='navyBlue.500' sx={{fontSize: {xs: 20, md: 20, lg: 22, xl: 24}}}>
-                    {item.title}
-                  </Typography>
-
-                  <Box sx={{ display: 'flex', gap: 1.2 }} mb={1.75}>
-                    <CheckIcon sx={{ color: 'navyBlue.500', fontSize: 20 }} />
-                    <Typography variant="body05" mb={0} color='text.secondary' component='p' sx={{fontSize: {xs: 14, lg: 16}}}>
-                      Popular Courses: <span style={{ fontWeight: 600 }}>{item.popularCourses}</span>
+                <Box sx={{ px: 2, pt: 2, pb: 3.8, height: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <Box>
+                    <Typography
+                      mb={1}
+                      variant="heading11"
+                      component="h5"
+                      color="navyBlue.500"
+                      sx={{ fontSize: { xs: 20, md: 20, lg: 22, xl: 24 } }}
+                    >
+                      {item.title}
                     </Typography>
+
+                    <Typography
+                      mb={1}
+                      variant="body03"
+                      component="p"
+                      color="text.secondary"
+                    >
+                      <Typography 
+                        variant="body02"
+                        component="span"
+                        fontWeight={600}
+                        sx={{ fontSize: { xs: 20, md: 20, lg: 22, xl: 24 } }}
+                      >
+                        {item.title} 
+                        </Typography> Universities
+                    </Typography>
+
+                    <Box sx={{ display: "flex", gap: 1.2 }} mb={1.75}>
+                      <CheckIcon sx={{ color: "navyBlue.500", fontSize: 20 }} />
+                      <Typography
+                        variant="body05"
+                        mb={0}
+                        color="text.secondary"
+                        component="p"
+                        sx={{ fontSize: { xs: 14, lg: 16 } }}
+                      >
+                        Popular Courses:{" "}
+                        <span style={{ fontWeight: 600 }}>
+                          {item.popularCourses}
+                        </span>
+                      </Typography>
+                    </Box>
+
+                    <Box sx={{ display: "flex", gap: 1.2 }}>
+                      <CheckIcon sx={{ color: "navyBlue.500", fontSize: 20 }} />
+                      <Typography
+                        variant="body05"
+                        mb={0}
+                        color="text.secondary"
+                        component="p"
+                        sx={{ fontSize: { xs: 14, lg: 16 } }}
+                      >
+                        Student Friendly Cities -{" "}
+                        <span style={{ fontWeight: 600 }}>
+                          {item.studentCities}
+                        </span>
+                      </Typography>
+                    </Box>
                   </Box>
 
-                  <Box sx={{ display: 'flex', gap: 1.2 }}>
-                    <CheckIcon sx={{ color: 'navyBlue.500', fontSize: 20 }} />
-                    <Typography variant="body05" mb={0} color='text.secondary' component='p' sx={{fontSize: {xs: 14, lg: 16}}}>
-                      Student Friendly Cities - <span style={{ fontWeight: 600 }}>{item.studentCities}</span>
-                    </Typography>
-                  </Box>
-
-                  <Box sx={{ display: 'flex', gap: {xs: 1.5, xl: 2}, justifyContent: 'center', flexDirection: { xs: 'row', md: 'column', lg: 'row' } }} mt={5}>
-                    <Button variant="contained" size="medium" sx={{ fontWeight: 500, padding: {xs: "12px 12px",lg: '16px 20px', xl: '16px 30px'} }}>
-                      <Image src='/Home/download_arrow.svg' height={16} width={16} alt='Download' style={{ marginRight: "6px" }} /> Country Guide
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: { xs: 1.5, xl: 2 },
+                      justifyContent: "center",
+                      flexDirection: { xs: "row", md: "column", lg: "row" },
+                    }}
+                    mt={5}
+                  >
+                    <Button
+                      variant="contained"
+                      size="medium"
+                      sx={{
+                        fontWeight: 500,
+                        padding: {
+                          xs: "12px 12px",
+                          lg: "16px 20px",
+                          xl: "16px 30px",
+                        },
+                      }}
+                    >
+                      <Image
+                        src="/Home/download_arrow.svg"
+                        height={16}
+                        width={16}
+                        alt="Download"
+                        style={{ marginRight: "6px" }}
+                      />{" "}
+                      Country Guide
                     </Button>
 
-                    <Button variant="outlined" size="medium" sx={{ fontWeight: 500, padding: { xs: "12px 12px",lg: '16px 20px', xl: '16px 30px'} }}>
+                    <Button
+                      variant="outlined"
+                      size="medium"
+                      sx={{
+                        fontWeight: 500,
+                        padding: {
+                          xs: "12px 12px",
+                          lg: "16px 20px",
+                          xl: "16px 30px",
+                        },
+                      }}
+                    >
                       Explore More
                     </Button>
                   </Box>
@@ -195,6 +278,5 @@ export default function PopularDestinations({bgColor}: Props) {
         )}
       </Box>
     </Section>
-
   );
 }

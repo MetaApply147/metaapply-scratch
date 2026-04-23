@@ -20,6 +20,9 @@
     "tagColor": {
       "type": "string"
     },
+    "universityNumber": {
+      "type": "string"
+    },
     "image": {
       "type": "media",
       "multiple": false,
