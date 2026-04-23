@@ -53,7 +53,6 @@ export default function BlogDetailsContent({ blog, sidebar }: any) {
       spacing="lg"
       sx={{
         position: "relative",
-        pb: '0 !important',
         "&:before": {
           content: "''",
           position: "absolute",

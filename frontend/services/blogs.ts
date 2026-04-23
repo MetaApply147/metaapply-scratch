@@ -42,7 +42,7 @@ export const fetchBlogBySlug = async (
   const res = await fetch(
     `${API}/api/posts?filters[slug][$eq]=${encodeURIComponent(
       slug
-    )}&filters[publishedAt][$notNull]=true&populate[featuredImage]=true&populate[category]=true&populate[tags]=true&populate[author][populate][image]=true`,
+    )}&filters[publishedAt][$notNull]=true&populate[featuredImage]=true&populate[category]=true&populate[tags]=true&populate[faqs]=true&populate[author][populate][image]=true`,
     {
       next: { revalidate: 300 },
     }
