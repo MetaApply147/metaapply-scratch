@@ -21,6 +21,7 @@ type Destination = {
   studentCities?: string;
   countryGuideLink?: string;
   exploreMoreLink?: string;
+  universityNumber?: string;
 };
 
 type Props = {
@@ -81,6 +82,7 @@ export default function PopularDestinations({ bgColor }: Props) {
           studentCities: item.studentCities,
           countryGuideLink: item.countryGuideLink,
           exploreMoreLink: item.exploreMoreLink,
+          universityNumber: item.universityNumber,
         }));
 
         setData(mapped);
@@ -164,7 +166,17 @@ export default function PopularDestinations({ bgColor }: Props) {
                 </Box>
 
                 {/* CONTENT */}
-                <Box sx={{ px: 2, pt: 2, pb: 3.8, height: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <Box
+                  sx={{
+                    px: 2,
+                    pt: 2,
+                    pb: 3.8,
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
                   <Box>
                     <Typography
                       mb={1}
@@ -182,14 +194,15 @@ export default function PopularDestinations({ bgColor }: Props) {
                       component="p"
                       color="text.secondary"
                     >
-                      <Typography 
+                      <Typography
                         variant="body02"
                         component="span"
                         fontWeight={600}
                         sx={{ fontSize: { xs: 20, md: 20, lg: 22, xl: 24 } }}
                       >
-                        {item.title} 
-                        </Typography> Universities
+                        {item.universityNumber}+
+                      </Typography>{" "}
+                      Universities
                     </Typography>
 
                     <Box sx={{ display: "flex", gap: 1.2 }} mb={1.75}>
@@ -234,33 +247,44 @@ export default function PopularDestinations({ bgColor }: Props) {
                     }}
                     mt={5}
                   >
-                    <Button
-                      variant="contained"
-                      size="medium"
-                      sx={{
-                        fontWeight: 500,
-                        padding: {
-                          xs: "12px 12px",
-                          lg: "16px 20px",
-                          xl: "16px 30px",
-                        },
-                      }}
-                    >
-                      <Image
-                        src="/Home/download_arrow.svg"
-                        height={16}
-                        width={16}
-                        alt="Download"
-                        style={{ marginRight: "6px" }}
-                      />{" "}
-                      Country Guide
-                    </Button>
+                    {item.countryGuideLink && (
+                      <Button
+                        variant="contained"
+                        size="medium"
+                        component="a"
+                        href={item.countryGuideLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          fontWeight: 500,
+                          padding: {
+                            xs: "12px 12px",
+                            lg: "16px 20px",
+                            xl: "16px 30px",
+                          },
+                        }}
+                      >
+                        <Image
+                          src="/Home/download_arrow.svg"
+                          height={16}
+                          width={16}
+                          alt="Download"
+                          style={{ marginRight: "6px" }}
+                        />
+                        Country Guide
+                      </Button>
+                    )}
 
                     <Button
                       variant="outlined"
                       size="medium"
+                      component="a"
+                      href={item.exploreMoreLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       sx={{
                         fontWeight: 500,
+                        width: !item.countryGuideLink ? "100%" : "auto",
                         padding: {
                           xs: "12px 12px",
                           lg: "16px 20px",
