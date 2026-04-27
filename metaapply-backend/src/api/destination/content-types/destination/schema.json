@@ -13,6 +13,30 @@
   "attributes": {
     "title": {
       "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "hero": {
+      "type": "component",
+      "component": "shared.hero-banner",
+      "repeatable": false
+    },
+    "capital": {
+      "type": "string"
+    },
+    "tuitionFees": {
+      "type": "string"
+    },
+    "intakes": {
+      "type": "string"
+    },
+    "livingExpenses": {
+      "type": "string"
+    },
+    "whyStudyDescription": {
+      "type": "text"
     }
   }
 }
