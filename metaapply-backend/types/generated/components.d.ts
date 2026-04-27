@@ -115,14 +115,6 @@ export interface SharedHeroBanner extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedQuickFactsSection extends Struct.ComponentSchema {
-  collectionName: 'components_shared_quick_facts_sections';
-  info: {
-    displayName: 'quick-facts-section';
-  };
-  attributes: {};
-}
-
 export interface SharedTestimonial extends Struct.ComponentSchema {
   collectionName: 'components_shared_testimonials';
   info: {
@@ -177,7 +169,6 @@ declare module '@strapi/strapi' {
       'menu.section': MenuSection;
       'shared.feature': SharedFeature;
       'shared.hero-banner': SharedHeroBanner;
-      'shared.quick-facts-section': SharedQuickFactsSection;
       'shared.testimonial': SharedTestimonial;
       'success-story.testimonial-story': SuccessStoryTestimonialStory;
       'success-story.video-story': SuccessStoryVideoStory;

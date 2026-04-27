@@ -560,13 +560,9 @@ export interface ApiDestinationDestination extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    capital: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    hero: Schema.Attribute.Component<'shared.hero-banner', false>;
-    intakes: Schema.Attribute.String;
-    livingExpenses: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -574,13 +570,10 @@ export interface ApiDestinationDestination extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
-    tuitionFees: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    whyStudyDescription: Schema.Attribute.Text;
   };
 }
 
@@ -929,7 +922,6 @@ export interface ApiPopularDestinationPopularDestination
     tag: Schema.Attribute.String;
     tagColor: Schema.Attribute.String;
     title: Schema.Attribute.String;
-    universityNumber: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
