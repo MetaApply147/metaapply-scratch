@@ -6,6 +6,7 @@ import Image from "next/image";
 export default function PlanYourJourney() {
   return (
     <Box
+    component='section'
       sx={{
         position: "relative",
         backgroundColor: "navyBlue.600",

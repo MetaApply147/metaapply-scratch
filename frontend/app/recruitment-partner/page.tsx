@@ -20,7 +20,7 @@ export default function RecruitmentPartnerPage() {
             <ServicesSection />
 
             {/* Popular Destination section */}
-            <PopularDestinations bgColor='#F7FBFF' />
+            <PopularDestinations bg='#F7FBFF' />
 
             {/* Success Story */}
             <SuccessStories page="recruitment-partner" type="testimonial" />

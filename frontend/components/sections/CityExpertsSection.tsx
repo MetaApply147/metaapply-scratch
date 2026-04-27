@@ -198,8 +198,8 @@ export default function CityExpertsSection() {
                     >
                         {activeData.features?.map((f, i) => (
                         <Box key={i} display="flex" gap={1} alignItems="start">
-                            <Box sx={{height: {xs: 18, sm: 20}, width: {xs: 18, sm: 20}, position: 'relative'}}>
-                                <Image src='../green-circle-check.svg' fill alt="Check" style={{objectFit: 'cover'}}/>
+                            <Box sx={{height: {xs: 18, sm: 20}, width: {xs: 18, sm: 20}, position: 'relative', mt: '2px'}}>
+                                <Image src='../green-circle-check.svg' fill alt="Check" style={{objectFit: 'contain'}}/>
                             </Box>
                             <Typography variant="body05" sx={{fontSize: {md: 14, lg: 16}}}>{f.title}</Typography>
                         </Box>

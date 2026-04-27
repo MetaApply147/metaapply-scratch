@@ -31,7 +31,7 @@ export default function BlogDetailsHero({ blog }: any) {
           <Typography
             variant="body07"
             component="p"
-          > Published on
+          > Published on{" "}
             {new Date(blog.publishedAt).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",

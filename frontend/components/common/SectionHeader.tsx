@@ -7,9 +7,10 @@ type Props = {
   highlightPosition?: 'start';
   color?: string;
   mb?: string;
+  tagline?: string;
 };
 
-export default function SectionHeader({ title, highlight, title2, highlightPosition, color, mb }: Props) {
+export default function SectionHeader({ title, highlight, title2, highlightPosition, color, mb, tagline }: Props) {
   const isStart = highlightPosition === 'start';
   return (
     <Box mb={{ xs: 3, md: mb? mb: 6.5 }}>
@@ -31,6 +32,8 @@ export default function SectionHeader({ title, highlight, title2, highlightPosit
 
         {title2}
       </Typography>
+
+      <Typography mt={2} variant="heading11" component='p' fontWeight={500}>{tagline}</Typography>
     </Box>
   );
 }
