@@ -9,7 +9,7 @@ import { getServices } from '@/services/httpServices';
 type Props = {
   slug: string;
   minHeight?: any;
-  size?: 'default' | 'medium';
+  size?: 'default' | 'medium' | 'large';
   leftExtra?: React.ReactNode;
   disableSectionPadding?: boolean;
   rightMaxWidth?: number | string;
@@ -72,6 +72,7 @@ export default function HeroBanner({ slug, minHeight, size, leftExtra, disableSe
             ctaTarget={hero.ctaTarget}
             textColor={hero.textColor}
             size={size}
+            slug={slug}
           />
 
           {leftExtra}

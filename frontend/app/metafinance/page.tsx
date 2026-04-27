@@ -46,7 +46,7 @@ export default function MetaFinancePage() {
             <MetaFinanceProcess/>
 
             {/* Popular Destination section */}
-            <PopularDestinations bgColor='#F7FBFF'/>
+            <PopularDestinations bg="/study-abroad/Background-1.webp"/>
 
             {/* Success Story */}
             <SuccessStories page="metafinance" type="testimonial" cta={{

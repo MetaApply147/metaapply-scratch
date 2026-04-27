@@ -12,7 +12,7 @@ const features = [
 
 export default function HomeRecruitmentPartner() {
   return (
-    <Box sx={{ 
+    <Box component='section' sx={{ 
         borderRadius: "24px",
         background: `url('/Home/RecruitmentPartnerHomeBg.webp')`,
         mx: {xs: '16px',md:4},

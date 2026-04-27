@@ -6,8 +6,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SectionHeader from '../common/SectionHeader';
 import Section from '../common/Section';
 import Link from "next/link";
-import { link } from "fs";
-import { relative } from "path";
 
 /* ================= DATA ================= */
 

@@ -4,7 +4,7 @@ import Section from "@/components/common/Section";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 
-export default function BlogsCTA() {
+export default function CTASection() {
   return (
     <Section spacing="lg">
       <Box

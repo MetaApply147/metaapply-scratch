@@ -17,7 +17,7 @@ export default function Home() {
     <>
     
       {/*  Hero Section */}
-      <HeroBanner slug="home" minHeight={{ xs: 400, sm: 600, lg: 796 }} leftExtra={<StepperForm />}/>
+      <HeroBanner slug="home" size="large" minHeight={{ xs: 400, sm: 600, lg: 796 }} leftExtra={<StepperForm />}/>
 
       {/* Counters */}
       <Section spacing="lg" sx={{p: '0 !important'}}>
@@ -25,7 +25,7 @@ export default function Home() {
       </Section>
 
       {/* Partnered Universities */}
-      <PartneredUniversities />
+      <PartneredUniversities isHome />
 
       {/* Meet Experts */}
       <CityExpertsSection/>
@@ -50,13 +50,6 @@ export default function Home() {
 
       {/* FAQs */}
       <FAQSection page="home" />
-
-
-       
-      
-      
-      
-      
     </>
     
   );

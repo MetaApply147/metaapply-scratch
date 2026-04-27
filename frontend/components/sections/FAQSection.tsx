@@ -29,11 +29,12 @@ type FAQ = {
 type Props = {
   page: string;
   backgroundColor?: string;
+  disablePadding?: boolean;
 };
 
 /* ================= COMPONENT ================= */
 
-export default function FAQSection({ page, backgroundColor }: Props) {
+export default function FAQSection({ page, backgroundColor, disablePadding = false }: Props) {
   const [data, setData] = useState<FAQ[]>([]);
   const [grouped, setGrouped] = useState<Record<string, FAQ[]>>({});
   const [activeTab, setActiveTab] = useState("");
@@ -99,7 +100,7 @@ export default function FAQSection({ page, backgroundColor }: Props) {
     };
 
   return (
-    <Section spacing="lg" sx={{backgroundColor: backgroundColor}} >
+    <Section spacing="lg" sx={{backgroundColor: backgroundColor, ...(disablePadding && { py: 0 })}} >
       <Box>
         {/* ================= HEADING ================= */}
         <SectionHeader title="Frequently Asked" highlight="Questions" />

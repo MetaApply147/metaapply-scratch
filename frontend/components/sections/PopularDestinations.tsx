@@ -25,7 +25,8 @@ type Destination = {
 };
 
 type Props = {
-  bgColor?: string;
+  bg?: string;
+  tagline?: string;
 };
 
 /* ================= CONFIG ================= */
@@ -46,10 +47,14 @@ const getImageUrl = (url?: string): string | null => {
 
 /* ================= COMPONENT ================= */
 
-export default function PopularDestinations({ bgColor }: Props) {
+export default function PopularDestinations({ bg, tagline }: Props) {
   const [data, setData] = useState<Destination[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const backgroundValue = bg?.startsWith("/")
+  ? `url(${bg}) center/cover no-repeat`
+  : bg;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,8 +102,9 @@ export default function PopularDestinations({ bgColor }: Props) {
   }, []);
 
   return (
-    <Section spacing="lg" sx={{ backgroundColor: bgColor }}>
-      <SectionHeader title="Popular" highlight="Destinations" />
+    <Section spacing="lg" sx={{ background: backgroundValue }}>
+      <SectionHeader title="Popular" highlight="Destinations" tagline={tagline}/>
+
       <Box>
         {/* ERROR */}
         {error && <Alert severity="error">{error}</Alert>}
@@ -127,6 +133,7 @@ export default function PopularDestinations({ bgColor }: Props) {
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
+                  backgroundColor: 'common.white'
                 }}
               >
                 {/* IMAGE */}
