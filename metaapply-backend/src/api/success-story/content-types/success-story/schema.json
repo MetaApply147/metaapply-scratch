@@ -42,7 +42,18 @@
         "recruitment-partner",
         "university-partner",
         "metaapply-amplify",
-        "study-abroad"
+        "study-abroad",
+        "test-prep",
+        "ielts",
+        "toefl",
+        "pte",
+        "oet",
+        "duolingo",
+        "gre",
+        "gmat",
+        "sat",
+        "act",
+        "ap"
       ]
     },
     "type": {

@@ -709,6 +709,17 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'study-in-new-zealand',
         'study-in-south-korea',
         'study-in-caribbean-islands',
+        'test-prep',
+        'ielts',
+        'toefl',
+        'pte',
+        'oet',
+        'duolingo',
+        'gre',
+        'gmat',
+        'sat',
+        'act',
+        'ap',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1079,6 +1090,17 @@ export interface ApiSuccessStorySuccessStory
         'university-partner',
         'metaapply-amplify',
         'study-abroad',
+        'test-prep',
+        'ielts',
+        'toefl',
+        'pte',
+        'oet',
+        'duolingo',
+        'gre',
+        'gmat',
+        'sat',
+        'act',
+        'ap',
       ]
     > &
       Schema.Attribute.Required;
