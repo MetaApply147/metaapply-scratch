@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_university_logo_item_top_universities",
+  "info": {
+    "displayName": "topUniversities"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "priority": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

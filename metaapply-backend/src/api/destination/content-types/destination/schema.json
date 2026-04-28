@@ -37,6 +37,28 @@
     },
     "whyStudyDescription": {
       "type": "text"
+    },
+    "benefits": {
+      "type": "component",
+      "component": "shared.benefit-item",
+      "repeatable": true
+    },
+    "eligibilityCriteria": {
+      "type": "richtext"
+    },
+    "requiredDocuments": {
+      "type": "richtext"
+    },
+    "visaRequirements": {
+      "type": "richtext"
+    },
+    "costOfStudyDescription": {
+      "type": "richtext"
+    },
+    "topUniversities": {
+      "type": "component",
+      "component": "university-logo-item.top-universities",
+      "repeatable": true
     }
   }
 }
