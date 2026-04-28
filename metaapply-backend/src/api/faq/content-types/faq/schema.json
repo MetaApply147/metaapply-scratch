@@ -76,7 +76,18 @@
         "study-in-west-indies",
         "study-in-new-zealand",
         "study-in-south-korea",
-        "study-in-caribbean-islands"
+        "study-in-caribbean-islands",
+        "test-prep",
+        "ielts",
+        "toefl",
+        "pte",
+        "oet",
+        "duolingo",
+        "gre",
+        "gmat",
+        "sat",
+        "act",
+        "ap"
       ]
     }
   }
