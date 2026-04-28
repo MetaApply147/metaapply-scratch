@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_benefit_items",
+  "info": {
+    "displayName": "benefit-item"
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "string"
+    },
+    "cardTitle": {
+      "type": "string"
+    },
+    "cardDescription": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

@@ -560,10 +560,13 @@ export interface ApiDestinationDestination extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    benefits: Schema.Attribute.Component<'shared.benefit-item', true>;
     capital: Schema.Attribute.String;
+    costOfStudyDescription: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    eligibilityCriteria: Schema.Attribute.RichText;
     hero: Schema.Attribute.Component<'shared.hero-banner', false>;
     intakes: Schema.Attribute.String;
     livingExpenses: Schema.Attribute.String;
@@ -574,12 +577,18 @@ export interface ApiDestinationDestination extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    requiredDocuments: Schema.Attribute.RichText;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
+    topUniversities: Schema.Attribute.Component<
+      'university-logo-item.top-universities',
+      true
+    >;
     tuitionFees: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    visaRequirements: Schema.Attribute.RichText;
     whyStudyDescription: Schema.Attribute.Text;
   };
 }
@@ -669,6 +678,37 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'university-partner',
         'metaapply-amplify',
         'study-abroad',
+        'study-in-europe',
+        'study-in-uk',
+        'study-in-usa',
+        'study-in-uae',
+        'study-in-australia',
+        'study-in-malta',
+        'study-in-canada',
+        'study-in-france',
+        'study-in-russia',
+        'study-in-tbilisi-georgia',
+        'study-in-germany',
+        'study-in-ireland',
+        'study-in-spain',
+        'study-in-singapore',
+        'study-in-malaysia',
+        'study-in-poland',
+        'study-in-turkiye',
+        'study-in-netherlands',
+        'study-in-albania',
+        'study-in-austria',
+        'study-in-monaco',
+        'study-in-scotland',
+        'study-in-hungary',
+        'study-in-guyana',
+        'study-in-uzbekistan',
+        'study-in-kyrgyzstan',
+        'study-in-switzerland',
+        'study-in-west-indies',
+        'study-in-new-zealand',
+        'study-in-south-korea',
+        'study-in-caribbean-islands',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;

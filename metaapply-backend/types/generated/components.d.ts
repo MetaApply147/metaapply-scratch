@@ -80,6 +80,18 @@ export interface MenuSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedBenefitItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_benefit_items';
+  info: {
+    displayName: 'benefit-item';
+  };
+  attributes: {
+    cardDescription: Schema.Attribute.Text;
+    cardTitle: Schema.Attribute.String;
+    number: Schema.Attribute.String;
+  };
+}
+
 export interface SharedFeature extends Struct.ComponentSchema {
   collectionName: 'components_shared_features';
   info: {
@@ -113,14 +125,6 @@ export interface SharedHeroBanner extends Struct.ComponentSchema {
     textColor: Schema.Attribute.Enumeration<['light', 'dark']>;
     title: Schema.Attribute.String;
   };
-}
-
-export interface SharedQuickFactsSection extends Struct.ComponentSchema {
-  collectionName: 'components_shared_quick_facts_sections';
-  info: {
-    displayName: 'quick-facts-section';
-  };
-  attributes: {};
 }
 
 export interface SharedTestimonial extends Struct.ComponentSchema {
@@ -165,6 +169,19 @@ export interface SuccessStoryVideoStory extends Struct.ComponentSchema {
   };
 }
 
+export interface UniversityLogoItemTopUniversities
+  extends Struct.ComponentSchema {
+  collectionName: 'components_university_logo_item_top_universities';
+  info: {
+    displayName: 'topUniversities';
+  };
+  attributes: {
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    name: Schema.Attribute.String;
+    priority: Schema.Attribute.Integer;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -175,12 +192,13 @@ declare module '@strapi/strapi' {
       'footer.footer-section': FooterFooterSection;
       'menu.item': MenuItem;
       'menu.section': MenuSection;
+      'shared.benefit-item': SharedBenefitItem;
       'shared.feature': SharedFeature;
       'shared.hero-banner': SharedHeroBanner;
-      'shared.quick-facts-section': SharedQuickFactsSection;
       'shared.testimonial': SharedTestimonial;
       'success-story.testimonial-story': SuccessStoryTestimonialStory;
       'success-story.video-story': SuccessStoryVideoStory;
+      'university-logo-item.top-universities': UniversityLogoItemTopUniversities;
     }
   }
 }
