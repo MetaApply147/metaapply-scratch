@@ -1,32 +1,52 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import BaseBanner from './BaseBanner';
-import BannerContent from './BannerContent';
-import BannerImage from './BannerImage';
-import { getServices } from '@/services/httpServices';
+import { useEffect, useState } from "react";
+import BaseBanner from "./BaseBanner";
+import BannerContent from "./BannerContent";
+import BannerImage from "./BannerImage";
+import { getServices } from "@/services/httpServices";
 
 type Props = {
-  slug: string;
+  slug?: string;
+  heroData?: any;
   minHeight?: any;
-  size?: 'default' | 'medium' | 'large';
+  size?: "default" | "medium" | "large";
   leftExtra?: React.ReactNode;
   disableSectionPadding?: boolean;
   rightMaxWidth?: number | string;
-  alignSelf? : string;
+  alignSelf?: string;
   rightComponent?: React.ReactNode;
+  width?: string;
 };
 
-export default function HeroBanner({ slug, minHeight, size, leftExtra, disableSectionPadding, rightMaxWidth, alignSelf, rightComponent }: Props) {
+export default function HeroBanner({
+  slug,
+  heroData,
+  minHeight,
+  size,
+  leftExtra,
+  disableSectionPadding,
+  rightMaxWidth,
+  alignSelf,
+  rightComponent,
+  width
+}: Props) {
   const [hero, setHero] = useState<any>(null);
 
   useEffect(() => {
+    if (heroData) {
+      setHero(heroData);
+      return;
+    }
+
+    if (!slug) return;
+
     const fetchData = async () => {
-      const res = await getServices('/pages', {
+      const res = await getServices("/pages", {
         filters: { slug: { $eq: slug } },
         populate: {
           hero: {
-            populate: ['logo', 'rightImage', 'backgroundImage'],
+            populate: ["logo", "rightImage", "backgroundImage"],
           },
         },
       });
@@ -38,16 +58,15 @@ export default function HeroBanner({ slug, minHeight, size, leftExtra, disableSe
     };
 
     fetchData();
-    
-  }, [slug]);
-  
+  }, [slug, heroData]);
+
   const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
   const getImageUrl = (media: any) => {
-    if (!media?.url) return '';
-    if (media.url.startsWith('http')) return media.url;
+    if (!media?.url) return "";
+    if (media.url.startsWith("http")) return media.url;
     return `${BASE_URL}${media.url}`;
-    };
+  };
 
   if (!hero) return null;
 
@@ -59,6 +78,7 @@ export default function HeroBanner({ slug, minHeight, size, leftExtra, disableSe
       disableSectionPadding={disableSectionPadding}
       rightMaxWidth={rightMaxWidth}
       alignSelf={alignSelf}
+      width={width}
       left={
         <>
           <BannerContent
@@ -77,7 +97,6 @@ export default function HeroBanner({ slug, minHeight, size, leftExtra, disableSe
 
           {leftExtra}
         </>
-        
       }
       right={
         rightComponent
