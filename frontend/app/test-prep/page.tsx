@@ -6,6 +6,7 @@ import JourneyToDreamScoreSection from "@/components/sections/Pages/test-prep/Jo
 import KnowExamsSection from "@/components/sections/Pages/test-prep/KnowExamsSection";
 import OurFaculty from "@/components/sections/Pages/test-prep/OurFaculty";
 import QuickOverviewSection from "@/components/sections/Pages/test-prep/QuickOverviewSection";
+import QuizCTASection from "@/components/sections/Pages/test-prep/QuizCTASection";
 import UpcomingBatches from "@/components/sections/Pages/test-prep/UpcomingBatches";
 import WhyMetaApply from "@/components/sections/Pages/test-prep/WhyMetaapply";
 import SuccessStories from "@/components/sections/SuccessStories";
@@ -23,11 +24,12 @@ export default function TestPrep() {
             <AchiversSection />
             <QuickOverviewSection/>
             <KnowExamsSection/>
+            <QuizCTASection/>
             <UpcomingBatches/>
             <OurFaculty/>
             <WhyMetaApply/>
             <JourneyToDreamScoreSection/>
-            <SuccessStories page="test-prep" type="video" />
+            <SuccessStories page="test-prep"/>
             <FAQSection page="test-prep" disablePadding/>
             <CTASection/>
         </>
