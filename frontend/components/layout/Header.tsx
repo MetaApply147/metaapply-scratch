@@ -89,7 +89,7 @@ export default function Header({ menus, tabs }: HeaderProps) {
     <AppBar
       position="sticky"
       elevation={0}
-      sx={{ backgroundColor: "white" }}
+      sx={{ backgroundColor: "white", boxShadow: '0px 20px 40px 0px #E1E1E133' }}
       ref={headerRef}
     >
       <Container maxWidth="xl" sx={{ position: "relative" }}>
