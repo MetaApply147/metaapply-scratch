@@ -90,6 +90,11 @@ const palette = {
 
   blueSelected: "#0065FF",
 
+  warning: {
+  main: "#F7BE33",
+  light: "#FFF2D0",
+  dark: "#D89A00",
+},
 };
 
 export default palette;
