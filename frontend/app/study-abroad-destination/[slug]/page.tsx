@@ -1,4 +1,5 @@
 import HeroBanner from "@/components/banner/HeroBanner";
+import DestinationPageClient from "@/components/sections/Pages/studyAbroad/DestinationPageClient";
 import DestinationSections from "@/components/sections/Pages/studyAbroad/DestinationSections";
 import StudyAbroadContent from "@/components/sections/Pages/studyAbroad/StudyAbroadContent";
 import {
@@ -38,21 +39,7 @@ export default async function DestinationPage({
         disableSectionPadding
         width="40%"
       />
-      <StudyAbroadContent
-        sections={[
-          { id: "life-in", label: `Life in ${countryName}` },
-          { id: "why-study", label: `Why Study in ${countryName}` },
-          { id: "benefits", label: "Benefits" },
-          { id: "eligibility", label: "Eligibility Criteria" },
-          { id: "documents", label: "Required Documents" },
-          { id: "visa", label: "Visa Requirements" },
-          { id: "cost-of-study", label: `Cost of Study in ${countryName}` },
-          { id: "universities", label: "Top Universities" },
-          { id: "scholarships", label: "Scholarships" },
-        ]}
-      >
-        <DestinationSections data={data} countryName={countryName}/>
-      </StudyAbroadContent>
+      <DestinationPageClient data={data} countryName={countryName} />
     </div>
   );
 }

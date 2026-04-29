@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Typography } from "@mui/material";
 
 /* ================= DATA ================= */
@@ -18,7 +16,6 @@ export default function StudyDescription({ data, countryName }: Props) {
         variant="heading09"
         component="h3"
         pb={1.5}
-        //   sx={{ lineHeight: "110%", color: "secondary.main" }}
       >
         Why{" "}
         <Box component="span" sx={{ color: "primary.main" }}>

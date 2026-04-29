@@ -12,15 +12,32 @@ type SectionItem = {
 type Props = {
   sections: SectionItem[];
   children: React.ReactNode;
+  setAdmissionTab?: (tab: string) => void;
 };
 
-export default function StudyAbroadContent({ sections, children }: Props) {
+export default function StudyAbroadContent({
+  sections,
+  children,
+  setAdmissionTab,
+}: Props) {
   const [active, setActive] = useState(sections[0]?.id);
 
   const handleClick = (id: string) => {
     setActive(id);
 
-    const el = document.getElementById(id);
+    let scrollId = id;
+
+    if (id === "documents") {
+      setAdmissionTab?.("documents");
+      scrollId = "admission-checklist";
+    }
+
+    if (id === "visa") {
+      setAdmissionTab?.("visa");
+      scrollId = "admission-checklist";
+    }
+
+    const el = document.getElementById(scrollId);
 
     if (el) {
       const headerOffset = 150;

@@ -55,6 +55,9 @@ export default function InfoCards({ data }: Props) {
               boxShadow: "0px 8px 40px 0px #B4B4B433",
               px: 2.8,
               py: 2.5,
+              display: 'flex', 
+              flexDirection: 'column',
+              justifyContent: 'space-between'
             }}
           >
             <Box sx={{ height: 64, width: 64, position: "relative" }}>
