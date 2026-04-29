@@ -5,10 +5,11 @@ import { Box, Container, BoxProps } from '@mui/material';
 type SectionProps = BoxProps & {
   children: React.ReactNode;
   container?: boolean;
-  spacing?: 'sm' | 'md' | 'lg';
+  spacing?: 'none' | 'sm' | 'md' | 'lg';
 };
 
 const spacingMap = {
+  none: { py: 0 },
   sm: { py: { xs: 4, md: 6 } },
   md: { py: { xs: 6, md: 10 } },
   lg: { py: { xs: 8, md: 11.25 } },
