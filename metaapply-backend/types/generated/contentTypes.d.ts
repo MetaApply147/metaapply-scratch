@@ -578,6 +578,10 @@ export interface ApiDestinationDestination extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     requiredDocuments: Schema.Attribute.RichText;
+    scholarshipCards: Schema.Attribute.Component<
+      'common.scholarship-card',
+      true
+    >;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
     topUniversities: Schema.Attribute.Component<
@@ -1141,6 +1145,53 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTestPrepTestPrep extends Struct.CollectionTypeSchema {
+  collectionName: 'test_preps';
+  info: {
+    displayName: 'TestPrep';
+    pluralName: 'test-preps';
+    singularName: 'test-prep';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Advantage: Schema.Attribute.Boolean;
+    advantagesSection: Schema.Attribute.Component<
+      'common.advantages-section',
+      false
+    >;
+    courses: Schema.Attribute.Component<'common.courses', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ctaText: Schema.Attribute.String;
+    ctaUrl: Schema.Attribute.String;
+    examDates: Schema.Attribute.RichText;
+    examOverview: Schema.Attribute.RichText;
+    faculty: Schema.Attribute.Component<'common.faculty', true>;
+    Format: Schema.Attribute.RichText;
+    heroSection: Schema.Attribute.Component<'shared.test-prep-hero', false>;
+    highlight: Schema.Attribute.Component<'common.highlight-item', true>;
+    journey: Schema.Attribute.Component<'common.journey', true>;
+    journeyHeading: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::test-prep.test-prep'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    scoringPattern: Schema.Attribute.RichText;
+    slug: Schema.Attribute.UID<'title'>;
+    testprepSlides: Schema.Attribute.Component<'common.testprep-slide', true>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1671,6 +1722,7 @@ declare module '@strapi/strapi' {
       'api::services-inner-page-destination.services-inner-page-destination': ApiServicesInnerPageDestinationServicesInnerPageDestination;
       'api::success-story.success-story': ApiSuccessStorySuccessStory;
       'api::tag.tag': ApiTagTag;
+      'api::test-prep.test-prep': ApiTestPrepTestPrep;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

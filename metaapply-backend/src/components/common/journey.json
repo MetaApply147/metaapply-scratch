@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_common_journeys",
+  "info": {
+    "displayName": "journey"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

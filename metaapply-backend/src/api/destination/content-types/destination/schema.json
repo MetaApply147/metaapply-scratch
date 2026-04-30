@@ -59,6 +59,11 @@
       "type": "component",
       "component": "university-logo-item.top-universities",
       "repeatable": true
+    },
+    "scholarshipCards": {
+      "type": "component",
+      "component": "common.scholarship-card",
+      "repeatable": true
     }
   }
 }
