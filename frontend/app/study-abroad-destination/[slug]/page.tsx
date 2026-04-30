@@ -1,7 +1,11 @@
 import HeroBanner from "@/components/banner/HeroBanner";
+import CalculatorsSection from "@/components/sections/CalculatorsSection";
+import CTASectionCommon from "@/components/sections/CTASectionCommon";
+import FAQSection from "@/components/sections/FAQSection";
+import MetaapplyProcess from "@/components/sections/MetaapplyProcess";
 import DestinationPageClient from "@/components/sections/Pages/studyAbroad/DestinationPageClient";
-import DestinationSections from "@/components/sections/Pages/studyAbroad/DestinationSections";
-import StudyAbroadContent from "@/components/sections/Pages/studyAbroad/StudyAbroadContent";
+import StudentTrust from "@/components/sections/Pages/studyAbroad/StudentTrust";
+import TopUniversities from "@/components/sections/Pages/studyAbroad/TopUniversities";
 import {
   fetchDestinations,
   fetchDestinationBySlug,
@@ -32,14 +36,27 @@ export default async function DestinationPage({
   const countryName = data.title.replace("Study in ", "");
 
   return (
-    <div>
+    <>
       <HeroBanner
         heroData={data.hero}
         minHeight={{ xs: 400, sm: 400, lg: 650 }}
         disableSectionPadding
         width="40%"
       />
+
       <DestinationPageClient data={data} countryName={countryName} />
-    </div>
+
+      <StudentTrust/>
+
+      <TopUniversities data={data?.topUniversities} countryName={countryName}/>
+
+      <CalculatorsSection/>
+
+      <MetaapplyProcess/>
+
+      <FAQSection page={`study-in-${countryName}`} disablePadding/>
+
+      <CTASectionCommon title="Ready to begin your Journey?" description="Explore top universities, programs, and opportunities in UK aligned with your future goals." buttonText="Talk to Our Experts" image="/study-abroad/Inner-pages/CTA-Girl.webp" ImageWidth="423px"/>
+    </>
   );
 }

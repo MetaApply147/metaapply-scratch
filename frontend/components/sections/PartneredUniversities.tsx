@@ -41,7 +41,7 @@ const getImageUrl = (url?: string): string | null => {
   return `${BASE_URL}${url.startsWith("/") ? url : `/${url}`}`;
 };
 
-const groupPartnersForRows = (arr: Partner[], rows = 4) => {
+const groupPartnersForRows = (arr: Partner[], rows = 3) => {
   const cols = Math.ceil(arr.length / rows);
 
   const matrix: (Partner | null)[][] = Array.from({ length: rows }, () =>
@@ -134,7 +134,7 @@ export default function PartneredUniversities({
     fetchPartners();
   }, []);
 
-  const groupedPartners = groupPartnersForRows(partners, 4);
+  const groupedPartners = groupPartnersForRows(partners, 3);
 
   const sliderContent = (
     <>
@@ -176,7 +176,7 @@ export default function PartneredUniversities({
             <Box
               sx={{
                 display: "grid",
-                gridTemplateRows: "repeat(4, 1fr)",
+                gridTemplateRows: "repeat(3, 1fr)",
                 gap: 2,
                 height: "100%",
               }}
@@ -192,7 +192,7 @@ export default function PartneredUniversities({
                       justifyContent: "center",
                       borderRadius: "12px",
                       backgroundColor: "#fff",
-                      boxShadow: "0px 4px 20px rgba(0,0,0,0.06)",
+                      boxShadow: "0px 4px 30px 0px #CCCCCC4D",
                       px: 2,
                     }}
                   >
