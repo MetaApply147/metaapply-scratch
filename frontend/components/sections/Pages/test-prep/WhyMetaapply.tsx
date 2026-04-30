@@ -1,6 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import FeatureCard from "./FeatureCard";
-import palette from "@/theme/palette";
 import SectionHeader from "@/components/common/SectionHeader";
 
 const whyMetaApplyData = [
@@ -46,25 +45,80 @@ export default function WhyMetaApply() {
   return (
     <Box
       sx={{
+        width: "100%",
         maxWidth: "1317px",
         mx: "auto",
-        py: 8,
+
+        px: {
+          xs: 2,
+          sm: 3,
+          md: 4,
+          lg: 0,
+        },
+
+        py: {
+          xs: 6,
+          sm: 7,
+          md: 8,
+        },
+
         display: "flex",
         flexDirection: "column",
-        gap: "36px",
+
+        gap: {
+          xs: "28px",
+          md: "36px",
+        },
       }}
     >
-      <SectionHeader title='Why' highlight='MetaApply TestPrep' mb={"0"}/>
+      <SectionHeader
+        title="Why"
+        highlight="MetaApply TestPrep"
+        mb="0"
+      />
 
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "24px",
+
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "1fr",
+            md: "repeat(2, minmax(0, 1fr))",
+            xl: "repeat(3, minmax(0, 1fr))",
+          },
+
+          gap: {
+            xs: 2,
+            sm: 2.5,
+            md: 3,
+          },
+
+          alignItems: "stretch",
         }}
       >
         {whyMetaApplyData.map((item, index) => (
-          <FeatureCard key={index} {...item} />
+          <Box
+            key={index}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <Box
+              sx={{
+                width: "100%",
+                maxWidth: {
+                  xs: "100%",
+                  sm: "520px",
+                  md: "100%",
+                },
+              }}
+            >
+              <FeatureCard {...item} />
+            </Box>
+          </Box>
         ))}
       </Box>
     </Box>

@@ -29,37 +29,43 @@ export const examGroups = [
 export default function KnowExamsSection() {
   return (
     <Box
-      sx={{
-        width: "1312px",
-        mx: "auto",
-        display: "flex",
-        flexDirection: "column",
-        gap: "52px",
-        py: 10,
-      }}
-    >
-      <SectionHeader title='Know Your' highlight='Study Abroad Exams' mb={"0"}/>
+  sx={{
+    width: "100%",
+    maxWidth: "1312px",
+    mx: "auto",
+    px: { xs: 2, sm: 3, md: 0 },
+    py: { xs: 6, md: 10 },
+    display: "flex",
+    flexDirection: "column",
+    gap: { xs: "20px", sm: "28px", md: "52px" },
+  }}
+>
+      <SectionHeader
+        title="Know Your"
+        highlight="Study Abroad Exams"
+        mb="0"
+      />
+
       <Box
         sx={{
-          width: "1312px",
-          height: "444px",
-          display: "flex",
-          gap: "68px",
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            lg: "repeat(2, 1fr)",
+          },
+          gap: { xs: "28px", md: "40px", lg: "68px" },
         }}
       >
         {examGroups.map((group, index) => (
           <Box
             key={index}
             sx={{
-              width: "625px",
-              height: "438px",
+              width: "100%",
               borderRadius: "24px",
               backgroundColor: palette.common.white,
-
-              px: "72px",
-              py: "20px",
+              px: { xs: 3, sm: 4, md: "48px" },
+              py: { xs: 4, md: "32px" },
               boxSizing: "border-box",
-
               boxShadow: `
                 0px 40px 92px rgba(104, 3, 124, 0.05),
                 0px 40px 109px rgba(104, 3, 124, 0.01)
@@ -68,76 +74,67 @@ export default function KnowExamsSection() {
           >
             <Box
               sx={{
-                width: "468px",
-                height: "360px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "48px",
-                mx: "auto",
+                gap: { xs: "32px", md: "48px" },
               }}
             >
               <Typography
                 sx={{
-                  width: "468px",
-                  height: "72px",
                   fontFamily: "Plus Jakarta Sans",
                   fontWeight: 600,
-                  fontSize: "28px",
-                  lineHeight: "36px",
+                  fontSize: {
+                    xs: "22px",
+                    sm: "24px",
+                    md: "28px",
+                  },
+                  lineHeight: {
+                    xs: "32px",
+                    md: "36px",
+                  },
                   textAlign: "center",
                   color: palette.navyBlue[400],
                 }}
               >
                 {group.title}
               </Typography>
+
               <Box
                 sx={{
-                  width: "468px",
-                  height: "240px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "32px",
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    sm: "repeat(2, 1fr)",
+                  },
+                  gap: { xs: "20px", md: "24px" },
                 }}
               >
-                {[0, 1].map((row) => (
+                {group.exams.map((exam, i) => (
                   <Box
-                    key={row}
+                    key={i}
                     sx={{
-                      width: "468px",
-                      height: "104px",
+                      width: "100%",
+                      minHeight: { xs: "100px", md: "104px" },
+                      border: `1px solid ${palette.gray[200]}`,
+                      borderRadius: "16px",
                       display: "flex",
-                      gap: "24px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: palette.common.white,
+                      p: 2,
                     }}
                   >
-                    {group.exams
-                      .slice(row * 2, row * 2 + 2)
-                      .map((exam, i) => (
-                        <Box
-                          key={i}
-                          sx={{
-                            width: "222px",
-                            height: "104px",
-                            border: `1px solid ${palette.gray[200]}`,
-                            borderRadius: "16px",
-
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-
-                            backgroundColor: palette.common.white,
-                          }}
-                        >
-                          <Image
-                            src={exam.image}
-                            alt={exam.alt}
-                            width={120}
-                            height={48}
-                            style={{
-                              objectFit: "contain",
-                            }}
-                          />
-                        </Box>
-                      ))}
+                    <Image
+                      src={exam.image}
+                      alt={exam.alt}
+                      width={120}
+                      height={48}
+                      style={{
+                        objectFit: "contain",
+                        maxWidth: "100%",
+                        height: "auto",
+                      }}
+                    />
                   </Box>
                 ))}
               </Box>
