@@ -1,0 +1,81 @@
+{
+  "kind": "collectionType",
+  "collectionName": "test_preps",
+  "info": {
+    "singularName": "test-prep",
+    "pluralName": "test-preps",
+    "displayName": "TestPrep"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "heroSection": {
+      "type": "component",
+      "component": "shared.test-prep-hero",
+      "repeatable": false
+    },
+    "examOverview": {
+      "type": "richtext"
+    },
+    "highlight": {
+      "type": "component",
+      "component": "common.highlight-item",
+      "repeatable": true
+    },
+    "Format": {
+      "type": "richtext"
+    },
+    "scoringPattern": {
+      "type": "richtext"
+    },
+    "examDates": {
+      "type": "richtext"
+    },
+    "testprepSlides": {
+      "type": "component",
+      "component": "common.testprep-slide",
+      "repeatable": true
+    },
+    "journeyHeading": {
+      "type": "string"
+    },
+    "journey": {
+      "type": "component",
+      "component": "common.journey",
+      "repeatable": true
+    },
+    "Advantage": {
+      "type": "boolean"
+    },
+    "advantagesSection": {
+      "type": "component",
+      "component": "common.advantages-section",
+      "repeatable": false
+    },
+    "faculty": {
+      "type": "component",
+      "component": "common.faculty",
+      "repeatable": true
+    },
+    "courses": {
+      "type": "component",
+      "component": "common.courses",
+      "repeatable": true
+    },
+    "ctaText": {
+      "type": "string"
+    },
+    "ctaUrl": {
+      "type": "string"
+    }
+  }
+}

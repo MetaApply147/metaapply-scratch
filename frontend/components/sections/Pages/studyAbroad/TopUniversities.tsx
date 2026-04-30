@@ -82,7 +82,7 @@ export default function PartneredUniversities({ data, countryName }: Props) {
   const groupedPartners = groupPartnersForRows(partners, 3);
 
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" id="universities">
       <SectionHeader
         title="Top"
         highlight={`Universities in ${countryName}`}

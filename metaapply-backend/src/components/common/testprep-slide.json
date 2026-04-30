@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_common_testprep_slides",
+  "info": {
+    "displayName": "testprep-slide"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "pointers": {
+      "type": "richtext"
+    },
+    "buttonUrl": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

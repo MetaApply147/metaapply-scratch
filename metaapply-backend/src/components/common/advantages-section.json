@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_common_advantages_sections",
+  "info": {
+    "displayName": "advantagesSection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "highlight": {
+      "type": "string"
+    },
+    "list": {
+      "type": "richtext"
+    },
+    "buttonUrl": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

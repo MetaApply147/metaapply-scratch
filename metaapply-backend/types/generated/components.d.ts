@@ -1,5 +1,88 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface CommonAdvantagesSection extends Struct.ComponentSchema {
+  collectionName: 'components_common_advantages_sections';
+  info: {
+    displayName: 'advantagesSection';
+  };
+  attributes: {
+    buttonText: Schema.Attribute.String;
+    buttonUrl: Schema.Attribute.String;
+    highlight: Schema.Attribute.String;
+    list: Schema.Attribute.RichText;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface CommonCourses extends Struct.ComponentSchema {
+  collectionName: 'components_common_courses';
+  info: {
+    displayName: 'courses';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface CommonFaculty extends Struct.ComponentSchema {
+  collectionName: 'components_common_faculties';
+  info: {
+    displayName: 'faculty';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface CommonHighlightItem extends Struct.ComponentSchema {
+  collectionName: 'components_common_highlight_items';
+  info: {
+    displayName: 'highlight-item';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    order: Schema.Attribute.Integer;
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface CommonJourney extends Struct.ComponentSchema {
+  collectionName: 'components_common_journeys';
+  info: {
+    displayName: 'journey';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface CommonScholarshipCard extends Struct.ComponentSchema {
+  collectionName: 'components_common_scholarship_cards';
+  info: {
+    displayName: 'Scholarship Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface CommonTestprepSlide extends Struct.ComponentSchema {
+  collectionName: 'components_common_testprep_slides';
+  info: {
+    displayName: 'testprep-slide';
+  };
+  attributes: {
+    buttonUrl: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    pointers: Schema.Attribute.RichText;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface FaqFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_faq_faq_items';
   info: {
@@ -127,6 +210,26 @@ export interface SharedHeroBanner extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedTestPrepHero extends Struct.ComponentSchema {
+  collectionName: 'components_shared_test_prep_heroes';
+  info: {
+    displayName: 'TestPrep-hero';
+  };
+  attributes: {
+    brochureUrl: Schema.Attribute.String;
+    enrolURL: Schema.Attribute.String;
+    offer: Schema.Attribute.Boolean;
+    offerText: Schema.Attribute.String;
+    offerTime: Schema.Attribute.String;
+    pointers: Schema.Attribute.RichText;
+    rightImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    tagline: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedTestimonial extends Struct.ComponentSchema {
   collectionName: 'components_shared_testimonials';
   info: {
@@ -185,6 +288,13 @@ export interface UniversityLogoItemTopUniversities
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'common.advantages-section': CommonAdvantagesSection;
+      'common.courses': CommonCourses;
+      'common.faculty': CommonFaculty;
+      'common.highlight-item': CommonHighlightItem;
+      'common.journey': CommonJourney;
+      'common.scholarship-card': CommonScholarshipCard;
+      'common.testprep-slide': CommonTestprepSlide;
       'faq.faq-item': FaqFaqItem;
       'footer-destinations.destinations': FooterDestinationsDestinations;
       'footer.destination-item': FooterDestinationItem;
@@ -195,6 +305,7 @@ declare module '@strapi/strapi' {
       'shared.benefit-item': SharedBenefitItem;
       'shared.feature': SharedFeature;
       'shared.hero-banner': SharedHeroBanner;
+      'shared.test-prep-hero': SharedTestPrepHero;
       'shared.testimonial': SharedTestimonial;
       'success-story.testimonial-story': SuccessStoryTestimonialStory;
       'success-story.video-story': SuccessStoryVideoStory;

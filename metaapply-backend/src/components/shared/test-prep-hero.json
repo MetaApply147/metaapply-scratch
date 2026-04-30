@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_shared_test_prep_heroes",
+  "info": {
+    "displayName": "TestPrep-hero"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "tagline": {
+      "type": "text"
+    },
+    "pointers": {
+      "type": "richtext"
+    },
+    "enrolURL": {
+      "type": "string"
+    },
+    "brochureUrl": {
+      "type": "string"
+    },
+    "rightImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "offer": {
+      "type": "boolean"
+    },
+    "offerText": {
+      "type": "string"
+    },
+    "offerTime": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
