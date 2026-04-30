@@ -39,20 +39,21 @@ export default function MetaapplyProcess({ disablePadding = false }) {
       <Box
         sx={{
           minHeight: { xs: 500, lg: 776 },
-          background: 'url(study-abroad/Process.webp)',
-        position: 'relative',
+          background: "url(/study-abroad/Process.webp)",
+          position: "relative",
           pb: 3,
-          display: 'flex',
-            alignItems: 'end',
-            '&: before': {
-                content: '""',
-                position: 'absolute',
-                background: 'linear-gradient(176.99deg, rgba(242, 246, 250, 0) 2.46%, rgba(242, 246, 250, 0) 26.56%, rgba(242, 246, 250, 0.5) 44.04%, #FFFFFF 65.9%)',
-                width: '100%',
-                height: '83%',
-                bottom: 0,
-                left: 0
-            }
+          display: "flex",
+          alignItems: "end",
+          "&: before": {
+            content: '""',
+            position: "absolute",
+            background:
+              "linear-gradient(176.99deg, rgba(242, 246, 250, 0) 2.46%, rgba(242, 246, 250, 0) 26.56%, rgba(242, 246, 250, 0.5) 44.04%, #FFFFFF 65.9%)",
+            width: "100%",
+            height: "83%",
+            bottom: 0,
+            left: 0,
+          },
         }}
       >
         <Container>
@@ -68,7 +69,8 @@ export default function MetaapplyProcess({ disablePadding = false }) {
               1200: { slidesPerView: 9 },
             }}
             renderItem={(item: any) => (
-              <Box key={item.id}
+              <Box
+                key={item.id}
                 textAlign="center"
                 position="relative"
                 sx={{
@@ -136,6 +138,7 @@ export default function MetaapplyProcess({ disablePadding = false }) {
                       item.number === processSteps.length.toString() ? 1 : 3,
                   }).map((_, i) => (
                     <Box
+                    key={i}
                       sx={{
                         height: "97px",
                         width: "58px",

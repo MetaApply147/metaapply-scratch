@@ -10,6 +10,8 @@ type Props = {
   innerBg: string;
   children: React.ReactNode;
   highlightPosition?: "start";
+  topContent?: React.ReactNode;
+  Imagewidth?: string;
 };
 
 export default function InfoSectionCard({
@@ -21,6 +23,8 @@ export default function InfoSectionCard({
   innerBg,
   children,
   highlightPosition,
+  topContent,
+  Imagewidth= "79px"
 }: Props) {
   const isStart = highlightPosition === "start";
   return (
@@ -50,7 +54,7 @@ export default function InfoSectionCard({
           )}
         </Typography>
 
-        <Box sx={{ height: 100, width: 79, position: "relative" }}>
+        <Box sx={{ height: 100, width: Imagewidth, position: "relative" }}>
           <Image
             src={image}
             alt={title}
@@ -59,6 +63,8 @@ export default function InfoSectionCard({
           />
         </Box>
       </Box>
+
+      {topContent && <Box>{topContent}</Box>}
 
       <Box
         sx={{

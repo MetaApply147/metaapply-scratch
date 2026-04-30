@@ -4,7 +4,16 @@ import Section from "@/components/common/Section";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 
-export default function CTASection() {
+type Props = {
+    title?: string;
+    description?: string;
+    buttonText?: string;
+    buttonUrl?: string;
+    image: string;
+    ImageWidth?: string;
+}
+
+export default function CTASectionCommon({title, description, buttonText, buttonUrl, image, ImageWidth}: Props) {
   return (
     <Section spacing="lg">
       <Box
@@ -22,15 +31,10 @@ export default function CTASection() {
             borderRadius: "0 80px 0 80px",
             px: { xs: 4, md: 10 },
             pt: { xs: 5, md: 9 },
-            pb: { xs: 5, md: 11.5 },
+            pb: { xs: 5, md: 14.5 },
             display: "flex",
             alignItems: "center",
-            backgroundImage: `
-                    url("/blogs/CTA-Bg.webp"),
-                    linear-gradient(263.14deg, #732A94 2.19%, #000052 99.36%)
-                    `,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "auto",
+            background: 'linear-gradient(263.14deg, #8547A1 2.19%, #000052 99.36%)',
             backgroundPosition: "bottom center",
             boxShadow: "20px 25px 75px 0px #00000040",
           }}
@@ -47,9 +51,18 @@ export default function CTASection() {
               variant="heading07"
               component="h2"
               sx={{ color: "common.white" }}
-              mb={7.5}
+              mb={2.5}
             >
-              Get started on your dream to study abroad
+              {title}
+            </Typography>
+
+            <Typography
+              variant="body05"
+              component="p"
+              sx={{ color: "common.white" }}
+              mb={5}
+            >
+              {description}
             </Typography>
 
             <Button
@@ -64,7 +77,7 @@ export default function CTASection() {
                 },
               }}
             >
-              Talk to Our Experts
+              {buttonText}
             </Button>
           </Box>
 
@@ -88,13 +101,13 @@ export default function CTASection() {
             position: "absolute",
             right: 50,
             bottom: 0,
-            width: { xs: 260, md: 390 },
-            height: { xs: 360, md: 470 },
+            width: ImageWidth ? ImageWidth : '400px',
+            height: { xs: 360, md: 535 },
             zIndex: 4,
           }}
         >
           <Image
-            src="/blogs/BlogsCTA-girl.webp"
+            src={image}
             alt="Graduate Student"
             fill
             style={{
