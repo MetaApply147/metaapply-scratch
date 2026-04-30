@@ -16,9 +16,23 @@ export default function FeatureCard({
   return (
     <Box
       sx={{
-        width: "422px",
-        height: "250px",
-        borderRadius: "48px",
+        width: "100%",
+        maxWidth: {
+          xs: "100%",
+          sm: "520px",
+          md: "100%",
+          lg: "422px",
+        },
+
+        minHeight: {
+          xs: "auto",
+          md: "250px",
+        },
+
+        borderRadius: {
+          xs: "32px",
+          md: "48px",
+        },
 
         background: `linear-gradient(
           135deg,
@@ -27,27 +41,77 @@ export default function FeatureCard({
         )`,
 
         boxShadow: "0px 2px 4px -1px rgba(28, 33, 51, 0.10)",
+
         overflow: "hidden",
+
         display: "flex",
         alignItems: "center",
+
+        px: {
+          xs: 3,
+          sm: 4,
+          md: 0,
+        },
+
+        py: {
+          xs: 3,
+          md: 0,
+        },
+
+        mx: "auto",
+
+        boxSizing: "border-box",
       }}
     >
       <Box
         sx={{
           display: "flex",
-          alignItems: "center",
+
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
+
+          alignItems: {
+            xs: "center",
+            sm: "center",
+          },
+
           width: "100%",
-          gap: "24px",
+
+          gap: {
+            xs: "20px",
+            sm: "24px",
+          },
+
+          textAlign: {
+            xs: "center",
+            sm: "left",
+          },
+
+          p: {
+            md: "0 32px",
+          },
         }}
       >
+        {/* IMAGE */}
         <Box
           sx={{
-            width: "129px",
-            height: "146px",
+            width: {
+              xs: "110px",
+              md: "129px",
+            },
+
+            height: {
+              xs: "120px",
+              md: "146px",
+            },
+
             flexShrink: 0,
+
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex-start",
+            justifyContent: "center",
           }}
         >
           <Image
@@ -58,25 +122,46 @@ export default function FeatureCard({
             style={{
               objectFit: "contain",
               display: "block",
+              width: "100%",
+              height: "100%",
             }}
           />
         </Box>
 
+        {/* CONTENT */}
         <Box
           sx={{
-            width: "248px",
+            flex: 1,
+
             display: "flex",
             flexDirection: "column",
-            gap: "12px",
+
+            gap: {
+              xs: "10px",
+              md: "12px",
+            },
+
+            minWidth: 0,
           }}
         >
           <Typography
             sx={{
-              fontSize: "18px",
+              fontSize: {
+                xs: "22px",
+                md: "18px",
+              },
+
               fontWeight: 600,
-              lineHeight: "24px",
+
+              lineHeight: {
+                xs: "30px",
+                md: "24px",
+              },
+
               color: palette.navyBlue[400],
               fontFamily: "Plus Jakarta Sans",
+
+              wordBreak: "break-word",
             }}
           >
             {title}
@@ -84,11 +169,22 @@ export default function FeatureCard({
 
           <Typography
             sx={{
-              fontSize: "16px",
-              lineHeight: "20px",
+              fontSize: {
+                xs: "15px",
+                md: "16px",
+              },
+
+              lineHeight: {
+                xs: "26px",
+                md: "20px",
+              },
+
               fontWeight: 400,
+
               color: palette.text.body,
               fontFamily: "Open Sans",
+
+              wordBreak: "break-word",
             }}
           >
             {description}

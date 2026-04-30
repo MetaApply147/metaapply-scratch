@@ -54,7 +54,7 @@ export default function QuickOverviewSection() {
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '40px',
+                        gap: { xs: '10px', md: '40px' }
                     }}
                 >
                     <SectionHeader title='Exams to Study Abroad-' highlight='A Quick Overview' mb={"0"} />
@@ -64,7 +64,7 @@ export default function QuickOverviewSection() {
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: '24px',
+                            gap: { xs: '18px', md: '24px' },
                             maxWidth: '1317px',
                         }}
                     >
@@ -72,8 +72,8 @@ export default function QuickOverviewSection() {
                             sx={{
                                 fontFamily: 'Open Sans',
                                 fontWeight: 400,
-                                fontSize: '16px',
-                                lineHeight: '26px',
+                                fontSize: { xs: '15px', md: '16px' },
+                                lineHeight: { xs: '30px', md: '26px' },
                                 color: '#202020',
                             }}
                         >
@@ -87,8 +87,8 @@ export default function QuickOverviewSection() {
                             sx={{
                                 fontFamily: 'Open Sans',
                                 fontWeight: 400,
-                                fontSize: '16px',
-                                lineHeight: '26px',
+                                fontSize: { xs: '15px', md: '16px' },
+                                lineHeight: { xs: '30px', md: '26px' },
                                 color: '#202020',
                             }}
                         >
@@ -102,8 +102,8 @@ export default function QuickOverviewSection() {
                             sx={{
                                 fontFamily: 'Open Sans',
                                 fontWeight: 400,
-                                fontSize: '16px',
-                                lineHeight: '26px',
+                                fontSize: { xs: '15px', md: '16px' },
+                                lineHeight: { xs: '30px', md: '26px' },
                                 color: '#202020',
                             }}
                         >
@@ -129,8 +129,8 @@ export default function QuickOverviewSection() {
                         sx={{
                             fontFamily: 'Plus Jakarta Sans',
                             fontWeight: 600,
-                            fontSize: '28px',
-                            lineHeight: '44px',
+                            fontSize: { xs: '28px', md: '28px' },
+                            lineHeight: { xs: '54px', md: '44px' },
                             color: '#031621',
                         }}
                     >
@@ -140,33 +140,37 @@ export default function QuickOverviewSection() {
                     {/* Cards */}
                     <Box
                         sx={{
-                            display: 'flex',
-                            gap: '24px',
-                            flexWrap: 'wrap',
+                            display: 'grid',
+                            gridTemplateColumns: {
+                                xs: '1fr',
+                                sm: 'repeat(2, 1fr)',
+                                lg: 'repeat(5, 1fr)',
+                            },
+                            gap: { xs: '20px', md: '24px' },
                         }}
                     >
                         {benefits.map((item, index) => (
                             <Box
                                 key={index}
                                 sx={{
-                                    width: '244px',
-                                    height: '187px',
+                                    width: '100%',
+                                    minHeight: { xs: '180px', md: '187px' },
                                     borderRadius: '16px',
                                     background: '#FFFFFF',
                                     border: '1px solid #E5E7EB',
                                     boxShadow: '0px 8px 40px rgba(180,180,180,0.2)',
-                                    px: '24px',
-                                    py: '24px',
+                                    px: { xs: '20px', md: '24px' },
+                                    py: { xs: '20px', md: '24px' },
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: '24px',
+                                    gap: { xs: '20px', md: '24px' },
                                 }}
                             >
                                 {/* Icon Box */}
                                 <Box
                                     sx={{
-                                        width: '64px',
-                                        height: '64px',
+                                        width: { xs: '72px', md: '64px' },
+                                        height: { xs: '72px', md: '64px' },
                                         position: 'relative',
                                         flexShrink: 0,
                                     }}
@@ -186,10 +190,9 @@ export default function QuickOverviewSection() {
                                     sx={{
                                         fontFamily: 'Plus Jakarta Sans',
                                         fontWeight: 500,
-                                        fontSize: '16px',
-                                        lineHeight: '22px',
+                                        fontSize: { xs: '18px', md: '16px' },
+                                        lineHeight: { xs: '30px', md: '22px' },
                                         color: '#031621',
-                                        maxWidth: '217px',
                                     }}
                                 >
                                     {item.title}

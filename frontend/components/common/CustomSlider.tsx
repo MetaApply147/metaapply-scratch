@@ -3,9 +3,10 @@
 import { Box, colors } from "@mui/material";
 import { useId } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar  } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 // Icons
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -26,6 +27,7 @@ type CustomSliderProps<T> = {
   showPagination?: boolean;
   paginationOnDesktop?: boolean;
   disablePadding?: boolean;
+  showScrollbar?: boolean;
 };
 
 /* ================= COMPONENT ================= */
@@ -40,6 +42,7 @@ export default function CustomSlider<T>({
   showPagination = false,
   paginationOnDesktop = false,
   disablePadding = false,
+  showScrollbar = false,
 }: CustomSliderProps<T>) {
   const id = useId();
 
@@ -97,9 +100,17 @@ export default function CustomSlider<T>({
         }}
       >
         <Swiper
-          modules={[Navigation, Pagination]} // ← added Pagination
+          modules={[Navigation, Pagination, Scrollbar]} // ← added Pagination
           spaceBetween={spaceBetween}
           slidesPerView={slidesPerView}
+          scrollbar={
+            showScrollbar
+              ? {
+                draggable: true,
+                dragSize: 28,
+              }
+              : false
+          }
           navigation={
             shouldShowArrows
               ? {
