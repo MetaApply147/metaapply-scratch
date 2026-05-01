@@ -110,3 +110,28 @@ export const searchBlogs = async (
     pagination: data?.meta?.pagination || {},
   };
 };
+
+/* ---------------------------------------
+   Blogs by Tag (Destination based)
+--------------------------------------- */
+export const fetchBlogsByTag = async (
+  tagName: string,
+  limit = 15
+) => {
+  const res = await fetch(
+    `${API}/api/posts?filters[tags][name][$eqi]=${encodeURIComponent(
+      tagName
+    )}&filters[publishedAt][$notNull]=true&sort=publishedAt:desc&populate[featuredImage]=true&populate[category]=true&populate[tags]=true&populate[author][populate][image]=true&pagination[page]=1&pagination[pageSize]=${limit}`,
+    {
+      next: { revalidate: 300 },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch blogs by tag");
+  }
+
+  const data = await res.json();
+
+  return data?.data || [];
+};

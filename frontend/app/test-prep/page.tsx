@@ -13,6 +13,31 @@ import SuccessStories from "@/components/sections/SuccessStories";
 import { Box } from "@mui/material";
 
 export default function TestPrep() {
+<<<<<<< HEAD
+  return (
+    <>
+      <HeroBanner
+        slug="test-prep"
+        minHeight={{ xs: 400, sm: 400, lg: 720 }}
+        disableSectionPadding
+        rightMaxWidth={580}
+        alignSelf="flex-end"
+      />
+      <AchiversSection />
+      <QuickOverviewSection />
+      <KnowExamsSection />
+      <QuizCTASection />
+      <UpcomingBatches />
+      <OurFaculty />
+      <WhyMetaApply />
+      <JourneyToDreamScoreSection />
+      <SuccessStories page="test-prep" />
+      <FAQSection page="test-prep" disablePadding />
+      <CTASection />
+    </>
+  );
+}
+=======
     return (
         <Box component="section">
             <HeroBanner
@@ -37,3 +62,4 @@ export default function TestPrep() {
 
     )
 }
+>>>>>>> 5449ae44c70c56fbbb1bae4124f2af4dcf576dbb
