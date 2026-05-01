@@ -34,7 +34,7 @@ export default function KnowExamsSection() {
     maxWidth: "1312px",
     mx: "auto",
     px: { xs: 2, sm: 3, md: 0 },
-    py: { xs: 6, md: 10 },
+    pt: { xs: 6, md: 10 },
     display: "flex",
     flexDirection: "column",
     gap: { xs: "20px", sm: "28px", md: "52px" },
