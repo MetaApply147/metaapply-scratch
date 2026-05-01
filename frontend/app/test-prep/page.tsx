@@ -10,8 +10,10 @@ import QuizCTASection from "@/components/sections/Pages/test-prep/QuizCTASection
 import UpcomingBatches from "@/components/sections/Pages/test-prep/UpcomingBatches";
 import WhyMetaApply from "@/components/sections/Pages/test-prep/WhyMetaapply";
 import SuccessStories from "@/components/sections/SuccessStories";
+import { Box } from "@mui/material";
 
 export default function TestPrep() {
+<<<<<<< HEAD
   return (
     <>
       <HeroBanner
@@ -35,3 +37,29 @@ export default function TestPrep() {
     </>
   );
 }
+=======
+    return (
+        <Box component="section">
+            <HeroBanner
+                slug="test-prep"
+                minHeight={{ xs: 400, sm: 400, lg: 720 }}
+                rightMaxWidth={580}
+                alignSelf="flex-end"
+            />
+            <AchiversSection />
+            <QuickOverviewSection/>
+            <KnowExamsSection/>
+            <QuizCTASection/>
+            <UpcomingBatches/>
+            <OurFaculty/>
+            <WhyMetaApply/>
+            <JourneyToDreamScoreSection/>
+            <SuccessStories page="test-prep"/>
+            <FAQSection page="test-prep" disablePadding/>
+            <CTASection/>
+        </Box>
+            
+
+    )
+}
+>>>>>>> 5449ae44c70c56fbbb1bae4124f2af4dcf576dbb

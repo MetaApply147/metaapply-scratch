@@ -11,14 +11,14 @@ import {
   Container,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, use } from "react";
 import { usePathname } from "next/navigation";
 import MegaMenu from "@/components/MegaMenu/MegaMenu";
 import { Tab } from "@/types/megamenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton, useTheme, useMediaQuery } from "@mui/material";
 import MobileMenu from "@/components/MegaMenu/MobileMenu";
-
+import { useRouter } from "next/navigation";
 /* ---------------- TYPES ---------------- */
 
 type Menu = {
@@ -39,6 +39,7 @@ type HeaderProps = {
 export default function Header({ menus, tabs }: HeaderProps) {
   const [activeMenu, setActiveMenu] = useState<Menu["Slug"] | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router=useRouter();
 
   const headerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -81,6 +82,18 @@ export default function Header({ menus, tabs }: HeaderProps) {
     setActiveMenu((prev) =>
       prev === menu.Slug ? null : menu.Slug
     );
+  };
+
+  const handleTextClick = (menu: Menu) => {
+    if (menu.Type !== "mega") return;
+    if (menu.Slug === "study-abroad") {
+      router.push("/study-abroad-destination");
+    } else if (menu.Slug === "testprep") {
+      router.push("/test-prep");
+    }
+      setActiveMenu((prev) =>
+        prev === menu.Slug ? null : menu.Slug
+      );
   };
 
   /* ---------------- RENDER ---------------- */
@@ -158,7 +171,7 @@ export default function Header({ menus, tabs }: HeaderProps) {
                         </Link>
                       ) : (
                         <Typography
-                          onClick={() => handleToggleMenu(menu)}
+                          onClick={() => handleTextClick(menu)}
                           sx={{
                             fontWeight: 400,
                             color: isActive

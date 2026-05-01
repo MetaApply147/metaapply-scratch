@@ -39,6 +39,8 @@ export default function BaseBanner({
         py: disableSectionPadding ? 0 : 9.5,
         minHeight,
         display: "flex",
+        px: { xs: 2, sm: 3, md: 0 },
+        overflow: "hidden",
       }}
     >
       {/* Overlay */}
@@ -58,36 +60,57 @@ export default function BaseBanner({
       )}
 
       <Container sx={{ position: "relative", zIndex: 2 }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: {
-              xs: "column",
-              md: reverse ? "row-reverse" : "row",
-            },
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 4,
-            height: "100%",
-          }}
-        >
+       <Box
+  sx={{
+    display: "flex",
+    flexDirection: {
+      xs: "column",
+      lg: reverse ? "row-reverse" : "row",
+    },
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: { xs: 4, md: 6, lg: 8 },
+    height: "100%",
+    width: "100%",
+    py: { xs: 4, md: 6, lg: 0 },
+  }}
+>
           <Box
-            flex={width ? "none" : 1}
-            sx={{
-              width: width || "auto",
-            }}
-          >
+  flex={width ? "none" : 1}
+  sx={{
+    width: {
+      xs: "100%",
+      lg: width || "auto",
+    },
+    textAlign: {
+      xs: "left",
+      lg: "left",
+    },
+  }}
+>
             {left}
           </Box>
 
           {right && (
             <Box
-              sx={{
-                alignSelf: alignSelf,
-                textAlign: "right",
-                maxWidth: rightMaxWidth || "100%",
-              }}
-            >
+  sx={{
+    alignSelf: {
+      xs: "center",
+      lg: alignSelf,
+    },
+    textAlign: "center",
+    maxWidth: {
+      xs: "100%",
+      lg: rightMaxWidth || "100%",
+    },
+    width: {
+      xs: "100%",
+      lg: "auto",
+    },
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
               {right}
             </Box>
           )}
