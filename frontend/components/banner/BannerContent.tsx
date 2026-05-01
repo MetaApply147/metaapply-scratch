@@ -89,7 +89,7 @@ export default function BannerContent({
       </Typography>
 
       {description &&
-        (slug === "study-abroad" ? (
+        ((slug === "study-abroad" || slug==="test-prep") ? (
           <Box mt={4} mb={7}>
             {description.split("\n").map((line: string, i: number) => (
               <Box

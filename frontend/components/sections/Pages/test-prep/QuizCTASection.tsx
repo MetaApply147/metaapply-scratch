@@ -6,7 +6,17 @@ import Image from "next/image";
 
 export default function QuizCTASection() {
   return (
-    <Section spacing="lg" container={false}>
+    <Section
+  spacing="lg"
+  container={false}
+          sx={{
+              pb: {
+                  xs: 4,
+                  md: 6,
+              },
+              mb: 0,
+          }}
+>
       <Box
         sx={{
           width: "100%",
@@ -31,7 +41,7 @@ export default function QuizCTASection() {
             justifyContent: "center",
             alignItems: "center",
             position: "relative",
-            py: { xs: 5, sm: 6, md: 0 },
+            py: { xs: 4, sm: 5, md: 0 },
             minHeight: { xs: "auto", md: "421px" },
           }}
         >
