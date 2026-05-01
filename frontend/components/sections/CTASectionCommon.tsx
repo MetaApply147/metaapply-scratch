@@ -5,15 +5,22 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 
 type Props = {
-    title?: string;
-    description?: string;
-    buttonText?: string;
-    buttonUrl?: string;
-    image: string;
-    ImageWidth?: string;
-}
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonUrl?: string;
+  image: string;
+  ImageWidth?: string;
+};
 
-export default function CTASectionCommon({title, description, buttonText, buttonUrl, image, ImageWidth}: Props) {
+export default function CTASectionCommon({
+  title,
+  description,
+  buttonText,
+  buttonUrl,
+  image,
+  ImageWidth,
+}: Props) {
   return (
     <Section spacing="lg">
       <Box
@@ -27,14 +34,15 @@ export default function CTASectionCommon({title, description, buttonText, button
           sx={{
             mt: 11,
             position: "relative",
-            overflow: 'hidden',
+            overflow: "hidden",
             borderRadius: "0 80px 0 80px",
             px: { xs: 4, md: 10 },
             pt: { xs: 5, md: 9 },
             pb: { xs: 5, md: 14.5 },
             display: "flex",
             alignItems: "center",
-            background: 'linear-gradient(263.14deg, #8547A1 2.19%, #000052 99.36%)',
+            background:
+              "linear-gradient(263.14deg, #8547A1 2.19%, #000052 99.36%)",
             backgroundPosition: "bottom center",
             boxShadow: "20px 25px 75px 0px #00000040",
           }}
@@ -92,6 +100,16 @@ export default function CTASectionCommon({title, description, buttonText, button
               top: 86,
               background: "rgba(255,255,255,0.2)",
               zIndex: 0,
+              "&::before": {
+                content: '""',
+                margin: '58px',
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(104.81deg, #FFC058 10.22%, #FF5EA0 89.54%)",
+                borderRadius: "50%",
+                zIndex: -1,
+              },
             }}
           />
         </Box>
@@ -101,7 +119,7 @@ export default function CTASectionCommon({title, description, buttonText, button
             position: "absolute",
             right: 50,
             bottom: 0,
-            width: ImageWidth ? ImageWidth : '400px',
+            width: ImageWidth ? ImageWidth : "400px",
             height: { xs: 360, md: 535 },
             zIndex: 4,
           }}

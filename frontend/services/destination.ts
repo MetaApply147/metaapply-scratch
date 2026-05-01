@@ -20,7 +20,7 @@ export const fetchDestinations = async () => {
 --------------------------------------- */
 export const fetchDestinationBySlug = async (slug: string) => {
   const response = await getServices(
-    "/destinations?populate[hero][populate]=*&populate[benefits]=*&populate[topUniversities][populate]=*"
+    "/destinations?populate[hero][populate]=*&populate[benefits]=*&populate[topUniversities][populate]=*&populate[scholarshipCards][populate]=*"
   );
 
   if (response?.isSuccess) {

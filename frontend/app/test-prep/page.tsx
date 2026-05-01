@@ -12,26 +12,26 @@ import WhyMetaApply from "@/components/sections/Pages/test-prep/WhyMetaapply";
 import SuccessStories from "@/components/sections/SuccessStories";
 
 export default function TestPrep() {
-    return (
-        <>
-            <HeroBanner
-                slug="test-prep"
-                minHeight={{ xs: 400, sm: 400, lg: 720 }}
-                disableSectionPadding
-                rightMaxWidth={580}
-                alignSelf="flex-end"
-            />
-            <AchiversSection />
-            <QuickOverviewSection/>
-            <KnowExamsSection/>
-            <QuizCTASection/>
-            <UpcomingBatches/>
-            <OurFaculty/>
-            <WhyMetaApply/>
-            <JourneyToDreamScoreSection/>
-            <SuccessStories page="test-prep"/>
-            <FAQSection page="test-prep" disablePadding/>
-            <CTASection/>
-        </>
-    )
+  return (
+    <>
+      <HeroBanner
+        slug="test-prep"
+        minHeight={{ xs: 400, sm: 400, lg: 720 }}
+        disableSectionPadding
+        rightMaxWidth={580}
+        alignSelf="flex-end"
+      />
+      <AchiversSection />
+      <QuickOverviewSection />
+      <KnowExamsSection />
+      <QuizCTASection />
+      <UpcomingBatches />
+      <OurFaculty />
+      <WhyMetaApply />
+      <JourneyToDreamScoreSection />
+      <SuccessStories page="test-prep" />
+      <FAQSection page="test-prep" disablePadding />
+      <CTASection />
+    </>
+  );
 }

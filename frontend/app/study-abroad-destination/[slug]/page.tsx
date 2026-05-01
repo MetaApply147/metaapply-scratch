@@ -3,7 +3,9 @@ import CalculatorsSection from "@/components/sections/CalculatorsSection";
 import CTASectionCommon from "@/components/sections/CTASectionCommon";
 import FAQSection from "@/components/sections/FAQSection";
 import MetaapplyProcess from "@/components/sections/MetaapplyProcess";
+import DestinationBlogs from "@/components/sections/Pages/studyAbroad/DestinationBlogs";
 import DestinationPageClient from "@/components/sections/Pages/studyAbroad/DestinationPageClient";
+import ScholarshipProgrammes from "@/components/sections/Pages/studyAbroad/ScholarshipProgrammes";
 import StudentTrust from "@/components/sections/Pages/studyAbroad/StudentTrust";
 import TopUniversities from "@/components/sections/Pages/studyAbroad/TopUniversities";
 import {
@@ -50,9 +52,13 @@ export default async function DestinationPage({
 
       <TopUniversities data={data?.topUniversities} countryName={countryName}/>
 
+      <ScholarshipProgrammes data={data}/>
+
       <CalculatorsSection/>
 
       <MetaapplyProcess/>
+
+      <DestinationBlogs  destinationTitle={data.title} countryName={countryName}/>
 
       <FAQSection page={`study-in-${countryName}`} disablePadding/>
 
