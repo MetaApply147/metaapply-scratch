@@ -286,9 +286,11 @@ export default function HeroSection({ data }: HeroProps) {
 --------------------------------------- */
 const timerBox = {
   background: "#FF0000",
+  fontFamily: 'var(--font-heading)',
+  fontWeight: 700,
   color: "common.white",
-  px: 1.5,
-  py: 0.5,
-  borderRadius: "4px",
-  fontWeight: "bold",
+  px: 1,
+  fontSize: '18px',
+  py: 0.75,
+  borderRadius: "6.29px",
 };
