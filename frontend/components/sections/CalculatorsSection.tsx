@@ -25,7 +25,7 @@ const cards = [
   {
     title: "Loan Calculator",
     desc: "Calculate your study abroad loan details with ease- estimate monthly EMI, interest rates, and total repayment in real time.",
-    image: "/study-abroad/Loan-Calculator.svg",
+    image: "/study-abroad/Loan-calculator.svg",
     ctaText: "Calculate Loan",
     ctaURL: "#",
   },
