@@ -18,7 +18,7 @@ const cards = [
   {
     title: "Visa Success Calculator",
     desc: "Find out which visa you need and estimated processing time based on your nationality and destination.",
-    image: "/study-abroad/Visa-calculator.svg",
+    image: "/study-abroad/Visa-Calculator.svg",
     ctaText: "Calculate Visa",
     ctaURL: "#",
   },
