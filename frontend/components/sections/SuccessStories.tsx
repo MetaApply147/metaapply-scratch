@@ -161,7 +161,12 @@ export default function SuccessStories({
             }}
           >
             <Box>
-              <Typography variant="body05" component="p">
+              <Box display="flex" gap={0}>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <StarIcon key={index} sx={{ color: "orange.main" }} />
+                ))}
+              </Box>
+              <Typography mt={2} variant="body05" component="p">
                 {item.description}
               </Typography>
             </Box>
