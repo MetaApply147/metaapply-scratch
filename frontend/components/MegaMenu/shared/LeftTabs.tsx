@@ -89,7 +89,7 @@ export default function LeftTabs({
         <Tab
           key={tab.id ?? index}
           label={tab.title}
-          icon={tab.slug === "calculators" ? undefined : <ChevronRight fontSize="small" />}
+          icon={tab.type === "link" ? undefined : <ChevronRight fontSize="small" />}
           iconPosition="end"
           aria-label={tab.title}
         />
