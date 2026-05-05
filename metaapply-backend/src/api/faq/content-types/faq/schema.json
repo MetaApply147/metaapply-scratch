@@ -87,7 +87,9 @@
         "gmat",
         "sat",
         "act",
-        "ap"
+        "ap",
+        "noic",
+        "meet-misa"
       ]
     }
   }
