@@ -32,7 +32,7 @@ export default function CTASectionCommon({
       >
         <Box
           sx={{
-            mt: 11,
+            mt: 7.5,
             position: "relative",
             overflow: "hidden",
             borderRadius: "0 80px 0 80px",
@@ -45,6 +45,7 @@ export default function CTASectionCommon({
               "linear-gradient(263.14deg, #8547A1 2.19%, #000052 99.36%)",
             backgroundPosition: "bottom center",
             boxShadow: "20px 25px 75px 0px #00000040",
+            minHeight: '475px'
           }}
         >
           {/* Left Content */}
@@ -52,7 +53,7 @@ export default function CTASectionCommon({
             sx={{
               position: "relative",
               zIndex: 5,
-              maxWidth: { xs: "100%", md: 470 },
+              maxWidth: { xs: "100%", md: '65%' },
             }}
           >
             <Typography
@@ -96,7 +97,7 @@ export default function CTASectionCommon({
               width: 839,
               height: 778,
               borderRadius: "50%",
-              right: -224,
+              right: -175,
               top: 86,
               background: "rgba(255,255,255,0.2)",
               zIndex: 0,
@@ -130,7 +131,7 @@ export default function CTASectionCommon({
             fill
             style={{
               objectFit: "contain",
-              objectPosition: "bottom right",
+              objectPosition: "bottom center",
             }}
             priority
           />

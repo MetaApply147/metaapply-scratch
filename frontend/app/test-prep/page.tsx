@@ -10,9 +10,35 @@ import QuizCTASection from "@/components/sections/Pages/test-prep/QuizCTASection
 import UpcomingBatches from "@/components/sections/Pages/test-prep/UpcomingBatches";
 import WhyMetaApply from "@/components/sections/Pages/test-prep/WhyMetaapply";
 import SuccessStories from "@/components/sections/SuccessStories";
-import { Box } from "@mui/material";
 
 export default function TestPrep() {
+  const facultyData = [
+    {
+      title: "Results-Focused Mentorship",
+      icon: { url: "/test-prep/Result-focused-mentorship.svg" },
+    },
+    {
+      title: "Global Admissions Insight",
+      icon: { url: "/test-prep/Global-admissions-insight.svg" },
+    },
+    {
+      title: "Data-driven Coaching",
+      icon: { url: "/test-prep/Data-driven-coaching.svg" },
+    },
+    {
+      title: "Certified Test Specialists",
+      icon: { url: "/test-prep/Certified-test-specialists.svg" },
+    },
+    {
+      title: "15+ Years Experience",
+      icon: { url: "/test-prep/15+-yrs-exp..svg" },
+    },
+    {
+      title: "Personalised Learning Plans",
+      icon: { url: "/test-prep/Personalised-learning-plans.svg" },
+    },
+  ];
+
   return (
     <>
       <HeroBanner
@@ -27,7 +53,7 @@ export default function TestPrep() {
       <KnowExamsSection />
       <QuizCTASection />
       <UpcomingBatches />
-      <OurFaculty />
+      <OurFaculty data={facultyData}/>
       <WhyMetaApply />
       <JourneyToDreamScoreSection />
       <SuccessStories page="test-prep" />

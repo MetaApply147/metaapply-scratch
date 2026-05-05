@@ -1,6 +1,14 @@
 import CTASectionCommon from "@/components/sections/CTASectionCommon";
 import FAQSection from "@/components/sections/FAQSection";
+import OurFaculty from "@/components/sections/Pages/test-prep/OurFaculty";
+import AdvantagesSection from "@/components/sections/Pages/testPrepInner/AdvantagesSection";
+import CoursesSection from "@/components/sections/Pages/testPrepInner/CoursesSection";
+import ExamOverview from "@/components/sections/Pages/testPrepInner/examOverview";
+import GlanceSection from "@/components/sections/Pages/testPrepInner/GlanceSection";
 import HeroSection from "@/components/sections/Pages/testPrepInner/HeroSection";
+import JourneySliderSection from "@/components/sections/Pages/testPrepInner/JourneySliderSection";
+import PrepSlider from "@/components/sections/Pages/testPrepInner/PrepSlider";
+import SuccessStories from "@/components/sections/SuccessStories";
 import { fetchExam, fetchExamBySlug } from "@/services/testPrep";
 import { notFound } from "next/navigation";
 
@@ -43,9 +51,38 @@ export default async function TestPrepPage({ params }: Props) {
     <>
       <HeroSection data={exam.heroSection} />
 
-        <FAQSection page="ielts"/>
+      <ExamOverview overview={exam.examOverview} highlights={exam.highlight} />
 
-      {/* <CTASectionCommon title="" description="" image=""/> */}
+      <GlanceSection
+        examName={data.title}
+        format={exam.Format}
+        scoringPattern={exam.scoringPattern}
+        examDates={exam.examDates}
+      />
+
+      <PrepSlider examName={data.title} slides={data.testprepSlides} />
+
+      <JourneySliderSection
+        highlightHeading={data.journeyHeading}
+        journey={data.journey}
+      />
+
+      <AdvantagesSection show={exam.Advantage} data={exam.advantagesSection} />
+
+      <OurFaculty data={exam.faculty}/>
+
+      <SuccessStories page={`${exam.title}`} />
+
+      <CoursesSection examName={exam.title} courses={exam.courses} />
+
+      <FAQSection page={`${exam.title}`} disableBottomPadding/>
+
+      <CTASectionCommon
+        title="Your preparation to 1500+ score starts with right strategy, focused training, and certified SAT mentorship."
+        buttonText="Connect Now"
+        image="/test-prep/Innerpages/Girl_2.webp"
+        ImageWidth="439px"
+      />
     </>
   );
 }

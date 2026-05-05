@@ -20,7 +20,7 @@ export const fetchExam = async () => {
 --------------------------------------- */
 export const fetchExamBySlug = async (slug: string) => {
   const response = await getServices(
-    `/test-preps?filters[slug][$eq]=${slug}&populate[heroSection][populate][rightImage]=true&populate[highlight][populate][icon]=true&populate[testprepSlides][populate][image]=true&populate[faculty][populate][icon]=true`
+    `/test-preps?filters[slug][$eq]=${slug}&populate[heroSection][populate][rightImage]=true&populate[highlight][populate][icon]=true&populate[testprepSlides][populate][image]=true&populate[journey]=true&populate[advantagesSection]=true&populate[courses]=true&populate[faculty][populate][icon]=true`
   );
 
   if (response?.isSuccess) {

@@ -37,6 +37,8 @@ export default async function DestinationPage({
 
   const countryName = data.title.replace("Study in ", "");
 
+  const countrySlug = data.slug;
+
   return (
     <>
       <HeroBanner
@@ -60,7 +62,7 @@ export default async function DestinationPage({
 
       <DestinationBlogs  destinationTitle={data.title} countryName={countryName}/>
 
-      <FAQSection page={`study-in-${countryName}`} disablePadding/>
+      <FAQSection page={`${countrySlug}`} disablePadding/>
 
       <CTASectionCommon title="Ready to begin your Journey?" description="Explore top universities, programs, and opportunities in UK aligned with your future goals." buttonText="Talk to Our Experts" image="/study-abroad/Inner-pages/CTA-Girl.webp" ImageWidth="423px"/>
     </>

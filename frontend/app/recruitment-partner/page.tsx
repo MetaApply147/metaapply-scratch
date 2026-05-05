@@ -11,7 +11,7 @@ export default function RecruitmentPartnerPage() {
 
     return (
         <>
-            <HeroBanner slug="recruitment-partner" minHeight={{ xs: 400, sm: 500, lg: 600 }} size="medium" />
+            <HeroBanner slug="recruitment-partner" minHeight={{ xs: 400, sm: 500, lg: 600 }} size="medium"/>
             <RecruitmentPartner />
             {/* Partnered Universities */}
             <PartneredUniversities />
