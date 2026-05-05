@@ -724,6 +724,8 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'sat',
         'act',
         'ap',
+        'noic',
+        'meet-misa',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
