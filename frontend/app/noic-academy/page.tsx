@@ -41,7 +41,7 @@ export default function NoicAcademy() {
             <AboutNoic />
             <OSSDMethods />
             <AdmissionProcess />
-            <FAQSection page="noic-academy" />
+            <FAQSection page="noic" />
         </>
     )
 }
