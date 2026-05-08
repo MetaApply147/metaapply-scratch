@@ -224,23 +224,6 @@ export default function CounsellingProcessSection() {
                 }}
               />
             </Box>
-
-            {/* ✅ SHARP ORANGE GLOW */}
-            <Box
-              sx={{
-                position: "absolute",
-                inset: 0,
-              }}
-            >
-              <Image
-                src="/premium-counselling/div.integ-graphic_glow.svg"
-                alt=""
-                fill
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-            </Box>
           </Box>
         </Box>
 

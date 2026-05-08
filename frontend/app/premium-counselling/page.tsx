@@ -16,16 +16,19 @@ export default function PremiumCounselling() {
         <>
             <TwoColumnFormSection
                 formSchema={schema}
-                formWidth="84%"
+                formWidth="503px"
                 alignEnd
+                formOffset="-330px"
+                formTop="18px"
+                bgColor="#F8F8F8"
             >
                 <AboutSection />
             </TwoColumnFormSection>
-            <WhyMetaApplySection/>
-            <CounsellingProcessSection/>
-            <PricingPlansSection/>
+            <WhyMetaApplySection />
+            <CounsellingProcessSection />
+            <PricingPlansSection />
             <FAQSection page="premium-counselling" />
-            <CTASectionCommon title="Your Journey to Academic Excellence Abroad Starts with Right Guidance" buttonText="Talk to Our Counsellors" image="/premium-counselling/girl.svg" ImageWidth="423px"/>
+            <CTASectionCommon title="Your Journey to Academic Excellence Abroad Starts with Right Guidance" buttonText="Talk to Our Counsellors" image="/premium-counselling/girl.svg" ImageWidth="423px" />
         </>
     )
 }
