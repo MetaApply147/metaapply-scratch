@@ -27,9 +27,9 @@ function PricingCard({ title, bg, features, recommended }: Props) {
                 width: "419px",
                 minHeight: "856px",
                 borderRadius: "24px",
-                overflow: "hidden",
+                overflow: "visible",
                 position: "relative",
-                background: hover ? "#32003F" : "#FFFFFF",
+                background: "#FFFFFF",
                 boxShadow: "0px 4px 38px rgba(0,0,0,0.04)",
                 transition: "all .3s ease",
             }}
@@ -40,7 +40,8 @@ function PricingCard({ title, bg, features, recommended }: Props) {
                     width: "100%",
                     height: "195px",
                     position: "relative",
-                    overflow: "hidden",
+                    zIndex: 5,
+                    overflow: "visible",
                     borderTopLeftRadius: "24px",
                     borderTopRightRadius: "24px",
                 }}
@@ -59,32 +60,47 @@ function PricingCard({ title, bg, features, recommended }: Props) {
                     <Box
                         sx={{
                             position: "absolute",
-                            top: "0",
+                            top: "-3px",
                             right: "0",
-                            width: "160px",
-                            height: "29px",
+                            width: "190px",
+                            height: "33px",
                             background: "#39B487",
-                            borderBottomLeftRadius: "20px",
                             borderTopRightRadius: "24px",
+                            borderBottomLeftRadius: "24px",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            zIndex: 5,
+                            zIndex: 50,
+                            overflow: "visible",
+                            "&::before": {
+                                content: '""',
+                                position: "absolute",
+                                top: "0",
+                                left: "-7.38px",
+                                width: "7.38px",
+                                height: "3.12px",
+                                background: "#39B487",
+                                boxShadow:
+                                    "-1.11px 1.11px 1.11px rgba(0,0,0,0.25) inset",
+                                borderTopLeftRadius: "4px",
+                                zIndex: 60,
+                            },
                         }}
                     >
                         <Typography
                             sx={{
-                                color: "#fff",
-                                fontSize: "14px",
+                                fontFamily: "Plus Jakarta Sans",
                                 fontWeight: 600,
-                                fontFamily: "Open Sans",
+                                fontSize: "14px",
+                                lineHeight: "100%",
+                                letterSpacing: "0%",
+                                color: "#FFFFFF",
                             }}
                         >
                             Highly Recommended
                         </Typography>
                     </Box>
                 )}
-
                 {/* GLASS TITLE */}
                 <Box
                     sx={{
@@ -128,6 +144,15 @@ function PricingCard({ title, bg, features, recommended }: Props) {
                     flexDirection: "column",
                     height: "calc(100% - 195px)",
                     transition: "all .3s ease",
+                    background: hover ? "#32003F" : "#FFFFFF",
+
+                    borderBottomLeftRadius: "24px",
+                    borderBottomRightRadius: "24px",
+
+                    position: "relative",
+                    zIndex: 2,
+                    overflow: "visible",
+
                 }}
             >
                 {/* FEATURES */}
@@ -187,7 +212,12 @@ function PricingCard({ title, bg, features, recommended }: Props) {
                                     <Box
                                         component="span"
                                         sx={{
-                                            color: hover ? "#00D639" : "#01A928",
+                                            color:
+                                                item.highlight === "Add On"
+                                                    ? "#FF3165"
+                                                    : hover
+                                                        ? "#00D639"
+                                                        : "#01A928",
                                             fontWeight: 600,
                                         }}
                                     >
