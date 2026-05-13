@@ -50,7 +50,7 @@ export default function MediaCoverage() {
       setLoading(true);
 
       const res = await getServices("/media-coverages", {
-        sort: "published_date:desc",
+        sort: ["published_date:desc", "id:asc"],
         pagination: {
           page: page,
           pageSize: pageSize,
@@ -203,11 +203,13 @@ export default function MediaCoverage() {
                       fontWeight: 600,
                       color: "text.primary",
                       border: "1px solid #F1F0F4",
-                      height: 40,
-                      width: 40,
-                      minWidth: 40,
-                      borderRadius: "999px",
-                      backgroundColor: "common.white",
+                      height: 32,
+                      width: 32,
+                      minWidth: 32,
+                      display: 'flex',
+                      justifyContent:'center',
+                      alignItems: 'center',
+                      borderRadius: '50%',
 
                       "&:hover": {
                         backgroundColor: "transparent",
@@ -216,18 +218,11 @@ export default function MediaCoverage() {
                     },
 
                     "& .MuiPaginationItem-root.Mui-selected": {
-                      backgroundColor: "#FF3185",
-                      color: "common.white",
-                      border: "1px solid #FF3185",
-
-                      "&:hover": {
-                        backgroundColor: "#FF3185",
+                          backgroundColor: "primary.main",
+                          color: "common.white",
                       },
-                    },
 
-                    "& .MuiPaginationItem-ellipsis": {
-                      border: "1px solid #F1F0F4",
-                    },
+                   
                   }}
                 />
               </Box>
