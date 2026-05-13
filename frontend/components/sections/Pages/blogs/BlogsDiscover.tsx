@@ -249,10 +249,6 @@ export default function BlogsDiscover({ initialBlogs, totalPages }: Props) {
                     boundaryCount={1}
                     onChange={handlePageChange}
                    sx={{
-                        // "& .MuiButtonBase-root": {
-                        //     overflow: "hidden",
-                        //     WebkitTapHighlightColor: "transparent",
-                        // },
 
                         "& .MuiTouchRipple-root": {
                             display: "none",
