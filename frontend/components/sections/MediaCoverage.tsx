@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from "react";
-import { Box, Typography, Divider, Button } from "@mui/material";
+import { useEffect, useState, useRef } from "react";
+import { Box, Typography, Divider, Pagination } from "@mui/material";
 import Link from "next/link";
 import { getServices } from "@/services/httpServices";
 import Section from "../common/Section";
@@ -10,180 +10,231 @@ import SectionHeader from "../common/SectionHeader";
 /* ================= TYPES ================= */
 
 type Coverage = {
-    id: number;
-    title?: string;
-    media_url?: string;
-    published_date?: string;
-    channel?: string;
+  id: number;
+  title?: string;
+  media_url?: string;
+  published_date?: string;
+  channel?: string;
 };
 
 /* ================= HELPER ================= */
 
 const isValidUrl = (url?: string) => {
-    if (!url) return false;
-    try {
-        new URL(url);
-        return true;
-    } catch {
-        return false;
-    }
+  if (!url) return false;
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
 };
 
 /* ================= COMPONENT ================= */
 
 export default function MediaCoverage() {
-    const [data, setData] = useState<Coverage[]>([]);
-    const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<Coverage[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    // ✅ pagination state
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+  // pagination state
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-    const pageSize = 20;
+  const coverageRef = useRef<HTMLDivElement>(null);
 
-    /* ================= FETCH ================= */
+  const pageSize = 20;
 
-    const fetchData = async () => {
-        try {
-            setLoading(true);
+  /* ================= FETCH ================= */
 
-            const res = await getServices("/media-coverages", {
-                sort: "published_date:desc",
-                pagination: {
-                    page: page,
-                    pageSize: pageSize,
-                },
-            });
+  const fetchData = async () => {
+    try {
+      setLoading(true);
 
-            console.log("MEDIA API:", res);
+      const res = await getServices("/media-coverages", {
+        sort: "published_date:desc",
+        pagination: {
+          page: page,
+          pageSize: pageSize,
+        },
+      });
 
-            if (!res?.isSuccess) {
-                setLoading(false);
-                return;
-            }
+      console.log("MEDIA API:", res);
 
-            // ✅ Strapi v5 structure
-            const items = res?.data?.data || [];
-            const meta = res?.data?.meta?.pagination;
+      if (!res?.isSuccess) {
+        setLoading(false);
+        return;
+      }
 
-            setData(items);
-            setTotalPages(meta?.pageCount || 1);
+      // Strapi v5 structure
+      const items = res?.data?.data || [];
+      const meta = res?.data?.meta?.pagination;
 
-        } catch (err) {
-            console.error("Fetch error:", err);
-        } finally {
-            setLoading(false);
-        }
-    };
+      setData(items);
+      setTotalPages(meta?.pageCount || 1);
+    } catch (err) {
+      console.error("Fetch error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    /* ================= EFFECT ================= */
+  /* ================= EFFECT ================= */
 
-    useEffect(() => {
-        fetchData();
-    }, [page]); // ✅ page change pe API call
+  useEffect(() => {
+    fetchData();
+  }, [page]); // page change pe API call
 
-    /* ================= UI ================= */
+  /* ================= UI ================= */
 
-    return (
-        <Section spacing="lg">
-            <Box>
-                <SectionHeader title="Media" highlight="Coverage" />
+  return (
+    <div ref={coverageRef} style={{ scrollMarginTop: "100px" }}>
+      <Section spacing="lg">
+        <Box>
+          <SectionHeader title="Coverage" />
 
-                <Box mt={4}>
-                    {/* LOADING */}
-                    {loading && <Typography>Loading coverage...</Typography>}
+          <Box>
+            {/* LOADING */}
+            {loading && (
+              <Typography component="p" variant="body05">
+                Loading coverage...
+              </Typography>
+            )}
 
-                    {/* EMPTY */}
-                    {!loading && data.length === 0 && (
-                        <Typography>No media coverage found</Typography>
-                    )}
+            {/* EMPTY */}
+            {!loading && data.length === 0 && (
+              <Typography component="p" variant="body05">
+                No media coverage found
+              </Typography>
+            )}
 
-                    {/* LIST */}
-                    {data.map((item) => {
-                        const validLink = isValidUrl(item.media_url);
+            {/* LIST */}
+            {data.map((item) => {
+              const validLink = isValidUrl(item.media_url);
 
-                        return (
-                            <Box key={item.id} py={2}>
-                                {/* TITLE */}
-                                {validLink ? (
-                                    <Link
-                                        href={item.media_url as string}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <Typography
-                                            sx={{
-                                                fontSize: "18px",
-                                                color: "#1a237e",
-                                                cursor: "pointer",
-                                                "&:hover": { textDecoration: "underline" },
-                                            }}
-                                        >
-                                            {item.title}
-                                        </Typography>
-                                    </Link>
-                                ) : (
-                                    <Typography
-                                        sx={{
-                                            fontSize: "18px",
-                                            color: "#1a237e",
-                                        }}
-                                    >
-                                        {item.title}
-                                    </Typography>
-                                )}
+              return (
+                <Box key={item.id} pb={2}>
+                  {/* TITLE */}
+                  {validLink ? (
+                    <Link
+                      href={item.media_url as string}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Typography
+                        variant="body05"
+                        component="p"
+                        fontWeight={500}
+                        sx={{
+                          color: "secondary.main",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                    </Link>
+                  ) : (
+                    <Typography
+                      variant="body05"
+                      component="p"
+                      fontWeight={500}
+                      sx={{
+                        color: "secondary.main",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                  )}
 
-                                {/* DATE + CHANNEL */}
-                                <Box mt={1} display="flex" gap={3}>
-                                    <Typography color="text.secondary">
-                                        {item.published_date
-                                            ? new Date(item.published_date).toLocaleDateString(
-                                                "en-GB",
-                                                {
-                                                    day: "numeric",
-                                                    month: "long",
-                                                    year: "numeric",
-                                                }
-                                            )
-                                            : ""}
-                                    </Typography>
+                  {/* DATE + CHANNEL */}
+                  <Box mt={1} display="flex" gap={3}>
+                    <Typography color="#64748b" fontWeight={500} component="p">
+                      {item.published_date
+                        ? new Date(item.published_date).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                            },
+                          )
+                        : ""}
+                    </Typography>
 
-                                    <Typography color="text.secondary">
-                                        {item.channel || "-"}
-                                    </Typography>
-                                </Box>
+                    <Typography color="#64748b" fontWeight={500} component="p">
+                      {item.channel || "-"}
+                    </Typography>
+                  </Box>
 
-                                <Divider sx={{ mt: 2 }} />
-                            </Box>
-                        );
-                    })}
-
-                    {/* ✅ PAGINATION CONTROLS */}
-                    {!loading && totalPages > 1 && (
-                        <Box mt={4} display="flex" justifyContent="center" gap={2}>
-                            <Button
-                                variant="outlined"
-                                disabled={page === 1}
-                                onClick={() => setPage((prev) => prev - 1)}
-                            >
-                                Prev
-                            </Button>
-
-                            <Typography alignSelf="center">
-                                Page {page} of {totalPages}
-                            </Typography>
-
-                            <Button
-                                variant="outlined"
-                                disabled={page === totalPages}
-                                onClick={() => setPage((prev) => prev + 1)}
-                            >
-                                Next
-                            </Button>
-                        </Box>
-                    )}
+                  <Divider sx={{ mt: 2, borderColor: "#ccc" }} />
                 </Box>
-            </Box>
-        </Section>
-    );
+              );
+            })}
+
+            {/* PAGINATION CONTROLS */}
+            {!loading && totalPages > 1 && (
+              <Box mt={5} display="flex" justifyContent="center">
+                <Pagination
+                  count={totalPages}
+                  page={page}
+                  onChange={(_, value) => {
+                    setPage(value);
+
+                    coverageRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}
+                  color="primary"
+                  siblingCount={0}
+                  boundaryCount={1}
+                  shape="rounded"
+                  sx={{
+                    "& .MuiTouchRipple-root": {
+                      display: "none",
+                    },
+
+                    "& .MuiPagination-ul": {
+                      gap: "8px",
+                    },
+
+                    "& .MuiPaginationItem-root": {
+                      fontFamily: "var(--font-body)",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: "text.primary",
+                      border: "1px solid #F1F0F4",
+                      height: 40,
+                      width: 40,
+                      minWidth: 40,
+                      borderRadius: "999px",
+                      backgroundColor: "common.white",
+
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                        border: "1px solid #FF3185",
+                      },
+                    },
+
+                    "& .MuiPaginationItem-root.Mui-selected": {
+                      backgroundColor: "#FF3185",
+                      color: "common.white",
+                      border: "1px solid #FF3185",
+
+                      "&:hover": {
+                        backgroundColor: "#FF3185",
+                      },
+                    },
+
+                    "& .MuiPaginationItem-ellipsis": {
+                      border: "1px solid #F1F0F4",
+                    },
+                  }}
+                />
+              </Box>
+            )}
+          </Box>
+        </Box>
+      </Section>
+    </div>
+  );
 }

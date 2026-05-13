@@ -78,7 +78,7 @@ export default async function TestPrepPage({ params }: Props) {
       <FAQSection page={`${exam.title}`} disableBottomPadding/>
 
       <CTASectionCommon
-        title="Your preparation to 1500+ score starts with right strategy, focused training, and certified SAT mentorship."
+        title={data.ctaText}
         buttonText="Connect Now"
         image="/test-prep/Innerpages/Girl_2.webp"
         ImageWidth="439px"
