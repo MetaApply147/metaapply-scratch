@@ -11,15 +11,13 @@ type Props = {
 };
 
 const processSteps = [
-  { number: "1", title: "Study Abroad Counselling" },
-  { number: "2", title: "College Shortlisting" },
-  { number: "3", title: "Test Prep Mentorship" },
-  { number: "4", title: "Application Assistance" },
-  { number: "5", title: "Offers and Scholarships" },
-  { number: "6", title: "Financial Assistance" },
-  { number: "7", title: "Visa Assistance" },
-  { number: "8", title: "Accommodation Assistance" },
-  { number: "9", title: "Pre-departure Orientation" },
+  { number: "1", title: "Counselling\nSession" },
+  { number: "2", title: "Course & Destination\nSelection" },
+  { number: "3", title: "College\nShortlisting" },
+  { number: "4", title: "Test Preparation\nMentorship" },
+  { number: "5", title: "Offers &\nScholarships" },
+  { number: "6", title: "VISA\nAssistance" },
+  { number: "7", title: "Pre-departure\nOrientation" },
 ];
 
 export default function MetaapplyProcess({ disablePadding = false }) {
@@ -59,14 +57,14 @@ export default function MetaapplyProcess({ disablePadding = false }) {
         <Container>
           <CustomSlider
             data={processSteps}
-            slidesPerView={9}
+            slidesPerView={7}
             spaceBetween={0}
             disablePadding
             breakpoints={{
               0: { slidesPerView: 1 },
               600: { slidesPerView: 2 },
               900: { slidesPerView: 3 },
-              1200: { slidesPerView: 9 },
+              1200: { slidesPerView: 7 },
             }}
             renderItem={(item: any) => (
               <Box
@@ -90,7 +88,6 @@ export default function MetaapplyProcess({ disablePadding = false }) {
                 >
                   <Box
                     display="flex"
-                    justifyContent="center"
                     alignItems="flex-start"
                   >
                     <Typography
@@ -115,6 +112,7 @@ export default function MetaapplyProcess({ disablePadding = false }) {
                         textAlign: "left",
                         lineHeight: "19px",
                         mt: 0.2,
+                        whiteSpace: "pre-line",
                       }}
                     >
                       {item.title}
@@ -135,7 +133,7 @@ export default function MetaapplyProcess({ disablePadding = false }) {
                 >
                   {Array.from({
                     length:
-                      item.number === processSteps.length.toString() ? 1 : 3,
+                      item.number === processSteps.length.toString() ? 1 : 4,
                   }).map((_, i) => (
                     <Box
                     key={i}

@@ -16,6 +16,7 @@ type Props = {
   textColor?: "light" | "dark";
   size?: "default" | "medium" | "large";
   slug? : string;
+  leftComponentWidth? :  string | number;
 };
 
 export default function BannerContent({
@@ -29,7 +30,8 @@ export default function BannerContent({
   ctaTarget = "_self",
   textColor = "dark",
   size = "default",
-  slug
+  slug,
+  leftComponentWidth
 }: Props) {
   const color = textColor === "light" ? "common.white" : "navyBlue.700";
 
@@ -48,7 +50,7 @@ export default function BannerContent({
     },
   };
   return (
-    <Box>
+    <Box sx={{width: leftComponentWidth}}>
       {showLogo && logo && (
         <Box mb={2.5}>
           <Image
@@ -72,7 +74,9 @@ export default function BannerContent({
           ...sizeStyles[size],
         }}
       >
-        {title}{" "}
+        <span
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
         {highlight && (
           <span
             style={{
@@ -89,7 +93,7 @@ export default function BannerContent({
       </Typography>
 
       {description &&
-        ((slug === "study-abroad" || slug==="test-prep") ? (
+        ((slug === "study-abroad" || slug==="test-prep" || slug==="centres") ? (
           <Box mt={4} mb={7}>
             {description.split("\n").map((line: string, i: number) => (
               <Box
