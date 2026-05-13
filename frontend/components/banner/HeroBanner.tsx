@@ -17,6 +17,7 @@ type Props = {
   alignSelf?: string;
   rightComponent?: React.ReactNode;
   width?: string;
+  leftComponentWidth?:  string | number;
 };
 
 export default function HeroBanner({
@@ -29,7 +30,8 @@ export default function HeroBanner({
   rightMaxWidth,
   alignSelf,
   rightComponent,
-  width
+  width,
+  leftComponentWidth
 }: Props) {
   const [hero, setHero] = useState<any>(null);
 
@@ -93,6 +95,7 @@ export default function HeroBanner({
             textColor={hero.textColor}
             size={size}
             slug={slug}
+            leftComponentWidth={leftComponentWidth}
           />
 
           {leftExtra}

@@ -726,6 +726,7 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'ap',
         'noic',
         'meet-misa',
+        'centres',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1107,6 +1108,13 @@ export interface ApiSuccessStorySuccessStory
         'sat',
         'act',
         'ap',
+        'ahmedabad-study-abroad-centre',
+        'bengaluru-study-abroad-centre',
+        'hyderabad-study-abroad-centre',
+        'jaipur-study-abroad-centre',
+        'kolkata-study-abroad-centre',
+        'noida-study-abroad-centre',
+        'pune-study-abroad-centre',
       ]
     > &
       Schema.Attribute.Required;
