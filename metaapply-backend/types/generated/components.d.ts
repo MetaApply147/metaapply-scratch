@@ -83,6 +83,37 @@ export interface CommonTestprepSlide extends Struct.ComponentSchema {
   };
 }
 
+export interface ExperienceCentreGallerySection extends Struct.ComponentSchema {
+  collectionName: 'components_experience_centre_gallery_sections';
+  info: {
+    displayName: 'gallery-section';
+  };
+  attributes: {
+    image1: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image2: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image3: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image4: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image5: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image6: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface ExperienceCentreHeadMessage extends Struct.ComponentSchema {
+  collectionName: 'components_experience_centre_head_messages';
+  info: {
+    displayName: 'head-message';
+  };
+  attributes: {
+    centreHeadDesignation: Schema.Attribute.Text;
+    centreHeadImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    centreHeadName: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
+    show_section: Schema.Attribute.Boolean;
+  };
+}
+
 export interface FaqFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_faq_faq_items';
   info: {
@@ -295,6 +326,8 @@ declare module '@strapi/strapi' {
       'common.journey': CommonJourney;
       'common.scholarship-card': CommonScholarshipCard;
       'common.testprep-slide': CommonTestprepSlide;
+      'experience-centre.gallery-section': ExperienceCentreGallerySection;
+      'experience-centre.head-message': ExperienceCentreHeadMessage;
       'faq.faq-item': FaqFaqItem;
       'footer-destinations.destinations': FooterDestinationsDestinations;
       'footer.destination-item': FooterDestinationItem;

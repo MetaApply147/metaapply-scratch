@@ -514,6 +514,55 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCentreCentre extends Struct.CollectionTypeSchema {
+  collectionName: 'centres';
+  info: {
+    displayName: 'Centre';
+    pluralName: 'centres';
+    singularName: 'centre';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    centreAddress: Schema.Attribute.String;
+    centreEmail: Schema.Attribute.String;
+    centreHeadMessage: Schema.Attribute.Component<
+      'experience-centre.head-message',
+      false
+    >;
+    centreHours: Schema.Attribute.String;
+    centreImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    facebookLink: Schema.Attribute.String;
+    factItem: Schema.Attribute.RichText;
+    factsButtonUrl: Schema.Attribute.String;
+    gallerySection: Schema.Attribute.Component<
+      'experience-centre.gallery-section',
+      false
+    >;
+    hero: Schema.Attribute.Component<'shared.hero-banner', false>;
+    instaLink: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::centre.centre'
+    > &
+      Schema.Attribute.Private;
+    map_embed_url: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCityExpertCityExpert extends Struct.CollectionTypeSchema {
   collectionName: 'city_experts';
   info: {
@@ -727,6 +776,13 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'noic',
         'meet-misa',
         'centres',
+        'ahmedabad-study-abroad-centre',
+        'bengaluru-study-abroad-centre',
+        'hyderabad-study-abroad-centre',
+        'jaipur-study-abroad-centre',
+        'kolkata-study-abroad-centre',
+        'noida-study-abroad-centre',
+        'pune-study-abroad-centre',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1716,6 +1772,7 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
+      'api::centre.centre': ApiCentreCentre;
       'api::city-expert.city-expert': ApiCityExpertCityExpert;
       'api::destination.destination': ApiDestinationDestination;
       'api::event.event': ApiEventEvent;

@@ -15,7 +15,7 @@ export const studyCentres: StudyCenter[] = [
         phone: "+91- 7428006970",
         address:
             "Ground Floor, Phoenix Pinnacle Building, Ulsoor Road, Banglore - 560042",
-        image: "/about-us/center-3.svg",
+        image: "/centres/Ahmedabad.webp",
     },
     {
         id: 2,
@@ -24,7 +24,7 @@ export const studyCentres: StudyCenter[] = [
         phone: "+91- 7428006970",
         address:
             "Ground Floor, Phoenix Pinnacle Building, Ulsoor Road, Banglore - 560042",
-        image: "/about-us/center-1.svg",
+        image: "/centres/Bengaluru.webp",
     },
     {
         id: 3,
@@ -33,7 +33,7 @@ export const studyCentres: StudyCenter[] = [
         phone: "+91- 7428006970",
         address:
             "Ground Floor, Phoenix Pinnacle Building, Ulsoor Road, Banglore - 560042",
-        image: "/about-us/center-4.svg",
+        image: "/centres/Hyderabad.webp",
     },
     {
         id: 4,
@@ -42,7 +42,7 @@ export const studyCentres: StudyCenter[] = [
         phone: "+91- 7428006970",
         address:
             "Ground Floor, Phoenix Pinnacle Building, Ulsoor Road, Banglore - 560042",
-        image: "/about-us/center-2.svg",
+        image: "/centres/Rajasthan.webp",
     },
     {
         id: 5,
@@ -51,7 +51,7 @@ export const studyCentres: StudyCenter[] = [
         phone: "+91- 7428006970",
         address:
             "Ground Floor, Phoenix Pinnacle Building, Ulsoor Road, Banglore - 560042",
-        image: "/about-us/center-2.svg",
+        image: "/centres/Kolkata.webp",
     },
     {
         id: 6,
@@ -60,7 +60,7 @@ export const studyCentres: StudyCenter[] = [
         phone: "+91- 7428006970",
         address:
             "Ground Floor, Phoenix Pinnacle Building, Ulsoor Road, Banglore - 560042",
-        image: "/about-us/center-2.svg",
+        image: "/centres/Noida.webp",
     },
     {
         id: 7,
@@ -69,6 +69,6 @@ export const studyCentres: StudyCenter[] = [
         phone: "+91- 7428006970",
         address:
             "Ground Floor, Phoenix Pinnacle Building, Ulsoor Road, Banglore - 560042",
-        image: "/about-us/center-2.svg",
+        image: "/centres/Pune.webp",
     },
 ];

@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_experience_centre_head_messages",
+  "info": {
+    "displayName": "head-message"
+  },
+  "options": {},
+  "attributes": {
+    "show_section": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "centreHeadName": {
+      "type": "string"
+    },
+    "centreHeadDesignation": {
+      "type": "text"
+    },
+    "centreHeadImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}
