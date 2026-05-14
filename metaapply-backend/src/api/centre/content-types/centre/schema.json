@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "centres",
+  "info": {
+    "singularName": "centre",
+    "pluralName": "centres",
+    "displayName": "Centre"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "hero": {
+      "type": "component",
+      "component": "shared.hero-banner",
+      "repeatable": false
+    },
+    "centreImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "factItem": {
+      "type": "richtext"
+    },
+    "factsButtonUrl": {
+      "type": "string"
+    },
+    "map_embed_url": {
+      "type": "string"
+    },
+    "centreAddress": {
+      "type": "string"
+    },
+    "centreEmail": {
+      "type": "string"
+    },
+    "centreHours": {
+      "type": "string"
+    },
+    "centreHeadMessage": {
+      "type": "component",
+      "component": "experience-centre.head-message",
+      "repeatable": false
+    },
+    "gallerySection": {
+      "type": "component",
+      "component": "experience-centre.gallery-section",
+      "repeatable": false
+    },
+    "facebookLink": {
+      "type": "string"
+    },
+    "instaLink": {
+      "type": "string"
+    }
+  }
+}
