@@ -50,7 +50,7 @@ export default function MediaCoverage() {
       setLoading(true);
 
       const res = await getServices("/media-coverages", {
-        sort: ["published_date:desc", "id:asc"],
+        sort: ["published_date:desc", "id:desc"],
         pagination: {
           page: page,
           pageSize: pageSize,
@@ -93,7 +93,7 @@ export default function MediaCoverage() {
 
           <Box>
             {/* LOADING */}
-            {loading && (
+            {loading && data.length === 0 && (
               <Typography component="p" variant="body05">
                 Loading coverage...
               </Typography>
@@ -118,6 +118,7 @@ export default function MediaCoverage() {
                       href={item.media_url as string}
                       target="_blank"
                       rel="noopener noreferrer"
+                      style={{width: "max-content", display: "block"}}
                     >
                       <Typography
                         variant="body05"
@@ -147,7 +148,7 @@ export default function MediaCoverage() {
 
                   {/* DATE + CHANNEL */}
                   <Box mt={1} display="flex" gap={3}>
-                    <Typography color="#64748b" fontWeight={500} component="p">
+                    <Typography variant="body05" color="#64748b" fontWeight={500} component="p">
                       {item.published_date
                         ? new Date(item.published_date).toLocaleDateString(
                             "en-GB",
@@ -160,7 +161,7 @@ export default function MediaCoverage() {
                         : ""}
                     </Typography>
 
-                    <Typography color="#64748b" fontWeight={500} component="p">
+                    <Typography variant="body05" color="#64748b" fontWeight={500} component="p">
                       {item.channel || "-"}
                     </Typography>
                   </Box>

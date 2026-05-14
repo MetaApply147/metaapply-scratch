@@ -2,10 +2,10 @@ import HeroBanner from "@/components/banner/HeroBanner";
 import CoCeoSection from "@/components/sections/Pages/about-us/CoCeoSection";
 import DrivesUsSection from "@/components/sections/Pages/about-us/DriveUsSection";
 import GallerySection from "@/components/sections/Pages/about-us/GallerySection";
-import GlobalJourneyCTA from "@/components/sections/Pages/about-us/GlobalJourneyCTA";
+import GlobalJourneyCTA from "@/components/sections/GlobalJourneyCTA";
 import OurStorySection from "@/components/sections/Pages/about-us/OurStorySection";
 import ProgressSection from "@/components/sections/Pages/about-us/ProgressSection";
-import StudyAbroadCentresSection from "@/components/sections/Pages/about-us/StudyAbroadCentresSection";
+import StudyCentreSlider from "@/components/sections/StudyCentreSlider";
 
 export default function AboutUs() {
     return (
@@ -20,7 +20,7 @@ export default function AboutUs() {
             <CoCeoSection />
             <DrivesUsSection />
             <ProgressSection />
-            <StudyAbroadCentresSection/>
+            <StudyCentreSlider buttonText="Book a Visit" sectionBackground="url('/study-abroad/Background-1.webp') center/cover no-repeat"/>
             <GallerySection/>
             <GlobalJourneyCTA/>
         </>

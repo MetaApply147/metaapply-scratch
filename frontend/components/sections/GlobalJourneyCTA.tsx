@@ -3,13 +3,26 @@
 import { Box, Typography, Button } from '@mui/material';
 import Image from 'next/image';
 
-const features = [
-  'Shortlist the right universities for your profile',
-  'Build a personalised study abroad roadmap',
-  'Unlock scholarships and financial aid options',
+type Props = {
+  title?: string;
+  features?: string[];
+  buttonText?: string;
+  buttonUrl?: string;
+  imageUrl?: string;
+}
+
+const defaultFeatures = [
+  "Shortlist the right universities for your profile",
+  "Build a personalised study abroad roadmap",
+  "Unlock scholarships and financial aid options",
 ];
 
-export default function GlobalJourneyCTA() {
+export default function GlobalJourneyCTA({
+  title = "Ready to Start your Global Journey?",
+  features = defaultFeatures,
+  buttonText = "Talk to Our Experts",
+  imageUrl = "/about-us/global-journey-right.svg",
+}: Props) {
   return (
     <Box
       component="section"
@@ -30,18 +43,6 @@ export default function GlobalJourneyCTA() {
         boxShadow: '20px 25px 75px 0px #ABABAB33',
       }}
     >
-      {/* BACKGROUND GRADIENT */}
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 0,
-
-          background:
-            'linear-gradient(262.64deg, #5D0031 -2.68%, #000052 31.59%)',
-        }}
-      />
-
       {/* MAIN GRID */}
       <Box
         sx={{
@@ -89,32 +90,19 @@ export default function GlobalJourneyCTA() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              alignItems: 'start',
 
               color: 'common.white',
             }}
           >
             {/* HEADING */}
             <Typography
+             variant='heading07'
               component="h2"
-              sx={{
-                fontSize: {
-                  xs: '28px',
-                  sm: '34px',
-                  md: '40px',
-                },
-
-                fontWeight: 500,
-                lineHeight: '130%',
-
-                mb: {
-                  xs: 3,
-                  md: 4,
-                },
-
-                fontFamily: 'Plus Jakarta Sans',
-              }}
+              fontWeight={500}
+              mb={4}
             >
-              Ready to Start your Global Journey?
+              {title}
             </Typography>
 
             {/* FEATURES */}
@@ -125,7 +113,7 @@ export default function GlobalJourneyCTA() {
 
                 gap: {
                   xs: '14px',
-                  md: '18px',
+                  md: '16px',
                 },
 
                 mb: {
@@ -148,7 +136,6 @@ export default function GlobalJourneyCTA() {
                       position: 'relative',
                       width: 20,
                       height: 20,
-                      minWidth: 20,
                     }}
                   >
                     <Image
@@ -159,19 +146,8 @@ export default function GlobalJourneyCTA() {
                   </Box>
 
                   <Typography
-                    sx={{
-                      fontSize: {
-                        xs: '15px',
-                        sm: '18px',
-                        md: '20px',
-                      },
-
-                      fontWeight: 400,
-                      lineHeight: '140%',
-
-                      color: 'common.white',
-                      fontFamily: 'Open Sans',
-                    }}
+                    variant='body03'
+                    component='p'
                   >
                     {item}
                   </Typography>
@@ -182,46 +158,9 @@ export default function GlobalJourneyCTA() {
             {/* BUTTON */}
             <Button
               variant="contained"
-              sx={{
-                width: 'fit-content',
-
-                minWidth: {
-                  xs: '210px',
-                  sm: '255px',
-                },
-
-                height: {
-                  xs: '56px',
-                  sm: '62px',
-                },
-
-                px: '32px',
-                py: '12px',
-
-                borderRadius: '12px',
-
-                background:
-                  'linear-gradient(90deg, #FF31B5 0%, #FF7BB8 100%)',
-
-                fontSize: {
-                  xs: '18px',
-                  sm: '20px',
-                },
-
-                fontWeight: 600,
-                lineHeight: '100%',
-                textTransform: 'none',
-                boxShadow: 'none',
-                fontFamily: 'Plus Jakarta Sans',
-
-                '&:hover': {
-                  background:
-                    'linear-gradient(90deg, #FF31B5 0%, #FF7BB8 100%)',
-                  boxShadow: 'none',
-                },
-              }}
+              size='large'
             >
-              Talk to Our Experts
+              {buttonText}
             </Button>
           </Box>
         </Box>
@@ -241,7 +180,7 @@ export default function GlobalJourneyCTA() {
           }}
         >
           <Image
-            src="/about-us/global-journey-right.svg"
+            src={imageUrl}
             alt="Global Journey"
             fill
             priority
