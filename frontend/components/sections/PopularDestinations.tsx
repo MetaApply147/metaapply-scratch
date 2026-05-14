@@ -27,6 +27,7 @@ type Destination = {
 type Props = {
   bg?: string;
   tagline?: string;
+  disablePadding? : boolean;
 };
 
 /* ================= CONFIG ================= */
@@ -47,7 +48,7 @@ const getImageUrl = (url?: string): string | null => {
 
 /* ================= COMPONENT ================= */
 
-export default function PopularDestinations({ bg, tagline }: Props) {
+export default function PopularDestinations({ bg, tagline, disablePadding }: Props) {
   const [data, setData] = useState<Destination[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -102,7 +103,7 @@ export default function PopularDestinations({ bg, tagline }: Props) {
   }, []);
 
   return (
-    <Section spacing="lg" sx={{ background: backgroundValue }}>
+    <Section spacing="lg" sx={{ background: backgroundValue, ...(disablePadding && { py: 0 }) }}>
       <SectionHeader title="Popular" highlight="Destinations" tagline={tagline}/>
 
       <Box>
