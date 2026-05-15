@@ -42,6 +42,7 @@ export default function StudyAbroadPage() {
         disableSectionPadding
         rightMaxWidth={580}
         alignSelf="flex-end"
+        isList={true}
       />
 
       {/* Number Card section */}

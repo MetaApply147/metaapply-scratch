@@ -18,6 +18,7 @@ type Props = {
   rightComponent?: React.ReactNode;
   width?: string;
   leftComponentWidth?:  string | number;
+  isList?: boolean;
 };
 
 export default function HeroBanner({
@@ -31,7 +32,8 @@ export default function HeroBanner({
   alignSelf,
   rightComponent,
   width,
-  leftComponentWidth
+  leftComponentWidth,
+  isList=false
 }: Props) {
   const [hero, setHero] = useState<any>(null);
 
@@ -96,6 +98,7 @@ export default function HeroBanner({
             size={size}
             slug={slug}
             leftComponentWidth={leftComponentWidth}
+            isList={isList}
           />
 
           {leftExtra}

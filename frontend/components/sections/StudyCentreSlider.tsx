@@ -12,16 +12,18 @@ type Props = {
   title?: string;
   highlight? : string;
   sectionBackground?: string;
+  disablePadding? : boolean;
 };
 
 export default function StudyCentreSlider({
   buttonText = "Book a Visit",
   title = "Walk-in to your nearest",
   highlight = "Study Abroad Centre",
-  sectionBackground
+  sectionBackground,
+  disablePadding
 }: Props) {
   return (
-    <Section spacing="lg" sx={{background: sectionBackground}}>
+    <Section spacing="lg" sx={{background: sectionBackground, ...(disablePadding && { py: 0 }) }}>
       <SectionHeader title={title} highlight={highlight}/>
 
       <CustomSlider

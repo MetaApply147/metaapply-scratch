@@ -16,6 +16,7 @@ const EventsPage = async () => {
         rightMaxWidth={480}
         alignSelf="flex-end"
         leftComponentWidth={'60%'}
+        isList={true}
       />
 
       <StudyCentreGrid buttonText="know More"/>
