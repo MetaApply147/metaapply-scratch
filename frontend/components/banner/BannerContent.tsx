@@ -17,6 +17,7 @@ type Props = {
   size?: "default" | "medium" | "large";
   slug? : string;
   leftComponentWidth? :  string | number;
+  isList?: boolean;
 };
 
 export default function BannerContent({
@@ -31,7 +32,8 @@ export default function BannerContent({
   textColor = "dark",
   size = "default",
   slug,
-  leftComponentWidth
+  leftComponentWidth,
+  isList=false
 }: Props) {
   const color = textColor === "light" ? "common.white" : "navyBlue.700";
 
@@ -93,7 +95,7 @@ export default function BannerContent({
       </Typography>
 
       {description &&
-        ((slug === "study-abroad" || slug==="test-prep" || slug==="centres") ? (
+         isList ? (
           <Box mt={4} mb={7}>
             {description.split("\n").map((line: string, i: number) => (
               <Box
@@ -134,7 +136,7 @@ export default function BannerContent({
           >
             {description}
           </Typography>
-      ))}
+      )}
 
       {ctaText && ctaUrl && (
         <Button

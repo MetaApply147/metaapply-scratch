@@ -783,6 +783,7 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         'kolkata-study-abroad-centre',
         'noida-study-abroad-centre',
         'pune-study-abroad-centre',
+        'student-ambassador',
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1171,6 +1172,7 @@ export interface ApiSuccessStorySuccessStory
         'kolkata-study-abroad-centre',
         'noida-study-abroad-centre',
         'pune-study-abroad-centre',
+        'student-ambassador',
       ]
     > &
       Schema.Attribute.Required;
