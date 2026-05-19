@@ -1173,6 +1173,7 @@ export interface ApiSuccessStorySuccessStory
         'noida-study-abroad-centre',
         'pune-study-abroad-centre',
         'student-ambassador',
+        'centres',
       ]
     > &
       Schema.Attribute.Required;
