@@ -9,9 +9,10 @@ type Props = {
   mb?: string;
   tagline?: string;
   maxWidth?: string;
+  taglineColor?: string;
 };
 
-export default function SectionHeader({ title, highlight, title2, highlightPosition, color, mb, tagline, maxWidth }: Props) {
+export default function SectionHeader({ title, highlight, title2, highlightPosition, color, mb, tagline, maxWidth,taglineColor }: Props) {
   const isStart = highlightPosition === 'start';
   return (
     <Box mb={{ xs: 3, md: mb? mb: 6.5 }} sx={{maxWidth: maxWidth}}>
@@ -34,7 +35,7 @@ export default function SectionHeader({ title, highlight, title2, highlightPosit
         {title2}
       </Typography>
 
-      <Typography mt={2} variant="heading11" component='p' fontWeight={500}>{tagline}</Typography>
+      <Typography mt={2} variant="heading11" component='p' fontWeight={500}  sx={{color: taglineColor,}}>{tagline}</Typography>
     </Box>
   );
 }
