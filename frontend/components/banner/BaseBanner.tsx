@@ -105,7 +105,7 @@ export default function BaseBanner({
     },
     width: {
       xs: "100%",
-      lg: "auto",
+      lg: rightMaxWidth  || "auto",
     },
     display: "flex",
     justifyContent: "center",
