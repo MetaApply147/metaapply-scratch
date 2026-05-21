@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Typography, Divider  } from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 import SectionColumn from "../shared/SectionColumn";
 import { Tab } from "@/types/megamenu";
 import Link from "next/link";
@@ -14,8 +14,8 @@ export default function TestPrepMegaMenu({ tab }: { tab: Tab }) {
   if (!tab) return null;
 
   const exam = tab?.title || "IELTS";
-  
-  {/* Variables for section columns */}
+
+  {/* Variables for section columns */ }
   const sections = tab.sections ?? [];
   const visibleSections = sections.slice(0, 3);
   const lastIndex = visibleSections.length - 1;
@@ -31,7 +31,7 @@ export default function TestPrepMegaMenu({ tab }: { tab: Tab }) {
   return (
     <Box sx={{ padding: "25px 0 0 32px", height: "100%", display: "flex", flexDirection: "column" }}>
       <Box mb={2}>
-        <Link href={`/testprep/${exam.toLowerCase()}`}>
+        <Link href={`/test-prep/${exam.toLowerCase()}`}>
           <Typography
             variant="heading15"
             sx={{
@@ -43,13 +43,13 @@ export default function TestPrepMegaMenu({ tab }: { tab: Tab }) {
               gap: 1,
             }}
           >
-            Know More About {exam} <ChevronRight fontSize="small" sx={{marginLeft: 3}} />
+            Know More About {exam} <ChevronRight fontSize="small" sx={{ marginLeft: 3 }} />
           </Typography>
         </Link>
       </Box>
 
       <Divider sx={{ mb: 2.5 }} />
-      
+
       <Box
         display="grid"
         gridTemplateColumns={{
@@ -58,9 +58,9 @@ export default function TestPrepMegaMenu({ tab }: { tab: Tab }) {
           md: "1fr 1fr 1.52fr",
         }}
         gap={3}
-        pl= {2}
-        sx={{height: "100%"}}
-        >
+        pl={2}
+        sx={{ height: "100%" }}
+      >
         {visibleSections.map((section, index) => {
           const isLastColumn = index === lastIndex;
 
@@ -85,7 +85,7 @@ export default function TestPrepMegaMenu({ tab }: { tab: Tab }) {
       </Box>
 
     </Box>
-    
+
   );
 }
 
@@ -111,7 +111,7 @@ function NextStepCard() {
           NextStep
         </Typography>
 
-        <Typography variant="body07" component="p" color="text.secondary" mb={1} sx={{fontFamily: "var(--font-heading)", color: "#505050"}}>
+        <Typography variant="body07" component="p" color="text.secondary" mb={1} sx={{ fontFamily: "var(--font-heading)", color: "#505050" }}>
           Bridge the Gap Between Learning and Earning.A guided path for students to become industry-ready with confidence.
         </Typography>
 
@@ -134,7 +134,7 @@ function NextStepCard() {
         alt="students"
         width={186}
         height={164}
-        style={{marginTop: "auto"}}
+        style={{ marginTop: "auto" }}
       />
     </Box>
   );
