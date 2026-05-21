@@ -1,8 +1,12 @@
 "use client";
 
 import Section from "@/components/common/Section";
-import { Box, Typography } from "@mui/material";
+import SectionHeader from "@/components/common/SectionHeader";
+import CustomSlider from "@/components/common/CustomSlider";
+import { Box } from "@mui/material";
 import Image from "next/image";
+
+/* ================= TYPES ================= */
 
 type GalleryImageType = {
   url?: string;
@@ -19,9 +23,7 @@ type Props = {
   };
 };
 
-
-
-// Base url 
+/* ================= BASE URL ================= */
 
 const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
@@ -31,9 +33,13 @@ if (!BASE_URL) {
 
 const getImageUrl = (url?: string): string | null => {
   if (!url) return null;
+
   if (url.startsWith("http")) return url;
+
   return `${BASE_URL}${url.startsWith("/") ? url : `/${url}`}`;
 };
+
+/* ================= COMPONENT ================= */
 
 export default function CentreGallery({ gallery }: Props) {
   const images = [
@@ -45,112 +51,159 @@ export default function CentreGallery({ gallery }: Props) {
     gallery?.image6?.url,
   ];
 
+  const slides = [
+    {
+      type: "two-images",
+      images: [images[0], images[1]],
+    },
+    {
+      type: "single-image",
+      images: [images[2]],
+    },
+    {
+      type: "three-images",
+      images: [images[3], images[4], images[5]],
+    },
+  ];
+
   return (
     <Section spacing="lg">
       <Box>
-        {/* Heading */}
-        <Typography
-          variant="heading08"
-          component="h2"
-          sx={{
-            mb: 4,
-          }}
-        >
-          Our{" "}
-          <Box
-            component="span"
-            sx={{
-              color: "primary.main",
+        <SectionHeader title="Our" highlight="Gallery" />
+
+        <Box sx={{minHeight: 577}}>
+          <CustomSlider
+            data={slides}
+            slidesPerView={3}
+            showPagination
+            showArrows
+            disablePadding
+            spaceBetween={16}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              600: {
+                slidesPerView: 2,
+              },
+              900: {
+                slidesPerView: 3,
+              },
             }}
-          >
-            Gallery
-          </Box>
-        </Typography>
-
-        {/* Gallery Layout */}
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "1fr",
-              md: "1fr 1fr 1fr",
-            },
-            gap: 2,
-          }}
-        >
-          {/* Left Column */}
-          <Box
-            sx={{
-              display: "grid",
-              gap: 2,
-            }}
-          >
-            {images[0] && (
-              <GalleryImage src={images[0]} height={220} />
+            renderItem={(item) => (
+              <GallerySlide item={item} />
             )}
-
-            {images[1] && (
-              <GalleryImage src={images[1]} height={260} />
-            )}
-          </Box>
-
-          {/* Center Large Image */}
-          <Box>
-            {images[2] && (
-              <GalleryImage
-                src={images[2]}
-                height={490}
-              />
-            )}
-          </Box>
-
-          {/* Right Column */}
-          <Box
-            sx={{
-              display: "grid",
-              gap: 2,
-            }}
-          >
-            {images[3] && (
-              <GalleryImage src={images[3]} height={260} />
-            )}
-
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 2,
-              }}
-            >
-              {images[4] && (
-                <GalleryImage
-                  src={images[4]}
-                  height={210}
-                />
-              )}
-
-              {images[5] && (
-                <GalleryImage
-                  src={images[5]}
-                  height={210}
-                />
-              )}
-            </Box>
-          </Box>
+          />
         </Box>
       </Box>
     </Section>
   );
 }
 
-/* ================= IMAGE CARD ================= */
+/* ================= SLIDE ================= */
+
+function GallerySlide({
+  item,
+}: {
+  item: {
+    type: string;
+    images: (string | undefined)[];
+  };
+}) {
+  // FIRST COLUMN → 2 IMAGES
+  if (item.type === "two-images") {
+    return (
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateRows: "1fr 1fr",
+          gap: 2,
+          // height: {
+          //   xs: 420,
+          //   md: 580,
+          // },
+          height: '100%',
+        }}
+      >
+        {item.images[0] && (
+          <GalleryImage src={item.images[0]} />
+        )}
+
+        {item.images[1] && (
+          <GalleryImage src={item.images[1]} />
+        )}
+      </Box>
+    );
+  }
+
+  // SECOND COLUMN → 1 IMAGE
+  if (item.type === "single-image") {
+    return (
+      <Box
+        sx={{
+          // height: {
+          //   xs: 420,
+          //   md: 580,
+          // },
+          height: '100%',
+        }}
+      >
+        {item.images[0] && (
+          <GalleryImage
+            src={item.images[0]}
+            fullHeight
+          />
+        )}
+      </Box>
+    );
+  }
+
+  // THIRD COLUMN → 1 TOP + 2 BOTTOM
+  return (
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateRows: "1fr 1fr",
+        gap: 2,
+       height: '100%',
+      }}
+    >
+      <Box>
+        {item.images[0] && (
+          <GalleryImage src={item.images[0]} />
+        )}
+      </Box>
+
+      <Box
+        sx={{
+           // height: {
+        //   xs: 420,
+        //   md: 580,
+        // },display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 2,
+        }}
+      >
+        {item.images[1] && (
+          <GalleryImage src={item.images[1]} />
+        )}
+
+        {item.images[2] && (
+          <GalleryImage src={item.images[2]} />
+        )}
+      </Box>
+    </Box>
+  );
+}
+
+/* ================= IMAGE ================= */
 
 function GalleryImage({
   src,
-  height,
+  fullHeight = false,
 }: {
   src: string;
-  height: number;
+  fullHeight?: boolean;
 }) {
   const imageUrl = getImageUrl(src);
 
@@ -161,9 +214,9 @@ function GalleryImage({
       sx={{
         position: "relative",
         width: "100%",
-        height,
-        borderRadius: "12px",
+        height: '100%',
         overflow: "hidden",
+        borderRadius: "0px",
       }}
     >
       <Image
