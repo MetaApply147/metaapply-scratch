@@ -159,3 +159,80 @@ export const studentAmbassadorBaseFields: FormField[] = [
         sendToLSQ: false,
     },
 ]
+
+export const contactUsBaseFields: FormField[] = [
+    {
+        name: 'year',
+        type: 'select',
+        lsKey: 'mx_enquireBy',
+        placeholder: 'Enquire By*',
+        required: true,
+        options: [
+            { label: 'Student', value: 'Student' },
+            { label: 'University', value: 'University' },
+            { label: 'Franchise', value: 'Franchise' },
+            { label: 'Others', value: 'Others' },
+        ],
+    },
+     {
+        name: "fullName",
+        type: "text",
+        lsKey: "FirstName",
+        placeholder: "Enter Full Name*",
+        required: true,
+    },
+    {
+        name: "email",
+        type: "email",
+        lsKey: "EmailAddress",
+        placeholder: "Enter Email ID*",
+        required: true,
+    },
+    {
+        name: "phone",
+        type: "phone",
+        lsKey: "Phone",
+        placeholder: "Phone Number*",
+        required: true,
+    },
+    {
+        name: "country",
+        type: "country",
+        lsKey: "mx_Country",
+        placeholder: "Select Country*",
+        required: true,
+    },
+    {
+        name: "state",
+        type: "state",
+        lsKey: "mx_State",
+        placeholder: "Select State*",
+        required: true,
+    },
+     {
+        name: 'message',
+        type: 'textarea',
+        lsKey: 'notes',
+        placeholder: 'Message',
+        required: false,
+    },
+    {
+        name: 'consent',
+        type: 'checkbox',
+        lsKey: 'mx_consent',
+        required: true,
+        defaultChecked: true,
+        label:
+            'I authorise MetaApply IE & its representatives to contact me with updates and notifications via Email/SMS/WhatsApp/Call.',
+    },
+
+    {
+        name: 'terms',
+        type: 'checkbox',
+        lsKey: 'mx_terms',
+        required: true,
+        defaultChecked: true,
+        label: 'I have read and agreed to terms & privacy policy',
+        sendToLSQ: false,
+    },
+]
