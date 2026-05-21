@@ -20,7 +20,7 @@ const cardsData = [
     image: "/centres/Global-reach.svg",
     cardTitle: "Global Reach",
     cardDescription:
-      "With 350+ partnered universities and 2000+ recruitment partners connected with us globally, we have become a trusted name. Our extensive network will help you find the perfect university abroad.",
+      "With 400+ partnered universities and 2000+ recruitment partners connected with us globally, we have become a trusted name. Our extensive network will help you find the perfect university abroad.",
   },
   {
     image: "/centres/VISA-Support.svg",
@@ -42,14 +42,14 @@ const cardsData = [
   },
 ];
 
-export default function EndToEnd(){
-    return(
-        <Section spacing="lg">
-            <SectionHeader highlight="Your End-to-End Partner" title="in Global Education" highlightPosition="start"/>
+export default function EndToEnd() {
+  return (
+    <Section spacing="lg">
+      <SectionHeader highlight="Your End-to-End Partner" title="in Global Education" highlightPosition="start" />
 
-            <Typography component='p' variant="body05" color="text.secondary" textAlign={"center"}>MetaApply is the trusted synonym of study abroad services. Our professionals understand the importance of your study abroad dream and hence, we provide you with a smooth, hassle-free journey to your dream study destination. From college shortlisting, application assistance, and English proficiency exam support to visa counselling, education loan funding, and accommodation assistance we cater to it all.</Typography>
+      <Typography component='p' variant="body05" color="text.secondary" textAlign={"center"}>MetaApply is the trusted synonym of study abroad services. Our professionals understand the importance of your study abroad dream and hence, we provide you with a smooth, hassle-free journey to your dream study destination. From college shortlisting, application assistance, and English proficiency exam support to visa counselling, education loan funding, and accommodation assistance we cater to it all.</Typography>
 
-            <ImageBoxes cards={cardsData}/>
-        </Section>
-    )
+      <ImageBoxes cards={cardsData} />
+    </Section>
+  )
 }
