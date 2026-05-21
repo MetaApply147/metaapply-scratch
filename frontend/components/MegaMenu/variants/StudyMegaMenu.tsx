@@ -24,13 +24,13 @@ export default function StudyMegaMenu({ tab }: { tab: Tab }) {
         md: "2fr 1fr",
         lg: "minmax(0,1fr) minmax(220px, 436px)",
       }}
-      sx={{height: "100%"}}
+      sx={{ height: "100%" }}
     >
       {/* LEFT CONTENT */}
-      <Box minWidth={0} sx={{padding: "25px 0 25px 32px"}}>
+      <Box minWidth={0} sx={{ padding: "25px 0 25px 32px" }}>
         {/* Heading */}
         <Box mb={2}>
-          <Link href={`/study-in-${country.toLowerCase().replace(/\s+/g, "-")}`}>
+          <Link href={`/study-abroad-destination/study-in-${country.toLowerCase().replace(/\s+/g, "-")}`}>
             <Typography
               variant="heading15"
               sx={{
@@ -43,7 +43,7 @@ export default function StudyMegaMenu({ tab }: { tab: Tab }) {
                 mb: 1
               }}
             >
-              Explore Studying in {country} <ChevronRight fontSize="small" sx={{marginLeft: 3}} />
+              Explore Studying in {country} <ChevronRight fontSize="small" sx={{ marginLeft: 3 }} />
             </Typography>
           </Link>
         </Box>
@@ -58,7 +58,7 @@ export default function StudyMegaMenu({ tab }: { tab: Tab }) {
             sm: "1fr 1fr",
           }}
           gap={3}
-          px= {2}
+          px={2}
         >
           {tab?.sections?.length ? (
             tab.sections.map((section) => (
@@ -142,7 +142,7 @@ function Services() {
 
       <Box display="grid" gridTemplateColumns="1fr 1fr" gap={2}>
         {services.map((service) => (
-          <SidebarItem key={service.name} label={service.name} imageUrl={service.image} href={service.href}/>
+          <SidebarItem key={service.name} label={service.name} imageUrl={service.image} href={service.href} />
         ))}
       </Box>
     </>
@@ -185,25 +185,25 @@ function SidebarCard({
           color: "text.primary"
         }}
       >
-        <Box sx={{display: "flex" , flexDirection: "column", gap: 0.2}}>
-          <Typography fontWeight={600} variant="heading15" component="h6" 
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.2 }}>
+          <Typography fontWeight={600} variant="heading15" component="h6"
             sx={{
               background: textGradient,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}>
             {title}
-            </Typography>
-          <Typography variant="body07">Know More <EastIcon sx={{fontSize: 12}}/></Typography>
+          </Typography>
+          <Typography variant="body07">Know More <EastIcon sx={{ fontSize: 12 }} /></Typography>
         </Box>
         <Image src={imageUrl} alt={title} width={137} height={137} style={{ objectFit: "fill", width: "auto", height: "137px" }} />
-      </Box>  
+      </Box>
     </Link>
-    
+
   );
 }
 
-function SidebarItem({ label, imageUrl, href}: { label: string, imageUrl: string, href: string }) {
+function SidebarItem({ label, imageUrl, href }: { label: string, imageUrl: string, href: string }) {
   return (
     <Link href={href} style={{ textDecoration: "none" }}>
       <Box
@@ -222,13 +222,13 @@ function SidebarItem({ label, imageUrl, href}: { label: string, imageUrl: string
           backgroundColor: "background.default"
         }}
       >
-        <Image src={imageUrl} alt="Cards Images" width={52} height={52}/>
-        <Box sx={{display: "flex", flexDirection: "column", gap: "2px"}}>
+        <Image src={imageUrl} alt="Cards Images" width={52} height={52} />
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           <Typography fontWeight={600} color="text.primary" component="h6" variant="heading15">{label}</Typography>
-          <Typography variant="body07" sx={{color: palette.neutralBlue[800]}}>Know More <EastIcon sx={{fontSize: 12}}/></Typography>
+          <Typography variant="body07" sx={{ color: palette.neutralBlue[800] }}>Know More <EastIcon sx={{ fontSize: 12 }} /></Typography>
         </Box>
       </Box>
     </Link>
-      
+
   );
 }
