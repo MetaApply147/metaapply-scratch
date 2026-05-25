@@ -375,8 +375,11 @@ export default function ReferEarnStepsSection() {
                 sx={{
                     position: "relative",
                     width: "100%",
-                    background:
-                        "linear-gradient(90deg, #222466 0%, #2E318C 100%)",
+                    backgroundImage: "url(/refer-and-earn/scholarshipCTABG.webp)",
+
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundPosition: "bottom center",
                     overflow: "hidden",
                     display: "flex",
                     alignItems: "center",

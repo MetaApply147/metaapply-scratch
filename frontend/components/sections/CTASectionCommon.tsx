@@ -11,6 +11,10 @@ type Props = {
   buttonUrl?: string;
   image: string;
   ImageWidth?: string;
+
+  imageSx?: object;
+  contentSx?: object;
+  sectionSx?: object;
 };
 
 export default function CTASectionCommon({
@@ -20,6 +24,10 @@ export default function CTASectionCommon({
   buttonUrl,
   image,
   ImageWidth,
+
+   imageSx,
+  contentSx,
+  sectionSx,
 }: Props) {
   return (
     <Section spacing="lg">
@@ -45,7 +53,8 @@ export default function CTASectionCommon({
               "linear-gradient(263.14deg, #8547A1 2.19%, #000052 99.36%)",
             backgroundPosition: "bottom center",
             boxShadow: "20px 25px 75px 0px #00000040",
-            minHeight: '475px'
+            minHeight: '475px',
+             ...sectionSx,
           }}
         >
           {/* Left Content */}
@@ -54,6 +63,7 @@ export default function CTASectionCommon({
               position: "relative",
               zIndex: 5,
               maxWidth: { xs: "100%", md: '65%' },
+               ...contentSx,
             }}
           >
             <Typography
@@ -123,6 +133,7 @@ export default function CTASectionCommon({
             width: ImageWidth ? ImageWidth : "400px",
             height: { xs: 360, md: 535 },
             zIndex: 4,
+            ...imageSx,
           }}
         >
           <Image
