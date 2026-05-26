@@ -301,7 +301,17 @@ export default function WhyChooseFranchise() {
 
                                                     flexShrink: 0,
 
-                                                    lineHeight: "48px",
+                                                    fontSize: {
+                                                        xs: "16px",
+                                                        sm: "18px",
+                                                        md: "20px",
+                                                    },
+
+                                                    lineHeight: {
+                                                        xs: "24px",
+                                                        sm: "28px",
+                                                        md: "48px",
+                                                    },
                                                 }}
                                             >
                                                 {item.id}
@@ -311,11 +321,17 @@ export default function WhyChooseFranchise() {
                                             <Typography
                                                 variant="heading12"
                                                 sx={{
-                                                    color:
-                                                        "text.heading",
+                                                    color: "text.heading",
+
+                                                    fontSize: {
+                                                        xs: "16px",
+                                                        sm: "18px",
+                                                        md: "20px",
+                                                    },
 
                                                     lineHeight: {
-                                                        xs: "28px",
+                                                        xs: "24px",
+                                                        sm: "28px",
                                                         md: "48px",
                                                     },
                                                 }}
@@ -345,13 +361,19 @@ export default function WhyChooseFranchise() {
                                                 sx={{
                                                     color: "text.body",
 
+                                                    fontSize: {
+                                                        xs: "14px",
+                                                        sm: "15px",
+                                                        md: "16px",
+                                                    },
+
                                                     lineHeight: {
-                                                        xs: "24px",
+                                                        xs: "22px",
+                                                        sm: "24px",
                                                         md: "28px",
                                                     },
 
-                                                    maxWidth:
-                                                        "672px",
+                                                    maxWidth: "672px",
                                                 }}
                                             >
                                                 {item.content}

@@ -30,7 +30,7 @@ export default function MetaapplyProcess({ disablePadding = false }) {
         <SectionHeader
           title="Process of"
           highlight="MetaApply"
-          tagline="Your international future, simplified into 9 easy steps"
+          tagline="Your international future, simplified into 7 easy steps"
         />
       </Container>
 

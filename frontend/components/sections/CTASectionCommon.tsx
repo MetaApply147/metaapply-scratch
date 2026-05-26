@@ -15,6 +15,7 @@ type Props = {
   imageSx?: object;
   contentSx?: object;
   sectionSx?: object;
+  componentSx?: object;
 };
 
 export default function CTASectionCommon({
@@ -28,9 +29,10 @@ export default function CTASectionCommon({
    imageSx,
   contentSx,
   sectionSx,
+  componentSx
 }: Props) {
   return (
-    <Section spacing="lg">
+    <Section spacing="lg" sx={{ ...componentSx }}>
       <Box
         sx={{
           position: "relative",
