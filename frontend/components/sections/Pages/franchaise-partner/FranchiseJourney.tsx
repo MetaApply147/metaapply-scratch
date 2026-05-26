@@ -94,17 +94,17 @@ export default function FranchiseJourney() {
                         disablePadding={true}
                         breakpoints={{
                             0: {
-                                slidesPerView: 1.2,
-                                spaceBetween: 16,
-                            },
-
-                            480: {
                                 slidesPerView: 2,
                                 spaceBetween: 16,
                             },
 
-                            768: {
+                            480: {
                                 slidesPerView: 3,
+                                spaceBetween: 16,
+                            },
+
+                            768: {
+                                slidesPerView: 6,
                                 spaceBetween: 20,
                             },
 

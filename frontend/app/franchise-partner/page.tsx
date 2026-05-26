@@ -22,17 +22,31 @@ export default function FranchisePartnerPage() {
                 title="Partner with MetaApply to bring global education closer to every student"
                 buttonText="Become a Franchise Partner"
                 image="/franchise-partner/CTA-img.svg"
-                ImageWidth="620px"
-
+                
+                componentSx={{
+                    pt: { xs: 0, md: 0 }, mt:{ xs: 0, md: 0 }
+                }}
                 sectionSx={{
                     minHeight: {
-                        xs: "620px",
+                        xs: "auto",
                         md: "475px",
                     },
 
+                    pt: {
+                        xs: 5,
+                        md: 9,
+                    },
+
                     pb: {
-                        xs: "320px",
+                        xs: "280px",
+                        sm: "320px",
                         md: "90px",
+                    },
+
+                    px: {
+                        xs: 3,
+                        sm: 4,
+                        md: 10,
                     },
                 }}
 
@@ -41,23 +55,52 @@ export default function FranchisePartnerPage() {
                         xs: "100%",
                         md: "48%",
                     },
+
+                    textAlign: {
+                        xs: "center",
+                        md: "left",
+                    },
+
+                    mx: {
+                        xs: "auto",
+                        md: 0,
+                    },
+
+                    position: "relative",
+                    zIndex: 5,
                 }}
 
                 imageSx={{
                     right: {
+                        xs: "50%",
                         md: 10,
                         lg: -5,
                     },
 
+                    transform: {
+                        xs: "translateX(50%)",
+                        md: "none",
+                    },
+
                     width: {
-                        md: "620px",
+                        xs: "240px",
+                        sm: "300px",
+                        md: "520px",
+                        lg: "620px",
                     },
 
                     height: {
-                        md: "620px",
+                        xs: "300px",
+                        sm: "360px",
+                        md: "520px",
+                        lg: "620px",
                     },
+
+                    bottom: 0,
                 }}
             />
+
+            
         </>
     );
 }
