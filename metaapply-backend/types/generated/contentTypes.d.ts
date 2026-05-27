@@ -553,7 +553,7 @@ export interface ApiCentreCentre extends Struct.CollectionTypeSchema {
       'api::centre.centre'
     > &
       Schema.Attribute.Private;
-    map_embed_url: Schema.Attribute.String;
+    map_embed_url: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;

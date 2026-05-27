@@ -40,7 +40,7 @@
       "type": "string"
     },
     "map_embed_url": {
-      "type": "string"
+      "type": "text"
     },
     "centreAddress": {
       "type": "string"
