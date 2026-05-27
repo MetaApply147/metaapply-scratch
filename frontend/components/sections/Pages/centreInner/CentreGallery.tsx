@@ -71,30 +71,28 @@ export default function CentreGallery({ gallery }: Props) {
       <Box>
         <SectionHeader title="Our" highlight="Gallery" />
 
-        <Box sx={{minHeight: 577}}>
-          <CustomSlider
-            data={slides}
-            slidesPerView={3}
-            showPagination
-            showArrows
-            disablePadding
-            spaceBetween={16}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              600: {
-                slidesPerView: 2,
-              },
-              900: {
-                slidesPerView: 3,
-              },
-            }}
-            renderItem={(item) => (
-              <GallerySlide item={item} />
-            )}
-          />
-        </Box>
+        <CustomSlider
+          data={slides}
+          slidesPerView={3}
+          showPagination
+          showArrows
+          disablePadding
+          spaceBetween={16}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            600: {
+              slidesPerView: 2,
+            },
+            900: {
+              slidesPerView: 3,
+            },
+          }}
+          renderItem={(item) => (
+            <GallerySlide item={item} />
+          )}
+        />
       </Box>
     </Section>
   );
@@ -110,6 +108,11 @@ function GallerySlide({
     images: (string | undefined)[];
   };
 }) {
+  const slideHeight = {
+    xs: 420,
+    md: 580,
+  };
+
   // FIRST COLUMN → 2 IMAGES
   if (item.type === "two-images") {
     return (
@@ -118,11 +121,7 @@ function GallerySlide({
           display: "grid",
           gridTemplateRows: "1fr 1fr",
           gap: 2,
-          // height: {
-          //   xs: 420,
-          //   md: 580,
-          // },
-          height: '100%',
+          height: slideHeight,
         }}
       >
         {item.images[0] && (
@@ -141,11 +140,7 @@ function GallerySlide({
     return (
       <Box
         sx={{
-          // height: {
-          //   xs: 420,
-          //   md: 580,
-          // },
-          height: '100%',
+          height: slideHeight,
         }}
       >
         {item.images[0] && (
@@ -165,7 +160,7 @@ function GallerySlide({
         display: "grid",
         gridTemplateRows: "1fr 1fr",
         gap: 2,
-       height: '100%',
+       height: slideHeight,
       }}
     >
       <Box>
@@ -176,12 +171,10 @@ function GallerySlide({
 
       <Box
         sx={{
-           // height: {
-        //   xs: 420,
-        //   md: 580,
-        // },display: "grid",
+          display: 'grid',
           gridTemplateColumns: "1fr 1fr",
           gap: 2,
+          height: "100%",
         }}
       >
         {item.images[1] && (
