@@ -2,6 +2,7 @@ import HeroBanner from "@/components/banner/HeroBanner";
 import FAQSection from "@/components/sections/FAQSection";
 import GlobalJourneyCTA from "@/components/sections/GlobalJourneyCTA";
 import CentreGallery from "@/components/sections/Pages/centreInner/CentreGallery";
+import CentreHeadMessage from "@/components/sections/Pages/centreInner/CentreHeadSection";
 import EndToEnd from "@/components/sections/Pages/centreInner/EndToEnd";
 import SocialPlatformSectionCentre from "@/components/sections/Pages/centreInner/SocialPlatformSectionCentre";
 import PopularDestinations from "@/components/sections/PopularDestinations";
@@ -16,7 +17,7 @@ type Props = {
 };
 
 const CentreDetailPage = async ({ params }: Props) => {
-  const { slug } = params;
+  const { slug } = await params;
 
   const response = await getServices("/centres", {
     filters: {
@@ -29,6 +30,9 @@ const CentreDetailPage = async ({ params }: Props) => {
         populate: "*",
       },
       gallerySection : {
+        populate: "*"
+      },
+      centreHeadMessage : {
         populate: "*"
       }
     },
@@ -46,6 +50,8 @@ const CentreDetailPage = async ({ params }: Props) => {
 
       <EndToEnd/>
 
+      <CentreHeadMessage centreHeadMessage={centreData?.centreHeadMessage}/>
+
       <CentreGallery gallery={centreData?.gallerySection}/>
 
       <PopularDestinations/>
@@ -58,7 +64,7 @@ const CentreDetailPage = async ({ params }: Props) => {
 
       <FAQSection page={centreData.slug}/>
 
-      <SocialPlatformSectionCentre facebookUrl="https://facebook.com/yourpage" instagramUrl="https://facebook.com/yourpage"/>
+      <SocialPlatformSectionCentre facebookUrl={centreData.facebookLink} instagramUrl={centreData.instaLink}/>
     </>
   );
 };
