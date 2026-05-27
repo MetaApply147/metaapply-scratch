@@ -50,8 +50,6 @@ const CentreDetailPage = async ({ params }: Props) => {
 
       <EndToEnd/>
 
-      <CentreHeadMessage centreHeadMessage={centreData?.centreHeadMessage}/>
-
       <CentreGallery gallery={centreData?.gallerySection}/>
 
       <PopularDestinations/>
