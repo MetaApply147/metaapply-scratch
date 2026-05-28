@@ -9,6 +9,7 @@ type Props = {
   buttonText?: string;
   buttonUrl?: string;
   imageUrl?: string;
+  description?: string;
 }
 
 const defaultFeatures = [
@@ -22,6 +23,7 @@ export default function GlobalJourneyCTA({
   features = defaultFeatures,
   buttonText = "Talk to Our Experts",
   imageUrl = "/about-us/global-journey-right.svg",
+  description
 }: Props) {
   return (
     <Box
@@ -105,55 +107,71 @@ export default function GlobalJourneyCTA({
               {title}
             </Typography>
 
-            {/* FEATURES */}
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
+            {/* DESCRIPTION */}
+{description ? (
+  <Typography
+    variant="body03"
+    component="p"
+    sx={{
+      mb: 4,
+      maxWidth: '580px',
+      opacity: 0.9,
+      lineHeight: 1.7,
+    }}
+  >
+    {description}
+  </Typography>
+) : (
+  /* FEATURES */
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
 
-                gap: {
-                  xs: '14px',
-                  md: '16px',
-                },
+      gap: {
+        xs: '14px',
+        md: '16px',
+      },
 
-                mb: {
-                  xs: 4,
-                  md: 5,
-                },
-              }}
-            >
-              {features.map((item) => (
-                <Box
-                  key={item}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                  }}
-                >
-                  <Box
-                    sx={{
-                      position: 'relative',
-                      width: 20,
-                      height: 20,
-                    }}
-                  >
-                    <Image
-                      src="/about-us/tick.svg"
-                      alt="tick"
-                      fill
-                    />
-                  </Box>
+      mb: {
+        xs: 4,
+        md: 5,
+      },
+    }}
+  >
+    {features?.map((item) => (
+      <Box
+        key={item}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+        }}
+      >
+        <Box
+          sx={{
+            position: 'relative',
+            width: 20,
+            height: 20,
+          }}
+        >
+          <Image
+            src="/about-us/tick.svg"
+            alt="tick"
+            fill
+          />
+        </Box>
 
-                  <Typography
-                    variant='body03'
-                    component='p'
-                  >
-                    {item}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
+        <Typography
+          variant="body03"
+          component="p"
+        >
+          {item}
+        </Typography>
+      </Box>
+    ))}
+  </Box>
+)}
 
             {/* BUTTON */}
             <Button

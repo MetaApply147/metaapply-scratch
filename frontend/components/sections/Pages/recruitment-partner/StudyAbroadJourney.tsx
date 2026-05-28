@@ -1,10 +1,10 @@
 "use client";
 
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import SectionHeader from "@/components/common/SectionHeader";
 import CustomSlider from "@/components/common/CustomSlider";
 import Image from "next/image";
-import CTASection from "../../CTASection";
+
 type Props = {
     disablePadding?: string;
 };
@@ -19,11 +19,16 @@ const processSteps = [
     { number: "7", title: "Pre-departure\nOrientation" },
 ];
 
-export default function StudyAbroadJourney({ disablePadding = false }) {
+export default function StudyAbroadJourney({
+    disablePadding = false,
+}) {
     return (
         <Box
             component="section"
-            sx={{ py: disablePadding ? "0" : { xs: 8, md: 11.25 } }}
+            sx={{
+                py: disablePadding ? "0" : { xs: 8, md: 11.25 },
+                overflow: "hidden",
+            }}
         >
             <Container>
                 <SectionHeader
@@ -32,17 +37,40 @@ export default function StudyAbroadJourney({ disablePadding = false }) {
                 />
             </Container>
 
-            <Container>
+            <Container
+                sx={{
+                    px: {
+                        xs: 0,
+                        sm: 2,
+                        md: 3,
+                    },
+                }}
+            >
                 <CustomSlider
                     data={processSteps}
                     slidesPerView={7}
                     spaceBetween={0}
-                    disablePadding
+                    showPagination={true}
                     breakpoints={{
-                        0: { slidesPerView: 1 },
-                        600: { slidesPerView: 2 },
-                        900: { slidesPerView: 3 },
-                        1200: { slidesPerView: 7 },
+                        0: {
+                            slidesPerView: 1,
+                            spaceBetween: 20,
+                        },
+
+                        600: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+
+                        900: {
+                            slidesPerView: 3,
+                            spaceBetween: 20,
+                        },
+
+                        1200: {
+                            slidesPerView: 7,
+                            spaceBetween: 0,
+                        },
                     }}
                     renderItem={(item: any) => (
                         <Box
@@ -53,20 +81,56 @@ export default function StudyAbroadJourney({ disablePadding = false }) {
                                 overflow: "visible",
                                 display: "flex",
                                 flexDirection: "column",
-                                pt: Number(item.number) % 2 === 0 ? "64px" : "0",
+
+                                minWidth: 0,
+                                width: "100%",
+
+                                pt: {
+                                    xs: 0,
+                                    md:
+                                        Number(item.number) % 2 === 0
+                                            ? "64px"
+                                            : "0",
+                                },
                             }}
                         >
-                            {/* text */}
+                            {/* TEXT */}
                             <Box
                                 sx={{
-                                    mb: Number(item.number) % 2 !== 0 ? 3 : 0,
-                                    mt: Number(item.number) % 2 === 0 ? 3 : 0,
-                                    order: Number(item.number) % 2 === 0 ? 1 : -1,
+                                    mb:
+                                        Number(item.number) % 2 !== 0
+                                            ? 3
+                                            : 0,
+
+                                    mt: {
+                                        xs: 2,
+                                        md:
+                                            Number(item.number) % 2 === 0
+                                                ? 3
+                                                : 0,
+                                    },
+
+                                    order: {
+                                        xs: -1,
+                                        md:
+                                            Number(item.number) % 2 === 0
+                                                ? 1
+                                                : -1,
+                                    },
+
+                                    minHeight: {
+                                        xs: "70px",
+                                        md: "unset",
+                                    },
                                 }}
                             >
                                 <Box
                                     display="flex"
                                     alignItems="flex-start"
+                                    justifyContent={{
+                                        xs: "center",
+                                        md: "flex-start",
+                                    }}
                                 >
                                     <Typography
                                         component="h3"
@@ -75,7 +139,16 @@ export default function StudyAbroadJourney({ disablePadding = false }) {
                                         sx={{
                                             color: "primary.main",
                                             mr: 0.5,
-                                            lineHeight: "40px !important",
+
+                                            lineHeight: {
+                                                xs: "32px",
+                                                md: "40px !important",
+                                            },
+
+                                            fontSize: {
+                                                xs: "28px",
+                                                md: "inherit",
+                                            },
                                         }}
                                     >
                                         {item.number}
@@ -87,9 +160,21 @@ export default function StudyAbroadJourney({ disablePadding = false }) {
                                         fontWeight={700}
                                         sx={{
                                             color: "#2e318c",
+
                                             textAlign: "left",
-                                            lineHeight: "19px",
+
+                                            lineHeight: {
+                                                xs: "20px",
+                                                md: "19px",
+                                            },
+
+                                            fontSize: {
+                                                xs: "14px",
+                                                md: "inherit",
+                                            },
+
                                             mt: 0.2,
+
                                             whiteSpace: "pre-line",
                                         }}
                                     >
@@ -98,32 +183,65 @@ export default function StudyAbroadJourney({ disablePadding = false }) {
                                 </Box>
                             </Box>
 
-                            {/* ribbon */}
+                            {/* RIBBON */}
                             <Box
                                 sx={{
                                     display: "flex",
                                     alignItems: "center",
-                                    pl: "42px",
-                                    width: "max-content",
+
+                                    overflow: "hidden",
+
+                                    pl: {
+                                        xs: 0,
+                                        md: "42px",
+                                    },
+
+                                    width: {
+                                        xs: "100%",
+                                        md: "max-content",
+                                    },
+
+                                    justifyContent: {
+                                        xs: "center",
+                                        md: "flex-start",
+                                    },
+
                                     position: "relative",
                                     left: "0",
                                 }}
                             >
                                 {Array.from({
                                     length:
-                                        item.number === processSteps.length.toString() ? 1 : 4,
+                                        item.number ===
+                                            processSteps.length.toString()
+                                            ? 1
+                                            : 4,
                                 }).map((_, i) => (
                                     <Box
                                         key={i}
                                         sx={{
-                                            height: "97px",
-                                            width: "58px",
+                                            height: {
+                                                xs: "70px",
+                                                md: "97px",
+                                            },
+
+                                            width: {
+                                                xs: "42px",
+                                                md: "58px",
+                                            },
+
                                             position: "relative",
-                                            ml: i !== 0 ? "-10px" : 0,
+
+                                            ml:
+                                                i !== 0
+                                                    ? {
+                                                        xs: "-8px",
+                                                        md: "-10px",
+                                                    }
+                                                    : 0,
                                         }}
                                     >
                                         <Image
-                                            key={i}
                                             src={
                                                 i === 0
                                                     ? "/study-abroad/dark-pink-vector.png"
@@ -131,7 +249,9 @@ export default function StudyAbroadJourney({ disablePadding = false }) {
                                             }
                                             alt="chevron"
                                             fill
-                                            style={{ objectFit: "contain" }}
+                                            style={{
+                                                objectFit: "contain",
+                                            }}
                                         />
                                     </Box>
                                 ))}
