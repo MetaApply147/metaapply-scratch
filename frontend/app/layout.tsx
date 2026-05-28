@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Open_Sans  } from "next/font/google";
+import { Plus_Jakarta_Sans, Open_Sans, Charmonman  } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/layout/Header";
@@ -22,6 +22,12 @@ const bodyFont = Open_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
+});
+
+const centreHeadingFont = Charmonman({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-centerHeading",
 });
 
 export const metadata: Metadata = {
