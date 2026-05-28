@@ -66,41 +66,42 @@ const revenueData = [
 
 const journeySteps = [
     {
-        id:1,
+        id: 1,
         title: "Partner Onboarding, Portal Access & Training",
-        icon: "/recruitment-partner/Liquid glass button.svg",
+        icon: "/recruitment-partner/step-1.svg",
     },
     {
-        id:2,
+        id: 2,
         title: "You Submit Student Profiles & Requirements",
-        icon: "/test-prep/Take-a-diagnostic-assessment.svg",
+        icon: "/recruitment-partner/step-2.svg",
     },
     {
-        id:3,
+        id: 3,
         title: "We Handle University Applications & Offer Processing",
-        icon: "/test-prep/Get-a-personalised-studyplan.svg",
+        icon: "/recruitment-partner/step-3.svg",
     },
     {
-        id:4,
+        id: 4,
         title: "We Provide Visa Assistance & Documentation Support",
-        icon: "/test-prep/Begin-mentor-guided-test-prep.svg",
+        icon: "/recruitment-partner/step-4.svg",
     },
     {
-        id:5,
+        id: 5,
         title: "We Support Pre-Departure & Student Services",
-        icon: "/test-prep/Take-mock-tets.svg",
+        icon: "/recruitment-partner/step-5.svg",
     },
     {
-        id:6,
-        title: "ou Track Applications & Receive Commission Payouts",
-        icon: "/test-prep/Achieve-your-target-score.svg",
+        id: 6,
+        title: "You Track Applications & Receive Commission Payouts",
+        icon: "/recruitment-partner/step-6.svg",
     },
 ];
 export default function RecruitmentPartnerPage() {
 
     return (
         <>
-            <HeroBanner slug="recruitment-partner" minHeight={{ xs: 400, sm: 500, lg: 600 }} size="medium" />
+            <HeroBanner slug="recruitment-partner" minHeight={{ xs: 400, sm: 500, lg: 600 }} size="medium" disableSectionPadding
+                alignSelf="flex-end" />
             <FeatureCardsSection
                 title="Why Partners Choose"
                 highlight="MetaApply to Grow Revenue"
@@ -120,12 +121,94 @@ export default function RecruitmentPartnerPage() {
                 image="/recruitment-partner/businessman-businesswoman.svg"
                 ImageWidth="620px"
                 componentSx={{
-                    pt: { xs: 0, md: 0 }, mt: { xs: 0, md: 0 }
+                    pt: 0,
+                    mt: 0,
+                }}
+                sectionSx={{
+                    minHeight: {
+                        xs: "620px",
+                        sm: "670px",
+                        md: "475px",
+                    },
+
+                    px: {
+                        xs: 3,
+                        sm: 5,
+                        md: 10,
+                    },
+
+                    pt: {
+                        xs: 6,
+                        md: 9,
+                    },
+
+                    pb: {
+                        xs: 0,
+                        md: 14.5,
+                    },
+
+                    borderRadius: {
+                        xs: "0 40px 0 40px",
+                        md: "0 80px 0 80px",
+                    },
+
+                    alignItems: {
+                        xs: "flex-start",
+                        md: "center",
+                    },
+                }}
+                contentSx={{
+                    maxWidth: {
+                        xs: "100%",
+                        md: "52%",
+                    },
+
+                    textAlign: {
+                        xs: "center",
+                        md: "left",
+                    },
+
+                    mx: {
+                        xs: "auto",
+                        md: 0,
+                    },
+
+                    position: "relative",
+                    zIndex: 5,
+
+                    display: "flex",
+                    flexDirection: "column",
+
+                    alignItems: {
+                        xs: "center",
+                        md: "flex-start",
+                    },
+
                 }}
                 imageSx={{
                     right: {
-                        md: 10,
-                        lg: -30,
+                        xs: "50%",
+                        md: -30,
+                    },
+
+                    transform: {
+                        xs: "translateX(50%)",
+                        md: "none",
+                    },
+
+                    bottom: 0,
+
+                    width: {
+                        xs: "280px",
+                        sm: "340px",
+                        md: "620px",
+                    },
+
+                    height: {
+                        xs: 320,
+                        sm: 420,
+                        md: 535,
+                        lg: 570,
                     },
                 }}
             />
