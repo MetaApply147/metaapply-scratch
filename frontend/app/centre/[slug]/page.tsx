@@ -1,6 +1,7 @@
 import HeroBanner from "@/components/banner/HeroBanner";
 import FAQSection from "@/components/sections/FAQSection";
 import GlobalJourneyCTA from "@/components/sections/GlobalJourneyCTA";
+import CentreFactsSection from "@/components/sections/Pages/centreInner/CentreFactsSection";
 import CentreGallery from "@/components/sections/Pages/centreInner/CentreGallery";
 import CentreHeadMessage from "@/components/sections/Pages/centreInner/CentreHeadSection";
 import EndToEnd from "@/components/sections/Pages/centreInner/EndToEnd";
@@ -32,7 +33,7 @@ const CentreDetailPage = async ({ params }: Props) => {
       gallerySection : {
         populate: "*"
       },
-      centreHeadMessage : {
+      centreImage : {
         populate: "*"
       }
     },
@@ -49,6 +50,8 @@ const CentreDetailPage = async ({ params }: Props) => {
       <HeroBanner slug={centreData.slug} heroData={centreData.hero} isList={true} leftComponentWidth={'50%'} minHeight={700}/>
 
       <EndToEnd/>
+
+      <CentreFactsSection data={centreData} />
 
       <CentreGallery gallery={centreData?.gallerySection}/>
 
