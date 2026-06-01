@@ -1,19 +1,21 @@
 'use client';
 
-import { Box, Button, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    Container,
+    Typography,
+} from '@mui/material';
 
 export default function TransformSuccessSection() {
     return (
         <Box
             component="section"
             sx={{
-                width: '100%',
-
                 px: {
                     xs: 2,
                     sm: 3,
-                    md: 4,
-                    lg: 5,
+                    md: 5,
                 },
 
                 mt: {
@@ -27,6 +29,7 @@ export default function TransformSuccessSection() {
                 },
             }}
         >
+            {/* MAIN WRAPPER */}
             <Box
                 sx={{
                     width: '100%',
@@ -34,14 +37,8 @@ export default function TransformSuccessSection() {
                     maxWidth: '1840px',
 
                     mx: 'auto',
+                    background: 'linear-gradient(262.64deg, #5D0031 -2.68%, #000052 31.59%)',
 
-                    minHeight: {
-                        xs: 'auto',
-                        lg: '421px',
-                    },
-
-                    background:
-                        'linear-gradient(90deg, #000052 0%, #5D0031 100%)',
 
                     borderTopRightRadius: {
                         xs: '40px',
@@ -55,177 +52,206 @@ export default function TransformSuccessSection() {
 
                     overflow: 'hidden',
 
-                    px: {
-                        xs: 3,
-                        sm: 4,
-                        md: 6,
-                        lg: '80px',
-                    },
+                    boxShadow: '20px 25px 75px 0px #ABABAB33',
 
-                    py: {
-                        xs: 5,
-                        md: '55px',
-                    },
-
-                    display: 'flex',
-
-                    flexDirection: {
-                        xs: 'column',
-                        lg: 'row',
-                    },
-
-                    alignItems: 'center',
-
-                    justifyContent: 'space-between',
-
-                    gap: {
-                        xs: 5,
-                        lg: '48px',
-                    },
-
-                    boxShadow:
-                        '20px 25px 75px rgba(171,171,171,0.20)',
                 }}
             >
-                {/* LEFT CONTENT */}
-                <Box
-                    sx={{
-                        width: '100%',
-
-                        maxWidth: {
-                            xs: '100%',
-                            lg: '875px',
-                        },
-
-                        display: 'flex',
-
-                        flexDirection: 'column',
-
-                        alignItems: {
-                            xs: 'center',
-                            lg: 'flex-start',
-                        },
-
-                        textAlign: {
-                            xs: 'center',
-                            lg: 'left',
-                        },
-
-                        flexShrink: 0,
-                    }}
-                >
-                    {/* HEADING */}
-                    <Typography
+                <Container>
+                    <Box
                         sx={{
-                            fontWeight: 500,
-
-                            fontSize: {
-                                xs: '34px',
-                                sm: '42px',
-                                lg: '42px',
+                            minHeight: {
+                                xs: 'auto',
+                                lg: '421px',
                             },
 
-                            lineHeight: {
-                                xs: '48px',
-                                sm: '58px',
-                                lg: '62px',
+                            pt: {
+                                xs: 5,
+                                md: '55px',
                             },
 
-                            letterSpacing: '0%',
+                            display: 'flex',
 
-                            color: '#FFFFFF',
-
-                            maxWidth: {
-                                xs: '100%',
-                                lg: '875px',
+                            flexDirection: {
+                                xs: 'column',
+                                lg: 'row',
                             },
-                        }}
-                    >
-                        Transforming university outreach
-                        into global student success
-                        through powerful solutions.
-                    </Typography>
 
-                    {/* BUTTON */}
-                    <Button
-                        sx={{
-                            mt: {
-                                xs: 4,
+                            alignItems: 'center',
+
+                            justifyContent: 'space-between',
+
+                            gap: {
+                                xs: 5,
                                 lg: '48px',
                             },
-
-                            width: '211px',
-
-                            height: '60px',
-
-                            borderRadius: '12px',
-
-                            px: '32px',
-
-                            py: '12px',
-
-                            textTransform: 'none',
-
-                            background:
-                                'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
-
-                            fontFamily:
-                                'var(--font-plus-jakarta)',
-
-                            fontWeight: 600,
-
-                            fontSize: '20px',
-
-                            lineHeight: '100%',
-
-                            color: '#FFFFFF',
-
-                            '&:hover': {
-                                background:
-                                    'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
-                            },
                         }}
                     >
-                        Connect Today
-                    </Button>
-                </Box>
+                        {/* LEFT CONTENT */}
+                        <Box
+                            sx={{
+                                width: '100%',
+                                maxWidth: {
+                                    xs: '100%',
+                                    md: '760px',
+                                    lg: '875px',
+                                },
 
-                {/* RIGHT IMAGE */}
-                <Box
-                    sx={{
-                        width: '100%',
+                                display: 'flex',
 
-                        maxWidth: {
-                            xs: '320px',
-                            sm: '400px',
-                            lg: '466px',
-                        },
+                                flexDirection: 'column',
 
-                        display: 'flex',
+                                alignItems: {
+                                    xs: 'center',
+                                    lg: 'flex-start',
+                                },
 
-                        justifyContent: 'center',
+                                textAlign: {
+                                    xs: 'center',
+                                    lg: 'left',
+                                },
+                                flex: 1,
 
-                        alignItems: 'center',
+                                minWidth: 0,
+                                mb: {
+                                    xs: 4,
+                                    md: 3,
+                                }
+                            }}
+                        >
+                            {/* HEADING */}
+                            <Typography
+                                sx={{
+                                    fontWeight: 500,
 
-                        flexShrink: 0,
-                    }}
-                >
-                    <Box
-                        component="img"
-                        src="/metaapply-amplify/transform-success-illustration.svg"
-                        alt="Transform Success"
+                                    fontFamily:
+                                        'Plus Jakarta Sans',
 
-                        sx={{
-                            width: '100%',
+                                    fontSize: {
+                                        xs: '34px',
+                                        sm: '42px',
+                                        lg: '42px',
+                                    },
 
-                            height: 'auto',
+                                    lineHeight: {
+                                        xs: '48px',
+                                        sm: '48px',
+                                        md: "48px",
+                                        lg: '52px',
+                                        xl: '62px',
+                                    },
 
-                            objectFit: 'contain',
+                                    letterSpacing: '0%',
 
-                            display: 'block',
-                        }}
-                    />
-                </Box>
+                                    color: '#FFFFFF',
+
+                                    maxWidth: {
+                                        xs: '100%',
+                                        lg: '875px',
+                                    },
+                                }}
+                            >
+                                Transforming university
+                                outreach into global
+                                student success through
+                                powerful solutions.
+                            </Typography>
+
+                            {/* BUTTON */}
+                            <Button
+                                sx={{
+                                    mt: {
+                                        xs: 4,
+                                        lg: '48px',
+                                    },
+
+                                    width: {
+                                        xs: '100%',
+                                        sm: '211px',
+                                    },
+
+                                    maxWidth: '211px',
+
+                                    height: '60px',
+
+                                    borderRadius:
+                                        '12px',
+
+                                    px: '32px',
+
+                                    py: '12px',
+
+                                    textTransform:
+                                        'none',
+
+                                    background:
+                                        'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
+
+
+                                    fontFamily:
+                                        'Plus Jakarta Sans',
+
+                                    fontWeight: 600,
+
+                                    fontSize: '20px',
+
+                                    lineHeight: '100%',
+
+                                    color: '#FFFFFF',
+
+                                    flexShrink: 0,
+
+                                    '&:hover': {
+                                        background:
+                                            'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
+                                    },
+                                }}
+                            >
+                                Connect Today
+                            </Button>
+                        </Box>
+
+                        {/* RIGHT IMAGE */}
+                        <Box
+                            sx={{
+                                width: '100%',
+
+                                maxWidth: {
+                                    xs: '320px',
+                                    sm: '400px',
+                                    lg: '466px',
+                                },
+
+                                display: 'flex',
+
+                                justifyContent:
+                                    'center',
+
+                                alignItems: 'center',
+
+                                flexShrink: 1,
+
+                                minWidth: 0,
+                            }}
+                        >
+                            <Box
+                                component="img"
+                                src="/metaapply-amplify/transform-success-illustration.svg"
+                                alt="Transform Success"
+                                sx={{
+                                    width: '100%',
+
+                                    height: 'auto',
+
+                                    objectFit:
+                                        'contain',
+
+                                    display:
+                                        'block',
+                                }}
+                            />
+                        </Box>
+                    </Box>
+                </Container>
             </Box>
         </Box>
     );

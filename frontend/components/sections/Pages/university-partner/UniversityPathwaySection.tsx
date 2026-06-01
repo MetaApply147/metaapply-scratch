@@ -1,9 +1,18 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import {
+    Box,
+    Container,
+    Typography,
+    useMediaQuery,
+} from '@mui/material';
+
+import { useTheme } from '@mui/material/styles';
+
 import Image from 'next/image';
 
 import SectionHeader from '@/components/common/SectionHeader';
+import CustomSlider from '@/components/common/CustomSlider';
 
 type PathwayItem = {
     icon: string;
@@ -36,226 +45,388 @@ const defaultItems: PathwayItem[] = [
 export default function UniversityPathwaySection({
     items = defaultItems,
 }: Props) {
+    const theme = useTheme();
+
+    const isMobile = useMediaQuery(
+        theme.breakpoints.down('md')
+    );
+
+    const PathwayCard = ({
+        item,
+    }: {
+        item: PathwayItem;
+    }) => {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+
+                    flexDirection: 'column',
+
+                    alignItems: 'center',
+
+                    textAlign: 'center',
+
+                    minWidth: 0,
+                }}
+            >
+                {/* CIRCLE */}
+                <Box
+                    sx={{
+                        width: {
+                            xs: '120px',
+                            sm: '150px',
+                            md: '160px',
+                            lg: '200px',
+                        },
+
+                        height: {
+                            xs: '120px',
+                            sm: '150px',
+                            md: '160px',
+                            lg: '200px',
+                        },
+
+                        borderRadius: '50%',
+
+                        background: '#FFFFFF',
+
+                        display: 'flex',
+
+                        alignItems: 'center',
+
+                        justifyContent: 'center',
+
+                        boxShadow:
+                            '0px 2px 32px rgba(178, 178, 178, 0.20)',
+
+                        mb: {
+                            xs: 2,
+                            md: 3,
+                        },
+
+                        mx: 'auto',
+
+                        position: 'relative',
+
+                        zIndex: 2,
+                    }}
+                >
+                    <Box
+                        sx={{
+                            position: 'relative',
+
+                            width: {
+                                xs: '55px',
+                                sm: '70px',
+                                md: '75px',
+                                lg: '100px',
+                            },
+
+                            height: {
+                                xs: '55px',
+                                sm: '70px',
+                                md: '75px',
+                                lg: '100px',
+                            },
+                        }}
+                    >
+                        <Image
+                            src={item.icon}
+                            alt={item.title}
+                            fill
+                            style={{
+                                objectFit: 'contain',
+                            }}
+                        />
+                    </Box>
+                </Box>
+
+                {/* TEXT */}
+                <Typography
+                    sx={{
+                        fontFamily:
+                            'Plus Jakarta Sans',
+
+                        maxWidth: {
+                            xs: '180px',
+                            sm: '220px',
+                            md: '200px',
+                            lg: '242px',
+                        },
+
+                        fontSize: {
+                            xs: '14px',
+                            sm: '16px',
+                            md: '17px',
+                            lg: '20px',
+                        },
+
+                        lineHeight: {
+                            xs: '20px',
+                            sm: '22px',
+                            md: '24px',
+                        },
+
+                        fontWeight: 500,
+
+                        color: '#202020',
+
+                        whiteSpace: 'pre-line',
+                    }}
+                >
+                    {item.title}
+                </Typography>
+            </Box>
+        );
+    };
+
     return (
         <Box
             component="section"
             sx={{
-                mx: { xs: 2, md: 4, lg: 5 },
-                mb: { xs: 5, md: 8 },
-
-                position: 'relative',
-                overflow: 'hidden',
-
-                borderRadius: '20px',
-
-                background: '#fff',
-
                 px: {
-                    xs: 3,
-                    md: '44px',
+                    xs: 2,
+                    sm: 3,
+                    md: 5,
                 },
 
-                py: {
+                mb: {
                     xs: 5,
-                    md: '40px',
+                    md: 8,
                 },
 
-                '&::before': {
-                    content: '""',
-
-                    position: 'absolute',
-                    inset: 0,
-
-                    backgroundImage:
-                        'url("/university-partner/bg-img.svg")',
-
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-
-                    opacity: 1,
-
-                    pointerEvents: 'none',
+                '.swiper-pagination': {
+                    mt: 2,
                 },
             }}
         >
-            {/* HEADER */}
+            {/* BG WRAPPER */}
             <Box
                 sx={{
-                    position: 'relative',
-                    zIndex: 2,
+                    width: '100%',
 
-                    mb: {
-                        xs: 6,
-                        md: '52px',
-                    },
-                }}
-            >
-                <SectionHeader
-                    title="University"
-                    highlight="Pathway"
-                />
-            </Box>
-
-            {/* MAIN WRAPPER */}
-            <Box
-                sx={{
-                    position: 'relative',
-                    zIndex: 2,
-
-                    maxWidth: '1323px',
+                    maxWidth: '1838px',
 
                     mx: 'auto',
-                }}
-            >
-                {/* CENTER CONNECTOR LINE */}
-                <Box
-                    sx={{
-                        display: {
-                            xs: 'none',
-                            lg: 'block',
-                        },
+
+                    position: 'relative',
+
+                    overflow: 'hidden',
+
+                    borderRadius: {
+                        xs: '20px',
+                        md: '24px',
+                    },
+
+                    background: '#fff',
+
+                    py: {
+                        xs: 5,
+                        md: '40px',
+                    },
+
+                    '&::before': {
+                        content: '""',
 
                         position: 'absolute',
 
-                        top: '100px',
-                        left: '11%',
+                        inset: 0,
 
-                        width: '78%',
+                        backgroundImage:
+                            'url("/university-partner/bg-img.svg")',
 
-                        borderTop: '1px dashed #15186C',
+                        backgroundSize: 'cover',
 
-                        zIndex: 1,
-                    }}
-                />
+                        backgroundPosition: 'center',
 
-                {/* ARROWS */}
-                {[1, 2, 3].map((item) => (
+                        pointerEvents: 'none',
+                    },
+                }}
+            >
+                <Container maxWidth="xl">
+                    {/* HEADER */}
                     <Box
-                        key={item}
                         sx={{
-                            display: {
-                                xs: 'none',
-                                lg: 'block',
-                            },
-
-                            position: 'absolute',
-
-                            top: '95px',
-
-                            left:
-                                item === 1
-                                    ? '24%'
-                                    : item === 2
-                                        ? '49.5%'
-                                        : '75%',
-
-                            width: '12px',
-                            height: '12px',
-
-                            borderTop: '2px solid #15186C',
-                            borderRight: '2px solid #15186C',
-
-                            transform: 'rotate(45deg)',
+                            position: 'relative',
 
                             zIndex: 2,
+
+                            mb: {
+                                xs: 5,
+                                md: '52px',
+                            },
                         }}
-                    />
-                ))}
+                    >
+                        <SectionHeader
+                            title="University"
+                            highlight="Pathway"
+                        />
+                    </Box>
 
-                {/* ITEMS */}
-                <Box
-                    sx={{
-                        position: 'relative',
+                    {/* MAIN */}
+                    <Box
+                        sx={{
+                            position: 'relative',
 
-                        display: 'grid',
+                            zIndex: 2,
 
-                        gridTemplateColumns: {
-                            xs: '1fr',
-                            sm: 'repeat(2,1fr)',
-                            lg: 'repeat(4,1fr)',
-                        },
+                            width: '100%',
 
-                        gap: {
-                            xs: 6,
-                            md: 4,
-                        },
+                            maxWidth: '1323px',
 
-                        alignItems: 'start',
-                    }}
-                >
-                    {items.map((item) => (
-                        <Box
-                            key={item.title}
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-
-                                textAlign: 'center',
-
-                                position: 'relative',
-                                zIndex: 3,
-                            }}
-                        >
-                            {/* CIRCLE */}
-                            <Box
-                                sx={{
-                                    width: '200px',
-                                    height: '200px',
-
-                                    borderRadius: '50%',
-
-                                    background: '#FFFFFF',
-
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-
-                                    boxShadow:
-                                        '0px 2px 32px rgba(178, 178, 178, 0.20)',
-
-                                    mb: '24px',
-                                }}
-                            >
+                            mx: 'auto',
+                        }}
+                    >
+                        {!isMobile && (
+                            <>
                                 <Box
                                     sx={{
-                                        position: 'relative',
+                                        position:
+                                            'absolute',
 
-                                        width: '100px',
-                                        height: '100px',
+                                        top: '100px',
+
+                                        left: '11%',
+
+                                        width: '78%',
+
+                                        borderTop:
+                                            '1px dashed #15186C',
+
+                                        zIndex: 1,
                                     }}
-                                >
-                                    <Image
-                                        src={item.icon}
-                                        alt={item.title}
-                                        fill
-                                        style={{
-                                            objectFit: 'contain',
-                                        }}
-                                    />
-                                </Box>
+                                />
+
+                                {[1, 2, 3].map(
+                                    (item) => (
+                                        <Box
+                                            key={item}
+                                            sx={{
+                                                position:
+                                                    'absolute',
+
+                                                top: '95px',
+
+                                                left:
+                                                    item ===
+                                                        1
+                                                        ? '24%'
+                                                        : item ===
+                                                            2
+                                                            ? '49.5%'
+                                                            : '75%',
+
+                                                width:
+                                                    '12px',
+
+                                                height:
+                                                    '12px',
+
+                                                borderTop:
+                                                    '2px solid #15186C',
+
+                                                borderRight:
+                                                    '2px solid #15186C',
+
+                                                transform:
+                                                    'rotate(45deg)',
+
+                                                zIndex: 2,
+                                            }}
+                                        />
+                                    )
+                                )}
+                            </>
+                        )}
+                        {isMobile ? (
+                            <Box mt={2}>
+                                <CustomSlider
+                                    data={items}
+                                    slidesPerView={
+                                        1
+                                    }
+                                    spaceBetween={
+                                        16
+                                    }
+                                    showArrows={
+                                        false
+                                    }
+                                    showPagination
+                                    loop={false}
+                                    disablePadding
+                                    breakpoints={{
+                                        0: {
+                                            slidesPerView:
+                                                1,
+
+                                            spaceBetween: 14,
+                                        },
+
+                                        480: {
+                                            slidesPerView:
+                                                2,
+
+                                            spaceBetween: 16,
+                                        },
+
+                                        600: {
+                                            slidesPerView:
+                                                2,
+
+                                            spaceBetween: 18,
+                                        },
+                                    }}
+                                    renderItem={(
+                                        item: PathwayItem
+                                    ) => (
+                                        <PathwayCard
+                                            item={
+                                                item
+                                            }
+                                        />
+                                    )}
+                                />
                             </Box>
-
-                            {/* TEXT */}
-                            <Typography
+                        ) : (
+                            <Box
                                 sx={{
-                                    maxWidth: '242px',
+                                    display:
+                                        'grid',
 
-                                    fontSize: '20px',
-                                    lineHeight: '24px',
+                                    gridTemplateColumns:
+                                        'repeat(4,1fr)',
 
-                                    fontWeight: 500,
+                                    gap: {
+                                        md: 3,
+                                        lg: 4,
+                                    },
 
-                                    color: '#202020',
+                                    alignItems:
+                                        'start',
 
-                                    whiteSpace: 'pre-line',
+                                    position:
+                                        'relative',
+
+                                    zIndex: 2,
                                 }}
                             >
-                                {item.title}
-                            </Typography>
-                        </Box>
-                    ))}
-                </Box>
+                                {items.map(
+                                    (item) => (
+                                        <PathwayCard
+                                            key={
+                                                item.title
+                                            }
+                                            item={
+                                                item
+                                            }
+                                        />
+                                    )
+                                )}
+                            </Box>
+                        )}
+                    </Box>
+                </Container>
             </Box>
         </Box>
     );

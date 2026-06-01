@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import Image from 'next/image';
 
 import SectionHeader from '@/components/common/SectionHeader';
@@ -42,17 +42,10 @@ export default function AboutAmplifySection() {
         <Box
             component="section"
             sx={{
-                width: '100%',
-
-                maxWidth: '1832px',
-
-                mx: 'auto',
-
                 px: {
                     xs: 2,
                     sm: 3,
-                    md: 4,
-                    lg: '44px',
+                    md: 0,
                 },
 
                 py: {
@@ -63,358 +56,376 @@ export default function AboutAmplifySection() {
                 },
             }}
         >
-            <Box
+            \            <Box
                 sx={{
-                    display: 'grid',
+                    width: '100%',
 
-                    gridTemplateColumns: {
-                        xs: '1fr',
-                        md: '1fr 1fr',
-                        xl: '602px 524px',
-                    },
+                    maxWidth: '1832px',
 
-                    justifyContent: 'center',
-
-                    gap: {
-                        xs: 6,
-                        sm: 7,
-                        md: '60px',
-                        lg: '100px',
-                        xl: '189px',
-                    },
-
-                    alignItems: 'start',
+                    mx: 'auto',
                 }}
             >
-                {/* LEFT CONTENT */}
-                <Box
-                    sx={{
-                        width: '100%',
-
-                        maxWidth: {
-                            xs: '100%',
-                            xl: '602px',
-                        },
-                    }}
-                >
-                    {/* HEADING */}
-                    <Box
-                        sx={{
-                            mb: {
-                                xs: 2.5,
-                                md: 4,
-                            },
-                        }}
-                    >
-                        <SectionHeader
-                            title="About"
-                            highlight="Amplify"
-                            mb="0px"
-                        />
-                    </Box>
-
-                    {/* DESCRIPTION */}
-                    <Typography
-                        sx={{
-                            typography: {
-                                xs: 'body06',
-                                sm: 'body05',
-                            },
-
-                            lineHeight: {
-                                xs: '24px',
-                                sm: '28px',
-                            },
-
-                            color: 'text.body',
-
-                            mb: {
-                                xs: 3,
-                                md: '28px',
-                            },
-
-                            maxWidth: '602px',
-                        }}
-                    >
-                        Amplify is a tiered “university partnership” service that helps
-                        universities boost international student recruitment across key
-                        markets.
-                    </Typography>
-
-                    {/* SUB TITLE */}
-                    <Typography
-                        sx={{
-                            typography: {
-                                xs: 'body06',
-                                sm: 'body05',
-                            },
-
-                            '&': {
-                                fontWeight: 600,
-                            },
-
-                            lineHeight: {
-                                xs: '24px',
-                                sm: '28px',
-                            },
-
-                            color: 'text.body',
-
-                            mb: {
-                                xs: 2,
-                                md: 3,
-                            },
-                        }}
-                    >
-                        We deliver comprehensive university support via our 6 core pillars:
-                    </Typography>
-
-                    {/* PILLARS */}
-                    <Box
-                        sx={{
-                            display: 'flex',
-
-                            flexDirection: 'column',
-
-                            gap: {
-                                xs: 1.5,
-                                md: '12px',
-                            },
-
-                            width: '100%',
-
-                            maxWidth: {
-                                xs: '100%',
-                                md: '520px',
-                            },
-                        }}
-                    >
-                        {pillars.map((item, index) => (
-                            <Box
-                                key={item}
-                                sx={{
-                                    width: '100%',
-
-                                    minHeight: {
-                                        xs: '44px',
-                                        md: '38px',
-                                    },
-
-                                    borderRadius: '20px',
-
-                                    background:
-                                        'linear-gradient(90deg, #FFE1ED 0%, #FFFFFF 111.73%)',
-
-                                    display: 'flex',
-
-                                    alignItems: 'center',
-
-                                    px: {
-                                        xs: 1.5,
-                                        md: '12px',
-                                    },
-
-                                    py: {
-                                        xs: 1,
-                                        md: '7px',
-                                    },
-                                }}
-                            >
-                                <Typography
-                                    sx={{
-                                        typography: {
-                                            xs: 'body06',
-                                            sm: 'body05',
-                                        },
-
-                                        lineHeight: {
-                                            xs: '22px',
-                                            sm: '28px',
-                                        },
-
-                                        color: 'text.body',
-
-                                        wordBreak: 'break-word',
-                                    }}
-                                >
-                                    {index + 1}. {item}
-                                </Typography>
-                            </Box>
-                        ))}
-                    </Box>
-                </Box>
-
-                {/* RIGHT CONTENT */}
-                <Box
-                    sx={{
-                        width: '100%',
-
-                        maxWidth: {
-                            xs: '100%',
-                            xl: '524px',
-                        },
-                    }}
-                >
-                    {/* HEADING */}
-                    <Box
-                        sx={{
-                            mb: {
-                                xs: 2.5,
-                                md: 4,
-                            },
-                        }}
-                    >
-                        <SectionHeader
-                            title="Our"
-                            highlight="Numbers"
-                            mb="0px"
-                        />
-                    </Box>
-
-                    {/* STATS GRID */}
+                <Container>
                     <Box
                         sx={{
                             display: 'grid',
 
                             gridTemplateColumns: {
                                 xs: '1fr',
-                                sm: 'repeat(2,1fr)',
+                                lg: 'minmax(0, 602px) minmax(0, 524px)',
                             },
+
+                            justifyContent: 'space-between',
 
                             gap: {
-                                xs: 2,
-                                sm: 3,
-                                md: '24px',
+                                xs: 6,
+                                sm: 7,
+                                md: '60px',
+                                lg: '80px',
+                                xl: '120px',
                             },
+
+                            alignItems: 'start',
                         }}
                     >
-                        {stats.map((item) => (
+                        <Box
+                            sx={{
+                                width: '100%',
+
+                                minWidth: 0,
+                            }}
+                        >
                             <Box
-                                key={item.label}
                                 sx={{
-                                    width: '100%',
-
-                                    minHeight: {
-                                        xs: '170px',
-                                        sm: '190px',
-                                        md: '200px',
-                                    },
-
-                                    background: '#FFFFFF',
-
-                                    borderRadius: '16px',
-
-                                    px: {
+                                    mb: {
                                         xs: 2.5,
-                                        sm: 3,
-                                        md: '24px',
+                                        md: 4,
+                                    },
+                                }}
+                            >
+                                <SectionHeader
+                                    title="About"
+                                    highlight="Amplify"
+                                    mb="0px"
+                                />
+                            </Box>
+
+                            <Typography
+                                sx={{
+                                    typography: {
+                                        xs: 'body06',
+                                        sm: 'body05',
                                     },
 
-                                    py: {
-                                        xs: 2.5,
-                                        sm: 3,
-                                        md: '32px',
+                                    lineHeight: {
+                                        xs: '24px',
+                                        sm: '28px',
                                     },
 
-                                    boxShadow:
-                                        '0px 10px 40px -1px #B9B9B926',
+                                    color: 'text.body',
 
+                                    mb: {
+                                        xs: 3,
+                                        md: '28px',
+                                    },
+
+                                    maxWidth: {
+                                        xs: '100%',
+                                        lg: '602px',
+                                    },
+                                }}
+                            >
+                                Amplify is a tiered “university partnership”
+                                service that helps universities boost
+                                international student recruitment across key
+                                markets.
+                            </Typography>
+
+                            <Typography
+                                sx={{
+                                    typography: {
+                                        xs: 'body06',
+                                        sm: 'body05',
+                                    },
+
+                                    fontWeight: 600,
+
+                                    lineHeight: {
+                                        xs: '24px',
+                                        sm: '28px',
+                                    },
+
+                                    color: 'text.body',
+
+                                    mb: {
+                                        xs: 2,
+                                        md: 3,
+                                    },
+                                }}
+                            >
+                                We deliver comprehensive university support via
+                                our 6 core pillars:
+                            </Typography>
+
+                            <Box
+                                sx={{
                                     display: 'flex',
 
                                     flexDirection: 'column',
 
                                     gap: {
+                                        xs: 1.5,
+                                        md: '12px',
+                                    },
+
+                                    width: '100%',
+
+                                    maxWidth: {
+                                        xs: '100%',
+                                        md: '520px',
+                                    },
+                                }}
+                            >
+                                {pillars.map((item, index) => (
+                                    <Box
+                                        key={item}
+                                        sx={{
+                                            width: '100%',
+
+                                            minHeight: {
+                                                xs: '44px',
+                                                md: '38px',
+                                            },
+
+                                            borderRadius:
+                                                '20px',
+
+                                            background:
+                                                'linear-gradient(90deg, #FFE1ED 0%, #FFFFFF 111.73%)',
+
+                                            display: 'flex',
+
+                                            alignItems:
+                                                'center',
+
+                                            px: {
+                                                xs: 1.5,
+                                                md: '12px',
+                                            },
+
+                                            py: {
+                                                xs: 1,
+                                                md: '7px',
+                                            },
+                                        }}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                typography: {
+                                                    xs: 'body06',
+                                                    sm: 'body05',
+                                                },
+
+                                                lineHeight: {
+                                                    xs: '22px',
+                                                    sm: '28px',
+                                                },
+
+                                                color: 'text.body',
+
+                                                wordBreak:
+                                                    'break-word',
+                                            }}
+                                        >
+                                            {index + 1}. {item}
+                                        </Typography>
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
+
+                        <Box
+                            sx={{
+                                width: '100%',
+
+                                minWidth: 0,
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    mb: {
+                                        xs: 2.5,
+                                        md: 4,
+                                    },
+                                }}
+                            >
+                                <SectionHeader
+                                    title="Our"
+                                    highlight="Numbers"
+                                    mb="0px"
+                                />
+                            </Box>
+
+                            <Box
+                                sx={{
+                                    display: 'grid',
+
+                                    gridTemplateColumns: {
+                                        xs: '1fr',
+                                        sm: 'repeat(2,1fr)',
+                                    },
+
+                                    gap: {
                                         xs: 2,
+                                        sm: 3,
                                         md: '24px',
                                     },
                                 }}
                             >
-                                {/* ICON */}
-                                <Box
-                                    sx={{
-                                        position: 'relative',
-
-                                        width: {
-                                            xs: '64px',
-                                            md: '77px',
-                                        },
-
-                                        height: {
-                                            xs: '64px',
-                                            md: '76px',
-                                        },
-
-                                        flexShrink: 0,
-                                    }}
-                                >
-                                    <Image
-                                        src={item.icon}
-                                        alt={item.label}
-                                        fill
-                                        style={{
-                                            objectFit: 'contain',
-                                        }}
-                                    />
-                                </Box>
-
-                                {/* CONTENT */}
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-
-                                        flexDirection: 'column',
-
-                                        gap: '4px',
-                                    }}
-                                >
-                                    <Typography
+                                {stats.map((item) => (
+                                    <Box
+                                        key={item.label}
                                         sx={{
-                                            fontFamily: 'var(--font-heading)',
+                                            width: '100%',
 
-                                            fontWeight: 600,
+                                            minHeight: {
+                                                xs: '170px',
+                                                sm: '190px',
+                                                md: '200px',
+                                            },
 
-                                            fontSize: {
-                                                xs: '26px',
-                                                sm: '28px',
+                                            background:
+                                                '#FFFFFF',
+
+                                            borderRadius:
+                                                '16px',
+
+                                            px: {
+                                                xs: 2.5,
+                                                sm: 3,
+                                                md: '24px',
+                                            },
+
+                                            py: {
+                                                xs: 2.5,
+                                                sm: 3,
                                                 md: '32px',
                                             },
 
-                                            lineHeight: {
-                                                xs: '34px',
-                                                sm: '38px',
-                                                md: '42px',
+                                            boxShadow:
+                                                '0px 10px 40px -1px #B9B9B926',
+
+                                            display: 'flex',
+
+                                            flexDirection:
+                                                'column',
+
+                                            gap: {
+                                                xs: 2,
+                                                md: '24px',
                                             },
-
-                                            letterSpacing: '0.15px',
-
-                                            color: '#031621',
                                         }}
                                     >
-                                        {item.value}
-                                    </Typography>
+                                        <Box
+                                            sx={{
+                                                position:
+                                                    'relative',
 
-                                    <Typography
-                                        sx={{
-                                            typography: {
-                                                xs: 'body06',
-                                                sm: 'body05',
-                                            },
+                                                width: {
+                                                    xs: '64px',
+                                                    md: '77px',
+                                                },
 
-                                            lineHeight: {
-                                                xs: '22px',
-                                                sm: '24px',
-                                            },
+                                                height: {
+                                                    xs: '64px',
+                                                    md: '76px',
+                                                },
 
-                                            color: 'text.body',
-                                        }}
-                                    >
-                                        {item.label}
-                                    </Typography>
-                                </Box>
+                                                flexShrink: 0,
+                                            }}
+                                        >
+                                            <Image
+                                                src={item.icon}
+                                                alt={
+                                                    item.label
+                                                }
+                                                fill
+                                                style={{
+                                                    objectFit:
+                                                        'contain',
+                                                }}
+                                            />
+                                        </Box>
+
+                                        <Box
+                                            sx={{
+                                                display:
+                                                    'flex',
+
+                                                flexDirection:
+                                                    'column',
+
+                                                gap: '4px',
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    fontFamily:
+                                                        'var(--font-heading)',
+
+                                                    fontWeight: 600,
+
+                                                    fontSize:
+                                                    {
+                                                        xs: '26px',
+                                                        sm: '28px',
+                                                        md: '32px',
+                                                    },
+
+                                                    lineHeight:
+                                                    {
+                                                        xs: '34px',
+                                                        sm: '38px',
+                                                        md: '42px',
+                                                    },
+
+                                                    letterSpacing:
+                                                        '0.15px',
+
+                                                    color:
+                                                        '#031621',
+                                                }}
+                                            >
+                                                {item.value}
+                                            </Typography>
+
+                                            <Typography
+                                                sx={{
+                                                    typography:
+                                                    {
+                                                        xs: 'body06',
+                                                        sm: 'body05',
+                                                    },
+
+                                                    lineHeight:
+                                                    {
+                                                        xs: '22px',
+                                                        sm: '24px',
+                                                    },
+
+                                                    color:
+                                                        'text.body',
+                                                }}
+                                            >
+                                                {item.label}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                ))}
                             </Box>
-                        ))}
+                        </Box>
                     </Box>
-                </Box>
+                </Container>
             </Box>
         </Box>
     );

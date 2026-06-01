@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import Section from "@/components/common/Section";
 import Image from "next/image";
 
@@ -15,10 +15,14 @@ export default function JoinNetworkCTA() {
                     md: 10,
                 },
 
-                /* SAME BG WIDTH AS YOUR ORIGINAL */
+                /*
+                  KEEP SAME BG WIDTH
+                  AS YOUR ORIGINAL
+                */
                 px: {
                     xs: 2,
-                    md: 5,
+                    sm: 3,
+                    md: 4,
                 },
 
                 overflow: "hidden",
@@ -53,215 +57,221 @@ export default function JoinNetworkCTA() {
                     boxShadow:
                         "20px 25px 75px 0px #ABABAB33",
 
-                    /* KEEP ORIGINAL BG WIDTH */
-                    px: {
-    xs: 3,
-    sm: 5,
-    md: 8,
-    lg: "60px",
-    xl: "80px",
-},
-
                     pt: {
                         xs: 5,
                         md: 6,
                     },
-
-                    pb: {
-                        xs: 5,
-                        md: 6,
+                    pb:{
+                        md:6
                     },
 
                     minHeight: {
                         xs: "auto",
                         md: "421px",
                     },
-
-                    display: "flex",
-
-                    flexDirection: {
-                        xs: "column",
-                        md: "row",
-                    },
-
-                    /* FIXED ALIGNMENT */
-                    alignItems: {
-                        xs: "flex-start",
-                        md: "center",
-                    },
-
-                    justifyContent:
-                        "space-between",
-
-                    gap: {
-                        xs: 5,
-                        md: 4,
-                    },
                 }}
             >
-                {/* LEFT CONTENT */}
-                <Box
-                    sx={{
-                        width: "100%",
-
-                        maxWidth: {
-                            xs: "100%",
-                            md: "875px",
-                        },
-
-                        zIndex: 2,
-
-                        /* ALWAYS LEFT */
-                        textAlign: "left",
-
-                        display: "flex",
-
-                        flexDirection: "column",
-
-                        alignItems: "flex-start",
-                    }}
-                >
-                    <Typography
+                <Container>
+                    <Box
                         sx={{
-                            fontFamily:
-                                "Plus Jakarta Sans",
+                            display: "flex",
 
-                            fontWeight: 500,
-
-                            fontSize: {
-                                xs: "28px",
-                                sm: "34px",
-                                md: "30px",
-                                lg: "42px",
+                            flexDirection: {
+                                xs: "column",
+                                md: "row",
                             },
 
-                            lineHeight: {
-                                xs: "40px",
-                                sm: "48px",
-                                md: "38px",
-                                lg: "62px",
+                            alignItems: {
+                                xs: "flex-start",
+                                md: "center",
                             },
 
-                            color: "#FFFFFF",
+                            justifyContent:
+                                "space-between",
 
-                            maxWidth: {
-                                xs: "100%",
-                                md: "875px",
+                            gap: {
+                                xs: 5,
+                                md: 4,
+                                lg: 6,
                             },
                         }}
                     >
-                        Grow your study abroad
-                        business with MetaApply,
-                        trusted by partners across
-                        the globe
-                    </Typography>
+                        {/* LEFT CONTENT */}
+                        <Box
+                            sx={{
+                                width: "100%",
 
-                    {/* BUTTON */}
-                    <Button
-                        variant="contained"
-                        sx={{
-                            mt: {
-                                xs: 3,
-                                md: 5,
-                            },
+                                maxWidth: {
+                                    xs: "100%",
+                                    lg: "875px",
+                                },
 
-                            width: {
-                                xs: "100%",
-                                sm: "229px",
-                            },
+                                zIndex: 2,
 
-                            maxWidth: "229px",
+                                textAlign: "left",
 
-                            height: "60px",
+                                display: "flex",
 
-                            borderRadius: "12px",
+                                flexDirection:
+                                    "column",
 
-                            px: "32px",
+                                alignItems:
+                                    "flex-start",
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontFamily:
+                                        "Plus Jakarta Sans",
 
-                            py: "12px",
+                                    fontWeight: 500,
 
-                            textTransform:
-                                "none",
+                                    fontSize: {
+                                        xs: "28px",
+                                        sm: "34px",
+                                        md: "30px",
+                                        lg: "42px",
+                                    },
 
-                            fontFamily:
-                                "Plus Jakarta Sans",
+                                    lineHeight: {
+                                        xs: "40px",
+                                        sm: "48px",
+                                        md: "38px",
+                                        lg: "62px",
+                                    },
 
-                            fontWeight: 600,
+                                    color: "#FFFFFF",
 
-                            fontSize: {
-                                xs: "18px",
-                                md: "20px",
-                            },
+                                    maxWidth: {
+                                        xs: "100%",
+                                        md: "875px",
+                                    },
+                                }}
+                            >
+                                Grow your study
+                                abroad business
+                                with MetaApply,
+                                trusted by partners
+                                across the globe
+                            </Typography>
 
-                            lineHeight: "100%",
+                            {/* BUTTON */}
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    mt: {
+                                        xs: 3,
+                                        md: 5,
+                                    },
 
-                            background:
-                                "linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)",
+                                    width: {
+                                        xs: "100%",
+                                        sm: "229px",
+                                    },
 
-                            color: "#FFFFFF",
+                                    maxWidth:
+                                        "229px",
 
-                            boxShadow: "none",
+                                    height:
+                                        "60px",
 
-                            "&:hover": {
-                                background:
-                                    "linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)",
+                                    borderRadius:
+                                        "12px",
 
-                                boxShadow: "none",
-                            },
-                        }}
-                    >
-                        Join Our Network
-                    </Button>
-                </Box>
+                                    px: "32px",
 
-                {/* RIGHT IMAGE */}
-                <Box
-                    sx={{
-                        position: "relative",
+                                    py: "12px",
 
-                        width: {
-                            xs: "240px",
-                            sm: "320px",
-                            md: "466px",
-                        },
+                                    textTransform:
+                                        "none",
 
-                        height: {
-                            xs: "220px",
-                            sm: "320px",
-                            md: "401px",
-                        },
+                                    fontFamily:
+                                        "Plus Jakarta Sans",
 
-                        flexShrink: 0,
+                                    fontWeight: 600,
 
-                        display: "flex",
+                                    fontSize: {
+                                        xs: "18px",
+                                        md: "20px",
+                                    },
 
-                        justifyContent:
-                            "center",
+                                    lineHeight:
+                                        "100%",
 
-                        /* FIXED */
-                        alignItems: "flex-end",
+                                    background:
+                                        "linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)",
 
-                        alignSelf: {
-                            xs: "center",
-                            md: "flex-end",
-                        },
+                                    color:
+                                        "#FFFFFF",
 
-                        mx: {
-                            xs: "auto",
-                            md: 0,
-                        },
-                    }}
-                >
-                    <Image
-                        src="/recruitment-partner/CTA-img.svg"
-                        alt="Join Network"
-                        fill
-                        style={{
-                            objectFit: "contain",
-                        }}
-                        priority
-                    />
-                </Box>
+                                    boxShadow:
+                                        "none",
+
+                                    "&:hover": {
+                                        background:
+                                            "linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)",
+
+                                        boxShadow:
+                                            "none",
+                                    },
+                                }}
+                            >
+                                Join Our Network
+                            </Button>
+                        </Box>
+
+                        {/* RIGHT IMAGE */}
+                        <Box
+                            sx={{
+                                position:
+                                    "relative",
+
+                                width: {
+                                    xs: "240px",
+                                    sm: "320px",
+                                    md: "466px",
+                                },
+
+                                height: {
+                                    xs: "220px",
+                                    sm: "320px",
+                                    md: "401px",
+                                },
+
+                                flexShrink: 0,
+
+                                display: "flex",
+
+                                justifyContent:
+                                    "center",
+
+                                alignItems:
+                                    "flex-end",
+
+                                alignSelf: {
+                                    xs: "center",
+                                    md: "flex-end",
+                                },
+
+                                mx: {
+                                    xs: "auto",
+                                    md: 0,
+                                },
+                            }}
+                        >
+                            <Image
+                                src="/recruitment-partner/CTA-img.svg"
+                                alt="Join Network"
+                                fill
+                                style={{
+                                    objectFit:
+                                        "contain",
+                                }}
+                                priority
+                            />
+                        </Box>
+                    </Box>
+                </Container>
             </Box>
         </Section>
     );
