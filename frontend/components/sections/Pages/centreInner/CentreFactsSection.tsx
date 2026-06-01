@@ -78,7 +78,7 @@ export default function CentreFactsSection({ data }: Props) {
               fontFamily: "var(--font-centerHeading)",
             }}
           >
-            Hyderabad
+            {data.title?.split(/study abroad centre/i)[0].trim()}
           </Box>
         </Typography>
 
@@ -168,7 +168,7 @@ export default function CentreFactsSection({ data }: Props) {
                           alignItems: "flex-start",
                         }}
                       >
-                        <Image src="/centres/star-Vector.svg" alt="Star" height={18} width={18} objectFit="contain" style={{marginTop: '3px'}}/>
+                        <Image src="/centres/star-Vector.svg" alt="Star" height={18} width={18} style={{marginTop: '3px', objectFit: 'contain'}}/>
 
                         <Typography
                           variant="body06"

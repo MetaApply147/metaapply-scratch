@@ -1,0 +1,33 @@
+.container :global(.kSvMSU) {
+  height: auto;
+}
+
+.container :global(.es-embed-root) {
+  max-width: 100% !important;
+  font-family: var(--font-heading);
+}
+
+.container :global(.gAnTMh) {
+  background: #fff;
+  border: 1px solid rgba(17, 17, 17, 0.2);
+  box-shadow: 0 20px 38px 0 hsl(0deg 0% 86% / 50%);
+  border-radius: 20px;
+}
+
+.container :global(.ewZrxH) {
+  background: #2e318c !important;
+}
+
+.container :global(.cUNnRd) {
+  min-height: 500px;
+}
+
+.container :global(.cjAcxZ) {
+  min-height: auto;
+  padding-bottom: 2em !important;
+}
+
+.button{
+    display: block !important;
+    margin: 2.5em auto 0 !important;
+}
