@@ -6,6 +6,7 @@ import {
     AccordionDetails,
     AccordionSummary,
     Box,
+    Container,
     Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -29,7 +30,7 @@ const franchiseData = [
         id: "3.",
         title: "Simplified Processes",
         content:
-            "Onboarding as a franchisee with us is hassle-free. Our dedicated team assists you through the documentation and agreement process, ensuring a smooth transition. ",
+            "Onboarding as a franchisee with us is hassle-free. Our dedicated team assists you through the documentation and agreement process, ensuring a smooth transition.",
     },
     {
         id: "4.",
@@ -41,7 +42,7 @@ const franchiseData = [
         id: "5.",
         title: "Dedicated Support & Guidance",
         content:
-            "We provide comprehensive support and guidance, including initial and ongoing training in sales, marketing, and operations. Our franchisees receive operational, marketing, and technology support, ensuring their success in the market. ",
+            "We provide comprehensive support and guidance, including initial and ongoing training in sales, marketing, and operations. Our franchisees receive operational, marketing, and technology support, ensuring their success in the market.",
     },
     {
         id: "6.",
@@ -74,28 +75,20 @@ export default function WhyChooseFranchise() {
                 },
             }}
         >
-            {/* OUTER WRAPPER */}
             <Box
                 sx={{
-                    width: "100%",
-
                     px: {
-                        xs: "12px",
-                        sm: "18px",
+                        xs: "16px",
+                        sm: "24px",
                         md: "24px",
                         lg: "32px",
                         xl: "40px",
                     },
                 }}
             >
-                {/* MAIN CARD */}
-                <Box
+\                <Box
                     sx={{
                         width: "100%",
-
-                        maxWidth: "1832px",
-
-                        mx: "auto",
 
                         background:
                             "url('/franchise-partner/bg-img.svg') center/cover no-repeat",
@@ -107,14 +100,6 @@ export default function WhyChooseFranchise() {
 
                         overflow: "hidden",
 
-                        px: {
-                            xs: "16px",
-                            sm: "24px",
-                            md: "40px",
-                            lg: "60px",
-                            xl: "220px",
-                        },
-
                         py: {
                             xs: "24px",
                             sm: "32px",
@@ -123,267 +108,271 @@ export default function WhyChooseFranchise() {
                         },
                     }}
                 >
-                    {/* HEADING */}
-                    <SectionHeader
-                        title="Why Choose"
-                        highlight="MetaApply Franchise"
-                    />
-
-                    {/* CONTENT */}
-                    <Box
+                    <Container
                         sx={{
-                            display: "flex",
-
-                            flexDirection: {
-                                xs: "column",
-                                lg: "row",
-                            },
-
-                            alignItems: {
-                                xs: "center",
-                                lg: "stretch",
-                            },
-
-                            justifyContent: "space-between",
-
-                            gap: {
-                                xs: "32px",
-                                md: "48px",
-                                lg: "60px",
-                                xl: "72px",
-                            },
+                            position: "relative",
+                            zIndex: 2,
                         }}
                     >
-                        {/* IMAGE */}
+                        <SectionHeader
+                            title="Why Choose"
+                            highlight="MetaApply Franchise"
+                        />
+
                         <Box
                             sx={{
-                                flex: {
-                                    lg: "0 0 42%",
-                                    xl: "0 0 38%",
+                                display: "flex",
+
+                                flexDirection: {
+                                    xs: "column",
+                                    lg: "row",
                                 },
 
-                                width: {
-                                    xs: "100%",
-                                    sm: "420px",
-                                    md: "700px",
-                                    lg: "100%",
+                                alignItems: {
+                                    xs: "center",
+                                    lg: "stretch",
                                 },
 
-                                maxWidth: {
-                                    xs: "100%",
-                                    lg: "520px",
-                                },
+                                justifyContent: "space-between",
 
-                                mx: {
-                                    xs: "auto",
-                                    lg: 0,
+                                gap: {
+                                    xs: "32px",
+                                    md: "48px",
+                                    lg: "60px",
+                                    xl: "72px",
                                 },
                             }}
                         >
                             <Box
                                 sx={{
-                                    position: "relative",
+                                    flex: {
+                                        lg: "0 0 42%",
+                                        xl: "0 0 38%",
+                                    },
+
+                                    width: {
+                                        xs: "100%",
+                                        sm: "420px",
+                                        md: "700px",
+                                        lg: "100%",
+                                    },
+
+                                    maxWidth: {
+                                        xs: "100%",
+                                        lg: "520px",
+                                    },
+
+                                    mx: {
+                                        xs: "auto",
+                                        lg: 0,
+                                    },
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        position: "relative",
+
+                                        width: "100%",
+
+                                        aspectRatio: "543 / 576",
+
+                                        borderRadius: "16px",
+
+                                        overflow: "hidden",
+                                    }}
+                                >
+                                    <Image
+                                        src="/franchise-partner/boy.svg"
+                                        alt="Franchise Partner"
+                                        fill
+                                        priority
+                                        sizes="(max-width: 900px) 100vw, 40vw"
+                                        style={{
+                                            objectFit: "cover",
+                                            objectPosition: "center top",
+                                        }}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box
+                                sx={{
+                                    flex: 1,
 
                                     width: "100%",
 
-                                    aspectRatio: "543 / 576",
+                                    maxWidth: {
+                                        xs: "100%",
+                                        lg: "742px",
+                                    },
 
-                                    borderRadius: "16px",
+                                    display: "flex",
 
-                                    overflow: "hidden",
+                                    flexDirection: "column",
+
+                                    gap: "16px",
                                 }}
                             >
-                                <Image
-                                    src="/franchise-partner/boy.svg"
-                                    alt="Franchise Partner"
-                                    fill
-                                    priority
-                                    sizes="(max-width: 900px) 100vw, 40vw"
-                                    style={{
-                                        objectFit: "cover",
-                                        objectPosition: "center top",
-                                    }}
-                                />
-                            </Box>
-                        </Box>
+                                {franchiseData.map((item, index) => {
+                                    const panel = `panel-${index}`;
+                                    const isExpanded =
+                                        expanded === panel;
 
-                        {/* ACCORDION */}
-                        <Box
-                            sx={{
-                                flex: 1,
-
-                                width: "100%",
-
-                                maxWidth: {
-                                    xs: "100%",
-                                    lg: "742px",
-                                },
-
-                                display: "flex",
-
-                                flexDirection: "column",
-
-                                gap: "16px",
-                            }}
-                        >
-                            {franchiseData.map((item, index) => {
-                                const panel = `panel-${index}`;
-                                const isExpanded = expanded === panel;
-
-                                return (
-                                    <Accordion
-                                        key={item.id}
-                                        disableGutters
-                                        elevation={0}
-                                        expanded={isExpanded}
-                                        onChange={handleChange(panel)}
-                                        sx={{
-                                            backgroundColor:
-                                                "common.white",
-
-                                            borderRadius:
-                                                "12px !important",
-
-                                            overflow: "hidden",
-
-                                            "&::before": {
-                                                display: "none",
-                                            },
-
-                                            boxShadow: isExpanded
-                                                ? "0px 8px 24px rgba(0,0,0,0.04)"
-                                                : "none",
-                                        }}
-                                    >
-                                        <AccordionSummary
-                                            expandIcon={
-                                                <ExpandMoreIcon
-                                                    sx={{
-                                                        color:
-                                                            "text.heading",
-
-                                                        fontSize: 22,
-                                                    }}
-                                                />
-                                            }
+                                    return (
+                                        <Accordion
+                                            key={item.id}
+                                            disableGutters
+                                            elevation={0}
+                                            expanded={isExpanded}
+                                            onChange={handleChange(panel)}
                                             sx={{
-                                                minHeight:
-                                                    "66px !important",
+                                                backgroundColor:
+                                                    "common.white",
 
-                                                px: {
-                                                    xs: "18px",
-                                                    sm: "24px",
-                                                    md: "28px",
+                                                borderRadius:
+                                                    "12px !important",
+
+                                                overflow: "hidden",
+
+                                                "&::before": {
+                                                    display: "none",
                                                 },
 
-                                                "& .MuiAccordionSummary-content":
-                                                {
-                                                    margin:
-                                                        "0 !important",
-
-                                                    alignItems:
-                                                        "center",
-
-                                                    gap: {
-                                                        xs: "12px",
-                                                        md: "16px",
-                                                    },
-                                                },
+                                                boxShadow: isExpanded
+                                                    ? "0px 8px 24px rgba(0,0,0,0.04)"
+                                                    : "none",
                                             }}
                                         >
-                                            {/* NUMBER */}
-                                            <Typography
-                                                variant="heading12"
+                                            <AccordionSummary
+                                                expandIcon={
+                                                    <ExpandMoreIcon
+                                                        sx={{
+                                                            color:
+                                                                "text.heading",
+
+                                                            fontSize: 22,
+                                                        }}
+                                                    />
+                                                }
                                                 sx={{
-                                                    color: "pink.400",
+                                                    minHeight:
+                                                        "66px !important",
 
-                                                    minWidth: "24px",
-
-                                                    flexShrink: 0,
-
-                                                    fontSize: {
-                                                        xs: "16px",
-                                                        sm: "18px",
-                                                        md: "20px",
-                                                    },
-
-                                                    lineHeight: {
-                                                        xs: "24px",
-                                                        sm: "28px",
-                                                        md: "48px",
-                                                    },
-                                                }}
-                                            >
-                                                {item.id}
-                                            </Typography>
-
-                                            {/* TITLE */}
-                                            <Typography
-                                                variant="heading12"
-                                                sx={{
-                                                    color: "text.heading",
-
-                                                    fontSize: {
-                                                        xs: "16px",
-                                                        sm: "18px",
-                                                        md: "20px",
-                                                    },
-
-                                                    lineHeight: {
-                                                        xs: "24px",
-                                                        sm: "28px",
-                                                        md: "48px",
-                                                    },
-                                                }}
-                                            >
-                                                {item.title}
-                                            </Typography>
-                                        </AccordionSummary>
-
-                                        <AccordionDetails
-                                            sx={{
-                                                px: {
-                                                    xs: "18px",
-                                                    sm: "24px",
-                                                    md: "28px",
-                                                },
-
-                                                pt: 0,
-
-                                                pb: {
-                                                    xs: "18px",
-                                                    md: "24px",
-                                                },
-                                            }}
-                                        >
-                                            <Typography
-                                                variant="body05"
-                                                sx={{
-                                                    color: "text.body",
-
-                                                    fontSize: {
-                                                        xs: "14px",
-                                                        sm: "15px",
-                                                        md: "16px",
-                                                    },
-
-                                                    lineHeight: {
-                                                        xs: "22px",
+                                                    px: {
+                                                        xs: "18px",
                                                         sm: "24px",
                                                         md: "28px",
                                                     },
 
-                                                    maxWidth: "672px",
+                                                    "& .MuiAccordionSummary-content":
+                                                        {
+                                                            margin:
+                                                                "0 !important",
+
+                                                            alignItems:
+                                                                "center",
+
+                                                            gap: {
+                                                                xs: "12px",
+                                                                md: "16px",
+                                                            },
+                                                        },
                                                 }}
                                             >
-                                                {item.content}
-                                            </Typography>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                );
-                            })}
+                                                {/* NUMBER */}
+                                                <Typography
+                                                    variant="heading12"
+                                                    sx={{
+                                                        color: "pink.400",
+
+                                                        minWidth: "24px",
+
+                                                        flexShrink: 0,
+
+                                                        fontSize: {
+                                                            xs: "16px",
+                                                            sm: "18px",
+                                                            md: "20px",
+                                                        },
+
+                                                        lineHeight: {
+                                                            xs: "24px",
+                                                            sm: "28px",
+                                                            md: "48px",
+                                                        },
+                                                    }}
+                                                >
+                                                    {item.id}
+                                                </Typography>
+
+                                                <Typography
+                                                    variant="heading12"
+                                                    sx={{
+                                                        color:
+                                                            "text.heading",
+
+                                                        fontSize: {
+                                                            xs: "16px",
+                                                            sm: "18px",
+                                                            md: "20px",
+                                                        },
+
+                                                        lineHeight: {
+                                                            xs: "24px",
+                                                            sm: "28px",
+                                                            md: "48px",
+                                                        },
+                                                    }}
+                                                >
+                                                    {item.title}
+                                                </Typography>
+                                            </AccordionSummary>
+
+                                            <AccordionDetails
+                                                sx={{
+                                                    px: {
+                                                        xs: "18px",
+                                                        sm: "24px",
+                                                        md: "28px",
+                                                    },
+
+                                                    pt: 0,
+
+                                                    pb: {
+                                                        xs: "18px",
+                                                        md: "24px",
+                                                    },
+                                                }}
+                                            >
+                                                <Typography
+                                                    variant="body05"
+                                                    sx={{
+                                                        color: "text.body",
+
+                                                        fontSize: {
+                                                            xs: "14px",
+                                                            sm: "15px",
+                                                            md: "16px",
+                                                        },
+
+                                                        lineHeight: {
+                                                            xs: "22px",
+                                                            sm: "24px",
+                                                            md: "28px",
+                                                        },
+
+                                                        maxWidth: "672px",
+                                                    }}
+                                                >
+                                                    {item.content}
+                                                </Typography>
+                                            </AccordionDetails>
+                                        </Accordion>
+                                    );
+                                })}
+                            </Box>
                         </Box>
-                    </Box>
+                    </Container>
                 </Box>
             </Box>
         </Box>
