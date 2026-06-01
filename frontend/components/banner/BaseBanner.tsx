@@ -72,7 +72,7 @@ export default function BaseBanner({
     gap: { xs: 4, md: 6, lg: 8 },
     height: "100%",
     width: "100%",
-    py: { xs: 4, md: 6, lg: 0 },
+    // py: { xs: 4, md: 6, lg: 0 },
   }}
 >
           <Box
