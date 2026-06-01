@@ -1,9 +1,11 @@
 "use client";
 
 import HeroBanner from "@/components/banner/HeroBanner";
+import Section from "@/components/common/Section";
+import SectionHeader from "@/components/common/SectionHeader";
+import { Box, Button } from "@mui/material";
 import Script from "next/script";
-
-import "./style.css";
+import styles from "./style.module.css";
 
 export default function CheckYourLoanEligibilityPage() {
     return (
@@ -29,62 +31,18 @@ export default function CheckYourLoanEligibilityPage() {
                 strategy="afterInteractive"
             />
 
-            {/* PAGE */}
-            <main className="metaFinance">
+            <Section spacing="lg">
+                <SectionHeader title="Education Loan" highlight="EMI Calculator" />
+                
+                 <Box
+                className={`elfsight-app-98378002-447c-4b6f-8cd7-ddc4e12451a7 loan-calc-widget ${styles.container}`}
+                data-elfsight-app-lazy
+                ></Box>
 
-                {/* BREADCRUMB */}
-                <section className="breadcrumbs">
-                    <div className="loan-container">
-
-                        <ul className="breadcrumb-list">
-                            <li>
-                                <a href="/">Home</a>
-                            </li>
-
-                            <li>/</li>
-
-                            <li>
-                                <a href="/metafinance">
-                                    MetaFinance
-                                </a>
-                            </li>
-
-                            <li>/</li>
-
-                            <li>Loan Calculator</li>
-                        </ul>
-
-                    </div>
-                </section>
-
-                {/* EMI SECTION */}
-                <section className="section-spacing">
-                    <div className="loan-container">
-
-                        <h2 className="heading_spacing">
-                            Education Loan <span>EMI Calculator</span>
-                        </h2>
-
-                        {/* EMI WIDGET */}
-                        <div className="widget-wrapper">
-                            <div
-                                className="elfsight-app-98378002-447c-4b6f-8cd7-ddc4e12451a7 loan-calc-widget"
-                                data-elfsight-app-lazy
-                            ></div>
-                        </div>
-
-                        {/* BUTTON */}
-                        <div className="text-center mt-4 pt-4">
-                            <a href="/metafinance">
-                                <button className="apply-btn">
-                                    Apply Education Loan Today
-                                </button>
-                            </a>
-                        </div>
-
-                    </div>
-                </section>
-            </main>
+                <Button variant="contained" size="large" className={styles.button}>
+                    Apply Education Loan Today
+                </Button>
+            </Section>
         </>
     );
 }
