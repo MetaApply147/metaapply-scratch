@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import Image from 'next/image';
 
 import SectionHeader from '@/components/common/SectionHeader';
@@ -21,54 +21,47 @@ export default function GlobalReachSection() {
             component="section"
             sx={{
                 width: '100%',
-                background: "#F6FBFF",
-
-                py: {
-                    xs: 6,
-                    sm: 8,
-                    md: 10,
-                },
-
                 px: {
                     xs: 2,
                     sm: 3,
-                    md: 4,
-                    lg: 5,
+                    md: 5,
                 },
             }}
         >
-            {/* MAIN CONTAINER */}
             <Box
                 sx={{
                     width: '100%',
+
                     maxWidth: '1838px',
 
+                    background: '#F6FBFF',
+
                     mx: 'auto',
+
+                    py: {
+                        xs: 6,
+                        sm: 8,
+                        md: 10,
+                    },
                 }}
             >
-                {/* HEADING */}
-                <Box
-                    sx={{
-                        mb: {
-                            xs: 5,
-                            md: 7,
-                            lg: '68px',
-                        },
+                <Container>
+                    <Box
+                        sx={{
+                            mb: {
+                                xs: 5,
+                                md: 7,
+                                lg: '68px',
+                            },
+                        }}
+                    >
+                        <SectionHeader
+                            title="Our"
+                            highlight="Global Reach"
+                        />
+                    </Box>
+                </Container>
 
-                        width: '100%',
-
-                        maxWidth: '1250px',
-
-                        mx: 'auto',
-                    }}
-                >
-                    <SectionHeader
-                        title="Our"
-                        highlight="Global Reach"
-                    />
-                </Box>
-
-                {/* CONTENT */}
                 <Box
                     sx={{
                         display: 'flex',
@@ -99,7 +92,6 @@ export default function GlobalReachSection() {
                                 xs: '100%',
                                 lg: 'calc(100% - 774px)',
                             },
-
                             maxWidth: {
                                 xs: '500px',
                                 md: '650px',
@@ -114,7 +106,6 @@ export default function GlobalReachSection() {
                                 md: '520px',
                                 lg: '597px',
                             },
-
                         }}
                     >
                         <Image
@@ -128,7 +119,6 @@ export default function GlobalReachSection() {
                         />
                     </Box>
 
-                    {/* RIGHT CONTENT */}
                     <Box
                         sx={{
                             width: '100%',
@@ -138,11 +128,20 @@ export default function GlobalReachSection() {
                                 lg: '706px',
                             },
 
-                            flexShrink: 0,
+                            flexShrink: 1,
+
+                            minWidth: 0,
 
                             pt: {
                                 xs: 0,
                                 lg: '18px',
+                            },
+                            px: {
+                                xs: 2,
+                                sm: 3,
+                                md: 5,
+                                lg: 5,
+                                xl: 0
                             },
                         }}
                     >
@@ -229,9 +228,7 @@ export default function GlobalReachSection() {
                                                 md: 'body05',
                                             },
 
-                                            '&': {
-                                                fontWeight: 500,
-                                            },
+                                            fontWeight: 500,
 
                                             lineHeight: {
                                                 xs: '22px',

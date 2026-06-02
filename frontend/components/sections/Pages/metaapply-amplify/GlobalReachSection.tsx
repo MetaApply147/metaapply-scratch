@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import Image from 'next/image';
 
 import SectionHeader from '@/components/common/SectionHeader';
@@ -27,7 +27,7 @@ const offices = [
         image: '/metaapply-amplify/Ireland.svg',
     },
     {
-        title: '01Office in Australia',
+        title: '01 Office in Australia',
         image: '/metaapply-amplify/Australia.svg',
     },
 ];
@@ -37,17 +37,10 @@ export default function GlobalReachSection() {
         <Box
             component="section"
             sx={{
-                width: '100%',
-
-                maxWidth: '1500px',
-
-                mx: 'auto',
-
                 px: {
                     xs: 2,
                     sm: 3,
-                    md: 4,
-                    lg: '44px',
+                    md: 0,
                 },
 
                 py: {
@@ -58,148 +51,163 @@ export default function GlobalReachSection() {
                 },
             }}
         >
-            {/* SECTION WRAPPER */}
+            {/* MAIN WRAPPER */}
             <Box
                 sx={{
                     width: '100%',
 
-                    maxWidth: '1411px',
+                    maxWidth: '1832px',
 
                     mx: 'auto',
                 }}
             >
-                {/* HEADING */}
-                <Box
-                    sx={{
-                        mb: {
-                            xs: 4,
-                            sm: 5,
-                            md: '62px',
-                        },
-                    }}
-                >
-                    <SectionHeader
-                        title="Our"
-                        highlight="Global Reach"
-                        mb="0px"
-                    />
-                </Box>
+                <Container>
+                    {/* HEADING */}
+                    <Box
+                        sx={{
+                            mb: {
+                                xs: 4,
+                                sm: 5,
+                                md: '62px',
+                            },
+                        }}
+                    >
+                        <SectionHeader
+                            title="Our"
+                            highlight="Global Reach"
+                            mb="0px"
+                        />
+                    </Box>
 
-                {/* GRID */}
-                <Box
-                    sx={{
-                        display: 'grid',
+                    {/* GRID */}
+                    <Box
+                        sx={{
+                            display: 'grid',
 
-                        gridTemplateColumns: {
-                            xs: '1fr',
-                            sm: 'repeat(2,1fr)',
-                            lg: 'repeat(3,1fr)',
-                        },
+                            gridTemplateColumns: {
+                                xs: '1fr',
+                                sm: 'repeat(2,1fr)',
+                                lg: 'repeat(3,minmax(0,1fr))',
+                            },
 
-                        columnGap: {
-                            xs: 3,
-                            sm: 4,
-                            md: 6,
-                            lg: '25px',
-                        },
+                            columnGap: {
+                                xs: 3,
+                                sm: 4,
+                                md: 6,
+                                lg: '25px',
+                            },
 
-                        rowGap: {
-                            xs: 5,
-                            sm: 6,
-                            md: '72px',
-                        },
+                            rowGap: {
+                                xs: 5,
+                                sm: 6,
+                                md: '72px',
+                            },
 
-                        alignItems: 'start',
-                    }}
-                >
-                    {offices.map((item) => (
-                        <Box
-                            key={item.title}
-                            sx={{
-                                width: '100%',
-
-                                maxWidth: {
-                                    xs: '260px',
-                                    md: '236px',
-                                },
-
-                                mx: {
-                                    xs: 'auto',
-                                    lg: '0',
-                                },
-
-                                display: 'flex',
-
-                                flexDirection: 'column',
-
-                                alignItems: 'center',
-
-                                textAlign: 'center',
-                            }}
-                        >
-                            {/* TITLE */}
-                            <Typography
+                            alignItems: 'start',
+                        }}
+                    >
+                        {offices.map((item) => (
+                            <Box
+                                key={item.title}
                                 sx={{
-                                    fontFamily: 'var(--font-heading)',
+                                    width: '100%',
 
-                                    fontWeight: 700,
-
-                                    fontSize: {
-                                        xs: '22px',
-                                        sm: '24px',
-                                        md: '27.6px',
+                                    maxWidth: {
+                                        xs: '260px',
+                                        md: '320px',
+                                        lg: '360px',
                                     },
 
-                                    lineHeight: '100%',
-
-                                    color: '#2C3688',
-
-                                    mb: {
-                                        xs: 2,
-                                        md: '25px',
-                                    },
-
-                                    minHeight: {
-                                        xs: '52px',
-                                        md: '36px',
+                                    mx: {
+                                        xs: 'auto',
+                                        lg: 0,
                                     },
 
                                     display: 'flex',
 
+                                    flexDirection: 'column',
+
                                     alignItems: 'center',
 
-                                    justifyContent: 'center',
+                                    textAlign: 'center',
+
+                                    minWidth: 0,
                                 }}
                             >
-                                {item.title}
-                            </Typography>
+                                {/* TITLE */}
+                                <Typography
+                                    sx={{
+                                        fontFamily:
+                                            'var(--font-heading)',
 
-                            {/* MAP IMAGE */}
-                            <Box
-                                sx={{
-                                    position: 'relative',
+                                        fontWeight: 700,
 
-                                    width: '100%',
+                                        fontSize: {
+                                            xs: '22px',
+                                            sm: '24px',
+                                            md: '27.6px',
+                                        },
 
-                                    height: {
-                                        xs: '180px',
-                                        sm: '200px',
-                                        md: '237px',
-                                    },
-                                }}
-                            >
-                                <Image
-                                    src={item.image}
-                                    alt={item.title}
-                                    fill
-                                    style={{
-                                        objectFit: 'contain',
+                                        lineHeight: 1.1,
+
+                                        color: '#2C3688',
+
+                                        mb: {
+                                            xs: 2,
+                                            md: '25px',
+                                        },
+
+                                        whiteSpace:
+                                            'nowrap',
+
+                                        minHeight: {
+                                            xs: '32px',
+                                            md: '36px',
+                                        },
+
+                                        display: 'flex',
+
+                                        alignItems: 'center',
+
+                                        justifyContent:
+                                            'center',
+
+                                        textAlign: 'center',
                                     }}
-                                />
+                                >
+                                    {item.title}
+                                </Typography>
+
+                                {/* MAP IMAGE */}
+                                <Box
+                                    sx={{
+                                        position: 'relative',
+
+                                        width: '100%',
+
+                                        height: {
+                                            xs: '180px',
+                                            sm: '200px',
+                                            md: '237px',
+                                        },
+
+                                        flexShrink: 0,
+                                    }}
+                                >
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        fill
+                                        style={{
+                                            objectFit:
+                                                'contain',
+                                        }}
+                                    />
+                                </Box>
                             </Box>
-                        </Box>
-                    ))}
-                </Box>
+                        ))}
+                    </Box>
+                </Container>
             </Box>
         </Box>
     );

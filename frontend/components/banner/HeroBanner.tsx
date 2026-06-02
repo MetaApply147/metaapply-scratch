@@ -13,7 +13,7 @@ type Props = {
   size?: "default" | "medium" | "large";
   leftExtra?: React.ReactNode;
   disableSectionPadding?: boolean;
-  rightMaxWidth?: number | string;
+  rightMaxWidth?: any;
   alignSelf?: string;
   rightComponent?: React.ReactNode;
   width?: string;

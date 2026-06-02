@@ -72,8 +72,6 @@ export default function RecruitmentPartners({
                             ? "none"
                             : {
                                   xs: "none",
-                                  sm: "none",
-                                  md: "none",
                                   lg: "block",
                               },
 
@@ -83,7 +81,7 @@ export default function RecruitmentPartners({
 
                         left: "72%",
 
-                        width: "61%",
+                        width: "60%",
 
                         borderTop:
                             "1.5px dashed #6E0092",
@@ -221,9 +219,9 @@ export default function RecruitmentPartners({
                 px: {
                     xs: "16px",
                     sm: "24px",
-                    md: 0,
-                    lg: 0,
-                    xl: 0,
+                    md: "24px",
+                    lg: "32px",
+                    xl: "40px",
                 },
 
                 ".swiper-button-disabled": {

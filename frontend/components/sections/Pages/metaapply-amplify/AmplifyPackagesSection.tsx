@@ -1,9 +1,11 @@
 'use client';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 import {
     Box,
     Button,
+    Container,
     Typography,
 } from '@mui/material';
 
@@ -15,21 +17,23 @@ const packages = [
         description:
             'Ideal for market-entry universities seeking visibility & steady pipeline.',
         titleColor: '#27A5A5',
-        bg: '#ECFCFC',
+        bgImage: '/metaapply-amplify/green-package.svg',
     },
+
     {
         title: 'Growth',
         description:
             'Ideal for mid-scale universities seeking higher conversions & brand recall.',
         titleColor: '#3166C8',
-        bg: '#EEF4FF',
+        bgImage: '/metaapply-amplify/blue-package.svg',
     },
+
     {
         title: 'Premium',
         description:
             'Ideal for large universities seeking global diversity and enrolment scale.',
         titleColor: '#E99D1F',
-        bg: '#FFF8E8',
+        bgImage: '/metaapply-amplify/yellow-package.svg',
     },
 ];
 
@@ -38,17 +42,10 @@ export default function AmplifyPackagesSection() {
         <Box
             component="section"
             sx={{
-                width: '100%',
-
-                maxWidth: '1415px',
-
-                mx: 'auto',
-
                 px: {
                     xs: 2,
                     sm: 3,
-                    md: 4,
-                    lg: '44px',
+                    md: 0,
                 },
 
                 pt: {
@@ -62,293 +59,337 @@ export default function AmplifyPackagesSection() {
                 },
             }}
         >
-            {/* HEADING */}
+            {/* MAIN WRAPPER */}
             <Box
                 sx={{
-                    mb: {
-                        xs: 4,
-                        md: '59px',
-                    },
+                    width: '100%',
+
+                    maxWidth: '1832px',
+
+                    mx: 'auto',
                 }}
             >
-                <SectionHeader
-                    title="Amplify"
-                    highlight="Packages"
-                    mb="0px"
-                />
-            </Box>
-
-            {/* CARDS */}
-            <Box
-                sx={{
-                    display: 'grid',
-
-                    gridTemplateColumns: {
-                        xs: '1fr',
-                        sm: 'repeat(2,1fr)',
-                        lg: 'repeat(3,1fr)',
-                    },
-
-                    gap: {
-                        xs: 2,
-                        md: '24px',
-                    },
-
-                    mb: {
-                        xs: 4,
-                        md: '36px',
-                    },
-                }}
-            >
-                {packages.map((item) => (
+                <Container>
                     <Box
-                        key={item.title}
                         sx={{
-                            width: '100%',
-
-                            minHeight: {
-                                xs: '190px',
-                                md: '208px',
+                            mb: {
+                                xs: 4,
+                                md: '59px',
                             },
-
-                            borderRadius: '20px',
-
-                            overflow: 'hidden',
-
-                            background: '#FFFFFF',
-
-                            boxShadow:
-                                '0px 13.72px 54.89px rgba(213,213,213,0.25)',
-
-                            display: 'flex',
-
-                            flexDirection: 'column',
                         }}
                     >
-                        {/* TOP AREA */}
-                        <Box
-                            sx={{
-                                position: 'relative',
+                        <SectionHeader
+                            title="Amplify"
+                            highlight="Packages"
+                            mb="0px"
+                        />
+                    </Box>
 
-                                background: item.bg,
+                    {/* CARDS */}
+                    <Box
+                        sx={{
+                            display: 'grid',
 
-                                minHeight: {
-                                    xs: '96px',
-                                    md: '96px',
-                                },
+                            gridTemplateColumns: {
+                                xs: '1fr',
+                                sm: 'repeat(2,minmax(0,1fr))',
+                                lg: 'repeat(3,minmax(0,1fr))',
+                            },
 
-                                px: {
-                                    xs: 3,
-                                    md: '24px',
-                                },
+                            gap: {
+                                xs: 2,
+                                md: '24px',
+                            },
 
-                                pt: {
-                                    xs: 3,
-                                    md: '24px',
-                                },
+                            mb: {
+                                xs: 4,
+                                md: '36px',
+                            },
 
-                                borderTopLeftRadius: '20px',
-
-                                borderTopRightRadius: '20px',
-                            }}
-                        >
-                            {/* HEART */}
+                            alignItems: 'stretch',
+                        }}
+                    >
+                        {packages.map((item) => (
                             <Box
+                                key={item.title}
                                 sx={{
-                                    position: 'absolute',
+                                    width: '100%',
 
-                                    top: '12px',
+                                    minHeight: {
+                                        xs: '190px',
+                                        md: '208px',
+                                    },
 
-                                    right: '12px',
+                                    borderRadius:
+                                        '20px',
 
-                                    width: '32px',
+                                    overflow: 'hidden',
 
-                                    height: '32px',
+                                    background:
+                                        '#FFFFFF',
 
-                                    borderRadius: '16px',
+                                    boxShadow: "0px 13.72px 54.89px 0px #D5D5D540",
 
-                                    background: '#FFFFFF',
 
                                     display: 'flex',
 
-                                    alignItems: 'center',
+                                    flexDirection:
+                                        'column',
 
-                                    justifyContent: 'center',
-
-                                    boxShadow:
-                                        '0px 4px 4px rgba(29,29,29,0.25)',
+                                    minWidth: 0,
                                 }}
                             >
-                                <FavoriteBorderIcon
+                                {/* TOP AREA */}
+                                <Box
                                     sx={{
-                                        fontSize: '20px',
-                                        color: '#7E7878',
+                                        position:
+                                            'relative',
+
+                                        backgroundImage: `url(${item.bgImage})`,
+
+                                        backgroundSize: 'cover',
+
+                                        backgroundPosition: 'center',
+
+                                        backgroundRepeat: 'no-repeat',
+
+                                        minHeight: {
+                                            xs: '96px',
+                                            md: '96px',
+                                        },
+
+                                        px: {
+                                            xs: 3,
+                                            md: '24px',
+                                        },
+
+                                        pt: {
+                                            xs: 3,
+                                            md: '24px',
+                                        },
+
+                                        borderTopLeftRadius:
+                                            '20px',
+
+                                        borderTopRightRadius:
+                                            '20px',
                                     }}
-                                />
+                                >
+                                    {/* HEART */}
+                                    <Box
+                                        sx={{
+                                            position:
+                                                'absolute',
+
+                                            top: '12px',
+
+                                            right: '12px',
+
+                                            width: '32px',
+
+                                            height: '32px',
+
+                                            borderRadius:
+                                                '16px',
+
+                                            background:
+                                                '#FFFFFF',
+
+                                            display:
+                                                'flex',
+
+                                            alignItems:
+                                                'center',
+
+                                            justifyContent:
+                                                'center',
+
+                                            boxShadow:
+                                                '0px 4px 4px rgba(29,29,29,0.25)',
+                                        }}
+                                    >
+                                        <FavoriteBorderIcon
+                                            sx={{
+                                                fontSize:
+                                                    '20px',
+
+                                                color:
+                                                    '#7E7878',
+                                            }}
+                                        />
+                                    </Box>
+
+                                    {/* TITLE */}
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 600,
+                                            fontFamily: "Plus Jakarta Sans",
+                                            fontSize: {
+                                                xs: '28px',
+                                                md: '32px',
+                                            },
+
+                                            lineHeight:
+                                            {
+                                                xs: '38px',
+                                                md: '42px',
+                                            },
+
+                                            color: item.titleColor,
+                                        }}
+                                    >
+                                        {item.title}
+                                    </Typography>
+                                </Box>
+
+                                {/* DESCRIPTION */}
+                                <Box
+                                    sx={{
+                                        px: {
+                                            xs: 3,
+                                            md: '24px',
+                                        },
+
+                                        pt: {
+                                            xs: 3,
+                                            md: '20px',
+                                        },
+
+                                        pb: {
+                                            xs: 3,
+                                            md: '24px',
+                                        },
+
+                                        flex: 1,
+
+                                        display: 'flex',
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontSize:
+                                                '16px',
+                                            fontFamily: "Open Sans",
+
+                                            lineHeight:
+                                                '130%',
+
+                                            color:
+                                                '#202020',
+
+                                            maxWidth:
+                                                '354px',
+                                        }}
+                                    >
+                                        {
+                                            item.description
+                                        }
+                                    </Typography>
+                                </Box>
                             </Box>
+                        ))}
+                    </Box>
 
-                            {/* TITLE */}
-                            <Typography
-                                sx={{
-                                    '&': {
-                                        fontWeight: 600,
-                                    },
+                    {/* CTA ROW */}
+                    <Box
+                        sx={{
+                            display: 'flex',
 
-                                    fontSize: {
-                                        xs: '28px',
-                                        md: '32px',
-                                    },
+                            flexDirection: {
+                                xs: 'column',
+                                md: 'row',
+                            },
 
-                                    lineHeight: {
-                                        xs: '38px',
-                                        md: '42px',
-                                    },
+                            alignItems: {
+                                xs: 'flex-start',
+                                md: 'center',
+                            },
 
-                                    letterSpacing: '-2%',
+                            justifyContent:
+                                'space-between',
 
-                                    color: item.titleColor,
-                                }}
-                            >
-                                {item.title}
-                            </Typography>
-                        </Box>
-
-                        {/* DESCRIPTION */}
-                        <Box
+                            gap: {
+                                xs: 3,
+                                md: '32px',
+                            },
+                        }}
+                    >
+                        {/* TEXT */}
+                        <Typography
                             sx={{
-                                px: {
-                                    xs: 3,
-                                    md: '24px',
+                                fontWeight: 500,
+                                fontFamily: "Plus Jakarta Sans",
+                                fontSize: {
+                                    xs: '22px',
+                                    sm: '24px',
+                                    md: '28px',
                                 },
 
-                                pt: {
-                                    xs: 3,
-                                    md: '20px',
+                                lineHeight: {
+                                    xs: '34px',
+                                    md: '42px',
                                 },
 
-                                pb: {
-                                    xs: 3,
-                                    md: '24px',
-                                },
+                                color: '#031621',
 
-                                flex: 1,
+                                maxWidth: {
+                                    xs: '100%',
+                                    lg: '890px',
+                                },
                             }}
                         >
-                            <Typography
-                                sx={{
-                                    '&': {
-                                        fontWeight: 400,
-                                    },
+                            Download the brochure to unlock
+                            full pricing and enrolment plans.
+                        </Typography>
 
-                                    fontSize: '16px',
+                        {/* BUTTON */}
+                        <Button
+                            sx={{
+                                width: {
+                                    xs: '100%',
+                                    sm: '212px',
+                                },
 
-                                    lineHeight: '130%',
+                                maxWidth:
+                                    '212px',
 
-                                    color: '#202020',
+                                height: '60px',
 
-                                    maxWidth: '354px',
-                                }}
-                            >
-                                {item.description}
-                            </Typography>
-                        </Box>
+                                borderRadius:
+                                    '12px',
+
+                                px: '32px',
+
+                                py: '12px',
+
+                                textTransform:
+                                    'none',
+
+                                background:
+                                    'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
+
+                                fontWeight: 600,
+
+                                fontSize:
+                                    '20px',
+
+                                lineHeight:
+                                    '100%',
+
+                                color: '#FFFFFF',
+
+                                flexShrink: 0,
+
+                                '&:hover': {
+                                    background:
+                                        'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
+                                },
+                            }}
+                        >
+                            Download Now
+                        </Button>
                     </Box>
-                ))}
-            </Box>
-
-            {/* CTA ROW */}
-            <Box
-                sx={{
-                    display: 'flex',
-
-                    flexDirection: {
-                        xs: 'column',
-                        md: 'row',
-                    },
-
-                    alignItems: {
-                        xs: 'flex-start',
-                        md: 'center',
-                    },
-
-                    justifyContent: 'space-between',
-
-                    gap: {
-                        xs: 3,
-                        md: '32px',
-                    },
-                }}
-            >
-                {/* TEXT */}
-                <Typography
-                    sx={{
-                        '&': {
-                            fontWeight: 500,
-                        },
-                        fontSize: {
-                            xs: '22px',
-                            sm: '24px',
-                            md: '28px',
-                        },
-
-                        lineHeight: {
-                            xs: '34px',
-                            md: '42px',
-                        },
-
-                        letterSpacing: '0%',
-
-                        color: '#031621',
-
-                        maxWidth: '890px',
-                    }}
-                >
-                    Download the brochure to unlock full
-                    pricing and enrolment plans.
-                </Typography>
-
-                {/* BUTTON */}
-                <Button
-                    sx={{
-                        width: {
-                            xs: '100%',
-                            sm: '212px',
-                        },
-
-                        maxWidth: '212px',
-
-                        height: '60px',
-
-                        borderRadius: '12px',
-
-                        px: '32px',
-
-                        py: '12px',
-
-                        textTransform: 'none',
-
-                        background:
-                            'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
-
-                        '&': {
-                            fontWeight: 600,
-                        },
-                        fontSize: '20px',
-
-                        lineHeight: '100%',
-
-                        color: '#FFFFFF',
-
-                        flexShrink: 0,
-
-                        '&:hover': {
-                            background:
-                                'linear-gradient(90deg, #FF3185 0%, #FF7BB0 100%)',
-                        },
-                    }}
-                >
-                    Download Now
-                </Button>
+                </Container>
             </Box>
         </Box>
     );
