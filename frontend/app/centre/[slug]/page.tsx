@@ -3,7 +3,6 @@ import FAQSection from "@/components/sections/FAQSection";
 import GlobalJourneyCTA from "@/components/sections/GlobalJourneyCTA";
 import CentreFactsSection from "@/components/sections/Pages/centreInner/CentreFactsSection";
 import CentreGallery from "@/components/sections/Pages/centreInner/CentreGallery";
-import CentreHeadMessage from "@/components/sections/Pages/centreInner/CentreHeadSection";
 import EndToEnd from "@/components/sections/Pages/centreInner/EndToEnd";
 import SocialPlatformSectionCentre from "@/components/sections/Pages/centreInner/SocialPlatformSectionCentre";
 import PopularDestinations from "@/components/sections/PopularDestinations";
